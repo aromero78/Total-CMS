@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataObjects" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="DataObjectsContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ContentItems" EntityType="DataObjects.ContentItems" />
+    <EntitySet Name="UserRoles" EntityType="DataObjects.UserRoles" />
+    <EntitySet Name="UsersToUserRoles" EntityType="DataObjects.UsersToUserRoles" />
+    <AssociationSet Name="UsersContentItems" Association="DataObjects.UsersContentItems">
+      <End EntitySet="UsersSet" Role="Users" />
+      <End EntitySet="ContentItems" Role="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="UsersContentItems1" Association="DataObjects.UsersContentItems1">
+      <End EntitySet="UsersSet" Role="Users" />
+      <End EntitySet="ContentItems" Role="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="UsersToUserRolesUsers" Association="DataObjects.UsersToUserRolesUsers">
+      <End EntitySet="UsersToUserRoles" Role="UsersToUserRoles" />
+      <End EntitySet="UsersSet" Role="Users" />
+    </AssociationSet>
+    <EntitySet Name="Folders" EntityType="DataObjects.Folders" />
+    <EntitySet Name="LibraryItems" EntityType="DataObjects.LibraryItems" />
+    <EntitySet Name="Menus" EntityType="DataObjects.Menus" />
+    <EntitySet Name="MenuItems" EntityType="DataObjects.MenuItems" />
+    <EntitySet Name="Calendars" EntityType="DataObjects.Calendars" />
+    <EntitySet Name="CalendarEvents" EntityType="DataObjects.CalendarEvents" />
+    <EntitySet Name="Templates" EntityType="DataObjects.Templates" />
+    <EntitySet Name="Aliases" EntityType="DataObjects.Aliases" />
+    <EntitySet Name="MetaDataSettings" EntityType="DataObjects.MetaDataSettings" />
+    <EntitySet Name="MetaDataTypes" EntityType="DataObjects.MetaDataTypes" />
+    <AssociationSet Name="ContentItemsAliases" Association="DataObjects.ContentItemsAliases">
+      <End Role="ContentItems" EntitySet="ContentItems" />
+      <End Role="Aliases" EntitySet="Aliases" />
+    </AssociationSet>
+    <AssociationSet Name="AliasesTemplates" Association="DataObjects.AliasesTemplates">
+      <End Role="Aliases" EntitySet="Aliases" />
+      <End Role="Templates" EntitySet="Templates" />
+    </AssociationSet>
+    <AssociationSet Name="FoldersContentItems" Association="DataObjects.FoldersContentItems">
+      <End Role="Folders" EntitySet="Folders" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <EntitySet Name="Languages" EntityType="DataObjects.Languages" />
+    <AssociationSet Name="LanguagesUsers" Association="DataObjects.LanguagesUsers">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Users" EntitySet="UsersSet" />
+    </AssociationSet>
+    <AssociationSet Name="LanguagesFolders" Association="DataObjects.LanguagesFolders">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="CalendarsFolders" Association="DataObjects.CalendarsFolders">
+      <End Role="Calendars" EntitySet="Calendars" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="CalendarsCalendarEvents" Association="DataObjects.CalendarsCalendarEvents">
+      <End Role="Calendars" EntitySet="Calendars" />
+      <End Role="CalendarEvents" EntitySet="CalendarEvents" />
+    </AssociationSet>
+    <AssociationSet Name="MenusFolders" Association="DataObjects.MenusFolders">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="MenuItemsMenus" Association="DataObjects.MenuItemsMenus">
+      <End Role="MenuItems" EntitySet="MenuItems" />
+      <End Role="Menus" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryItemsFolders" Association="DataObjects.LibraryItemsFolders">
+      <End Role="LibraryItems" EntitySet="LibraryItems" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <EntitySet Name="UsersSet" EntityType="DataObjects.Users" />
+    <AssociationSet Name="UsersToUserRolesUserRoles" Association="DataObjects.UsersToUserRolesUserRoles">
+      <End EntitySet="UsersToUserRoles" Role="UsersToUserRoles" />
+      <End EntitySet="UserRoles" Role="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ContentItems">
+    <Key>
+      <PropertyRef Name="ContentItemId" />
+    </Key>
+    <Property Type="Int32" Name="ContentItemId" Nullable="false" />
+    <Property Type="String" Name="ContentHtml" Nullable="false" />
+    <Property Type="String" Name="ContentSummary" Nullable="false" MaxLength="250" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+    <Property Type="DateTime" Name="DateModified" Nullable="false" />
+    <NavigationProperty Name="CreatedByUser" Relationship="DataObjects.UsersContentItems" FromRole="ContentItems" ToRole="Users" />
+    <Property Type="Int32" Name="CreatedByUserId" Nullable="false" />
+    <NavigationProperty Name="ModifiedByUser" Relationship="DataObjects.UsersContentItems1" FromRole="ContentItems" ToRole="Users" />
+    <Property Type="Int32" Name="ModifiedByUserId" Nullable="false" />
+    <NavigationProperty Name="Aliases" Relationship="DataObjects.ContentItemsAliases" FromRole="ContentItems" ToRole="Aliases" />
+    <Property Type="String" Name="FolderId" Nullable="false" />
+    <NavigationProperty Name="Folder" Relationship="DataObjects.FoldersContentItems" FromRole="ContentItems" ToRole="Folders" />
+    <Property Type="Int32" Name="FoldersFolderId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Type="Int32" Name="UserRoleId" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <NavigationProperty Name="UsersToUserRoles" Relationship="DataObjects.UsersToUserRolesUserRoles" FromRole="UserRoles" ToRole="UsersToUserRoles" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" cg:SetterAccess="Internal" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <NavigationProperty Name="ItemsCreated" Relationship="DataObjects.UsersContentItems" FromRole="Users" ToRole="ContentItems" />
+    <NavigationProperty Name="ItemsModified" Relationship="DataObjects.UsersContentItems1" FromRole="Users" ToRole="ContentItems" />
+    <NavigationProperty Name="UsersToUserRoles" Relationship="DataObjects.UsersToUserRolesUsers" FromRole="Users" ToRole="UsersToUserRoles" />
+    <Property Type="Int32" Name="LanguageId" Nullable="false" />
+    <NavigationProperty Name="Language" Relationship="DataObjects.LanguagesUsers" FromRole="Users" ToRole="Languages" />
+    <Property Type="Int32" Name="LanguagesLanguageId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsersToUserRoles">
+    <Key>
+      <PropertyRef Name="UserToUserRoleId" />
+    </Key>
+    <Property Name="UserToUserRoleId" cg:SetterAccess="Internal" Nullable="false" Type="Int32" />
+    <Property Name="UserRoleId" Nullable="false" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="DataObjects.UsersToUserRolesUsers" FromRole="UsersToUserRoles" ToRole="Users" />
+    <Property Name="UserId" Nullable="false" Type="Int32" />
+    <NavigationProperty Name="UserRole" Relationship="DataObjects.UsersToUserRolesUserRoles" FromRole="UsersToUserRoles" ToRole="UserRoles" />
+  </EntityType>
+  <Association Name="UsersContentItems">
+    <End Type="DataObjects.Users" Multiplicity="1" Role="Users" />
+    <End Type="DataObjects.ContentItems" Multiplicity="*" Role="ContentItems" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="CreatedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersContentItems1">
+    <End Type="DataObjects.Users" Multiplicity="1" Role="Users" />
+    <End Type="DataObjects.ContentItems" Multiplicity="*" Role="ContentItems" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="ModifiedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersToUserRolesUsers">
+    <End Type="DataObjects.UsersToUserRoles" Multiplicity="*" Role="UsersToUserRoles" />
+    <End Type="DataObjects.Users" Multiplicity="1" Role="Users" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UsersToUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Folders">
+    <Key>
+      <PropertyRef Name="FolderId" />
+    </Key>
+    <Property Type="Int32" Name="FolderId" Nullable="false" />
+    <NavigationProperty Name="ContentItems" Relationship="DataObjects.FoldersContentItems" FromRole="Folders" ToRole="ContentItems" />
+    <NavigationProperty Name="Language" Relationship="DataObjects.LanguagesFolders" FromRole="Folders" ToRole="Languages" />
+    <Property Type="Int32" Name="LanguageId" Nullable="false" />
+    <NavigationProperty Name="Calendars" Relationship="DataObjects.CalendarsFolders" FromRole="Folders" ToRole="Calendars" />
+    <NavigationProperty Name="Menus" Relationship="DataObjects.MenusFolders" FromRole="Folders" ToRole="Menus" />
+    <NavigationProperty Name="LibraryItems" Relationship="DataObjects.LibraryItemsFolders" FromRole="Folders" ToRole="LibraryItems" />
+  </EntityType>
+  <EntityType Name="LibraryItems">
+    <Key>
+      <PropertyRef Name="LibraryItemId" />
+    </Key>
+    <Property Type="Int32" Name="LibraryItemId" Nullable="false" />
+    <Property Type="String" Name="FolderId" Nullable="false" />
+    <NavigationProperty Name="Folder" Relationship="DataObjects.LibraryItemsFolders" FromRole="LibraryItems" ToRole="Folders" />
+    <Property Type="Int32" Name="FoldersFolderId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menus">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Type="Int32" Name="MenuId" Nullable="false" />
+    <Property Type="Int32" Name="FolderId" Nullable="false" />
+    <NavigationProperty Name="Folder" Relationship="DataObjects.MenusFolders" FromRole="Menus" ToRole="Folders" />
+    <NavigationProperty Name="MenuItems" Relationship="DataObjects.MenuItemsMenus" FromRole="Menus" ToRole="MenuItems" />
+  </EntityType>
+  <EntityType Name="MenuItems">
+    <Key>
+      <PropertyRef Name="MenuItemId" />
+    </Key>
+    <Property Type="Int32" Name="MenuItemId" Nullable="false" />
+    <NavigationProperty Name="Menu" Relationship="DataObjects.MenuItemsMenus" FromRole="MenuItems" ToRole="Menus" />
+    <Property Type="Int32" Name="MenuId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Calendars">
+    <Key>
+      <PropertyRef Name="CalendarId" />
+    </Key>
+    <Property Type="Int32" Name="CalendarId" Nullable="false" />
+    <Property Type="Int32" Name="FolderId" Nullable="false" />
+    <NavigationProperty Name="Folder" Relationship="DataObjects.CalendarsFolders" FromRole="Calendars" ToRole="Folders" />
+    <NavigationProperty Name="Events" Relationship="DataObjects.CalendarsCalendarEvents" FromRole="Calendars" ToRole="CalendarEvents" />
+  </EntityType>
+  <EntityType Name="CalendarEvents">
+    <Key>
+      <PropertyRef Name="CalendarEventIds" />
+    </Key>
+    <Property Type="Int32" Name="CalendarEventIds" Nullable="false" />
+    <NavigationProperty Name="Calendar" Relationship="DataObjects.CalendarsCalendarEvents" FromRole="CalendarEvents" ToRole="Calendars" />
+    <Property Type="Int32" Name="CalendarId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Templates">
+    <Key>
+      <PropertyRef Name="TemplateId" />
+    </Key>
+    <Property Type="Int32" Name="TemplateId" Nullable="false" />
+    <NavigationProperty Name="Aliases" Relationship="DataObjects.AliasesTemplates" FromRole="Templates" ToRole="Aliases" />
+  </EntityType>
+  <EntityType Name="Aliases">
+    <Key>
+      <PropertyRef Name="AliasId" />
+    </Key>
+    <Property Type="Int32" Name="AliasId" Nullable="false" />
+    <NavigationProperty Name="ContentItem" Relationship="DataObjects.ContentItemsAliases" FromRole="Aliases" ToRole="ContentItems" />
+    <NavigationProperty Name="Template" Relationship="DataObjects.AliasesTemplates" FromRole="Aliases" ToRole="Templates" />
+    <Property Type="Int32" Name="ContentItemId" Nullable="false" />
+    <Property Type="Int32" Name="TemplateId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MetaDataSettings">
+    <Key>
+      <PropertyRef Name="MetaDataSetting" />
+    </Key>
+    <Property Type="Int32" Name="MetaDataSetting" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MetaDataTypes">
+    <Key>
+      <PropertyRef Name="MetaDataTypeId" />
+    </Key>
+    <Property Type="Int32" Name="MetaDataTypeId" Nullable="false" />
+  </EntityType>
+  <Association Name="ContentItemsAliases">
+    <End Type="DataObjects.ContentItems" Role="ContentItems" Multiplicity="1" />
+    <End Type="DataObjects.Aliases" Role="Aliases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Principal>
+      <Dependent Role="Aliases">
+        <PropertyRef Name="ContentItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AliasesTemplates">
+    <End Type="DataObjects.Aliases" Role="Aliases" Multiplicity="*" />
+    <End Type="DataObjects.Templates" Role="Templates" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Templates">
+        <PropertyRef Name="TemplateId" />
+      </Principal>
+      <Dependent Role="Aliases">
+        <PropertyRef Name="TemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FoldersContentItems">
+    <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+    <End Type="DataObjects.ContentItems" Role="ContentItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="FoldersFolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Type="Int32" Name="LanguageId" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="DataObjects.LanguagesUsers" FromRole="Languages" ToRole="Users" />
+    <NavigationProperty Name="Folders" Relationship="DataObjects.LanguagesFolders" FromRole="Languages" ToRole="Folders" />
+  </EntityType>
+  <Association Name="LanguagesUsers">
+    <End Type="DataObjects.Languages" Role="Languages" Multiplicity="1" />
+    <End Type="DataObjects.Users" Role="Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="LanguagesLanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LanguagesFolders">
+    <End Type="DataObjects.Languages" Role="Languages" Multiplicity="1" />
+    <End Type="DataObjects.Folders" Role="Folders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="Folders">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CalendarsFolders">
+    <End Type="DataObjects.Calendars" Role="Calendars" Multiplicity="*" />
+    <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="Calendars">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CalendarsCalendarEvents">
+    <End Type="DataObjects.Calendars" Role="Calendars" Multiplicity="1" />
+    <End Type="DataObjects.CalendarEvents" Role="CalendarEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendars">
+        <PropertyRef Name="CalendarId" />
+      </Principal>
+      <Dependent Role="CalendarEvents">
+        <PropertyRef Name="CalendarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenusFolders">
+    <End Type="DataObjects.Menus" Role="Menus" Multiplicity="*" />
+    <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="Menus">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuItemsMenus">
+    <End Type="DataObjects.MenuItems" Role="MenuItems" Multiplicity="*" />
+    <End Type="DataObjects.Menus" Role="Menus" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="MenuItems">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LibraryItemsFolders">
+    <End Type="DataObjects.LibraryItems" Role="LibraryItems" Multiplicity="*" />
+    <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="LibraryItems">
+        <PropertyRef Name="FoldersFolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersToUserRolesUserRoles">
+    <End Type="DataObjects.UsersToUserRoles" Multiplicity="*" Role="UsersToUserRoles" />
+    <End Type="DataObjects.UserRoles" Multiplicity="1" Role="UserRoles" />
+    <ReferentialConstraint>
+      <Principal Role="UserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="UsersToUserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

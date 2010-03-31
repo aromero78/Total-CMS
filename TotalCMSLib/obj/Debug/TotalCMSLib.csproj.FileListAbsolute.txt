@@ -1,0 +1,6 @@
+C:\Documents and Settings\Anthony\My Documents\Visual Studio 2010\Projects\TotalCMS\TotalCMSLib\bin\Debug\TotalCMSLib.dll.config
+C:\Documents and Settings\Anthony\My Documents\Visual Studio 2010\Projects\TotalCMS\TotalCMSLib\bin\Debug\TotalCMSLib.dll
+C:\Documents and Settings\Anthony\My Documents\Visual Studio 2010\Projects\TotalCMS\TotalCMSLib\bin\Debug\TotalCMSLib.pdb
+C:\Documents and Settings\Anthony\My Documents\Visual Studio 2010\Projects\TotalCMS\TotalCMSLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Anthony\My Documents\Visual Studio 2010\Projects\TotalCMS\TotalCMSLib\obj\Debug\TotalCMSLib.dll
+C:\Documents and Settings\Anthony\My Documents\Visual Studio 2010\Projects\TotalCMS\TotalCMSLib\obj\Debug\TotalCMSLib.pdb
