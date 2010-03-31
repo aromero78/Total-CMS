@@ -65,14 +65,9 @@
             <End EntitySet="UserRoles" Role="UserRoles" /></AssociationSet>
           <EntitySet Name="Templates" EntityType="DataObjects.Templates" />
           <EntitySet Name="TemplateElements" EntityType="DataObjects.TemplateElement" />
-          <EntitySet Name="TemplateElementTypes" EntityType="DataObjects.TemplateElementTypes" />
           <AssociationSet Name="AdminElementAdminPages" Association="DataObjects.AdminElementAdminPages">
             <End Role="AdminElement" EntitySet="TemplateElements" />
             <End Role="AdminPages" EntitySet="Templates" /></AssociationSet>
-          <EntitySet Name="TemplateElementAttributes" EntityType="DataObjects.TemplateElementAttributes" />
-          <AssociationSet Name="AdminElementAttributesAdminElement" Association="DataObjects.AdminElementAttributesAdminElement">
-            <End Role="AdminElementAttributes" EntitySet="TemplateElementAttributes" />
-            <End Role="AdminElement" EntitySet="TemplateElements" /></AssociationSet>
           <AssociationSet Name="PagesAliases" Association="DataObjects.PagesAliases">
             <End Role="Pages" EntitySet="Templates" />
             <End Role="Aliases" EntitySet="Aliases" /></AssociationSet>
@@ -116,13 +111,21 @@
           <AssociationSet Name="AliasesContentItems" Association="DataObjects.AliasesContentItems">
             <End Role="Aliases" EntitySet="Aliases" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
-          <AssociationSet Name="TemplateElementTypesTemplateElementAttributes" Association="DataObjects.TemplateElementTypesTemplateElementAttributes">
-            <End Role="TemplateElementTypes" EntitySet="TemplateElementTypes" />
-            <End Role="TemplateElementAttributes" EntitySet="TemplateElementAttributes" /></AssociationSet>
           <EntitySet Name="ObjectSchemas" EntityType="DataObjects.ObjectSchema" />
-          <AssociationSet Name="ContentItemsObjectSchema" Association="DataObjects.ContentItemsObjectSchema">
-            <End Role="ContentItems" EntitySet="ContentItems" />
+          <EntitySet Name="ObjectXsltSets1" EntityType="DataObjects.ObjectXsltSets" />
+          <AssociationSet Name="ObjectXsltSetContentItems" Association="DataObjects.ObjectXsltSetContentItems">
+            <End Role="ObjectXsltSet" EntitySet="ObjectXsltSets1" />
+            <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
+          <AssociationSet Name="ObjectSchemaObjectXsltSets" Association="DataObjects.ObjectSchemaObjectXsltSets">
+            <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
+            <End Role="ObjectXsltSets" EntitySet="ObjectXsltSets1" /></AssociationSet>
+          <EntitySet Name="ObjectTypes" EntityType="DataObjects.ObjectTypes" />
+          <AssociationSet Name="ObjectTypesObjectSchema" Association="DataObjects.ObjectTypesObjectSchema">
+            <End Role="ObjectTypes" EntitySet="ObjectTypes" />
             <End Role="ObjectSchema" EntitySet="ObjectSchemas" /></AssociationSet>
+          <AssociationSet Name="ObjectSchemaTemplateElement" Association="DataObjects.ObjectSchemaTemplateElement">
+            <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
+            <End Role="TemplateElement" EntitySet="TemplateElements" /></AssociationSet>
           </EntityContainer>
         <EntityType Name="ContentItems">
           <Key>
@@ -142,8 +145,9 @@
           <Property Type="String" Name="ContentStatus" Nullable="false" MaxLength="2" />
           <NavigationProperty Name="ContentHistories" Relationship="DataObjects.ContentHistoryContentItems" FromRole="ContentItems" ToRole="ContentHistory" />
           <NavigationProperty Name="Aliases" Relationship="DataObjects.AliasesContentItems" FromRole="ContentItems" ToRole="Aliases" />
-          <NavigationProperty Name="ObjectSchema" Relationship="DataObjects.ContentItemsObjectSchema" FromRole="ContentItems" ToRole="ObjectSchema" />
           <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" />
+          <NavigationProperty Name="ObjectXsltSet" Relationship="DataObjects.ObjectXsltSetContentItems" FromRole="ContentItems" ToRole="ObjectXsltSet" />
+          <Property Type="Int32" Name="ObjectXsltSetId" Nullable="false" />
           </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -386,7 +390,7 @@
           <Property Type="Int32" Name="TemplateId" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" />
           <Property Type="Boolean" Name="IsUserDefined" Nullable="false" />
-          <NavigationProperty Name="PageElements" Relationship="DataObjects.AdminElementAdminPages" FromRole="AdminPages" ToRole="AdminElement" />
+          <NavigationProperty Name="TemplateElements" Relationship="DataObjects.AdminElementAdminPages" FromRole="AdminPages" ToRole="AdminElement" />
           <NavigationProperty Name="Aliases" Relationship="DataObjects.PagesAliases" FromRole="Pages" ToRole="Aliases" />
           <Property Type="String" Name="TemplateFileUrl" Nullable="false" /></EntityType>
         <EntityType Name="TemplateElement">
@@ -394,19 +398,15 @@
             <PropertyRef Name="TemplateElementId" /></Key>
           <Property Type="Int32" Name="TemplateElementId" Nullable="false" />
           <Property Type="Guid" Name="XsltId" Nullable="false" />
-          <NavigationProperty Name="Page" Relationship="DataObjects.AdminElementAdminPages" FromRole="AdminElement" ToRole="AdminPages" />
+          <NavigationProperty Name="Template" Relationship="DataObjects.AdminElementAdminPages" FromRole="AdminElement" ToRole="AdminPages" />
           <Property Type="Int32" Name="TemplateId" Nullable="false" />
           <Property Type="Int32" Name="TemplateElementTypeId" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" />
           <Property Type="String" Name="Description" Nullable="false" />
-          <NavigationProperty Name="PageElementAttributes" Relationship="DataObjects.AdminElementAttributesAdminElement" FromRole="AdminElement" ToRole="AdminElementAttributes" />
-          </EntityType>
-        <EntityType Name="TemplateElementTypes">
-          <Key>
-            <PropertyRef Name="TemplateElementTypeId" /></Key>
-          <Property Type="Int32" Name="TemplateElementTypeId" Nullable="false" />
-          <Property Type="String" Name="Type" Nullable="false" MaxLength="15" />
-          <NavigationProperty Name="TemplateElementAttributes" Relationship="DataObjects.TemplateElementTypesTemplateElementAttributes" FromRole="TemplateElementTypes" ToRole="TemplateElementAttributes" />
+          <Property Type="String" Name="DynamicParamName" Nullable="false" />
+          <Property Type="String" Name="ObjectId" Nullable="false" />
+          <NavigationProperty Name="ObjectSchema" Relationship="DataObjects.ObjectSchemaTemplateElement" FromRole="TemplateElement" ToRole="ObjectSchema" />
+          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" />
           </EntityType>
         <Association Name="AdminElementAdminPages">
           <End Type="DataObjects.TemplateElement" Role="AdminElement" Multiplicity="*" />
@@ -416,20 +416,6 @@
               <PropertyRef Name="TemplateId" /></Principal>
             <Dependent Role="AdminElement">
               <PropertyRef Name="TemplateId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="TemplateElementAttributes">
-          <Key>
-            <PropertyRef Name="TemplateElementAttributesId" /></Key>
-          <Property Type="Int32" Name="TemplateElementAttributesId" Nullable="false" />
-          <Property Type="String" Name="ObjectName" Nullable="false" />
-          <Property Type="String" Name="ObjectId" Nullable="false" />
-          <Property Type="String" Name="DynamicParam" Nullable="false" />
-          <Property Type="String" Name="TemplateElementId" Nullable="false" />
-          <NavigationProperty Name="PageElement" Relationship="DataObjects.AdminElementAttributesAdminElement" FromRole="AdminElementAttributes" ToRole="AdminElement" />
-          <NavigationProperty Name="TemplateElementType" Relationship="DataObjects.TemplateElementTypesTemplateElementAttributes" FromRole="TemplateElementAttributes" ToRole="TemplateElementTypes" />
-          <Property Type="Int32" Name="TemplateElementTypeId" Nullable="false" /></EntityType>
-        <Association Name="AdminElementAttributesAdminElement">
-          <End Type="DataObjects.TemplateElementAttributes" Role="AdminElementAttributes" Multiplicity="*" />
-          <End Type="DataObjects.TemplateElement" Role="AdminElement" Multiplicity="1" /></Association>
         <Association Name="PagesAliases">
           <End Type="DataObjects.Templates" Role="Pages" Multiplicity="1" />
           <End Type="DataObjects.Aliases" Role="Aliases" Multiplicity="*" />
@@ -574,7 +560,6 @@
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="ContentHistory">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
-        <ComplexType Name="XmlColumn" />
         <Association Name="ContentHistoryUsers">
           <End Type="DataObjects.ContentHistory" Role="ContentHistory" Multiplicity="*" />
           <End Type="DataObjects.Users" Role="Users" Multiplicity="1" />
@@ -591,27 +576,63 @@
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="Aliases">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="TemplateElementTypesTemplateElementAttributes">
-          <End Type="DataObjects.TemplateElementTypes" Role="TemplateElementTypes" Multiplicity="1" />
-          <End Type="DataObjects.TemplateElementAttributes" Role="TemplateElementAttributes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TemplateElementTypes">
-              <PropertyRef Name="TemplateElementTypeId" /></Principal>
-            <Dependent Role="TemplateElementAttributes">
-              <PropertyRef Name="TemplateElementTypeId" /></Dependent></ReferentialConstraint></Association>
         <EntityType Name="ObjectSchema">
           <Key>
             <PropertyRef Name="ObjectSchemaId" /></Key>
           <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" />
           <Property Type="String" Name="SchemaXml" Nullable="false" />
-          <NavigationProperty Name="ContentItems" Relationship="DataObjects.ContentItemsObjectSchema" FromRole="ObjectSchema" ToRole="ContentItems" /></EntityType>
-        <Association Name="ContentItemsObjectSchema">
+          <NavigationProperty Name="ObjectXsltSets" Relationship="DataObjects.ObjectSchemaObjectXsltSets" FromRole="ObjectSchema" ToRole="ObjectXsltSets" />
+          <NavigationProperty Name="ObjectType" Relationship="DataObjects.ObjectTypesObjectSchema" FromRole="ObjectSchema" ToRole="ObjectTypes" />
+          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" />
+          <NavigationProperty Name="TemplateElements" Relationship="DataObjects.ObjectSchemaTemplateElement" FromRole="ObjectSchema" ToRole="TemplateElement" />
+          <Property Type="String" Name="DataEntryXslt" Nullable="false" />
+          </EntityType>
+        <EntityType Name="ObjectXsltSets">
+          <Key>
+            <PropertyRef Name="ObjectXsltSetId" /></Key>
+          <Property Type="Int32" Name="ObjectXsltSetId" Nullable="false" />
+          <Property Type="String" Name="DisplayXslt" Nullable="false" />
+          <NavigationProperty Name="ContentItems" Relationship="DataObjects.ObjectXsltSetContentItems" FromRole="ObjectXsltSet" ToRole="ContentItems" />
+          <NavigationProperty Name="ObjectSchema" Relationship="DataObjects.ObjectSchemaObjectXsltSets" FromRole="ObjectXsltSets" ToRole="ObjectSchema" />
+          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" /></EntityType>
+        <Association Name="ObjectXsltSetContentItems">
+          <End Type="DataObjects.ObjectXsltSets" Role="ObjectXsltSet" Multiplicity="1" />
           <End Type="DataObjects.ContentItems" Role="ContentItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjectXsltSet">
+              <PropertyRef Name="ObjectXsltSetId" /></Principal>
+            <Dependent Role="ContentItems">
+              <PropertyRef Name="ObjectXsltSetId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="ObjectSchemaObjectXsltSets">
           <End Type="DataObjects.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
+          <End Type="DataObjects.ObjectXsltSets" Role="ObjectXsltSets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ObjectSchema">
               <PropertyRef Name="ObjectSchemaId" /></Principal>
-            <Dependent Role="ContentItems">
+            <Dependent Role="ObjectXsltSets">
+              <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
+        <EntityType Name="ObjectTypes">
+          <Key>
+            <PropertyRef Name="ObjectTypeId" /></Key>
+          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" />
+          <NavigationProperty Name="ObjectSchemas" Relationship="DataObjects.ObjectTypesObjectSchema" FromRole="ObjectTypes" ToRole="ObjectSchema" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          </EntityType>
+        <Association Name="ObjectTypesObjectSchema">
+          <End Type="DataObjects.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
+          <End Type="DataObjects.ObjectSchema" Role="ObjectSchema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjectTypes">
+              <PropertyRef Name="ObjectTypeId" /></Principal>
+            <Dependent Role="ObjectSchema">
+              <PropertyRef Name="ObjectTypeId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="ObjectSchemaTemplateElement">
+          <End Type="DataObjects.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
+          <End Type="DataObjects.TemplateElement" Role="TemplateElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjectSchema">
+              <PropertyRef Name="ObjectSchemaId" /></Principal>
+            <Dependent Role="TemplateElement">
               <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -641,34 +662,35 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Model1" ZoomLevel="100" >
-        <EntityTypeShape EntityType="DataObjects.ContentItems" Width="1.5" PointX="2.375" PointY="3" Height="3.7288216145833317" />
+        <EntityTypeShape EntityType="DataObjects.ContentItems" Width="1.5" PointX="2.375" PointY="2.375" Height="3.8931689453124996" />
         <EntityTypeShape EntityType="DataObjects.UserRoles" Width="1.5" PointX="8.375" PointY="3.875" Height="1.5923063151041665" />
         <EntityTypeShape EntityType="DataObjects.Users" Width="1.5" PointX="4.25" PointY="3.875" Height="2.7427376302083326" />
         <EntityTypeShape EntityType="DataObjects.UsersToUserRoles" PointX="6.125" PointY="3.875" Width="1.875" Height="1.7566536458333326" />
         <AssociationConnector Association="DataObjects.UsersContentItems">
-          <ConnectorPoint PointX="4.25" PointY="4.8945479496071354" />
-          <ConnectorPoint PointX="3.875" PointY="4.8945479496071354" /></AssociationConnector>
+          <ConnectorPoint PointX="4.25" PointY="5.07158447265625" />
+          <ConnectorPoint PointX="3.875" PointY="5.07158447265625" /></AssociationConnector>
         <AssociationConnector Association="DataObjects.UsersContentItems1">
-          <ConnectorPoint PointX="4.25" PointY="5.466821924410703" />
-          <ConnectorPoint PointX="3.875" PointY="5.466821924410703" /></AssociationConnector>
+          <ConnectorPoint PointX="4.25" PointY="4.4107922363281249" />
+          <ConnectorPoint PointX="3.875" PointY="4.4107922363281249" /></AssociationConnector>
         <AssociationConnector Association="DataObjects.UsersToUserRolesUsers">
           <ConnectorPoint PointX="6.125" PointY="4.7533268229166659" />
           <ConnectorPoint PointX="5.75" PointY="4.7533268229166659" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.Folders" Width="1.375" PointX="4.25" PointY="9" Height="4.2218636067708335" />
+        <EntityTypeShape EntityType="DataObjects.Folders" Width="1.375" PointX="4.25" PointY="9.25" Height="4.2218636067708335" />
         <EntityTypeShape EntityType="DataObjects.LibraryItems" Width="1.5" PointX="6.125" PointY="10.625" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataObjects.Menus" Width="1.5" PointX="2.375" PointY="8.875" Height="1.7566536458333326" />
         <EntityTypeShape EntityType="DataObjects.MenuItems" Width="1.5" PointX="2.375" PointY="11.125" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="DataObjects.Calendars" Width="1.5" PointX="5.125" PointY="13.75" Height="1.7566536458333326" />
-        <EntityTypeShape EntityType="DataObjects.CalendarEvents" Width="1.5" PointX="7.125" PointY="13.375" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataObjects.Calendars" Width="1.5" PointX="5.125" PointY="14" Height="1.7566536458333326" />
+        <EntityTypeShape EntityType="DataObjects.CalendarEvents" Width="1.5" PointX="7.125" PointY="13.875" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataObjects.Aliases" Width="1.5" PointX="0.5" PointY="10.5" Height="2.4140429687499996" />
-        <EntityTypeShape EntityType="DataObjects.MetaDataTypesToContentItems" Width="1.5" PointX="0.5" PointY="3.875" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataObjects.MetaDataTypesToContentItems" Width="1.5" PointX="0.5" PointY="3.75" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataObjects.MetaDataTypes" Width="1.5" PointX="0.5" PointY="6.125" Height="2.0853483072916665" />
         <AssociationConnector Association="DataObjects.FoldersContentItems" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.25" PointY="9.3542048699682638" />
-          <ConnectorPoint PointX="4.058" PointY="9.3542048699682638" />
-          <ConnectorPoint PointX="4.058" PointY="5.9766008992142705" />
-          <ConnectorPoint PointX="3.875" PointY="5.9766008992142705" />
+          <ConnectorPoint PointX="4.38721943848663" PointY="9.25" />
+          <ConnectorPoint PointX="4.38721943848663" PointY="8.8191536458333335" />
+          <ConnectorPoint PointX="4.1875" PointY="8.8191536458333335" />
+          <ConnectorPoint PointX="4.1875" PointY="3.6083071477050783" />
+          <ConnectorPoint PointX="3.875" PointY="3.6083071477050783" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataObjects.Languages" Width="1.5" PointX="4.25" PointY="7" Height="1.7566536458333335" />
         <AssociationConnector Association="DataObjects.LanguagesUsers">
@@ -676,115 +698,114 @@
           <ConnectorPoint PointX="5" PointY="6.6177376302083326" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.LanguagesFolders">
-          <ConnectorPoint PointX="4.5541421353429712" PointY="8.7566536458333335" />
-          <ConnectorPoint PointX="4.5541421353429712" PointY="8.87712" />
-          <ConnectorPoint PointX="4.8696653396731362" PointY="8.87712" />
-          <ConnectorPoint PointX="4.8696653396731362" PointY="9" />
+          <ConnectorPoint PointX="5.4130665470634485" PointY="8.7566536458333335" />
+          <ConnectorPoint PointX="5.4130665470634485" PointY="9.25" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.CalendarsFolders" ManuallyRouted="false">
-          <ConnectorPoint PointX="5.375" PointY="13.75" />
-          <ConnectorPoint PointX="5.375" PointY="13.221863606770834" />
+          <ConnectorPoint PointX="5.375" PointY="14" />
+          <ConnectorPoint PointX="5.375" PointY="13.471863606770834" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.CalendarsCalendarEvents">
-          <ConnectorPoint PointX="6.625" PointY="14.52300048828125" />
-          <ConnectorPoint PointX="7.125" PointY="14.52300048828125" />
+          <ConnectorPoint PointX="6.625" PointY="14.878326822916666" />
+          <ConnectorPoint PointX="7.125" PointY="14.878326822916666" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.MenusFolders">
-          <ConnectorPoint PointX="3.875" PointY="10.216477024529571" />
-          <ConnectorPoint PointX="4.067" PointY="10.216477024529571" />
-          <ConnectorPoint PointX="4.067" PointY="10.453048645234972" />
-          <ConnectorPoint PointX="4.25" PointY="10.453048645234972" />
+          <ConnectorPoint PointX="3.875" PointY="9.9408268229166659" />
+          <ConnectorPoint PointX="4.25" PointY="9.9408268229166659" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.MenuItemsMenus">
           <ConnectorPoint PointX="3.125" PointY="11.125" />
           <ConnectorPoint PointX="3.125" PointY="10.631653645833332" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.LibraryItemsFolders" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.125" PointY="10.756718302981954" />
-          <ConnectorPoint PointX="5.885" PointY="10.756718302981954" />
-          <ConnectorPoint PointX="5.885" PointY="10.287506969703481" />
-          <ConnectorPoint PointX="5.625" PointY="10.287506969703481" />
+          <ConnectorPoint PointX="6.125" PointY="11.58550048828125" />
+          <ConnectorPoint PointX="5.625" PointY="11.58550048828125" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.UsersToUserRolesUserRoles">
           <ConnectorPoint PointX="8" PointY="4.6711531575520837" />
-          <ConnectorPoint PointX="8.375" PointY="4.6711531575520837" /></AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.Templates" Width="1.5" PointX="0.5" PointY="13.375" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="DataObjects.TemplateElement" Width="2" PointX="2.375" PointY="13.375" Height="2.4140429687499996" />
-        <EntityTypeShape EntityType="DataObjects.TemplateElementTypes" Width="2" PointX="0.5" PointY="16.375" Height="1.4279589843750031" />
-        <AssociationConnector Association="DataObjects.AdminElementAdminPages">
-          <ConnectorPoint PointX="2.375" PointY="14.33550048828125" />
-          <ConnectorPoint PointX="2" PointY="14.33550048828125" />
+          <ConnectorPoint PointX="8.375" PointY="4.6711531575520837" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.TemplateElementAttributes" Width="2.375" PointX="3.75" PointY="16.625" Height="1.9210009765624996" />
-        <AssociationConnector Association="DataObjects.AdminElementAttributesAdminElement">
-          <ConnectorPoint PointX="4.0625" PointY="16.625" />
-          <ConnectorPoint PointX="4.0625" PointY="15.78904296875" />
+        <EntityTypeShape EntityType="DataObjects.Templates" Width="1.5" PointX="0.5" PointY="13.375" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataObjects.TemplateElement" Width="2" PointX="2.375" PointY="13.625" Height="2.7427376302083353" />
+        <AssociationConnector Association="DataObjects.AdminElementAdminPages">
+          <ConnectorPoint PointX="2.375" PointY="14.46050048828125" />
+          <ConnectorPoint PointX="2" PointY="14.46050048828125" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.PagesAliases">
           <ConnectorPoint PointX="1.25" PointY="13.375" />
           <ConnectorPoint PointX="1.25" PointY="12.91404296875" /></AssociationConnector>
         <AssociationConnector Association="DataObjects.ChildFolders">
-          <ConnectorPoint PointX="4.7375961538461535" PointY="13.221863606770834" />
-          <ConnectorPoint PointX="4.7375961538461535" PointY="13.471863606770832" />
-          <ConnectorPoint PointX="5.1469230769230769" PointY="13.471863606770832" />
-          <ConnectorPoint PointX="5.1469230769230769" PointY="13.221863606770834" />
+          <ConnectorPoint PointX="4.7375961538461535" PointY="13.471863606770834" />
+          <ConnectorPoint PointX="4.7375961538461535" PointY="13.721863606770832" />
+          <ConnectorPoint PointX="5.1469230769230769" PointY="13.721863606770832" />
+          <ConnectorPoint PointX="5.1469230769230769" PointY="13.471863606770834" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataObjects.Permissions" Width="1.5" PointX="6.125" PointY="5.875" Height="4.5505582682291656" />
         <AssociationConnector Association="DataObjects.PermissionsUserRoles">
           <ConnectorPoint PointX="7.625" PointY="6.0402190644481157" />
           <ConnectorPoint PointX="8.5604928376374474" PointY="6.0402190644481157" />
-          <ConnectorPoint PointX="8.5604928376374474" PointY="5.4673063151041674" /></AssociationConnector>
+          <ConnectorPoint PointX="8.5604928376374474" PointY="5.4673063151041674" />
+          </AssociationConnector>
         <AssociationConnector Association="DataObjects.MenuItemsAliases">
           <ConnectorPoint PointX="2.375" PointY="12.019521484375" />
           <ConnectorPoint PointX="2" PointY="12.019521484375" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.PermissionsFolders">
-          <ConnectorPoint PointX="6.125" PointY="9.58125348485174" />
-          <ConnectorPoint PointX="5.625" PointY="9.58125348485174" /></AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.MetaDataTypeToFolder" Width="1.5" PointX="2.375" PointY="6.875" Height="1.9210009765624996" />
+          <ConnectorPoint PointX="6.125" PointY="9.8377791341145837" />
+          <ConnectorPoint PointX="5.625" PointY="9.8377791341145837" /></AssociationConnector>
+        <EntityTypeShape EntityType="DataObjects.MetaDataTypeToFolder" Width="1.5" PointX="2.375" PointY="6.625" Height="1.9210009765624996" />
         <AssociationConnector Association="DataObjects.MetaDataTypeToFolderFolders" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.875" PointY="8.2039444986979166" />
-          <ConnectorPoint PointX="4.07090625" PointY="8.2039444986979166" />
-          <ConnectorPoint PointX="4.07090625" PointY="10.068400633006435" />
-          <ConnectorPoint PointX="4.25" PointY="10.068400633006435" />
+          <ConnectorPoint PointX="3.875" PointY="8.5460009765625" />
+          <ConnectorPoint PointX="4.25" PointY="9.25" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.MetaDataTypeToFolderMetaDataTypes">
-          <ConnectorPoint PointX="2.375" PointY="7.5426741536458337" />
-          <ConnectorPoint PointX="2" PointY="7.5426741536458337" /></AssociationConnector>
+          <ConnectorPoint PointX="2.375" PointY="7.4176741536458337" />
+          <ConnectorPoint PointX="2" PointY="7.4176741536458337" /></AssociationConnector>
         <EntityTypeShape EntityType="DataObjects.MetaDataValueTypes" Width="1.75" PointX="0.5" PointY="8.625" Height="1.427958984375" />
         <AssociationConnector Association="DataObjects.MetaDataValueTypesMetaDataTypes">
           <ConnectorPoint PointX="1.25" PointY="8.625" />
           <ConnectorPoint PointX="1.25" PointY="8.2103483072916674" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.MetaDataTypesToContentItemsMetaDataTypes">
-          <ConnectorPoint PointX="1.25" PointY="5.7960009765625" />
+          <ConnectorPoint PointX="1.25" PointY="5.6710009765625" />
           <ConnectorPoint PointX="1.25" PointY="6.125" /></AssociationConnector>
         <AssociationConnector Association="DataObjects.MetaDataTypesToContentItemsContentItems">
-          <ConnectorPoint PointX="2" PointY="4.647126204463194" />
-          <ConnectorPoint PointX="2.375" PointY="4.647126204463194" /></AssociationConnector>
+          <ConnectorPoint PointX="2" PointY="4.71050048828125" />
+          <ConnectorPoint PointX="2.375" PointY="4.71050048828125" /></AssociationConnector>
         <EntityTypeShape EntityType="DataObjects.ContentHistory" Width="1.5" PointX="4.25" PointY="0.875" Height="2.5783902994791661" />
         <AssociationConnector Association="DataObjects.ContentHistoryContentItems">
-          <ConnectorPoint PointX="4.25" PointY="3.2266951497395828" />
-          <ConnectorPoint PointX="3.875" PointY="3.2266951497395828" />
+          <ConnectorPoint PointX="4.25" PointY="2.8058220590820313" />
+          <ConnectorPoint PointX="3.875" PointY="2.8058220590820313" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.ContentHistoryUsers">
           <ConnectorPoint PointX="5" PointY="3.4533902994791661" />
           <ConnectorPoint PointX="5" PointY="3.875" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.AliasesContentItems">
-          <ConnectorPoint PointX="1.25" PointY="10.5" />
-          <ConnectorPoint PointX="1.25" PointY="10.115458984375" />
-          <ConnectorPoint PointX="2.3125" PointY="10.115458984375" />
-          <ConnectorPoint PointX="2.3125" PointY="5.4817574089263879" />
-          <ConnectorPoint PointX="2.375" PointY="5.4817574089263879" />
+          <ConnectorPoint PointX="2" PointY="11.707021484375" />
+          <ConnectorPoint PointX="2.3125" PointY="11.707021484375" />
+          <ConnectorPoint PointX="2.3125" PointY="6.3619189453125" />
+          <ConnectorPoint PointX="3.125" PointY="6.3619189453125" />
+          <ConnectorPoint PointX="3.125" PointY="6.2681689453125" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.TemplateElementTypesTemplateElementAttributes">
-          <ConnectorPoint PointX="2.5" PointY="17.2139794921875" />
-          <ConnectorPoint PointX="3.75" PointY="17.2139794921875" /></AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.ObjectSchema" Width="1.5" PointX="1.25" PointY="1.125" Height="1.2636116536458335" />
-        <AssociationConnector Association="DataObjects.ContentItemsObjectSchema">
-          <ConnectorPoint PointX="2.5625" PointY="3" />
-          <ConnectorPoint PointX="2.5625" PointY="2.552958984375" /></AssociationConnector>
+        <EntityTypeShape EntityType="DataObjects.ObjectSchema" Width="1.5" PointX="9" PointY="1.125" Height="2.085348307291667" />
+        <EntityTypeShape EntityType="DataObjects.ObjectXsltSets" Width="1.5" PointX="0.5" PointY="0.5" Height="1.7566536458333335" />
+        <AssociationConnector Association="DataObjects.ObjectXsltSetContentItems">
+          <ConnectorPoint PointX="2" PointY="2.2566536458333335" />
+          <ConnectorPoint PointX="2.375" PointY="2.375" />
+          </AssociationConnector>
+        <AssociationConnector Association="DataObjects.ObjectSchemaObjectXsltSets">
+          <ConnectorPoint PointX="9.75" PointY="1.125" />
+          <ConnectorPoint PointX="9.75" PointY="0.65625" />
+          <ConnectorPoint PointX="2" PointY="0.65625" /></AssociationConnector>
+        <EntityTypeShape EntityType="DataObjects.ObjectTypes" Width="1.5" PointX="6.375" PointY="1.75" Height="1.4279589843749996" />
+        <AssociationConnector Association="DataObjects.ObjectTypesObjectSchema">
+          <ConnectorPoint PointX="7.875" PointY="2.4639794921875" />
+          <ConnectorPoint PointX="9" PointY="2.4639794921875" /></AssociationConnector>
+        <AssociationConnector Association="DataObjects.ObjectSchemaTemplateElement">
+          <ConnectorPoint PointX="10.21875" PointY="3.210348307291667" />
+          <ConnectorPoint PointX="10.21875" PointY="16.113119303385417" />
+          <ConnectorPoint PointX="4.375" PointY="16.113119303385417" /></AssociationConnector>
         </Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

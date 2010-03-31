@@ -31,7 +31,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("DataObjects", "LibraryItemsFolders", "LibraryItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.LibraryItems), "Folders", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.Folders), true)]
 [assembly: EdmRelationshipAttribute("DataObjects", "UsersToUserRolesUserRoles", "UsersToUserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.UsersToUserRoles), "UserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.UserRoles), true)]
 [assembly: EdmRelationshipAttribute("DataObjects", "AdminElementAdminPages", "AdminElement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.TemplateElement), "AdminPages", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.Templates), true)]
-[assembly: EdmRelationshipAttribute("DataObjects", "AdminElementAttributesAdminElement", "AdminElementAttributes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.TemplateElementAttributes), "AdminElement", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.TemplateElement))]
 [assembly: EdmRelationshipAttribute("DataObjects", "PagesAliases", "Pages", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.Templates), "Aliases", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.Aliases), true)]
 [assembly: EdmRelationshipAttribute("DataObjects", "ChildFolders", "Folders", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.Folders), "Folders1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.Folders), true)]
 [assembly: EdmRelationshipAttribute("DataObjects", "PermissionsUserRoles", "Permissions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.Permissions), "UserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.UserRoles), true)]
@@ -45,8 +44,10 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("DataObjects", "ContentHistoryContentItems", "ContentHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.ContentHistory), "ContentItems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ContentItems), true)]
 [assembly: EdmRelationshipAttribute("DataObjects", "ContentHistoryUsers", "ContentHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.ContentHistory), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.Users), true)]
 [assembly: EdmRelationshipAttribute("DataObjects", "AliasesContentItems", "Aliases", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.Aliases), "ContentItems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ContentItems), true)]
-[assembly: EdmRelationshipAttribute("DataObjects", "TemplateElementTypesTemplateElementAttributes", "TemplateElementTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.TemplateElementTypes), "TemplateElementAttributes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.TemplateElementAttributes), true)]
-[assembly: EdmRelationshipAttribute("DataObjects", "ContentItemsObjectSchema", "ContentItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.ContentItems), "ObjectSchema", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ObjectSchema), true)]
+[assembly: EdmRelationshipAttribute("DataObjects", "ObjectXsltSetContentItems", "ObjectXsltSet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ObjectXsltSets), "ContentItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.ContentItems), true)]
+[assembly: EdmRelationshipAttribute("DataObjects", "ObjectSchemaObjectXsltSets", "ObjectSchema", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ObjectSchema), "ObjectXsltSets", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.ObjectXsltSets), true)]
+[assembly: EdmRelationshipAttribute("DataObjects", "ObjectTypesObjectSchema", "ObjectTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ObjectTypes), "ObjectSchema", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.ObjectSchema), true)]
+[assembly: EdmRelationshipAttribute("DataObjects", "ObjectSchemaTemplateElement", "ObjectSchema", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ObjectSchema), "TemplateElement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.TemplateElement), true)]
 
 #endregion
 
@@ -357,38 +358,6 @@ namespace TotalCMSLib
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<TemplateElementTypes> TemplateElementTypes
-        {
-            get
-            {
-                if ((_TemplateElementTypes == null))
-                {
-                    _TemplateElementTypes = base.CreateObjectSet<TemplateElementTypes>("TemplateElementTypes");
-                }
-                return _TemplateElementTypes;
-            }
-        }
-        private ObjectSet<TemplateElementTypes> _TemplateElementTypes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<TemplateElementAttributes> TemplateElementAttributes
-        {
-            get
-            {
-                if ((_TemplateElementAttributes == null))
-                {
-                    _TemplateElementAttributes = base.CreateObjectSet<TemplateElementAttributes>("TemplateElementAttributes");
-                }
-                return _TemplateElementAttributes;
-            }
-        }
-        private ObjectSet<TemplateElementAttributes> _TemplateElementAttributes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Permissions> Permissions
         {
             get
@@ -465,6 +434,38 @@ namespace TotalCMSLib
             }
         }
         private ObjectSet<ObjectSchema> _ObjectSchemas;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ObjectXsltSets> ObjectXsltSets1
+        {
+            get
+            {
+                if ((_ObjectXsltSets1 == null))
+                {
+                    _ObjectXsltSets1 = base.CreateObjectSet<ObjectXsltSets>("ObjectXsltSets1");
+                }
+                return _ObjectXsltSets1;
+            }
+        }
+        private ObjectSet<ObjectXsltSets> _ObjectXsltSets1;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ObjectTypes> ObjectTypes
+        {
+            get
+            {
+                if ((_ObjectTypes == null))
+                {
+                    _ObjectTypes = base.CreateObjectSet<ObjectTypes>("ObjectTypes");
+                }
+                return _ObjectTypes;
+            }
+        }
+        private ObjectSet<ObjectTypes> _ObjectTypes;
 
         #endregion
         #region AddTo Methods
@@ -598,22 +599,6 @@ namespace TotalCMSLib
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the TemplateElementTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTemplateElementTypes(TemplateElementTypes templateElementTypes)
-        {
-            base.AddObject("TemplateElementTypes", templateElementTypes);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the TemplateElementAttributes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTemplateElementAttributes(TemplateElementAttributes templateElementAttributes)
-        {
-            base.AddObject("TemplateElementAttributes", templateElementAttributes);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Permissions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToPermissions(Permissions permissions)
@@ -651,6 +636,22 @@ namespace TotalCMSLib
         public void AddToObjectSchemas(ObjectSchema objectSchema)
         {
             base.AddObject("ObjectSchemas", objectSchema);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ObjectXsltSets1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToObjectXsltSets1(ObjectXsltSets objectXsltSets)
+        {
+            base.AddObject("ObjectXsltSets1", objectXsltSets);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ObjectTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToObjectTypes(ObjectTypes objectTypes)
+        {
+            base.AddObject("ObjectTypes", objectTypes);
         }
 
         #endregion
@@ -1656,7 +1657,8 @@ namespace TotalCMSLib
         /// <param name="folderId">Initial value of the FolderId property.</param>
         /// <param name="contentStatus">Initial value of the ContentStatus property.</param>
         /// <param name="objectSchemaId">Initial value of the ObjectSchemaId property.</param>
-        public static ContentItems CreateContentItems(global::System.Int32 contentItemId, global::System.String contentHtml, global::System.String contentSummary, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdByUserId, global::System.Int32 modifiedByUserId, global::System.Int32 folderId, global::System.String contentStatus, global::System.Int32 objectSchemaId)
+        /// <param name="objectXsltSetId">Initial value of the ObjectXsltSetId property.</param>
+        public static ContentItems CreateContentItems(global::System.Int32 contentItemId, global::System.String contentHtml, global::System.String contentSummary, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdByUserId, global::System.Int32 modifiedByUserId, global::System.Int32 folderId, global::System.String contentStatus, global::System.Int32 objectSchemaId, global::System.Int32 objectXsltSetId)
         {
             ContentItems contentItems = new ContentItems();
             contentItems.ContentItemId = contentItemId;
@@ -1669,6 +1671,7 @@ namespace TotalCMSLib
             contentItems.FolderId = folderId;
             contentItems.ContentStatus = contentStatus;
             contentItems.ObjectSchemaId = objectSchemaId;
+            contentItems.ObjectXsltSetId = objectXsltSetId;
             return contentItems;
         }
 
@@ -1917,6 +1920,30 @@ namespace TotalCMSLib
         private global::System.Int32 _ObjectSchemaId;
         partial void OnObjectSchemaIdChanging(global::System.Int32 value);
         partial void OnObjectSchemaIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ObjectXsltSetId
+        {
+            get
+            {
+                return _ObjectXsltSetId;
+            }
+            set
+            {
+                OnObjectXsltSetIdChanging(value);
+                ReportPropertyChanging("ObjectXsltSetId");
+                _ObjectXsltSetId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ObjectXsltSetId");
+                OnObjectXsltSetIdChanged();
+            }
+        }
+        private global::System.Int32 _ObjectXsltSetId;
+        partial void OnObjectXsltSetIdChanging(global::System.Int32 value);
+        partial void OnObjectXsltSetIdChanged();
 
         #endregion
     
@@ -2108,16 +2135,16 @@ namespace TotalCMSLib
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ContentItemsObjectSchema", "ObjectSchema")]
-        public ObjectSchema ObjectSchema
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ObjectXsltSetContentItems", "ObjectXsltSet")]
+        public ObjectXsltSets ObjectXsltSet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ContentItemsObjectSchema", "ObjectSchema").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectXsltSets>("DataObjects.ObjectXsltSetContentItems", "ObjectXsltSet").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ContentItemsObjectSchema", "ObjectSchema").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectXsltSets>("DataObjects.ObjectXsltSetContentItems", "ObjectXsltSet").Value = value;
             }
         }
         /// <summary>
@@ -2125,17 +2152,17 @@ namespace TotalCMSLib
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ObjectSchema> ObjectSchemaReference
+        public EntityReference<ObjectXsltSets> ObjectXsltSetReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ContentItemsObjectSchema", "ObjectSchema");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectXsltSets>("DataObjects.ObjectXsltSetContentItems", "ObjectXsltSet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ObjectSchema>("DataObjects.ContentItemsObjectSchema", "ObjectSchema", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ObjectXsltSets>("DataObjects.ObjectXsltSetContentItems", "ObjectXsltSet", value);
                 }
             }
         }
@@ -4174,11 +4201,15 @@ namespace TotalCMSLib
         /// </summary>
         /// <param name="objectSchemaId">Initial value of the ObjectSchemaId property.</param>
         /// <param name="schemaXml">Initial value of the SchemaXml property.</param>
-        public static ObjectSchema CreateObjectSchema(global::System.Int32 objectSchemaId, global::System.String schemaXml)
+        /// <param name="objectTypeId">Initial value of the ObjectTypeId property.</param>
+        /// <param name="dataEntryXslt">Initial value of the DataEntryXslt property.</param>
+        public static ObjectSchema CreateObjectSchema(global::System.Int32 objectSchemaId, global::System.String schemaXml, global::System.Int32 objectTypeId, global::System.String dataEntryXslt)
         {
             ObjectSchema objectSchema = new ObjectSchema();
             objectSchema.ObjectSchemaId = objectSchemaId;
             objectSchema.SchemaXml = schemaXml;
+            objectSchema.ObjectTypeId = objectTypeId;
+            objectSchema.DataEntryXslt = dataEntryXslt;
             return objectSchema;
         }
 
@@ -4235,6 +4266,54 @@ namespace TotalCMSLib
         private global::System.String _SchemaXml;
         partial void OnSchemaXmlChanging(global::System.String value);
         partial void OnSchemaXmlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ObjectTypeId
+        {
+            get
+            {
+                return _ObjectTypeId;
+            }
+            set
+            {
+                OnObjectTypeIdChanging(value);
+                ReportPropertyChanging("ObjectTypeId");
+                _ObjectTypeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ObjectTypeId");
+                OnObjectTypeIdChanged();
+            }
+        }
+        private global::System.Int32 _ObjectTypeId;
+        partial void OnObjectTypeIdChanging(global::System.Int32 value);
+        partial void OnObjectTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DataEntryXslt
+        {
+            get
+            {
+                return _DataEntryXslt;
+            }
+            set
+            {
+                OnDataEntryXsltChanging(value);
+                ReportPropertyChanging("DataEntryXslt");
+                _DataEntryXslt = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("DataEntryXslt");
+                OnDataEntryXsltChanged();
+            }
+        }
+        private global::System.String _DataEntryXslt;
+        partial void OnDataEntryXsltChanging(global::System.String value);
+        partial void OnDataEntryXsltChanged();
 
         #endregion
     
@@ -4246,18 +4325,354 @@ namespace TotalCMSLib
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ContentItemsObjectSchema", "ContentItems")]
-        public EntityCollection<ContentItems> ContentItems
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ObjectSchemaObjectXsltSets", "ObjectXsltSets")]
+        public EntityCollection<ObjectXsltSets> ObjectXsltSets
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ContentItems>("DataObjects.ContentItemsObjectSchema", "ContentItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ObjectXsltSets>("DataObjects.ObjectSchemaObjectXsltSets", "ObjectXsltSets");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ContentItems>("DataObjects.ContentItemsObjectSchema", "ContentItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ObjectXsltSets>("DataObjects.ObjectSchemaObjectXsltSets", "ObjectXsltSets", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ObjectTypesObjectSchema", "ObjectTypes")]
+        public ObjectTypes ObjectType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectTypes>("DataObjects.ObjectTypesObjectSchema", "ObjectTypes").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectTypes>("DataObjects.ObjectTypesObjectSchema", "ObjectTypes").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ObjectTypes> ObjectTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectTypes>("DataObjects.ObjectTypesObjectSchema", "ObjectTypes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ObjectTypes>("DataObjects.ObjectTypesObjectSchema", "ObjectTypes", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ObjectSchemaTemplateElement", "TemplateElement")]
+        public EntityCollection<TemplateElement> TemplateElements
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TemplateElement>("DataObjects.ObjectSchemaTemplateElement", "TemplateElement");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TemplateElement>("DataObjects.ObjectSchemaTemplateElement", "TemplateElement", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DataObjects", Name="ObjectTypes")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ObjectTypes : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ObjectTypes object.
+        /// </summary>
+        /// <param name="objectTypeId">Initial value of the ObjectTypeId property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
+        public static ObjectTypes CreateObjectTypes(global::System.Int32 objectTypeId, global::System.String description)
+        {
+            ObjectTypes objectTypes = new ObjectTypes();
+            objectTypes.ObjectTypeId = objectTypeId;
+            objectTypes.Description = description;
+            return objectTypes;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ObjectTypeId
+        {
+            get
+            {
+                return _ObjectTypeId;
+            }
+            set
+            {
+                if (_ObjectTypeId != value)
+                {
+                    OnObjectTypeIdChanging(value);
+                    ReportPropertyChanging("ObjectTypeId");
+                    _ObjectTypeId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ObjectTypeId");
+                    OnObjectTypeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ObjectTypeId;
+        partial void OnObjectTypeIdChanging(global::System.Int32 value);
+        partial void OnObjectTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ObjectTypesObjectSchema", "ObjectSchema")]
+        public EntityCollection<ObjectSchema> ObjectSchemas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ObjectSchema>("DataObjects.ObjectTypesObjectSchema", "ObjectSchema");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ObjectSchema>("DataObjects.ObjectTypesObjectSchema", "ObjectSchema", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DataObjects", Name="ObjectXsltSets")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ObjectXsltSets : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ObjectXsltSets object.
+        /// </summary>
+        /// <param name="objectXsltSetId">Initial value of the ObjectXsltSetId property.</param>
+        /// <param name="displayXslt">Initial value of the DisplayXslt property.</param>
+        /// <param name="objectSchemaId">Initial value of the ObjectSchemaId property.</param>
+        public static ObjectXsltSets CreateObjectXsltSets(global::System.Int32 objectXsltSetId, global::System.String displayXslt, global::System.Int32 objectSchemaId)
+        {
+            ObjectXsltSets objectXsltSets = new ObjectXsltSets();
+            objectXsltSets.ObjectXsltSetId = objectXsltSetId;
+            objectXsltSets.DisplayXslt = displayXslt;
+            objectXsltSets.ObjectSchemaId = objectSchemaId;
+            return objectXsltSets;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ObjectXsltSetId
+        {
+            get
+            {
+                return _ObjectXsltSetId;
+            }
+            set
+            {
+                if (_ObjectXsltSetId != value)
+                {
+                    OnObjectXsltSetIdChanging(value);
+                    ReportPropertyChanging("ObjectXsltSetId");
+                    _ObjectXsltSetId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ObjectXsltSetId");
+                    OnObjectXsltSetIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ObjectXsltSetId;
+        partial void OnObjectXsltSetIdChanging(global::System.Int32 value);
+        partial void OnObjectXsltSetIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DisplayXslt
+        {
+            get
+            {
+                return _DisplayXslt;
+            }
+            set
+            {
+                OnDisplayXsltChanging(value);
+                ReportPropertyChanging("DisplayXslt");
+                _DisplayXslt = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("DisplayXslt");
+                OnDisplayXsltChanged();
+            }
+        }
+        private global::System.String _DisplayXslt;
+        partial void OnDisplayXsltChanging(global::System.String value);
+        partial void OnDisplayXsltChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ObjectSchemaId
+        {
+            get
+            {
+                return _ObjectSchemaId;
+            }
+            set
+            {
+                OnObjectSchemaIdChanging(value);
+                ReportPropertyChanging("ObjectSchemaId");
+                _ObjectSchemaId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ObjectSchemaId");
+                OnObjectSchemaIdChanged();
+            }
+        }
+        private global::System.Int32 _ObjectSchemaId;
+        partial void OnObjectSchemaIdChanging(global::System.Int32 value);
+        partial void OnObjectSchemaIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ObjectXsltSetContentItems", "ContentItems")]
+        public EntityCollection<ContentItems> ContentItems
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ContentItems>("DataObjects.ObjectXsltSetContentItems", "ContentItems");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ContentItems>("DataObjects.ObjectXsltSetContentItems", "ContentItems", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ObjectSchemaObjectXsltSets", "ObjectSchema")]
+        public ObjectSchema ObjectSchema
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ObjectSchemaObjectXsltSets", "ObjectSchema").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ObjectSchemaObjectXsltSets", "ObjectSchema").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ObjectSchema> ObjectSchemaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ObjectSchemaObjectXsltSets", "ObjectSchema");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ObjectSchema>("DataObjects.ObjectSchemaObjectXsltSets", "ObjectSchema", value);
                 }
             }
         }
@@ -4912,7 +5327,10 @@ namespace TotalCMSLib
         /// <param name="templateElementTypeId">Initial value of the TemplateElementTypeId property.</param>
         /// <param name="title">Initial value of the Title property.</param>
         /// <param name="description">Initial value of the Description property.</param>
-        public static TemplateElement CreateTemplateElement(global::System.Int32 templateElementId, global::System.Guid xsltId, global::System.Int32 templateId, global::System.Int32 templateElementTypeId, global::System.String title, global::System.String description)
+        /// <param name="dynamicParamName">Initial value of the DynamicParamName property.</param>
+        /// <param name="objectId">Initial value of the ObjectId property.</param>
+        /// <param name="objectSchemaId">Initial value of the ObjectSchemaId property.</param>
+        public static TemplateElement CreateTemplateElement(global::System.Int32 templateElementId, global::System.Guid xsltId, global::System.Int32 templateId, global::System.Int32 templateElementTypeId, global::System.String title, global::System.String description, global::System.String dynamicParamName, global::System.String objectId, global::System.Int32 objectSchemaId)
         {
             TemplateElement templateElement = new TemplateElement();
             templateElement.TemplateElementId = templateElementId;
@@ -4921,6 +5339,9 @@ namespace TotalCMSLib
             templateElement.TemplateElementTypeId = templateElementTypeId;
             templateElement.Title = title;
             templateElement.Description = description;
+            templateElement.DynamicParamName = dynamicParamName;
+            templateElement.ObjectId = objectId;
+            templateElement.ObjectSchemaId = objectSchemaId;
             return templateElement;
         }
 
@@ -5073,158 +5494,30 @@ namespace TotalCMSLib
         private global::System.String _Description;
         partial void OnDescriptionChanging(global::System.String value);
         partial void OnDescriptionChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "AdminElementAdminPages", "AdminPages")]
-        public Templates Page
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Templates>("DataObjects.AdminElementAdminPages", "AdminPages").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Templates>("DataObjects.AdminElementAdminPages", "AdminPages").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Templates> PageReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Templates>("DataObjects.AdminElementAdminPages", "AdminPages");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Templates>("DataObjects.AdminElementAdminPages", "AdminPages", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "AdminElementAttributesAdminElement", "AdminElementAttributes")]
-        public EntityCollection<TemplateElementAttributes> PageElementAttributes
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TemplateElementAttributes>("DataObjects.AdminElementAttributesAdminElement", "AdminElementAttributes");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TemplateElementAttributes>("DataObjects.AdminElementAttributesAdminElement", "AdminElementAttributes", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DataObjects", Name="TemplateElementAttributes")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class TemplateElementAttributes : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new TemplateElementAttributes object.
-        /// </summary>
-        /// <param name="templateElementAttributesId">Initial value of the TemplateElementAttributesId property.</param>
-        /// <param name="objectName">Initial value of the ObjectName property.</param>
-        /// <param name="objectId">Initial value of the ObjectId property.</param>
-        /// <param name="dynamicParam">Initial value of the DynamicParam property.</param>
-        /// <param name="templateElementId">Initial value of the TemplateElementId property.</param>
-        /// <param name="templateElementTypeId">Initial value of the TemplateElementTypeId property.</param>
-        public static TemplateElementAttributes CreateTemplateElementAttributes(global::System.Int32 templateElementAttributesId, global::System.String objectName, global::System.String objectId, global::System.String dynamicParam, global::System.String templateElementId, global::System.Int32 templateElementTypeId)
-        {
-            TemplateElementAttributes templateElementAttributes = new TemplateElementAttributes();
-            templateElementAttributes.TemplateElementAttributesId = templateElementAttributesId;
-            templateElementAttributes.ObjectName = objectName;
-            templateElementAttributes.ObjectId = objectId;
-            templateElementAttributes.DynamicParam = dynamicParam;
-            templateElementAttributes.TemplateElementId = templateElementId;
-            templateElementAttributes.TemplateElementTypeId = templateElementTypeId;
-            return templateElementAttributes;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 TemplateElementAttributesId
-        {
-            get
-            {
-                return _TemplateElementAttributesId;
-            }
-            set
-            {
-                if (_TemplateElementAttributesId != value)
-                {
-                    OnTemplateElementAttributesIdChanging(value);
-                    ReportPropertyChanging("TemplateElementAttributesId");
-                    _TemplateElementAttributesId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("TemplateElementAttributesId");
-                    OnTemplateElementAttributesIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _TemplateElementAttributesId;
-        partial void OnTemplateElementAttributesIdChanging(global::System.Int32 value);
-        partial void OnTemplateElementAttributesIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String ObjectName
+        public global::System.String DynamicParamName
         {
             get
             {
-                return _ObjectName;
+                return _DynamicParamName;
             }
             set
             {
-                OnObjectNameChanging(value);
-                ReportPropertyChanging("ObjectName");
-                _ObjectName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ObjectName");
-                OnObjectNameChanged();
+                OnDynamicParamNameChanging(value);
+                ReportPropertyChanging("DynamicParamName");
+                _DynamicParamName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("DynamicParamName");
+                OnDynamicParamNameChanged();
             }
         }
-        private global::System.String _ObjectName;
-        partial void OnObjectNameChanging(global::System.String value);
-        partial void OnObjectNameChanged();
+        private global::System.String _DynamicParamName;
+        partial void OnDynamicParamNameChanging(global::System.String value);
+        partial void OnDynamicParamNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5255,72 +5548,24 @@ namespace TotalCMSLib
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String DynamicParam
+        public global::System.Int32 ObjectSchemaId
         {
             get
             {
-                return _DynamicParam;
+                return _ObjectSchemaId;
             }
             set
             {
-                OnDynamicParamChanging(value);
-                ReportPropertyChanging("DynamicParam");
-                _DynamicParam = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("DynamicParam");
-                OnDynamicParamChanged();
+                OnObjectSchemaIdChanging(value);
+                ReportPropertyChanging("ObjectSchemaId");
+                _ObjectSchemaId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ObjectSchemaId");
+                OnObjectSchemaIdChanged();
             }
         }
-        private global::System.String _DynamicParam;
-        partial void OnDynamicParamChanging(global::System.String value);
-        partial void OnDynamicParamChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String TemplateElementId
-        {
-            get
-            {
-                return _TemplateElementId;
-            }
-            set
-            {
-                OnTemplateElementIdChanging(value);
-                ReportPropertyChanging("TemplateElementId");
-                _TemplateElementId = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("TemplateElementId");
-                OnTemplateElementIdChanged();
-            }
-        }
-        private global::System.String _TemplateElementId;
-        partial void OnTemplateElementIdChanging(global::System.String value);
-        partial void OnTemplateElementIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 TemplateElementTypeId
-        {
-            get
-            {
-                return _TemplateElementTypeId;
-            }
-            set
-            {
-                OnTemplateElementTypeIdChanging(value);
-                ReportPropertyChanging("TemplateElementTypeId");
-                _TemplateElementTypeId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("TemplateElementTypeId");
-                OnTemplateElementTypeIdChanged();
-            }
-        }
-        private global::System.Int32 _TemplateElementTypeId;
-        partial void OnTemplateElementTypeIdChanging(global::System.Int32 value);
-        partial void OnTemplateElementTypeIdChanged();
+        private global::System.Int32 _ObjectSchemaId;
+        partial void OnObjectSchemaIdChanging(global::System.Int32 value);
+        partial void OnObjectSchemaIdChanged();
 
         #endregion
     
@@ -5332,16 +5577,16 @@ namespace TotalCMSLib
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "AdminElementAttributesAdminElement", "AdminElement")]
-        public TemplateElement PageElement
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "AdminElementAdminPages", "AdminPages")]
+        public Templates Template
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TemplateElement>("DataObjects.AdminElementAttributesAdminElement", "AdminElement").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Templates>("DataObjects.AdminElementAdminPages", "AdminPages").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TemplateElement>("DataObjects.AdminElementAttributesAdminElement", "AdminElement").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Templates>("DataObjects.AdminElementAdminPages", "AdminPages").Value = value;
             }
         }
         /// <summary>
@@ -5349,17 +5594,17 @@ namespace TotalCMSLib
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<TemplateElement> PageElementReference
+        public EntityReference<Templates> TemplateReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TemplateElement>("DataObjects.AdminElementAttributesAdminElement", "AdminElement");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Templates>("DataObjects.AdminElementAdminPages", "AdminPages");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TemplateElement>("DataObjects.AdminElementAttributesAdminElement", "AdminElement", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Templates>("DataObjects.AdminElementAdminPages", "AdminPages", value);
                 }
             }
         }
@@ -5370,16 +5615,16 @@ namespace TotalCMSLib
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "TemplateElementTypesTemplateElementAttributes", "TemplateElementTypes")]
-        public TemplateElementTypes TemplateElementType
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "ObjectSchemaTemplateElement", "ObjectSchema")]
+        public ObjectSchema ObjectSchema
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TemplateElementTypes>("DataObjects.TemplateElementTypesTemplateElementAttributes", "TemplateElementTypes").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ObjectSchemaTemplateElement", "ObjectSchema").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TemplateElementTypes>("DataObjects.TemplateElementTypesTemplateElementAttributes", "TemplateElementTypes").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ObjectSchemaTemplateElement", "ObjectSchema").Value = value;
             }
         }
         /// <summary>
@@ -5387,123 +5632,17 @@ namespace TotalCMSLib
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<TemplateElementTypes> TemplateElementTypeReference
+        public EntityReference<ObjectSchema> ObjectSchemaReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TemplateElementTypes>("DataObjects.TemplateElementTypesTemplateElementAttributes", "TemplateElementTypes");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ObjectSchema>("DataObjects.ObjectSchemaTemplateElement", "ObjectSchema");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TemplateElementTypes>("DataObjects.TemplateElementTypesTemplateElementAttributes", "TemplateElementTypes", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DataObjects", Name="TemplateElementTypes")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class TemplateElementTypes : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new TemplateElementTypes object.
-        /// </summary>
-        /// <param name="templateElementTypeId">Initial value of the TemplateElementTypeId property.</param>
-        /// <param name="type">Initial value of the Type property.</param>
-        public static TemplateElementTypes CreateTemplateElementTypes(global::System.Int32 templateElementTypeId, global::System.String type)
-        {
-            TemplateElementTypes templateElementTypes = new TemplateElementTypes();
-            templateElementTypes.TemplateElementTypeId = templateElementTypeId;
-            templateElementTypes.Type = type;
-            return templateElementTypes;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 TemplateElementTypeId
-        {
-            get
-            {
-                return _TemplateElementTypeId;
-            }
-            set
-            {
-                if (_TemplateElementTypeId != value)
-                {
-                    OnTemplateElementTypeIdChanging(value);
-                    ReportPropertyChanging("TemplateElementTypeId");
-                    _TemplateElementTypeId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("TemplateElementTypeId");
-                    OnTemplateElementTypeIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _TemplateElementTypeId;
-        partial void OnTemplateElementTypeIdChanging(global::System.Int32 value);
-        partial void OnTemplateElementTypeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Type
-        {
-            get
-            {
-                return _Type;
-            }
-            set
-            {
-                OnTypeChanging(value);
-                ReportPropertyChanging("Type");
-                _Type = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Type");
-                OnTypeChanged();
-            }
-        }
-        private global::System.String _Type;
-        partial void OnTypeChanging(global::System.String value);
-        partial void OnTypeChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "TemplateElementTypesTemplateElementAttributes", "TemplateElementAttributes")]
-        public EntityCollection<TemplateElementAttributes> TemplateElementAttributes
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TemplateElementAttributes>("DataObjects.TemplateElementTypesTemplateElementAttributes", "TemplateElementAttributes");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TemplateElementAttributes>("DataObjects.TemplateElementTypesTemplateElementAttributes", "TemplateElementAttributes", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ObjectSchema>("DataObjects.ObjectSchemaTemplateElement", "ObjectSchema", value);
                 }
             }
         }
@@ -5651,7 +5790,7 @@ namespace TotalCMSLib
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DataObjects", "AdminElementAdminPages", "AdminElement")]
-        public EntityCollection<TemplateElement> PageElements
+        public EntityCollection<TemplateElement> TemplateElements
         {
             get
             {
@@ -6317,19 +6456,6 @@ namespace TotalCMSLib
         }
 
         #endregion
-    }
-
-    #endregion
-    #region ComplexTypes
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmComplexTypeAttribute(NamespaceName="DataObjects", Name="XmlColumn")]
-    [DataContractAttribute(IsReference=true)]
-    [Serializable()]
-    public partial class XmlColumn : ComplexObject
-    {
     }
 
     #endregion
