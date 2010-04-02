@@ -48,6 +48,9 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("DataObjects", "ObjectSchemaObjectXsltSets", "ObjectSchema", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ObjectSchema), "ObjectXsltSets", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.ObjectXsltSets), true)]
 [assembly: EdmRelationshipAttribute("DataObjects", "ObjectTypesObjectSchema", "ObjectTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ObjectTypes), "ObjectSchema", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.ObjectSchema), true)]
 [assembly: EdmRelationshipAttribute("DataObjects", "ObjectSchemaTemplateElement", "ObjectSchema", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.ObjectSchema), "TemplateElement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.TemplateElement), true)]
+[assembly: EdmRelationshipAttribute("DataObjects", "MenusMenus", "Menus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.Menus), "Menus1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.Menus), true)]
+[assembly: EdmRelationshipAttribute("DataObjects", "MenusMenus1", "Menus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.Menus), "Menus1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.Menus), true)]
+[assembly: EdmRelationshipAttribute("DataObjects", "MenusAliases", "Menus", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TotalCMSLib.Menus), "Aliases", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TotalCMSLib.Aliases), true)]
 
 #endregion
 
@@ -466,6 +469,22 @@ namespace TotalCMSLib
             }
         }
         private ObjectSet<ObjectTypes> _ObjectTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Settings> Settings
+        {
+            get
+            {
+                if ((_Settings == null))
+                {
+                    _Settings = base.CreateObjectSet<Settings>("Settings");
+                }
+                return _Settings;
+            }
+        }
+        private ObjectSet<Settings> _Settings;
 
         #endregion
         #region AddTo Methods
@@ -652,6 +671,14 @@ namespace TotalCMSLib
         public void AddToObjectTypes(ObjectTypes objectTypes)
         {
             base.AddObject("ObjectTypes", objectTypes);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Settings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSettings(Settings settings)
+        {
+            base.AddObject("Settings", settings);
         }
 
         #endregion
@@ -941,6 +968,28 @@ namespace TotalCMSLib
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ContentItems>("DataObjects.AliasesContentItems", "ContentItems", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "MenusAliases", "Menus")]
+        public EntityCollection<Menus> Menus
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Menus>("DataObjects.MenusAliases", "Menus");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Menus>("DataObjects.MenusAliases", "Menus", value);
                 }
             }
         }
@@ -3073,13 +3122,15 @@ namespace TotalCMSLib
         /// <param name="menuId">Initial value of the MenuId property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="aliasId">Initial value of the AliasId property.</param>
-        public static MenuItems CreateMenuItems(global::System.Int32 menuItemId, global::System.Int32 menuId, global::System.String name, global::System.Int32 aliasId)
+        /// <param name="orderId">Initial value of the OrderId property.</param>
+        public static MenuItems CreateMenuItems(global::System.Int32 menuItemId, global::System.Int32 menuId, global::System.String name, global::System.Int32 aliasId, global::System.String orderId)
         {
             MenuItems menuItems = new MenuItems();
             menuItems.MenuItemId = menuItemId;
             menuItems.MenuId = menuId;
             menuItems.Name = name;
             menuItems.AliasId = aliasId;
+            menuItems.OrderId = orderId;
             return menuItems;
         }
 
@@ -3184,6 +3235,30 @@ namespace TotalCMSLib
         private global::System.Int32 _AliasId;
         partial void OnAliasIdChanging(global::System.Int32 value);
         partial void OnAliasIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String OrderId
+        {
+            get
+            {
+                return _OrderId;
+            }
+            set
+            {
+                OnOrderIdChanging(value);
+                ReportPropertyChanging("OrderId");
+                _OrderId = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("OrderId");
+                OnOrderIdChanged();
+            }
+        }
+        private global::System.String _OrderId;
+        partial void OnOrderIdChanging(global::System.String value);
+        partial void OnOrderIdChanged();
 
         #endregion
     
@@ -3284,12 +3359,22 @@ namespace TotalCMSLib
         /// <param name="menuId">Initial value of the MenuId property.</param>
         /// <param name="folderId">Initial value of the FolderId property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Menus CreateMenus(global::System.Int32 menuId, global::System.Int32 folderId, global::System.String name)
+        /// <param name="property">Initial value of the Property property.</param>
+        /// <param name="orderId">Initial value of the OrderId property.</param>
+        /// <param name="parentMenuId">Initial value of the ParentMenuId property.</param>
+        /// <param name="rootMenuId">Initial value of the RootMenuId property.</param>
+        /// <param name="aliasId">Initial value of the AliasId property.</param>
+        public static Menus CreateMenus(global::System.Int32 menuId, global::System.Int32 folderId, global::System.String name, global::System.String property, global::System.String orderId, global::System.Int32 parentMenuId, global::System.Int32 rootMenuId, global::System.Int32 aliasId)
         {
             Menus menus = new Menus();
             menus.MenuId = menuId;
             menus.FolderId = folderId;
             menus.Name = name;
+            menus.Property = property;
+            menus.OrderId = orderId;
+            menus.ParentMenuId = parentMenuId;
+            menus.RootMenuId = rootMenuId;
+            menus.AliasId = aliasId;
             return menus;
         }
 
@@ -3370,6 +3455,126 @@ namespace TotalCMSLib
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Property
+        {
+            get
+            {
+                return _Property;
+            }
+            set
+            {
+                OnPropertyChanging(value);
+                ReportPropertyChanging("Property");
+                _Property = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Property");
+                OnPropertyChanged();
+            }
+        }
+        private global::System.String _Property;
+        partial void OnPropertyChanging(global::System.String value);
+        partial void OnPropertyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String OrderId
+        {
+            get
+            {
+                return _OrderId;
+            }
+            set
+            {
+                OnOrderIdChanging(value);
+                ReportPropertyChanging("OrderId");
+                _OrderId = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("OrderId");
+                OnOrderIdChanged();
+            }
+        }
+        private global::System.String _OrderId;
+        partial void OnOrderIdChanging(global::System.String value);
+        partial void OnOrderIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ParentMenuId
+        {
+            get
+            {
+                return _ParentMenuId;
+            }
+            set
+            {
+                OnParentMenuIdChanging(value);
+                ReportPropertyChanging("ParentMenuId");
+                _ParentMenuId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ParentMenuId");
+                OnParentMenuIdChanged();
+            }
+        }
+        private global::System.Int32 _ParentMenuId;
+        partial void OnParentMenuIdChanging(global::System.Int32 value);
+        partial void OnParentMenuIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RootMenuId
+        {
+            get
+            {
+                return _RootMenuId;
+            }
+            set
+            {
+                OnRootMenuIdChanging(value);
+                ReportPropertyChanging("RootMenuId");
+                _RootMenuId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RootMenuId");
+                OnRootMenuIdChanged();
+            }
+        }
+        private global::System.Int32 _RootMenuId;
+        partial void OnRootMenuIdChanging(global::System.Int32 value);
+        partial void OnRootMenuIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AliasId
+        {
+            get
+            {
+                return _AliasId;
+            }
+            set
+            {
+                OnAliasIdChanging(value);
+                ReportPropertyChanging("AliasId");
+                _AliasId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AliasId");
+                OnAliasIdChanged();
+            }
+        }
+        private global::System.Int32 _AliasId;
+        partial void OnAliasIdChanging(global::System.Int32 value);
+        partial void OnAliasIdChanged();
 
         #endregion
     
@@ -3431,6 +3636,142 @@ namespace TotalCMSLib
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MenuItems>("DataObjects.MenuItemsMenus", "MenuItems", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "MenusMenus", "Menus1")]
+        public EntityCollection<Menus> ChildMenus
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Menus>("DataObjects.MenusMenus", "Menus1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Menus>("DataObjects.MenusMenus", "Menus1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "MenusMenus", "Menus")]
+        public Menus ParentMenu
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Menus>("DataObjects.MenusMenus", "Menus").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Menus>("DataObjects.MenusMenus", "Menus").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Menus> ParentMenuReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Menus>("DataObjects.MenusMenus", "Menus");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Menus>("DataObjects.MenusMenus", "Menus", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "MenusMenus1", "Menus")]
+        public Menus RootMenu
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Menus>("DataObjects.MenusMenus1", "Menus").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Menus>("DataObjects.MenusMenus1", "Menus").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Menus> RootMenuReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Menus>("DataObjects.MenusMenus1", "Menus");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Menus>("DataObjects.MenusMenus1", "Menus", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataObjects", "MenusAliases", "Aliases")]
+        public Aliases Alias
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Aliases>("DataObjects.MenusAliases", "Aliases").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Aliases>("DataObjects.MenusAliases", "Aliases").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Aliases> AliasReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Aliases>("DataObjects.MenusAliases", "Aliases");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Aliases>("DataObjects.MenusAliases", "Aliases", value);
                 }
             }
         }
@@ -5306,6 +5647,61 @@ namespace TotalCMSLib
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DataObjects", Name="Settings")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Settings : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Settings object.
+        /// </summary>
+        /// <param name="settingId">Initial value of the SettingId property.</param>
+        public static Settings CreateSettings(global::System.Int32 settingId)
+        {
+            Settings settings = new Settings();
+            settings.SettingId = settingId;
+            return settings;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SettingId
+        {
+            get
+            {
+                return _SettingId;
+            }
+            set
+            {
+                if (_SettingId != value)
+                {
+                    OnSettingIdChanging(value);
+                    ReportPropertyChanging("SettingId");
+                    _SettingId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("SettingId");
+                    OnSettingIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SettingId;
+        partial void OnSettingIdChanging(global::System.Int32 value);
+        partial void OnSettingIdChanged();
+
+        #endregion
+    
     }
     
     /// <summary>

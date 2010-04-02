@@ -126,6 +126,16 @@
           <AssociationSet Name="ObjectSchemaTemplateElement" Association="DataObjects.ObjectSchemaTemplateElement">
             <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
             <End Role="TemplateElement" EntitySet="TemplateElements" /></AssociationSet>
+          <EntitySet Name="Settings" EntityType="DataObjects.Settings" />
+          <AssociationSet Name="MenusMenus" Association="DataObjects.MenusMenus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Menus1" EntitySet="Menus" /></AssociationSet>
+          <AssociationSet Name="MenusMenus1" Association="DataObjects.MenusMenus1">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Menus1" EntitySet="Menus" /></AssociationSet>
+          <AssociationSet Name="MenusAliases" Association="DataObjects.MenusAliases">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Aliases" EntitySet="Aliases" /></AssociationSet>
           </EntityContainer>
         <EntityType Name="ContentItems">
           <Key>
@@ -248,7 +258,17 @@
           <Property Type="Int32" Name="FolderId" Nullable="false" />
           <NavigationProperty Name="Folder" Relationship="DataObjects.MenusFolders" FromRole="Menus" ToRole="Folders" />
           <NavigationProperty Name="MenuItems" Relationship="DataObjects.MenuItemsMenus" FromRole="Menus" ToRole="MenuItems" />
-          <Property Type="String" Name="Name" Nullable="false" /></EntityType>
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Property" Nullable="false" />
+          <Property Type="String" Name="OrderId" Nullable="false" />
+          <NavigationProperty Name="ChildMenus" Relationship="DataObjects.MenusMenus" FromRole="Menus" ToRole="Menus1" />
+          <NavigationProperty Name="ParentMenu" Relationship="DataObjects.MenusMenus" FromRole="Menus1" ToRole="Menus" />
+          <Property Type="Int32" Name="ParentMenuId" Nullable="false" />
+          <NavigationProperty Name="RootMenu" Relationship="DataObjects.MenusMenus1" FromRole="Menus1" ToRole="Menus" />
+          <Property Type="Int32" Name="RootMenuId" Nullable="false" />
+          <NavigationProperty Name="Alias" Relationship="DataObjects.MenusAliases" FromRole="Menus" ToRole="Aliases" />
+          <Property Type="Int32" Name="AliasId" Nullable="false" />
+          </EntityType>
         <EntityType Name="MenuItems">
           <Key>
             <PropertyRef Name="MenuItemId" /></Key>
@@ -258,6 +278,7 @@
           <Property Type="String" Name="Name" Nullable="false" />
           <NavigationProperty Name="Alias" Relationship="DataObjects.MenuItemsAliases" FromRole="MenuItems" ToRole="Aliases" />
           <Property Type="Int32" Name="AliasId" Nullable="false" />
+          <Property Type="String" Name="OrderId" Nullable="false" />
           </EntityType>
         <EntityType Name="Calendars">
           <Key>
@@ -288,6 +309,7 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <NavigationProperty Name="ContentItem" Relationship="DataObjects.AliasesContentItems" FromRole="Aliases" ToRole="ContentItems" />
           <Property Type="Int32" Name="ContentItemId" Nullable="false" />
+          <NavigationProperty Name="Menus" Relationship="DataObjects.MenusAliases" FromRole="Aliases" ToRole="Menus" />
           </EntityType>
         <EntityType Name="MetaDataTypesToContentItems">
           <Key>
@@ -634,6 +656,35 @@
               <PropertyRef Name="ObjectSchemaId" /></Principal>
             <Dependent Role="TemplateElement">
               <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="SettingId" /></Key>
+          <Property Type="Int32" Name="SettingId" Nullable="false" />
+          </EntityType>
+        <Association Name="MenusMenus">
+          <End Type="DataObjects.Menus" Role="Menus" Multiplicity="1" />
+          <End Type="DataObjects.Menus" Role="Menus1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuId" /></Principal>
+            <Dependent Role="Menus1">
+              <PropertyRef Name="ParentMenuId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="MenusMenus1">
+          <End Type="DataObjects.Menus" Role="Menus" Multiplicity="1" />
+          <End Type="DataObjects.Menus" Role="Menus1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuId" /></Principal>
+            <Dependent Role="Menus1">
+              <PropertyRef Name="RootMenuId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="MenusAliases">
+          <End Type="DataObjects.Menus" Role="Menus" Multiplicity="*" />
+          <End Type="DataObjects.Aliases" Role="Aliases" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Aliases">
+              <PropertyRef Name="AliasId" /></Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="AliasId" /></Dependent></ReferentialConstraint></Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -668,9 +719,13 @@
         <EntityTypeShape EntityType="DataObjects.UsersToUserRoles" PointX="6.125" PointY="3.875" Width="1.875" Height="1.7566536458333326" />
         <AssociationConnector Association="DataObjects.UsersContentItems">
           <ConnectorPoint PointX="4.25" PointY="5.07158447265625" />
+          <ConnectorPoint PointX="4.208333333333333" PointY="5.0715844726562489" />
+          <ConnectorPoint PointX="4.041666666666667" PointY="5.07158447265625" />
           <ConnectorPoint PointX="3.875" PointY="5.07158447265625" /></AssociationConnector>
         <AssociationConnector Association="DataObjects.UsersContentItems1">
           <ConnectorPoint PointX="4.25" PointY="4.4107922363281249" />
+          <ConnectorPoint PointX="4.208333333333333" PointY="4.410792236328124" />
+          <ConnectorPoint PointX="4.041666666666667" PointY="4.4107922363281249" />
           <ConnectorPoint PointX="3.875" PointY="4.4107922363281249" /></AssociationConnector>
         <AssociationConnector Association="DataObjects.UsersToUserRolesUsers">
           <ConnectorPoint PointX="6.125" PointY="4.7533268229166659" />
@@ -678,19 +733,21 @@
           </AssociationConnector>
         <EntityTypeShape EntityType="DataObjects.Folders" Width="1.375" PointX="4.25" PointY="9.25" Height="4.2218636067708335" />
         <EntityTypeShape EntityType="DataObjects.LibraryItems" Width="1.5" PointX="6.125" PointY="10.625" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="DataObjects.Menus" Width="1.5" PointX="2.375" PointY="8.875" Height="1.7566536458333326" />
-        <EntityTypeShape EntityType="DataObjects.MenuItems" Width="1.5" PointX="2.375" PointY="11.125" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataObjects.Menus" Width="1.5" PointX="2.375" PointY="9" Height="2.5783902994791656" />
+        <EntityTypeShape EntityType="DataObjects.MenuItems" Width="1.5" PointX="2.375" PointY="12.625" Height="2.0853483072916674" />
         <EntityTypeShape EntityType="DataObjects.Calendars" Width="1.5" PointX="5.125" PointY="14" Height="1.7566536458333326" />
         <EntityTypeShape EntityType="DataObjects.CalendarEvents" Width="1.5" PointX="7.125" PointY="13.875" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataObjects.Aliases" Width="1.5" PointX="0.5" PointY="10.5" Height="2.4140429687499996" />
         <EntityTypeShape EntityType="DataObjects.MetaDataTypesToContentItems" Width="1.5" PointX="0.5" PointY="3.75" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataObjects.MetaDataTypes" Width="1.5" PointX="0.5" PointY="6.125" Height="2.0853483072916665" />
-        <AssociationConnector Association="DataObjects.FoldersContentItems" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.38721943848663" PointY="9.25" />
-          <ConnectorPoint PointX="4.38721943848663" PointY="8.8191536458333335" />
-          <ConnectorPoint PointX="4.1875" PointY="8.8191536458333335" />
-          <ConnectorPoint PointX="4.1875" PointY="3.6083071477050783" />
-          <ConnectorPoint PointX="3.875" PointY="3.6083071477050783" />
+        <AssociationConnector Association="DataObjects.FoldersContentItems" ManuallyRouted="true">
+          <ConnectorPoint PointX="4.968752" PointY="9.25" />
+          <ConnectorPoint PointX="4.968752" PointY="8.890625" />
+          <ConnectorPoint PointX="4.125" PointY="8.890625" />
+          <ConnectorPoint PointX="4.125" PointY="3.7033902994791656" />
+          <ConnectorPoint PointX="4" PointY="3.7033902994791656" />
+          <ConnectorPoint PointX="4" PointY="3.5496456909179681" />
+          <ConnectorPoint PointX="3.875" PointY="3.5496456909179681" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataObjects.Languages" Width="1.5" PointX="4.25" PointY="7" Height="1.7566536458333335" />
         <AssociationConnector Association="DataObjects.LanguagesUsers">
@@ -710,12 +767,12 @@
           <ConnectorPoint PointX="7.125" PointY="14.878326822916666" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.MenusFolders">
-          <ConnectorPoint PointX="3.875" PointY="9.9408268229166659" />
-          <ConnectorPoint PointX="4.25" PointY="9.9408268229166659" />
+          <ConnectorPoint PointX="3.875" PointY="10.57854248046875" />
+          <ConnectorPoint PointX="4.25" PointY="10.57854248046875" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.MenuItemsMenus">
-          <ConnectorPoint PointX="3.125" PointY="11.125" />
-          <ConnectorPoint PointX="3.125" PointY="10.631653645833332" />
+          <ConnectorPoint PointX="3.611456463011943" PointY="12.625" />
+          <ConnectorPoint PointX="3.611456463011943" PointY="12.235779622395834" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.LibraryItemsFolders" ManuallyRouted="false">
           <ConnectorPoint PointX="6.125" PointY="11.58550048828125" />
@@ -725,14 +782,14 @@
           <ConnectorPoint PointX="8" PointY="4.6711531575520837" />
           <ConnectorPoint PointX="8.375" PointY="4.6711531575520837" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.Templates" Width="1.5" PointX="0.5" PointY="13.375" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="DataObjects.TemplateElement" Width="2" PointX="2.375" PointY="13.625" Height="2.7427376302083353" />
+        <EntityTypeShape EntityType="DataObjects.Templates" Width="1.5" PointX="0.5" PointY="14" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataObjects.TemplateElement" Width="2" PointX="2.375" PointY="14.875" Height="2.7427376302083353" />
         <AssociationConnector Association="DataObjects.AdminElementAdminPages">
-          <ConnectorPoint PointX="2.375" PointY="14.46050048828125" />
-          <ConnectorPoint PointX="2" PointY="14.46050048828125" />
+          <ConnectorPoint PointX="2.375" PointY="15.398000488281252" />
+          <ConnectorPoint PointX="2" PointY="15.398000488281252" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.PagesAliases">
-          <ConnectorPoint PointX="1.25" PointY="13.375" />
+          <ConnectorPoint PointX="1.25" PointY="14" />
           <ConnectorPoint PointX="1.25" PointY="12.91404296875" /></AssociationConnector>
         <AssociationConnector Association="DataObjects.ChildFolders">
           <ConnectorPoint PointX="4.7375961538461535" PointY="13.471863606770834" />
@@ -742,13 +799,13 @@
           </AssociationConnector>
         <EntityTypeShape EntityType="DataObjects.Permissions" Width="1.5" PointX="6.125" PointY="5.875" Height="4.5505582682291656" />
         <AssociationConnector Association="DataObjects.PermissionsUserRoles">
-          <ConnectorPoint PointX="7.625" PointY="6.0402190644481157" />
-          <ConnectorPoint PointX="8.5604928376374474" PointY="6.0402190644481157" />
-          <ConnectorPoint PointX="8.5604928376374474" PointY="5.4673063151041674" />
+          <ConnectorPoint PointX="7.625" PointY="6.1201479957217249" />
+          <ConnectorPoint PointX="9.125" PointY="6.1201479957217249" />
+          <ConnectorPoint PointX="9.125" PointY="5.4673063151041665" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.MenuItemsAliases">
-          <ConnectorPoint PointX="2.375" PointY="12.019521484375" />
-          <ConnectorPoint PointX="2" PointY="12.019521484375" />
+          <ConnectorPoint PointX="2.375" PointY="12.851695149739584" />
+          <ConnectorPoint PointX="2" PointY="12.851695149739584" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.PermissionsFolders">
           <ConnectorPoint PointX="6.125" PointY="9.8377791341145837" />
@@ -782,8 +839,8 @@
           <ConnectorPoint PointX="5" PointY="3.875" />
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.AliasesContentItems">
-          <ConnectorPoint PointX="2" PointY="11.707021484375" />
-          <ConnectorPoint PointX="2.3125" PointY="11.707021484375" />
+          <ConnectorPoint PointX="2" PointY="11.5410087421875" />
+          <ConnectorPoint PointX="2.3125" PointY="11.5410087421875" />
           <ConnectorPoint PointX="2.3125" PointY="6.3619189453125" />
           <ConnectorPoint PointX="3.125" PointY="6.3619189453125" />
           <ConnectorPoint PointX="3.125" PointY="6.2681689453125" />
@@ -796,16 +853,30 @@
           </AssociationConnector>
         <AssociationConnector Association="DataObjects.ObjectSchemaObjectXsltSets">
           <ConnectorPoint PointX="9.75" PointY="1.125" />
-          <ConnectorPoint PointX="9.75" PointY="0.65625" />
-          <ConnectorPoint PointX="2" PointY="0.65625" /></AssociationConnector>
+          <ConnectorPoint PointX="9.75" PointY="0.65624999999999989" />
+          <ConnectorPoint PointX="2" PointY="0.65624999999999989" /></AssociationConnector>
         <EntityTypeShape EntityType="DataObjects.ObjectTypes" Width="1.5" PointX="6.375" PointY="1.75" Height="1.4279589843749996" />
         <AssociationConnector Association="DataObjects.ObjectTypesObjectSchema">
           <ConnectorPoint PointX="7.875" PointY="2.4639794921875" />
           <ConnectorPoint PointX="9" PointY="2.4639794921875" /></AssociationConnector>
         <AssociationConnector Association="DataObjects.ObjectSchemaTemplateElement">
           <ConnectorPoint PointX="10.21875" PointY="3.210348307291667" />
-          <ConnectorPoint PointX="10.21875" PointY="16.113119303385417" />
-          <ConnectorPoint PointX="4.375" PointY="16.113119303385417" /></AssociationConnector>
+          <ConnectorPoint PointX="10.21875" PointY="16.738119303385417" />
+          <ConnectorPoint PointX="4.375" PointY="16.738119303385417" /></AssociationConnector>
+        <EntityTypeShape EntityType="DataObjects.Settings" Width="1.5" PointX="8" PointY="6.5" Height="1.0992643229166657" />
+        <AssociationConnector Association="DataObjects.MenusMenus">
+          <ConnectorPoint PointX="3.125" PointY="12.235779622395834" />
+          <ConnectorPoint PointX="3.125" PointY="12.485779622395832" />
+          <ConnectorPoint PointX="2.6847185048101712" PointY="12.485779622395832" />
+          <ConnectorPoint PointX="2.6847185048101712" PointY="12.235779622395832" /></AssociationConnector>
+        <AssociationConnector Association="DataObjects.MenusMenus1">
+          <ConnectorPoint PointX="2.9069230769230767" PointY="9" />
+          <ConnectorPoint PointX="2.9069230769230767" PointY="8.75" />
+          <ConnectorPoint PointX="3.3534615384615383" PointY="8.75" />
+          <ConnectorPoint PointX="3.3534615384615383" PointY="9" /></AssociationConnector>
+        <AssociationConnector Association="DataObjects.MenusAliases">
+          <ConnectorPoint PointX="2.375" PointY="11.093048630208333" />
+          <ConnectorPoint PointX="2" PointY="11.093048630208333" /></AssociationConnector>
         </Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
