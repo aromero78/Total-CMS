@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalCMS", "TotalCMS\TotalCMS.csproj", "{5A53A956-EF7B-4541-B3B5-C2BAEADC7674}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalCMSWeb", "TotalCMS\TotalCMSWeb.csproj", "{5A53A956-EF7B-4541-B3B5-C2BAEADC7674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalCMSLib", "TotalCMSLib\TotalCMSLib.csproj", "{CFD032ED-8A9B-4BB9-A6A1-526B08870EDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalCMS", "TotalCMSLib\TotalCMS.csproj", "{CFD032ED-8A9B-4BB9-A6A1-526B08870EDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

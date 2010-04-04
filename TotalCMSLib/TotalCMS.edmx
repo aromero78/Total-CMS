@@ -4,196 +4,1042 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="Model1TargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="DataAccess.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DataAccessStoreContainer">
+    <EntitySet Name="ContentItems" EntityType="DataAccess.Store.ContentItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRoles" EntityType="DataAccess.Store.UserRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsersToUserRoles" EntityType="DataAccess.Store.UsersToUserRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Folders" EntityType="DataAccess.Store.Folders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LibraryItems" EntityType="DataAccess.Store.LibraryItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Menus" EntityType="DataAccess.Store.Menus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MenuItems" EntityType="DataAccess.Store.MenuItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Calendars" EntityType="DataAccess.Store.Calendars" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CalendarEvents" EntityType="DataAccess.Store.CalendarEvents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Aliases" EntityType="DataAccess.Store.Aliases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaDataTypesToContentItems" EntityType="DataAccess.Store.MetaDataTypesToContentItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaDataTypes" EntityType="DataAccess.Store.MetaDataTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Languages" EntityType="DataAccess.Store.Languages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsersSet" EntityType="DataAccess.Store.UsersSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Templates" EntityType="DataAccess.Store.Templates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TemplateElements" EntityType="DataAccess.Store.TemplateElements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Permissions" EntityType="DataAccess.Store.Permissions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaDataTypeToFolders" EntityType="DataAccess.Store.MetaDataTypeToFolders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaDataValueTypes" EntityType="DataAccess.Store.MetaDataValueTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentHistories" EntityType="DataAccess.Store.ContentHistories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ObjectSchemas" EntityType="DataAccess.Store.ObjectSchemas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ObjectXslts" EntityType="DataAccess.Store.ObjectXslts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ObjectTypes" EntityType="DataAccess.Store.ObjectTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Settings" EntityType="DataAccess.Store.Settings" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UsersContentItems" Association="DataAccess.Store.UsersContentItems">
+      <End Role="Users" EntitySet="UsersSet" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="UsersContentItems1" Association="DataAccess.Store.UsersContentItems1">
+      <End Role="Users" EntitySet="UsersSet" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="UsersToUserRolesUsers" Association="DataAccess.Store.UsersToUserRolesUsers">
+      <End Role="UsersToUserRoles" EntitySet="UsersToUserRoles" />
+      <End Role="Users" EntitySet="UsersSet" />
+    </AssociationSet>
+    <AssociationSet Name="FoldersContentItems" Association="DataAccess.Store.FoldersContentItems">
+      <End Role="Folders" EntitySet="Folders" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="LanguagesUsers" Association="DataAccess.Store.LanguagesUsers">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Users" EntitySet="UsersSet" />
+    </AssociationSet>
+    <AssociationSet Name="LanguagesFolders" Association="DataAccess.Store.LanguagesFolders">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="CalendarsFolders" Association="DataAccess.Store.CalendarsFolders">
+      <End Role="Calendars" EntitySet="Calendars" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="CalendarsCalendarEvents" Association="DataAccess.Store.CalendarsCalendarEvents">
+      <End Role="Calendars" EntitySet="Calendars" />
+      <End Role="CalendarEvents" EntitySet="CalendarEvents" />
+    </AssociationSet>
+    <AssociationSet Name="MenusFolders" Association="DataAccess.Store.MenusFolders">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="MenuItemsMenus" Association="DataAccess.Store.MenuItemsMenus">
+      <End Role="MenuItems" EntitySet="MenuItems" />
+      <End Role="Menus" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryItemsFolders" Association="DataAccess.Store.LibraryItemsFolders">
+      <End Role="LibraryItems" EntitySet="LibraryItems" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="UsersToUserRolesUserRoles" Association="DataAccess.Store.UsersToUserRolesUserRoles">
+      <End Role="UsersToUserRoles" EntitySet="UsersToUserRoles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="AdminElementAdminPages" Association="DataAccess.Store.AdminElementAdminPages">
+      <End Role="AdminElement" EntitySet="TemplateElements" />
+      <End Role="AdminPages" EntitySet="Templates" />
+    </AssociationSet>
+    <AssociationSet Name="PagesAliases" Association="DataAccess.Store.PagesAliases">
+      <End Role="Pages" EntitySet="Templates" />
+      <End Role="Aliases" EntitySet="Aliases" />
+    </AssociationSet>
+    <AssociationSet Name="ChildFolders" Association="DataAccess.Store.ChildFolders">
+      <End Role="Folders" EntitySet="Folders" />
+      <End Role="Folders1" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="PermissionsUserRoles" Association="DataAccess.Store.PermissionsUserRoles">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="PermissionsFolders" Association="DataAccess.Store.PermissionsFolders">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="MetaDataTypeToFolderFolders" Association="DataAccess.Store.MetaDataTypeToFolderFolders">
+      <End Role="MetaDataTypeToFolder" EntitySet="MetaDataTypeToFolders" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="MetaDataTypeToFolderMetaDataTypes" Association="DataAccess.Store.MetaDataTypeToFolderMetaDataTypes">
+      <End Role="MetaDataTypeToFolder" EntitySet="MetaDataTypeToFolders" />
+      <End Role="MetaDataTypes" EntitySet="MetaDataTypes" />
+    </AssociationSet>
+    <AssociationSet Name="MetaDataValueTypesMetaDataTypes" Association="DataAccess.Store.MetaDataValueTypesMetaDataTypes">
+      <End Role="MetaDataValueTypes" EntitySet="MetaDataValueTypes" />
+      <End Role="MetaDataTypes" EntitySet="MetaDataTypes" />
+    </AssociationSet>
+    <AssociationSet Name="MetaDataTypesToContentItemsMetaDataTypes" Association="DataAccess.Store.MetaDataTypesToContentItemsMetaDataTypes">
+      <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
+      <End Role="MetaDataTypes" EntitySet="MetaDataTypes" />
+    </AssociationSet>
+    <AssociationSet Name="MetaDataTypesToContentItemsContentItems" Association="DataAccess.Store.MetaDataTypesToContentItemsContentItems">
+      <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="ContentHistoryContentItems" Association="DataAccess.Store.ContentHistoryContentItems">
+      <End Role="ContentHistory" EntitySet="ContentHistories" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="ContentHistoryUsers" Association="DataAccess.Store.ContentHistoryUsers">
+      <End Role="ContentHistory" EntitySet="ContentHistories" />
+      <End Role="Users" EntitySet="UsersSet" />
+    </AssociationSet>
+    <AssociationSet Name="AliasesContentItems" Association="DataAccess.Store.AliasesContentItems">
+      <End Role="Aliases" EntitySet="Aliases" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectXsltSetContentItems" Association="DataAccess.Store.ObjectXsltSetContentItems">
+      <End Role="ObjectXsltSet" EntitySet="ObjectXslts" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectSchemaObjectXsltSets" Association="DataAccess.Store.ObjectSchemaObjectXsltSets">
+      <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
+      <End Role="ObjectXsltSets" EntitySet="ObjectXslts" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectTypesObjectSchema" Association="DataAccess.Store.ObjectTypesObjectSchema">
+      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
+      <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectSchemaTemplateElement" Association="DataAccess.Store.ObjectSchemaTemplateElement">
+      <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
+      <End Role="TemplateElement" EntitySet="TemplateElements" />
+    </AssociationSet>
+    <AssociationSet Name="MenusMenus" Association="DataAccess.Store.MenusMenus">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Menus1" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="MenusMenus1" Association="DataAccess.Store.MenusMenus1">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Menus1" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="ContentItemsObjectSchema" Association="DataAccess.Store.ContentItemsObjectSchema">
+      <End Role="ContentItems" EntitySet="ContentItems" />
+      <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
+    </AssociationSet>
+    <AssociationSet Name="TemplateElementContentItems" Association="DataAccess.Store.TemplateElementContentItems">
+      <End Role="TemplateElement" EntitySet="TemplateElements" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="AliasesMenuItems" Association="DataAccess.Store.AliasesMenuItems">
+      <End Role="Aliases" EntitySet="Aliases" />
+      <End Role="MenuItems" EntitySet="MenuItems" />
+    </AssociationSet>
+    <AssociationSet Name="AliasesMenus" Association="DataAccess.Store.AliasesMenus">
+      <End Role="Aliases" EntitySet="Aliases" />
+      <End Role="Menus" EntitySet="Menus" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ContentItems">
+    <Key>
+      <PropertyRef Name="ContentItemId" />
+    </Key>
+    <Property Name="ContentItemId" Type="int" Nullable="false" />
+    <Property Name="ContentHtml" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContentSummary" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="true" />
+    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+    <Property Name="ModifiedByUserId" Type="int" Nullable="true" />
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="ContentStatus" Type="nvarchar" Nullable="false" MaxLength="2" />
+    <Property Name="ObjectXsltId" Type="int" Nullable="false" />
+    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Name="UserRoleId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsersToUserRoles">
+    <Key>
+      <PropertyRef Name="UserToUserRoleId" />
+    </Key>
+    <Property Name="UserToUserRoleId" Type="int" Nullable="false" />
+    <Property Name="UserRoleId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Folders">
+    <Key>
+      <PropertyRef Name="FolderId" />
+    </Key>
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="InheritPermissions" Type="bit" Nullable="false" />
+    <Property Name="ParentFolderId" Type="int" Nullable="true" />
+    <Property Name="InheritMetaData" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PermissionsId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Language_LanguageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LibraryItems">
+    <Key>
+      <PropertyRef Name="LibraryItemId" />
+    </Key>
+    <Property Name="LibraryItemId" Type="int" Nullable="false" />
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="FileUrl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Desciprtion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menus">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Property" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ParentMenuId" Type="int" Nullable="false" />
+    <Property Name="RootMenuId" Type="int" Nullable="false" />
+    <Property Name="AliasId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MenuItems">
+    <Key>
+      <PropertyRef Name="MenuItemId" />
+    </Key>
+    <Property Name="MenuItemId" Type="int" Nullable="false" />
+    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AliasId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Calendars">
+    <Key>
+      <PropertyRef Name="CalendarId" />
+    </Key>
+    <Property Name="CalendarId" Type="int" Nullable="false" />
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CalendarEvents">
+    <Key>
+      <PropertyRef Name="CalendarEventIds" />
+    </Key>
+    <Property Name="CalendarEventIds" Type="int" Nullable="false" />
+    <Property Name="CalendarId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iCalSettings" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Aliases">
+    <Key>
+      <PropertyRef Name="AliasId" />
+    </Key>
+    <Property Name="AliasId" Type="int" Nullable="false" />
+    <Property Name="TemplateId" Type="int" Nullable="false" />
+    <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="ContentItemId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MetaDataTypesToContentItems">
+    <Key>
+      <PropertyRef Name="MetaDataTypesToContentItemsId" />
+    </Key>
+    <Property Name="MetaDataTypesToContentItemsId" Type="int" Nullable="false" />
+    <Property Name="MetaDataTypeId" Type="int" Nullable="false" />
+    <Property Name="ContentItemId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MetaDataTypes">
+    <Key>
+      <PropertyRef Name="MetaDataTypeId" />
+    </Key>
+    <Property Name="MetaDataTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DefaultValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MetaDataValueTypesId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" Nullable="false" />
+    <Property Name="LangId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsersSet">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Templates">
+    <Key>
+      <PropertyRef Name="TemplateId" />
+    </Key>
+    <Property Name="TemplateId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsUserDefined" Type="bit" Nullable="false" />
+    <Property Name="TemplateFileUrl" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TemplateElements">
+    <Key>
+      <PropertyRef Name="TemplateElementId" />
+    </Key>
+    <Property Name="TemplateElementId" Type="int" Nullable="false" />
+    <Property Name="XsltId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TemplateId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DynamicParamName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
+    <Property Name="ContentItemId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Permissions">
+    <Key>
+      <PropertyRef Name="PermissionsId" />
+    </Key>
+    <Property Name="PermissionsId" Type="int" Nullable="false" />
+    <Property Name="UserRoleId" Type="int" Nullable="false" />
+    <Property Name="CanReadContent" Type="bit" Nullable="false" />
+    <Property Name="CanAddContent" Type="bit" Nullable="false" />
+    <Property Name="CanDeleteContent" Type="bit" Nullable="false" />
+    <Property Name="CanReadMenus" Type="bit" Nullable="false" />
+    <Property Name="CanAddMenus" Type="bit" Nullable="false" />
+    <Property Name="CanDeleteMenus" Type="bit" Nullable="false" />
+    <Property Name="CanReadFolders" Type="bit" Nullable="false" />
+    <Property Name="CanAddFolders" Type="bit" Nullable="false" />
+    <Property Name="CanDeleteFoldres" Type="bit" Nullable="false" />
+    <Property Name="CanReadCalendars" Type="bit" Nullable="false" />
+    <Property Name="CanAddCalendars" Type="bit" Nullable="false" />
+    <Property Name="CanDeleteCalednars" Type="bit" Nullable="false" />
+    <Property Name="CanEditContent" Type="bit" Nullable="false" />
+    <Property Name="CanEditMenus" Type="bit" Nullable="false" />
+    <Property Name="CanEditFolder" Type="bit" Nullable="false" />
+    <Property Name="CanEditCalendar" Type="bit" Nullable="false" />
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="IsPageAdmin" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MetaDataTypeToFolders">
+    <Key>
+      <PropertyRef Name="MetaDataTypeToFolderId" />
+    </Key>
+    <Property Name="MetaDataTypeToFolderId" Type="int" Nullable="false" />
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="MetaDataTypeId" Type="int" Nullable="false" />
+    <Property Name="IsRequired" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MetaDataValueTypes">
+    <Key>
+      <PropertyRef Name="MetaDataValueTypesId" />
+    </Key>
+    <Property Name="MetaDataValueTypesId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentHistories">
+    <Key>
+      <PropertyRef Name="ContentHistoryId" />
+    </Key>
+    <Property Name="ContentHistoryId" Type="int" Nullable="false" />
+    <Property Name="ContentItemId" Type="int" Nullable="false" />
+    <Property Name="VersionNumber" Type="float" Nullable="false" />
+    <Property Name="ContentHtml" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContentSummary" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="MetaDataXml" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectSchemas">
+    <Key>
+      <PropertyRef Name="ObjectSchemaId" />
+    </Key>
+    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
+    <Property Name="SchemaXml" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectTypeId" Type="int" Nullable="false" />
+    <Property Name="DataEntryXslt" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectXslts">
+    <Key>
+      <PropertyRef Name="ObjectXsltId" />
+    </Key>
+    <Property Name="ObjectXsltId" Type="int" Nullable="false" />
+    <Property Name="ObjectXslt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectTypes">
+    <Key>
+      <PropertyRef Name="ObjectTypeId" />
+    </Key>
+    <Property Name="ObjectTypeId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Settings">
+    <Key>
+      <PropertyRef Name="SettingId" />
+    </Key>
+    <Property Name="SettingId" Type="int" Nullable="false" />
+    <Property Name="LicenceKey" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="UsersContentItems">
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="CreatedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersContentItems1">
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="0..1" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="ModifiedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersToUserRolesUsers">
+    <End Role="UsersToUserRoles" Type="DataAccess.Store.UsersToUserRoles" Multiplicity="*" />
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UsersToUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FoldersContentItems">
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LanguagesUsers">
+    <End Role="Languages" Type="DataAccess.Store.Languages" Multiplicity="1" />
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LanguagesFolders">
+    <End Role="Languages" Type="DataAccess.Store.Languages" Multiplicity="1" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="Folders">
+        <PropertyRef Name="Language_LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CalendarsFolders">
+    <End Role="Calendars" Type="DataAccess.Store.Calendars" Multiplicity="*" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="Calendars">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CalendarsCalendarEvents">
+    <End Role="Calendars" Type="DataAccess.Store.Calendars" Multiplicity="1" />
+    <End Role="CalendarEvents" Type="DataAccess.Store.CalendarEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendars">
+        <PropertyRef Name="CalendarId" />
+      </Principal>
+      <Dependent Role="CalendarEvents">
+        <PropertyRef Name="CalendarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenusFolders">
+    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="*" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="Menus">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuItemsMenus">
+    <End Role="MenuItems" Type="DataAccess.Store.MenuItems" Multiplicity="*" />
+    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="MenuItems">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LibraryItemsFolders">
+    <End Role="LibraryItems" Type="DataAccess.Store.LibraryItems" Multiplicity="*" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="LibraryItems">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersToUserRolesUserRoles">
+    <End Role="UsersToUserRoles" Type="DataAccess.Store.UsersToUserRoles" Multiplicity="*" />
+    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="UsersToUserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdminElementAdminPages">
+    <End Role="AdminElement" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
+    <End Role="AdminPages" Type="DataAccess.Store.Templates" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AdminPages">
+        <PropertyRef Name="TemplateId" />
+      </Principal>
+      <Dependent Role="AdminElement">
+        <PropertyRef Name="TemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PagesAliases">
+    <End Role="Pages" Type="DataAccess.Store.Templates" Multiplicity="1" />
+    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pages">
+        <PropertyRef Name="TemplateId" />
+      </Principal>
+      <Dependent Role="Aliases">
+        <PropertyRef Name="TemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ChildFolders">
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="0..1" />
+    <End Role="Folders1" Type="DataAccess.Store.Folders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="Folders1">
+        <PropertyRef Name="ParentFolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PermissionsUserRoles">
+    <End Role="Permissions" Type="DataAccess.Store.Permissions" Multiplicity="*" />
+    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="Permissions">
+        <PropertyRef Name="UserRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PermissionsFolders">
+    <End Role="Permissions" Type="DataAccess.Store.Permissions" Multiplicity="*" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="Permissions">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaDataTypeToFolderFolders">
+    <End Role="MetaDataTypeToFolder" Type="DataAccess.Store.MetaDataTypeToFolders" Multiplicity="*" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="MetaDataTypeToFolder">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaDataTypeToFolderMetaDataTypes">
+    <End Role="MetaDataTypeToFolder" Type="DataAccess.Store.MetaDataTypeToFolders" Multiplicity="*" />
+    <End Role="MetaDataTypes" Type="DataAccess.Store.MetaDataTypes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="MetaDataTypes">
+        <PropertyRef Name="MetaDataTypeId" />
+      </Principal>
+      <Dependent Role="MetaDataTypeToFolder">
+        <PropertyRef Name="MetaDataTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaDataValueTypesMetaDataTypes">
+    <End Role="MetaDataValueTypes" Type="DataAccess.Store.MetaDataValueTypes" Multiplicity="1" />
+    <End Role="MetaDataTypes" Type="DataAccess.Store.MetaDataTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MetaDataValueTypes">
+        <PropertyRef Name="MetaDataValueTypesId" />
+      </Principal>
+      <Dependent Role="MetaDataTypes">
+        <PropertyRef Name="MetaDataValueTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaDataTypesToContentItemsMetaDataTypes">
+    <End Role="MetaDataTypesToContentItems" Type="DataAccess.Store.MetaDataTypesToContentItems" Multiplicity="*" />
+    <End Role="MetaDataTypes" Type="DataAccess.Store.MetaDataTypes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="MetaDataTypes">
+        <PropertyRef Name="MetaDataTypeId" />
+      </Principal>
+      <Dependent Role="MetaDataTypesToContentItems">
+        <PropertyRef Name="MetaDataTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaDataTypesToContentItemsContentItems">
+    <End Role="MetaDataTypesToContentItems" Type="DataAccess.Store.MetaDataTypesToContentItems" Multiplicity="*" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Principal>
+      <Dependent Role="MetaDataTypesToContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContentHistoryContentItems">
+    <End Role="ContentHistory" Type="DataAccess.Store.ContentHistories" Multiplicity="*" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Principal>
+      <Dependent Role="ContentHistory">
+        <PropertyRef Name="ContentItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContentHistoryUsers">
+    <End Role="ContentHistory" Type="DataAccess.Store.ContentHistories" Multiplicity="*" />
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ContentHistory">
+        <PropertyRef Name="CreatedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AliasesContentItems">
+    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="*" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Principal>
+      <Dependent Role="Aliases">
+        <PropertyRef Name="ContentItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ObjectXsltSetContentItems">
+    <End Role="ObjectXsltSet" Type="DataAccess.Store.ObjectXslts" Multiplicity="1" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectXsltSet">
+        <PropertyRef Name="ObjectXsltId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="ObjectXsltId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ObjectSchemaObjectXsltSets">
+    <End Role="ObjectSchema" Type="DataAccess.Store.ObjectSchemas" Multiplicity="1" />
+    <End Role="ObjectXsltSets" Type="DataAccess.Store.ObjectXslts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectSchema">
+        <PropertyRef Name="ObjectSchemaId" />
+      </Principal>
+      <Dependent Role="ObjectXsltSets">
+        <PropertyRef Name="ObjectSchemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ObjectTypesObjectSchema">
+    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
+    <End Role="ObjectSchema" Type="DataAccess.Store.ObjectSchemas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectTypes">
+        <PropertyRef Name="ObjectTypeId" />
+      </Principal>
+      <Dependent Role="ObjectSchema">
+        <PropertyRef Name="ObjectTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ObjectSchemaTemplateElement">
+    <End Role="ObjectSchema" Type="DataAccess.Store.ObjectSchemas" Multiplicity="1" />
+    <End Role="TemplateElement" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectSchema">
+        <PropertyRef Name="ObjectSchemaId" />
+      </Principal>
+      <Dependent Role="TemplateElement">
+        <PropertyRef Name="ObjectSchemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenusMenus">
+    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
+    <End Role="Menus1" Type="DataAccess.Store.Menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="Menus1">
+        <PropertyRef Name="ParentMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenusMenus1">
+    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
+    <End Role="Menus1" Type="DataAccess.Store.Menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="Menus1">
+        <PropertyRef Name="RootMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContentItemsObjectSchema">
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
+    <End Role="ObjectSchema" Type="DataAccess.Store.ObjectSchemas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectSchema">
+        <PropertyRef Name="ObjectSchemaId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="ObjectSchemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TemplateElementContentItems">
+    <End Role="TemplateElement" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Principal>
+      <Dependent Role="TemplateElement">
+        <PropertyRef Name="ContentItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AliasesMenuItems">
+    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="1" />
+    <End Role="MenuItems" Type="DataAccess.Store.MenuItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aliases">
+        <PropertyRef Name="AliasId" />
+      </Principal>
+      <Dependent Role="MenuItems">
+        <PropertyRef Name="AliasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AliasesMenus">
+    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="1" />
+    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aliases">
+        <PropertyRef Name="AliasId" />
+      </Principal>
+      <Dependent Role="Menus">
+        <PropertyRef Name="AliasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataObjects" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntityContainer Name="DataObjectsContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ContentItems" EntityType="DataObjects.ContentItems" />
-          <EntitySet Name="UserRoles" EntityType="DataObjects.UserRoles" />
-          <EntitySet Name="UsersToUserRoles" EntityType="DataObjects.UsersToUserRoles" />
-          <AssociationSet Name="UsersContentItems" Association="DataObjects.UsersContentItems">
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataAccess" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="DataObjectsContainer" annotation:LazyLoadingEnabled="true" cg:TypeAccess="Internal">
+          <EntitySet Name="ContentItems" EntityType="DataAccess.ContentItems" />
+          <EntitySet Name="UserRoles" EntityType="DataAccess.UserRoles" />
+          <EntitySet Name="UsersToUserRoles" EntityType="DataAccess.UsersToUserRoles" />
+          <AssociationSet Name="UsersContentItems" Association="DataAccess.UsersContentItems">
             <End EntitySet="UsersSet" Role="Users" />
             <End EntitySet="ContentItems" Role="ContentItems" /></AssociationSet>
-          <AssociationSet Name="UsersContentItems1" Association="DataObjects.UsersContentItems1">
+          <AssociationSet Name="UsersContentItems1" Association="DataAccess.UsersContentItems1">
             <End EntitySet="UsersSet" Role="Users" />
             <End EntitySet="ContentItems" Role="ContentItems" /></AssociationSet>
-          <AssociationSet Name="UsersToUserRolesUsers" Association="DataObjects.UsersToUserRolesUsers">
+          <AssociationSet Name="UsersToUserRolesUsers" Association="DataAccess.UsersToUserRolesUsers">
             <End EntitySet="UsersToUserRoles" Role="UsersToUserRoles" />
             <End EntitySet="UsersSet" Role="Users" /></AssociationSet>
-          <EntitySet Name="Folders" EntityType="DataObjects.Folders" />
-          <EntitySet Name="LibraryItems" EntityType="DataObjects.LibraryItems" />
-          <EntitySet Name="Menus" EntityType="DataObjects.Menus" />
-          <EntitySet Name="MenuItems" EntityType="DataObjects.MenuItems" />
-          <EntitySet Name="Calendars" EntityType="DataObjects.Calendars" />
-          <EntitySet Name="CalendarEvents" EntityType="DataObjects.CalendarEvents" />
-          <EntitySet Name="Aliases" EntityType="DataObjects.Aliases" />
-          <EntitySet Name="MetaDataTypesToContentItems" EntityType="DataObjects.MetaDataTypesToContentItems" />
-          <EntitySet Name="MetaDataTypes" EntityType="DataObjects.MetaDataTypes" />
-          <AssociationSet Name="FoldersContentItems" Association="DataObjects.FoldersContentItems">
+          <EntitySet Name="Folders" EntityType="DataAccess.Folders" />
+          <EntitySet Name="LibraryItems" EntityType="DataAccess.LibraryItems" />
+          <EntitySet Name="Menus" EntityType="DataAccess.Menus" />
+          <EntitySet Name="MenuItems" EntityType="DataAccess.MenuItems" />
+          <EntitySet Name="Calendars" EntityType="DataAccess.Calendars" />
+          <EntitySet Name="CalendarEvents" EntityType="DataAccess.CalendarEvents" />
+          <EntitySet Name="Aliases" EntityType="DataAccess.Aliases" />
+          <EntitySet Name="MetaDataTypesToContentItems" EntityType="DataAccess.MetaDataTypesToContentItems" />
+          <EntitySet Name="MetaDataTypes" EntityType="DataAccess.MetaDataTypes" />
+          <AssociationSet Name="FoldersContentItems" Association="DataAccess.FoldersContentItems">
             <End Role="Folders" EntitySet="Folders" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
-          <EntitySet Name="Languages" EntityType="DataObjects.Languages" />
-          <AssociationSet Name="LanguagesUsers" Association="DataObjects.LanguagesUsers">
+          <EntitySet Name="Languages" EntityType="DataAccess.Languages" />
+          <AssociationSet Name="LanguagesUsers" Association="DataAccess.LanguagesUsers">
             <End Role="Languages" EntitySet="Languages" />
             <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
-          <AssociationSet Name="LanguagesFolders" Association="DataObjects.LanguagesFolders">
+          <AssociationSet Name="LanguagesFolders" Association="DataAccess.LanguagesFolders">
             <End Role="Languages" EntitySet="Languages" />
             <End Role="Folders" EntitySet="Folders" /></AssociationSet>
-          <AssociationSet Name="CalendarsFolders" Association="DataObjects.CalendarsFolders">
+          <AssociationSet Name="CalendarsFolders" Association="DataAccess.CalendarsFolders">
             <End Role="Calendars" EntitySet="Calendars" />
             <End Role="Folders" EntitySet="Folders" /></AssociationSet>
-          <AssociationSet Name="CalendarsCalendarEvents" Association="DataObjects.CalendarsCalendarEvents">
+          <AssociationSet Name="CalendarsCalendarEvents" Association="DataAccess.CalendarsCalendarEvents">
             <End Role="Calendars" EntitySet="Calendars" />
             <End Role="CalendarEvents" EntitySet="CalendarEvents" /></AssociationSet>
-          <AssociationSet Name="MenusFolders" Association="DataObjects.MenusFolders">
+          <AssociationSet Name="MenusFolders" Association="DataAccess.MenusFolders">
             <End Role="Menus" EntitySet="Menus" />
             <End Role="Folders" EntitySet="Folders" /></AssociationSet>
-          <AssociationSet Name="MenuItemsMenus" Association="DataObjects.MenuItemsMenus">
+          <AssociationSet Name="MenuItemsMenus" Association="DataAccess.MenuItemsMenus">
             <End Role="MenuItems" EntitySet="MenuItems" />
             <End Role="Menus" EntitySet="Menus" /></AssociationSet>
-          <AssociationSet Name="LibraryItemsFolders" Association="DataObjects.LibraryItemsFolders">
+          <AssociationSet Name="LibraryItemsFolders" Association="DataAccess.LibraryItemsFolders">
             <End Role="LibraryItems" EntitySet="LibraryItems" />
             <End Role="Folders" EntitySet="Folders" /></AssociationSet>
-          <EntitySet Name="UsersSet" EntityType="DataObjects.Users" />
-          <AssociationSet Name="UsersToUserRolesUserRoles" Association="DataObjects.UsersToUserRolesUserRoles">
+          <EntitySet Name="UsersSet" EntityType="DataAccess.Users" />
+          <AssociationSet Name="UsersToUserRolesUserRoles" Association="DataAccess.UsersToUserRolesUserRoles">
             <End EntitySet="UsersToUserRoles" Role="UsersToUserRoles" />
             <End EntitySet="UserRoles" Role="UserRoles" /></AssociationSet>
-          <EntitySet Name="Templates" EntityType="DataObjects.Templates" />
-          <EntitySet Name="TemplateElements" EntityType="DataObjects.TemplateElement" />
-          <AssociationSet Name="AdminElementAdminPages" Association="DataObjects.AdminElementAdminPages">
+          <EntitySet Name="Templates" EntityType="DataAccess.Templates" />
+          <EntitySet Name="TemplateElements" EntityType="DataAccess.TemplateElement" />
+          <AssociationSet Name="AdminElementAdminPages" Association="DataAccess.AdminElementAdminPages">
             <End Role="AdminElement" EntitySet="TemplateElements" />
             <End Role="AdminPages" EntitySet="Templates" /></AssociationSet>
-          <AssociationSet Name="PagesAliases" Association="DataObjects.PagesAliases">
+          <AssociationSet Name="PagesAliases" Association="DataAccess.PagesAliases">
             <End Role="Pages" EntitySet="Templates" />
             <End Role="Aliases" EntitySet="Aliases" /></AssociationSet>
-          <AssociationSet Name="ChildFolders" Association="DataObjects.ChildFolders">
+          <AssociationSet Name="ChildFolders" Association="DataAccess.ChildFolders">
             <End Role="Folders" EntitySet="Folders" />
             <End Role="Folders1" EntitySet="Folders" /></AssociationSet>
-          <EntitySet Name="Permissions" EntityType="DataObjects.Permissions" />
-          <AssociationSet Name="PermissionsUserRoles" Association="DataObjects.PermissionsUserRoles">
+          <EntitySet Name="Permissions" EntityType="DataAccess.Permissions" />
+          <AssociationSet Name="PermissionsUserRoles" Association="DataAccess.PermissionsUserRoles">
             <End Role="Permissions" EntitySet="Permissions" />
             <End Role="UserRoles" EntitySet="UserRoles" /></AssociationSet>
-          <AssociationSet Name="MenuItemsAliases" Association="DataObjects.MenuItemsAliases">
-            <End Role="MenuItems" EntitySet="MenuItems" />
-            <End Role="Aliases" EntitySet="Aliases" /></AssociationSet>
-          <AssociationSet Name="PermissionsFolders" Association="DataObjects.PermissionsFolders">
+          <AssociationSet Name="PermissionsFolders" Association="DataAccess.PermissionsFolders">
             <End Role="Permissions" EntitySet="Permissions" />
             <End Role="Folders" EntitySet="Folders" /></AssociationSet>
-          <EntitySet Name="MetaDataTypeToFolders" EntityType="DataObjects.MetaDataTypeToFolder" />
-          <AssociationSet Name="MetaDataTypeToFolderFolders" Association="DataObjects.MetaDataTypeToFolderFolders">
+          <EntitySet Name="MetaDataTypeToFolders" EntityType="DataAccess.MetaDataTypeToFolder" />
+          <AssociationSet Name="MetaDataTypeToFolderFolders" Association="DataAccess.MetaDataTypeToFolderFolders">
             <End Role="MetaDataTypeToFolder" EntitySet="MetaDataTypeToFolders" />
             <End Role="Folders" EntitySet="Folders" /></AssociationSet>
-          <AssociationSet Name="MetaDataTypeToFolderMetaDataTypes" Association="DataObjects.MetaDataTypeToFolderMetaDataTypes">
+          <AssociationSet Name="MetaDataTypeToFolderMetaDataTypes" Association="DataAccess.MetaDataTypeToFolderMetaDataTypes">
             <End Role="MetaDataTypeToFolder" EntitySet="MetaDataTypeToFolders" />
             <End Role="MetaDataTypes" EntitySet="MetaDataTypes" /></AssociationSet>
-          <EntitySet Name="MetaDataValueTypes" EntityType="DataObjects.MetaDataValueTypes" />
-          <AssociationSet Name="MetaDataValueTypesMetaDataTypes" Association="DataObjects.MetaDataValueTypesMetaDataTypes">
+          <EntitySet Name="MetaDataValueTypes" EntityType="DataAccess.MetaDataValueTypes" />
+          <AssociationSet Name="MetaDataValueTypesMetaDataTypes" Association="DataAccess.MetaDataValueTypesMetaDataTypes">
             <End Role="MetaDataValueTypes" EntitySet="MetaDataValueTypes" />
             <End Role="MetaDataTypes" EntitySet="MetaDataTypes" /></AssociationSet>
-          <AssociationSet Name="MetaDataTypesToContentItemsMetaDataTypes" Association="DataObjects.MetaDataTypesToContentItemsMetaDataTypes">
+          <AssociationSet Name="MetaDataTypesToContentItemsMetaDataTypes" Association="DataAccess.MetaDataTypesToContentItemsMetaDataTypes">
             <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
             <End Role="MetaDataTypes" EntitySet="MetaDataTypes" /></AssociationSet>
-          <AssociationSet Name="MetaDataTypesToContentItemsContentItems" Association="DataObjects.MetaDataTypesToContentItemsContentItems">
+          <AssociationSet Name="MetaDataTypesToContentItemsContentItems" Association="DataAccess.MetaDataTypesToContentItemsContentItems">
             <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
-          <EntitySet Name="ContentHistories" EntityType="DataObjects.ContentHistory" />
-          <AssociationSet Name="ContentHistoryContentItems" Association="DataObjects.ContentHistoryContentItems">
+          <EntitySet Name="ContentHistories" EntityType="DataAccess.ContentHistory" />
+          <AssociationSet Name="ContentHistoryContentItems" Association="DataAccess.ContentHistoryContentItems">
             <End Role="ContentHistory" EntitySet="ContentHistories" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
-          <AssociationSet Name="ContentHistoryUsers" Association="DataObjects.ContentHistoryUsers">
+          <AssociationSet Name="ContentHistoryUsers" Association="DataAccess.ContentHistoryUsers">
             <End Role="ContentHistory" EntitySet="ContentHistories" />
             <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
-          <AssociationSet Name="AliasesContentItems" Association="DataObjects.AliasesContentItems">
+          <AssociationSet Name="AliasesContentItems" Association="DataAccess.AliasesContentItems">
             <End Role="Aliases" EntitySet="Aliases" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
-          <EntitySet Name="ObjectSchemas" EntityType="DataObjects.ObjectSchema" />
-          <EntitySet Name="ObjectXsltSets1" EntityType="DataObjects.ObjectXsltSets" />
-          <AssociationSet Name="ObjectXsltSetContentItems" Association="DataObjects.ObjectXsltSetContentItems">
-            <End Role="ObjectXsltSet" EntitySet="ObjectXsltSets1" />
+          <EntitySet Name="ObjectSchemas" EntityType="DataAccess.ObjectSchema" />
+          <EntitySet Name="ObjectXslts" EntityType="DataAccess.ObjectXslts" />
+          <AssociationSet Name="ObjectXsltSetContentItems" Association="DataAccess.ObjectXsltSetContentItems">
+            <End Role="ObjectXsltSet" EntitySet="ObjectXslts" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
-          <AssociationSet Name="ObjectSchemaObjectXsltSets" Association="DataObjects.ObjectSchemaObjectXsltSets">
+          <AssociationSet Name="ObjectSchemaObjectXsltSets" Association="DataAccess.ObjectSchemaObjectXsltSets">
             <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
-            <End Role="ObjectXsltSets" EntitySet="ObjectXsltSets1" /></AssociationSet>
-          <EntitySet Name="ObjectTypes" EntityType="DataObjects.ObjectTypes" />
-          <AssociationSet Name="ObjectTypesObjectSchema" Association="DataObjects.ObjectTypesObjectSchema">
+            <End Role="ObjectXsltSets" EntitySet="ObjectXslts" /></AssociationSet>
+          <EntitySet Name="ObjectTypes" EntityType="DataAccess.ObjectTypes" />
+          <AssociationSet Name="ObjectTypesObjectSchema" Association="DataAccess.ObjectTypesObjectSchema">
             <End Role="ObjectTypes" EntitySet="ObjectTypes" />
             <End Role="ObjectSchema" EntitySet="ObjectSchemas" /></AssociationSet>
-          <AssociationSet Name="ObjectSchemaTemplateElement" Association="DataObjects.ObjectSchemaTemplateElement">
+          <AssociationSet Name="ObjectSchemaTemplateElement" Association="DataAccess.ObjectSchemaTemplateElement">
             <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
             <End Role="TemplateElement" EntitySet="TemplateElements" /></AssociationSet>
-          <EntitySet Name="Settings" EntityType="DataObjects.Settings" />
-          <AssociationSet Name="MenusMenus" Association="DataObjects.MenusMenus">
+          <EntitySet Name="Settings" EntityType="DataAccess.Settings" />
+          <AssociationSet Name="MenusMenus" Association="DataAccess.MenusMenus">
             <End Role="Menus" EntitySet="Menus" />
             <End Role="Menus1" EntitySet="Menus" /></AssociationSet>
-          <AssociationSet Name="MenusMenus1" Association="DataObjects.MenusMenus1">
+          <AssociationSet Name="MenusMenus1" Association="DataAccess.MenusMenus1">
             <End Role="Menus" EntitySet="Menus" />
             <End Role="Menus1" EntitySet="Menus" /></AssociationSet>
-          <AssociationSet Name="MenusAliases" Association="DataObjects.MenusAliases">
-            <End Role="Menus" EntitySet="Menus" />
-            <End Role="Aliases" EntitySet="Aliases" /></AssociationSet>
+          <AssociationSet Name="ContentItemsObjectSchema" Association="DataAccess.ContentItemsObjectSchema">
+            <End Role="ContentItems" EntitySet="ContentItems" />
+            <End Role="ObjectSchema" EntitySet="ObjectSchemas" /></AssociationSet>
+          <AssociationSet Name="TemplateElementContentItems" Association="DataAccess.TemplateElementContentItems">
+            <End Role="TemplateElement" EntitySet="TemplateElements" />
+            <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
+          <AssociationSet Name="AliasesMenuItems" Association="DataAccess.AliasesMenuItems">
+            <End Role="Aliases" EntitySet="Aliases" />
+            <End Role="MenuItems" EntitySet="MenuItems" /></AssociationSet>
+          <AssociationSet Name="AliasesMenus" Association="DataAccess.AliasesMenus">
+            <End Role="Aliases" EntitySet="Aliases" />
+            <End Role="Menus" EntitySet="Menus" /></AssociationSet>
           </EntityContainer>
-        <EntityType Name="ContentItems">
+        <EntityType Name="ContentItems" Abstract="true">
           <Key>
             <PropertyRef Name="ContentItemId" /></Key>
-          <Property Type="Int32" Name="ContentItemId" Nullable="false" />
-          <Property Type="String" Name="ContentHtml" Nullable="false" />
-          <Property Type="String" Name="ContentSummary" Nullable="false" MaxLength="250" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="false" />
-          <Property Type="DateTime" Name="DateModified" Nullable="false" />
-          <NavigationProperty Name="CreatedByUser" Relationship="DataObjects.UsersContentItems" FromRole="ContentItems" ToRole="Users" />
-          <Property Type="Int32" Name="CreatedByUserId" Nullable="false" />
-          <NavigationProperty Name="ModifiedByUser" Relationship="DataObjects.UsersContentItems1" FromRole="ContentItems" ToRole="Users" />
-          <Property Type="Int32" Name="ModifiedByUserId" Nullable="false" />
-          <NavigationProperty Name="Folder" Relationship="DataObjects.FoldersContentItems" FromRole="ContentItems" ToRole="Folders" />
-          <Property Type="Int32" Name="FolderId" Nullable="false" />
-          <NavigationProperty Name="MetaDataTypesToContentItems" Relationship="DataObjects.MetaDataTypesToContentItemsContentItems" FromRole="ContentItems" ToRole="MetaDataTypesToContentItems" />
-          <Property Type="String" Name="ContentStatus" Nullable="false" MaxLength="2" />
-          <NavigationProperty Name="ContentHistories" Relationship="DataObjects.ContentHistoryContentItems" FromRole="ContentItems" ToRole="ContentHistory" />
-          <NavigationProperty Name="Aliases" Relationship="DataObjects.AliasesContentItems" FromRole="ContentItems" ToRole="Aliases" />
-          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" />
-          <NavigationProperty Name="ObjectXsltSet" Relationship="DataObjects.ObjectXsltSetContentItems" FromRole="ContentItems" ToRole="ObjectXsltSet" />
-          <Property Type="Int32" Name="ObjectXsltSetId" Nullable="false" />
+          <Property Type="Int32" Name="ContentItemId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="ContentHtml" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="ContentSummary" Nullable="false" MaxLength="250" cg:SetterAccess="Public" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="CreatedByUser" Relationship="DataAccess.UsersContentItems" FromRole="ContentItems" ToRole="Users" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="CreatedByUserId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ModifiedByUser" Relationship="DataAccess.UsersContentItems1" FromRole="ContentItems" ToRole="Users" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ModifiedByUserId" Nullable="true" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Folder" Relationship="DataAccess.FoldersContentItems" FromRole="ContentItems" ToRole="Folders" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="MetaDataTypesToContentItems" Relationship="DataAccess.MetaDataTypesToContentItemsContentItems" FromRole="ContentItems" ToRole="MetaDataTypesToContentItems" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="ContentStatus" Nullable="false" MaxLength="2" cg:SetterAccess="Public" />
+          <NavigationProperty Name="ContentHistories" Relationship="DataAccess.ContentHistoryContentItems" FromRole="ContentItems" ToRole="ContentHistory" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Aliases" Relationship="DataAccess.AliasesContentItems" FromRole="ContentItems" ToRole="Aliases" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ObjectXslt" Relationship="DataAccess.ObjectXsltSetContentItems" FromRole="ContentItems" ToRole="ObjectXsltSet" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ObjectXsltId" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ContentItemsObjectSchema" FromRole="ContentItems" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="TemplateElements" Relationship="DataAccess.TemplateElementContentItems" FromRole="ContentItems" ToRole="TemplateElement" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="UserRoles">
+        <EntityType Name="UserRoles" Abstract="true">
           <Key>
             <PropertyRef Name="UserRoleId" /></Key>
-          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
+          <Property Type="Int32" Name="UserRoleId" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="String" Name="Description" Nullable="false" />
-          <NavigationProperty Name="UsersToUserRoles" Relationship="DataObjects.UsersToUserRolesUserRoles" FromRole="UserRoles" ToRole="UsersToUserRoles" />
-          <NavigationProperty Name="Permissions" Relationship="DataObjects.PermissionsUserRoles" FromRole="UserRoles" ToRole="Permissions" />
+          <NavigationProperty Name="UsersToUserRoles" Relationship="DataAccess.UsersToUserRolesUserRoles" FromRole="UserRoles" ToRole="UsersToUserRoles" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Permissions" Relationship="DataAccess.PermissionsUserRoles" FromRole="UserRoles" ToRole="Permissions" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="Users">
+        <EntityType Name="Users" Abstract="true">
           <Key>
             <PropertyRef Name="UserId" /></Key>
-          <Property Type="Int32" Name="UserId" Nullable="false" cg:SetterAccess="Internal" />
+          <Property Type="Int32" Name="UserId" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
-          <NavigationProperty Name="ItemsCreated" Relationship="DataObjects.UsersContentItems" FromRole="Users" ToRole="ContentItems" />
-          <NavigationProperty Name="ItemsModified" Relationship="DataObjects.UsersContentItems1" FromRole="Users" ToRole="ContentItems" />
-          <NavigationProperty Name="UsersToUserRoles" Relationship="DataObjects.UsersToUserRolesUsers" FromRole="Users" ToRole="UsersToUserRoles" />
-          <NavigationProperty Name="Language" Relationship="DataObjects.LanguagesUsers" FromRole="Users" ToRole="Languages" />
+          <NavigationProperty Name="ItemsCreated" Relationship="DataAccess.UsersContentItems" FromRole="Users" ToRole="ContentItems" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ItemsModified" Relationship="DataAccess.UsersContentItems1" FromRole="Users" ToRole="ContentItems" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="UsersToUserRoles" Relationship="DataAccess.UsersToUserRolesUsers" FromRole="Users" ToRole="UsersToUserRoles" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Language" Relationship="DataAccess.LanguagesUsers" FromRole="Users" ToRole="Languages" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="LanguageId" Nullable="false" />
-          <NavigationProperty Name="ContentHistories" Relationship="DataObjects.ContentHistoryUsers" FromRole="Users" ToRole="ContentHistory" />
+          <NavigationProperty Name="ContentHistories" Relationship="DataAccess.ContentHistoryUsers" FromRole="Users" ToRole="ContentHistory" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="UsersToUserRoles">
+        <EntityType Name="UsersToUserRoles" Abstract="true">
           <Key>
             <PropertyRef Name="UserToUserRoleId" /></Key>
-          <Property Name="UserToUserRoleId" cg:SetterAccess="Internal" Nullable="false" Type="Int32" />
+          <Property Name="UserToUserRoleId" cg:SetterAccess="Protected" Nullable="false" Type="Int32" />
           <Property Name="UserRoleId" Nullable="false" Type="Int32" />
-          <NavigationProperty Name="User" Relationship="DataObjects.UsersToUserRolesUsers" FromRole="UsersToUserRoles" ToRole="Users" />
+          <NavigationProperty Name="User" Relationship="DataAccess.UsersToUserRolesUsers" FromRole="UsersToUserRoles" ToRole="Users" cg:SetterAccess="Protected" />
           <Property Name="UserId" Nullable="false" Type="Int32" />
-          <NavigationProperty Name="UserRole" Relationship="DataObjects.UsersToUserRolesUserRoles" FromRole="UsersToUserRoles" ToRole="UserRoles" />
+          <NavigationProperty Name="UserRole" Relationship="DataAccess.UsersToUserRolesUserRoles" FromRole="UsersToUserRoles" ToRole="UserRoles" cg:SetterAccess="Protected" />
           </EntityType>
         <Association Name="UsersContentItems">
-          <End Type="DataObjects.Users" Multiplicity="1" Role="Users" />
-          <End Type="DataObjects.ContentItems" Multiplicity="*" Role="ContentItems" />
+          <End Type="DataAccess.Users" Multiplicity="1" Role="Users" />
+          <End Type="DataAccess.ContentItems" Multiplicity="*" Role="ContentItems" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" /></Principal>
@@ -201,8 +1047,8 @@
               <PropertyRef Name="CreatedByUserId" /></Dependent></ReferentialConstraint>
           </Association>
         <Association Name="UsersContentItems1">
-          <End Type="DataObjects.Users" Multiplicity="1" Role="Users" />
-          <End Type="DataObjects.ContentItems" Multiplicity="*" Role="ContentItems" />
+          <End Type="DataAccess.Users" Multiplicity="0..1" Role="Users" />
+          <End Type="DataAccess.ContentItems" Multiplicity="*" Role="ContentItems" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" /></Principal>
@@ -210,476 +1056,496 @@
               <PropertyRef Name="ModifiedByUserId" /></Dependent></ReferentialConstraint>
           </Association>
         <Association Name="UsersToUserRolesUsers">
-          <End Type="DataObjects.UsersToUserRoles" Multiplicity="*" Role="UsersToUserRoles" />
-          <End Type="DataObjects.Users" Multiplicity="1" Role="Users" />
+          <End Type="DataAccess.UsersToUserRoles" Multiplicity="*" Role="UsersToUserRoles" />
+          <End Type="DataAccess.Users" Multiplicity="1" Role="Users" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" /></Principal>
             <Dependent Role="UsersToUserRoles">
               <PropertyRef Name="UserId" /></Dependent></ReferentialConstraint>
           </Association>
-        <EntityType Name="Folders">
+        <EntityType Name="Folders" Abstract="true">
           <Key>
             <PropertyRef Name="FolderId" /></Key>
-          <Property Type="Int32" Name="FolderId" Nullable="false" />
-          <NavigationProperty Name="ContentItems" Relationship="DataObjects.FoldersContentItems" FromRole="Folders" ToRole="ContentItems" />
-          <NavigationProperty Name="Language" Relationship="DataObjects.LanguagesFolders" FromRole="Folders" ToRole="Languages" />
-          <Property Type="Int32" Name="LanguageId" Nullable="false" />
-          <NavigationProperty Name="Calendars" Relationship="DataObjects.CalendarsFolders" FromRole="Folders" ToRole="Calendars" />
-          <NavigationProperty Name="Menus" Relationship="DataObjects.MenusFolders" FromRole="Folders" ToRole="Menus" />
-          <NavigationProperty Name="LibraryItems" Relationship="DataObjects.LibraryItemsFolders" FromRole="Folders" ToRole="LibraryItems" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="false" />
-          <Property Type="Boolean" Name="InheritPermissions" Nullable="false" />
-          <NavigationProperty Name="ParentFolder" Relationship="DataObjects.ChildFolders" FromRole="Folders" ToRole="Folders1" />
-          <NavigationProperty Name="ChildFolders" Relationship="DataObjects.ChildFolders" FromRole="Folders" ToRole="Folders1" />
-          <Property Type="Int32" Name="ParentFolderId" Nullable="false" />
-          <Property Type="Boolean" Name="InheritMetaData" Nullable="false" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="false" />
-          <Property Type="String" Name="DateModified" Nullable="false" />
-          <Property Type="Int32" Name="PermissionsId" Nullable="false" />
-          <NavigationProperty Name="Permissions" Relationship="DataObjects.PermissionsFolders" FromRole="Folders" ToRole="Permissions" />
-          <NavigationProperty Name="MetaDataTypeToFolders" Relationship="DataObjects.MetaDataTypeToFolderFolders" FromRole="Folders" ToRole="MetaDataTypeToFolder" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentItems" Relationship="DataAccess.FoldersContentItems" FromRole="Folders" ToRole="ContentItems" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Language" Relationship="DataAccess.LanguagesFolders" FromRole="Folders" ToRole="Languages" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="LanguageId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Calendars" Relationship="DataAccess.CalendarsFolders" FromRole="Folders" ToRole="Calendars" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Menus" Relationship="DataAccess.MenusFolders" FromRole="Folders" ToRole="Menus" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="LibraryItems" Relationship="DataAccess.LibraryItemsFolders" FromRole="Folders" ToRole="LibraryItems" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="Description" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="Boolean" Name="InheritPermissions" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="ParentFolder" Relationship="DataAccess.ChildFolders" FromRole="Folders" ToRole="Folders1" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ChildFolders" Relationship="DataAccess.ChildFolders" FromRole="Folders" ToRole="Folders1" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ParentFolderId" Nullable="true" cg:SetterAccess="Public" />
+          <Property Type="Boolean" Name="InheritMetaData" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="DateModified" Nullable="true" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="PermissionsId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Permissions" Relationship="DataAccess.PermissionsFolders" FromRole="Folders" ToRole="Permissions" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="MetaDataTypeToFolders" Relationship="DataAccess.MetaDataTypeToFolderFolders" FromRole="Folders" ToRole="MetaDataTypeToFolder" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" cg:SetterAccess="Public" />
           </EntityType>
-        <EntityType Name="LibraryItems">
+        <EntityType Name="LibraryItems" Abstract="true">
           <Key>
             <PropertyRef Name="LibraryItemId" /></Key>
-          <Property Type="Int32" Name="LibraryItemId" Nullable="false" />
-          <NavigationProperty Name="Folder" Relationship="DataObjects.LibraryItemsFolders" FromRole="LibraryItems" ToRole="Folders" />
-          <Property Type="Int32" Name="FolderId" Nullable="false" />
-          <Property Type="String" Name="FileUrl" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <Property Type="String" Name="Desciprtion" Nullable="false" /></EntityType>
-        <EntityType Name="Menus">
+          <Property Type="Int32" Name="LibraryItemId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Folder" Relationship="DataAccess.LibraryItemsFolders" FromRole="LibraryItems" ToRole="Folders" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="FileUrl" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="Desciprtion" Nullable="false" cg:SetterAccess="Public" /></EntityType>
+        <EntityType Name="Menus" Abstract="true">
           <Key>
             <PropertyRef Name="MenuId" /></Key>
-          <Property Type="Int32" Name="MenuId" Nullable="false" />
-          <Property Type="Int32" Name="FolderId" Nullable="false" />
-          <NavigationProperty Name="Folder" Relationship="DataObjects.MenusFolders" FromRole="Menus" ToRole="Folders" />
-          <NavigationProperty Name="MenuItems" Relationship="DataObjects.MenuItemsMenus" FromRole="Menus" ToRole="MenuItems" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <Property Type="String" Name="Property" Nullable="false" />
-          <Property Type="String" Name="OrderId" Nullable="false" />
-          <NavigationProperty Name="ChildMenus" Relationship="DataObjects.MenusMenus" FromRole="Menus" ToRole="Menus1" />
-          <NavigationProperty Name="ParentMenu" Relationship="DataObjects.MenusMenus" FromRole="Menus1" ToRole="Menus" />
-          <Property Type="Int32" Name="ParentMenuId" Nullable="false" />
-          <NavigationProperty Name="RootMenu" Relationship="DataObjects.MenusMenus1" FromRole="Menus1" ToRole="Menus" />
-          <Property Type="Int32" Name="RootMenuId" Nullable="false" />
-          <NavigationProperty Name="Alias" Relationship="DataObjects.MenusAliases" FromRole="Menus" ToRole="Aliases" />
-          <Property Type="Int32" Name="AliasId" Nullable="false" />
+          <Property Type="Int32" Name="MenuId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Folder" Relationship="DataAccess.MenusFolders" FromRole="Menus" ToRole="Folders" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="MenuItems" Relationship="DataAccess.MenuItemsMenus" FromRole="Menus" ToRole="MenuItems" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Property" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="OrderId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ChildMenus" Relationship="DataAccess.MenusMenus" FromRole="Menus" ToRole="Menus1" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ParentMenu" Relationship="DataAccess.MenusMenus" FromRole="Menus1" ToRole="Menus" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ParentMenuId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="RootMenu" Relationship="DataAccess.MenusMenus1" FromRole="Menus1" ToRole="Menus" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="RootMenuId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Alias" Relationship="DataAccess.AliasesMenus" FromRole="Menus" ToRole="Aliases" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="AliasId" Nullable="false" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="MenuItems">
+        <EntityType Name="MenuItems" Abstract="true">
           <Key>
             <PropertyRef Name="MenuItemId" /></Key>
-          <Property Type="Int32" Name="MenuItemId" Nullable="false" />
-          <NavigationProperty Name="Menu" Relationship="DataObjects.MenuItemsMenus" FromRole="MenuItems" ToRole="Menus" />
-          <Property Type="Int32" Name="MenuId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <NavigationProperty Name="Alias" Relationship="DataObjects.MenuItemsAliases" FromRole="MenuItems" ToRole="Aliases" />
-          <Property Type="Int32" Name="AliasId" Nullable="false" />
-          <Property Type="String" Name="OrderId" Nullable="false" />
+          <Property Type="Int32" Name="MenuItemId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Menu" Relationship="DataAccess.MenuItemsMenus" FromRole="MenuItems" ToRole="Menus" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="MenuId" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="OrderId" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="Alias" Relationship="DataAccess.AliasesMenuItems" FromRole="MenuItems" ToRole="Aliases" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="AliasId" Nullable="false" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="Calendars">
+        <EntityType Name="Calendars" Abstract="true">
           <Key>
             <PropertyRef Name="CalendarId" /></Key>
-          <Property Type="Int32" Name="CalendarId" Nullable="false" />
-          <Property Type="Int32" Name="FolderId" Nullable="false" />
-          <NavigationProperty Name="Folder" Relationship="DataObjects.CalendarsFolders" FromRole="Calendars" ToRole="Folders" />
-          <NavigationProperty Name="Events" Relationship="DataObjects.CalendarsCalendarEvents" FromRole="Calendars" ToRole="CalendarEvents" />
-          <Property Type="String" Name="Name" Nullable="false" /></EntityType>
-        <EntityType Name="CalendarEvents">
+          <Property Type="Int32" Name="CalendarId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="Folder" Relationship="DataAccess.CalendarsFolders" FromRole="Calendars" ToRole="Folders" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Events" Relationship="DataAccess.CalendarsCalendarEvents" FromRole="Calendars" ToRole="CalendarEvents" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Public" /></EntityType>
+        <EntityType Name="CalendarEvents" Abstract="true">
           <Key>
             <PropertyRef Name="CalendarEventIds" /></Key>
-          <Property Type="Int32" Name="CalendarEventIds" Nullable="false" />
-          <NavigationProperty Name="Calendar" Relationship="DataObjects.CalendarsCalendarEvents" FromRole="CalendarEvents" ToRole="Calendars" />
-          <Property Type="Int32" Name="CalendarId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="false" />
-          <Property Type="String" Name="iCalSettings" Nullable="false" /></EntityType>
-        <EntityType Name="Aliases">
+          <Property Type="Int32" Name="CalendarEventIds" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Calendar" Relationship="DataAccess.CalendarsCalendarEvents" FromRole="CalendarEvents" ToRole="Calendars" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="CalendarId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="Description" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="iCalSettings" Nullable="false" cg:SetterAccess="Public" /></EntityType>
+        <EntityType Name="Aliases" Abstract="true">
           <Key>
             <PropertyRef Name="AliasId" /></Key>
-          <Property Type="Int32" Name="AliasId" Nullable="false" />
-          <NavigationProperty Name="Page" Relationship="DataObjects.PagesAliases" FromRole="Aliases" ToRole="Pages" />
-          <Property Type="Int32" Name="PageId" Nullable="false" />
-          <Property Type="Int32" Name="MenuItemId" Nullable="false" />
-          <Property Type="String" Name="Alias" Nullable="false" />
-          <NavigationProperty Name="MenuItems" Relationship="DataObjects.MenuItemsAliases" FromRole="Aliases" ToRole="MenuItems" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <NavigationProperty Name="ContentItem" Relationship="DataObjects.AliasesContentItems" FromRole="Aliases" ToRole="ContentItems" />
-          <Property Type="Int32" Name="ContentItemId" Nullable="false" />
-          <NavigationProperty Name="Menus" Relationship="DataObjects.MenusAliases" FromRole="Aliases" ToRole="Menus" />
+          <Property Type="Int32" Name="AliasId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Template" Relationship="DataAccess.PagesAliases" FromRole="Aliases" ToRole="Pages" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="TemplateId" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="String" Name="Alias" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="ContentItem" Relationship="DataAccess.AliasesContentItems" FromRole="Aliases" ToRole="ContentItems" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ContentItemId" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="MenuItem" Relationship="DataAccess.AliasesMenuItems" FromRole="Aliases" ToRole="MenuItems" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Menu" Relationship="DataAccess.AliasesMenus" FromRole="Aliases" ToRole="Menus" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="MetaDataTypesToContentItems">
+        <EntityType Name="MetaDataTypesToContentItems" Abstract="true">
           <Key>
             <PropertyRef Name="MetaDataTypesToContentItemsId" /></Key>
-          <Property Type="Int32" Name="MetaDataTypesToContentItemsId" Nullable="false" />
-          <NavigationProperty Name="MetaDataType" Relationship="DataObjects.MetaDataTypesToContentItemsMetaDataTypes" FromRole="MetaDataTypesToContentItems" ToRole="MetaDataTypes" />
-          <Property Type="Int32" Name="MetaDataTypeId" Nullable="false" />
-          <NavigationProperty Name="ContentItem" Relationship="DataObjects.MetaDataTypesToContentItemsContentItems" FromRole="MetaDataTypesToContentItems" ToRole="ContentItems" />
-          <Property Type="Int32" Name="ContentItemId" Nullable="false" />
-          <Property Type="String" Name="Value" Nullable="false" /></EntityType>
-        <EntityType Name="MetaDataTypes">
+          <Property Type="Int32" Name="MetaDataTypesToContentItemsId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="MetaDataType" Relationship="DataAccess.MetaDataTypesToContentItemsMetaDataTypes" FromRole="MetaDataTypesToContentItems" ToRole="MetaDataTypes" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="MetaDataTypeId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentItem" Relationship="DataAccess.MetaDataTypesToContentItemsContentItems" FromRole="MetaDataTypesToContentItems" ToRole="ContentItems" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ContentItemId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Value" Nullable="true" cg:SetterAccess="Protected" /></EntityType>
+        <EntityType Name="MetaDataTypes" Abstract="true">
           <Key>
             <PropertyRef Name="MetaDataTypeId" /></Key>
-          <Property Type="Int32" Name="MetaDataTypeId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <NavigationProperty Name="MetaDataTypeToFolders" Relationship="DataObjects.MetaDataTypeToFolderMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataTypeToFolder" />
-          <Property Type="String" Name="DefaultValue" Nullable="false" />
-          <NavigationProperty Name="MetaDataValueType" Relationship="DataObjects.MetaDataValueTypesMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataValueTypes" />
-          <Property Type="Int32" Name="MetaDataValueTypesId" Nullable="false" />
-          <NavigationProperty Name="MetaDataTypesToContentItems" Relationship="DataObjects.MetaDataTypesToContentItemsMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataTypesToContentItems" /></EntityType>
+          <Property Type="Int32" Name="MetaDataTypeId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="MetaDataTypeToFolders" Relationship="DataAccess.MetaDataTypeToFolderMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataTypeToFolder" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="DefaultValue" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="MetaDataValueType" Relationship="DataAccess.MetaDataValueTypesMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataValueTypes" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="MetaDataValueTypesId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="MetaDataTypesToContentItems" Relationship="DataAccess.MetaDataTypesToContentItemsMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataTypesToContentItems" cg:SetterAccess="Protected" /></EntityType>
         <Association Name="FoldersContentItems">
-          <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
-          <End Type="DataObjects.ContentItems" Role="ContentItems" Multiplicity="*" />
+          <End Type="DataAccess.Folders" Role="Folders" Multiplicity="1" />
+          <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Folders">
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="ContentItems">
               <PropertyRef Name="FolderId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="Languages">
+        <EntityType Name="Languages" Abstract="false">
           <Key>
             <PropertyRef Name="LanguageId" /></Key>
-          <Property Type="Int32" Name="LanguageId" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="DataObjects.LanguagesUsers" FromRole="Languages" ToRole="Users" />
-          <NavigationProperty Name="Folders" Relationship="DataObjects.LanguagesFolders" FromRole="Languages" ToRole="Folders" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" /></EntityType>
+          <Property Type="Int32" Name="LanguageId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Users" Relationship="DataAccess.LanguagesUsers" FromRole="Languages" ToRole="Users" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Folders" Relationship="DataAccess.LanguagesFolders" FromRole="Languages" ToRole="Folders" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="false" />
+          <Property Type="Int32" Name="LangId" Nullable="false" />
+          </EntityType>
         <Association Name="LanguagesUsers">
-          <End Type="DataObjects.Languages" Role="Languages" Multiplicity="1" />
-          <End Type="DataObjects.Users" Role="Users" Multiplicity="*" />
+          <End Type="DataAccess.Languages" Role="Languages" Multiplicity="1" />
+          <End Type="DataAccess.Users" Role="Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Languages">
               <PropertyRef Name="LanguageId" /></Principal>
             <Dependent Role="Users">
               <PropertyRef Name="LanguageId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="LanguagesFolders">
-          <End Type="DataObjects.Languages" Role="Languages" Multiplicity="1" />
-          <End Type="DataObjects.Folders" Role="Folders" Multiplicity="*" />
+          <End Type="DataAccess.Languages" Role="Languages" Multiplicity="1" />
+          <End Type="DataAccess.Folders" Role="Folders" Multiplicity="*" />
           </Association>
         <Association Name="CalendarsFolders">
-          <End Type="DataObjects.Calendars" Role="Calendars" Multiplicity="*" />
-          <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+          <End Type="DataAccess.Calendars" Role="Calendars" Multiplicity="*" />
+          <End Type="DataAccess.Folders" Role="Folders" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Folders">
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="Calendars">
               <PropertyRef Name="FolderId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="CalendarsCalendarEvents">
-          <End Type="DataObjects.Calendars" Role="Calendars" Multiplicity="1" />
-          <End Type="DataObjects.CalendarEvents" Role="CalendarEvents" Multiplicity="*" />
+          <End Type="DataAccess.Calendars" Role="Calendars" Multiplicity="1" />
+          <End Type="DataAccess.CalendarEvents" Role="CalendarEvents" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Calendars">
               <PropertyRef Name="CalendarId" /></Principal>
             <Dependent Role="CalendarEvents">
               <PropertyRef Name="CalendarId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="MenusFolders">
-          <End Type="DataObjects.Menus" Role="Menus" Multiplicity="*" />
-          <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+          <End Type="DataAccess.Menus" Role="Menus" Multiplicity="*" />
+          <End Type="DataAccess.Folders" Role="Folders" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Folders">
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="Menus">
               <PropertyRef Name="FolderId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="MenuItemsMenus">
-          <End Type="DataObjects.MenuItems" Role="MenuItems" Multiplicity="*" />
-          <End Type="DataObjects.Menus" Role="Menus" Multiplicity="1" />
+          <End Type="DataAccess.MenuItems" Role="MenuItems" Multiplicity="*" />
+          <End Type="DataAccess.Menus" Role="Menus" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Menus">
               <PropertyRef Name="MenuId" /></Principal>
             <Dependent Role="MenuItems">
               <PropertyRef Name="MenuId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="LibraryItemsFolders">
-          <End Type="DataObjects.LibraryItems" Role="LibraryItems" Multiplicity="*" />
-          <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+          <End Type="DataAccess.LibraryItems" Role="LibraryItems" Multiplicity="*" />
+          <End Type="DataAccess.Folders" Role="Folders" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Folders">
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="LibraryItems">
               <PropertyRef Name="FolderId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="UsersToUserRolesUserRoles">
-          <End Type="DataObjects.UsersToUserRoles" Multiplicity="*" Role="UsersToUserRoles" />
-          <End Type="DataObjects.UserRoles" Multiplicity="1" Role="UserRoles" />
+          <End Type="DataAccess.UsersToUserRoles" Multiplicity="*" Role="UsersToUserRoles" />
+          <End Type="DataAccess.UserRoles" Multiplicity="1" Role="UserRoles" />
           <ReferentialConstraint>
             <Principal Role="UserRoles">
               <PropertyRef Name="UserRoleId" /></Principal>
             <Dependent Role="UsersToUserRoles">
               <PropertyRef Name="UserRoleId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="Templates">
+        <EntityType Name="Templates" Abstract="true">
           <Key>
             <PropertyRef Name="TemplateId" /></Key>
-          <Property Type="Int32" Name="TemplateId" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="false" />
-          <Property Type="Boolean" Name="IsUserDefined" Nullable="false" />
-          <NavigationProperty Name="TemplateElements" Relationship="DataObjects.AdminElementAdminPages" FromRole="AdminPages" ToRole="AdminElement" />
-          <NavigationProperty Name="Aliases" Relationship="DataObjects.PagesAliases" FromRole="Pages" ToRole="Aliases" />
-          <Property Type="String" Name="TemplateFileUrl" Nullable="false" /></EntityType>
-        <EntityType Name="TemplateElement">
+          <Property Type="Int32" Name="TemplateId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Title" Nullable="false" cg:SetterAccess="Public" />
+          <Property Type="Boolean" Name="IsUserDefined" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="TemplateElements" Relationship="DataAccess.AdminElementAdminPages" FromRole="AdminPages" ToRole="AdminElement" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Aliases" Relationship="DataAccess.PagesAliases" FromRole="Pages" ToRole="Aliases" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="TemplateFileUrl" Nullable="false" cg:SetterAccess="Public" /></EntityType>
+        <EntityType Name="TemplateElement" Abstract="true">
           <Key>
             <PropertyRef Name="TemplateElementId" /></Key>
-          <Property Type="Int32" Name="TemplateElementId" Nullable="false" />
-          <Property Type="Guid" Name="XsltId" Nullable="false" />
-          <NavigationProperty Name="Template" Relationship="DataObjects.AdminElementAdminPages" FromRole="AdminElement" ToRole="AdminPages" />
-          <Property Type="Int32" Name="TemplateId" Nullable="false" />
-          <Property Type="Int32" Name="TemplateElementTypeId" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="false" />
-          <Property Type="String" Name="DynamicParamName" Nullable="false" />
-          <Property Type="String" Name="ObjectId" Nullable="false" />
-          <NavigationProperty Name="ObjectSchema" Relationship="DataObjects.ObjectSchemaTemplateElement" FromRole="TemplateElement" ToRole="ObjectSchema" />
-          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" />
+          <Property Type="Int32" Name="TemplateElementId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Guid" Name="XsltId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Template" Relationship="DataAccess.AdminElementAdminPages" FromRole="AdminElement" ToRole="AdminPages" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="TemplateId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Title" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Description" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="DynamicParamName" Nullable="true" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ObjectSchemaTemplateElement" FromRole="TemplateElement" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentItem" Relationship="DataAccess.TemplateElementContentItems" FromRole="TemplateElement" ToRole="ContentItems" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ContentItemId" Nullable="true" cg:SetterAccess="Protected" />
           </EntityType>
         <Association Name="AdminElementAdminPages">
-          <End Type="DataObjects.TemplateElement" Role="AdminElement" Multiplicity="*" />
-          <End Type="DataObjects.Templates" Role="AdminPages" Multiplicity="1" />
+          <End Type="DataAccess.TemplateElement" Role="AdminElement" Multiplicity="*" />
+          <End Type="DataAccess.Templates" Role="AdminPages" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="AdminPages">
               <PropertyRef Name="TemplateId" /></Principal>
             <Dependent Role="AdminElement">
               <PropertyRef Name="TemplateId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="PagesAliases">
-          <End Type="DataObjects.Templates" Role="Pages" Multiplicity="1" />
-          <End Type="DataObjects.Aliases" Role="Aliases" Multiplicity="*" />
+          <End Type="DataAccess.Templates" Role="Pages" Multiplicity="1" />
+          <End Type="DataAccess.Aliases" Role="Aliases" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pages">
               <PropertyRef Name="TemplateId" /></Principal>
             <Dependent Role="Aliases">
-              <PropertyRef Name="PageId" /></Dependent></ReferentialConstraint></Association>
+              <PropertyRef Name="TemplateId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ChildFolders">
-          <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
-          <End Type="DataObjects.Folders" Role="Folders1" Multiplicity="*" />
+          <End Type="DataAccess.Folders" Role="Folders" Multiplicity="0..1" />
+          <End Type="DataAccess.Folders" Role="Folders1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Folders">
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="Folders1">
               <PropertyRef Name="ParentFolderId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="Permissions">
+        <EntityType Name="Permissions" Abstract="true">
           <Key>
             <PropertyRef Name="PermissionsId" /></Key>
-          <Property Type="Int32" Name="PermissionsId" Nullable="false" />
-          <NavigationProperty Name="UserRole" Relationship="DataObjects.PermissionsUserRoles" FromRole="Permissions" ToRole="UserRoles" />
-          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
-          <Property Type="Boolean" Name="CanReadContent" Nullable="false" />
-          <Property Type="Boolean" Name="CanAddContent" Nullable="false" />
-          <Property Type="Boolean" Name="CanDeleteContent" Nullable="false" />
-          <Property Type="Boolean" Name="CanReadMenus" Nullable="false" />
-          <Property Type="Boolean" Name="CanAddMenus" Nullable="false" />
-          <Property Type="Boolean" Name="CanDeleteMenus" Nullable="false" />
-          <Property Type="Boolean" Name="CanReadFolders" Nullable="false" />
-          <Property Type="Boolean" Name="CanAddFolders" Nullable="false" />
-          <Property Type="Boolean" Name="CanDeleteFoldres" Nullable="false" />
-          <Property Type="Boolean" Name="CanReadCalendars" Nullable="false" />
-          <Property Type="Boolean" Name="CanAddCalendars" Nullable="false" />
-          <Property Type="Boolean" Name="CanDeleteCalednars" Nullable="false" />
-          <Property Type="Boolean" Name="CanEditContent" Nullable="false" />
-          <Property Type="Boolean" Name="CanEditMenus" Nullable="false" />
-          <Property Type="Boolean" Name="CanEditFolder" Nullable="false" />
-          <Property Type="Boolean" Name="CanEditCalendar" Nullable="false" />
-          <NavigationProperty Name="Folder" Relationship="DataObjects.PermissionsFolders" FromRole="Permissions" ToRole="Folders" />
-          <Property Type="Int32" Name="FolderId" Nullable="false" />
-          <Property Type="Boolean" Name="IsPageAdmin" Nullable="false" />
+          <Property Type="Int32" Name="PermissionsId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="UserRole" Relationship="DataAccess.PermissionsUserRoles" FromRole="Permissions" ToRole="UserRoles" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="UserRoleId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanReadContent" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanAddContent" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanDeleteContent" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanReadMenus" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanAddMenus" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanDeleteMenus" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanReadFolders" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanAddFolders" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanDeleteFoldres" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanReadCalendars" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanAddCalendars" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanDeleteCalednars" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanEditContent" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanEditMenus" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanEditFolder" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="CanEditCalendar" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Folder" Relationship="DataAccess.PermissionsFolders" FromRole="Permissions" ToRole="Folders" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="IsPageAdmin" Nullable="false" cg:SetterAccess="Protected" />
           </EntityType>
         <Association Name="PermissionsUserRoles">
-          <End Type="DataObjects.Permissions" Role="Permissions" Multiplicity="*" />
-          <End Type="DataObjects.UserRoles" Role="UserRoles" Multiplicity="1" />
+          <End Type="DataAccess.Permissions" Role="Permissions" Multiplicity="*" />
+          <End Type="DataAccess.UserRoles" Role="UserRoles" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="UserRoles">
               <PropertyRef Name="UserRoleId" /></Principal>
             <Dependent Role="Permissions">
               <PropertyRef Name="UserRoleId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="MenuItemsAliases">
-          <End Type="DataObjects.MenuItems" Role="MenuItems" Multiplicity="*" />
-          <End Type="DataObjects.Aliases" Role="Aliases" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Aliases">
-              <PropertyRef Name="AliasId" /></Principal>
-            <Dependent Role="MenuItems">
-              <PropertyRef Name="AliasId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="PermissionsFolders">
-          <End Type="DataObjects.Permissions" Role="Permissions" Multiplicity="*" />
-          <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+          <End Type="DataAccess.Permissions" Role="Permissions" Multiplicity="*" />
+          <End Type="DataAccess.Folders" Role="Folders" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Folders">
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="Permissions">
               <PropertyRef Name="FolderId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="MetaDataTypeToFolder">
+        <EntityType Name="MetaDataTypeToFolder" Abstract="true">
           <Key>
             <PropertyRef Name="MetaDataTypeToFolderId" /></Key>
-          <Property Type="Int32" Name="MetaDataTypeToFolderId" Nullable="false" />
-          <NavigationProperty Name="Folder" Relationship="DataObjects.MetaDataTypeToFolderFolders" FromRole="MetaDataTypeToFolder" ToRole="Folders" />
-          <Property Type="Int32" Name="FolderId" Nullable="false" />
-          <NavigationProperty Name="MetaDataType" Relationship="DataObjects.MetaDataTypeToFolderMetaDataTypes" FromRole="MetaDataTypeToFolder" ToRole="MetaDataTypes" />
-          <Property Type="Int32" Name="MetaDataTypeId" Nullable="false" />
-          <Property Type="Boolean" Name="IsRequired" Nullable="false" />
+          <Property Type="Int32" Name="MetaDataTypeToFolderId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="Folder" Relationship="DataAccess.MetaDataTypeToFolderFolders" FromRole="MetaDataTypeToFolder" ToRole="Folders" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="MetaDataType" Relationship="DataAccess.MetaDataTypeToFolderMetaDataTypes" FromRole="MetaDataTypeToFolder" ToRole="MetaDataTypes" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="MetaDataTypeId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Boolean" Name="IsRequired" Nullable="false" cg:SetterAccess="Protected" />
           </EntityType>
         <Association Name="MetaDataTypeToFolderFolders">
-          <End Type="DataObjects.MetaDataTypeToFolder" Role="MetaDataTypeToFolder" Multiplicity="*" />
-          <End Type="DataObjects.Folders" Role="Folders" Multiplicity="1" />
+          <End Type="DataAccess.MetaDataTypeToFolder" Role="MetaDataTypeToFolder" Multiplicity="*" />
+          <End Type="DataAccess.Folders" Role="Folders" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Folders">
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="MetaDataTypeToFolder">
               <PropertyRef Name="FolderId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="MetaDataTypeToFolderMetaDataTypes">
-          <End Type="DataObjects.MetaDataTypeToFolder" Role="MetaDataTypeToFolder" Multiplicity="*" />
-          <End Type="DataObjects.MetaDataTypes" Role="MetaDataTypes" Multiplicity="1" />
+          <End Type="DataAccess.MetaDataTypeToFolder" Role="MetaDataTypeToFolder" Multiplicity="*" />
+          <End Type="DataAccess.MetaDataTypes" Role="MetaDataTypes" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="MetaDataTypes">
               <PropertyRef Name="MetaDataTypeId" /></Principal>
             <Dependent Role="MetaDataTypeToFolder">
               <PropertyRef Name="MetaDataTypeId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="MetaDataValueTypes">
+        <EntityType Name="MetaDataValueTypes" Abstract="true">
           <Key>
             <PropertyRef Name="MetaDataValueTypesId" /></Key>
-          <Property Type="Int32" Name="MetaDataValueTypesId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <NavigationProperty Name="MetaDataTypes" Relationship="DataObjects.MetaDataValueTypesMetaDataTypes" FromRole="MetaDataValueTypes" ToRole="MetaDataTypes" /></EntityType>
+          <Property Type="Int32" Name="MetaDataValueTypesId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="MetaDataTypes" Relationship="DataAccess.MetaDataValueTypesMetaDataTypes" FromRole="MetaDataValueTypes" ToRole="MetaDataTypes" cg:SetterAccess="Protected" /></EntityType>
         <Association Name="MetaDataValueTypesMetaDataTypes">
-          <End Type="DataObjects.MetaDataValueTypes" Role="MetaDataValueTypes" Multiplicity="1" />
-          <End Type="DataObjects.MetaDataTypes" Role="MetaDataTypes" Multiplicity="*" />
+          <End Type="DataAccess.MetaDataValueTypes" Role="MetaDataValueTypes" Multiplicity="1" />
+          <End Type="DataAccess.MetaDataTypes" Role="MetaDataTypes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MetaDataValueTypes">
               <PropertyRef Name="MetaDataValueTypesId" /></Principal>
             <Dependent Role="MetaDataTypes">
               <PropertyRef Name="MetaDataValueTypesId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="MetaDataTypesToContentItemsMetaDataTypes">
-          <End Type="DataObjects.MetaDataTypesToContentItems" Role="MetaDataTypesToContentItems" Multiplicity="*" />
-          <End Type="DataObjects.MetaDataTypes" Role="MetaDataTypes" Multiplicity="1" />
+          <End Type="DataAccess.MetaDataTypesToContentItems" Role="MetaDataTypesToContentItems" Multiplicity="*" />
+          <End Type="DataAccess.MetaDataTypes" Role="MetaDataTypes" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="MetaDataTypes">
               <PropertyRef Name="MetaDataTypeId" /></Principal>
             <Dependent Role="MetaDataTypesToContentItems">
               <PropertyRef Name="MetaDataTypeId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="MetaDataTypesToContentItemsContentItems">
-          <End Type="DataObjects.MetaDataTypesToContentItems" Role="MetaDataTypesToContentItems" Multiplicity="*" />
-          <End Type="DataObjects.ContentItems" Role="ContentItems" Multiplicity="1" />
+          <End Type="DataAccess.MetaDataTypesToContentItems" Role="MetaDataTypesToContentItems" Multiplicity="*" />
+          <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="ContentItems">
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="MetaDataTypesToContentItems">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="ContentHistory">
+        <EntityType Name="ContentHistory" Abstract="true">
           <Key>
             <PropertyRef Name="ContentHistoryId" /></Key>
-          <Property Type="Int32" Name="ContentHistoryId" Nullable="false" />
-          <NavigationProperty Name="ContentItem" Relationship="DataObjects.ContentHistoryContentItems" FromRole="ContentHistory" ToRole="ContentItems" />
-          <Property Type="Int32" Name="ContentItemId" Nullable="false" />
-          <Property Type="Double" Name="VersionNumber" Nullable="false" />
-          <Property Type="String" Name="ContentHtml" Nullable="false" />
-          <Property Type="String" Name="ContentSummary" Nullable="false" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="false" />
-          <Property Type="String" Name="MetaDataXml" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DataObjects.ContentHistoryUsers" FromRole="ContentHistory" ToRole="Users" />
-          <Property Type="Int32" Name="CreatedByUserId" Nullable="false" />
+          <Property Type="Int32" Name="ContentHistoryId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentItem" Relationship="DataAccess.ContentHistoryContentItems" FromRole="ContentHistory" ToRole="ContentItems" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ContentItemId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Double" Name="VersionNumber" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="ContentHtml" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="ContentSummary" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="MetaDataXml" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="User" Relationship="DataAccess.ContentHistoryUsers" FromRole="ContentHistory" ToRole="Users" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="CreatedByUserId" Nullable="false" cg:SetterAccess="Protected" />
           </EntityType>
         <Association Name="ContentHistoryContentItems">
-          <End Type="DataObjects.ContentHistory" Role="ContentHistory" Multiplicity="*" />
-          <End Type="DataObjects.ContentItems" Role="ContentItems" Multiplicity="1" />
+          <End Type="DataAccess.ContentHistory" Role="ContentHistory" Multiplicity="*" />
+          <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="ContentItems">
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="ContentHistory">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ContentHistoryUsers">
-          <End Type="DataObjects.ContentHistory" Role="ContentHistory" Multiplicity="*" />
-          <End Type="DataObjects.Users" Role="Users" Multiplicity="1" />
+          <End Type="DataAccess.ContentHistory" Role="ContentHistory" Multiplicity="*" />
+          <End Type="DataAccess.Users" Role="Users" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" /></Principal>
             <Dependent Role="ContentHistory">
               <PropertyRef Name="CreatedByUserId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="AliasesContentItems">
-          <End Type="DataObjects.Aliases" Role="Aliases" Multiplicity="*" />
-          <End Type="DataObjects.ContentItems" Role="ContentItems" Multiplicity="1" />
+          <End Type="DataAccess.Aliases" Role="Aliases" Multiplicity="*" />
+          <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="ContentItems">
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="Aliases">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="ObjectSchema">
+        <EntityType Name="ObjectSchema" Abstract="true">
           <Key>
             <PropertyRef Name="ObjectSchemaId" /></Key>
-          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" />
-          <Property Type="String" Name="SchemaXml" Nullable="false" />
-          <NavigationProperty Name="ObjectXsltSets" Relationship="DataObjects.ObjectSchemaObjectXsltSets" FromRole="ObjectSchema" ToRole="ObjectXsltSets" />
-          <NavigationProperty Name="ObjectType" Relationship="DataObjects.ObjectTypesObjectSchema" FromRole="ObjectSchema" ToRole="ObjectTypes" />
-          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" />
-          <NavigationProperty Name="TemplateElements" Relationship="DataObjects.ObjectSchemaTemplateElement" FromRole="ObjectSchema" ToRole="TemplateElement" />
-          <Property Type="String" Name="DataEntryXslt" Nullable="false" />
+          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="SchemaXml" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ObjectXsltSets" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectSchema" ToRole="ObjectXsltSets" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ObjectType" Relationship="DataAccess.ObjectTypesObjectSchema" FromRole="ObjectSchema" ToRole="ObjectTypes" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="TemplateElements" Relationship="DataAccess.ObjectSchemaTemplateElement" FromRole="ObjectSchema" ToRole="TemplateElement" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="DataEntryXslt" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentItems" Relationship="DataAccess.ContentItemsObjectSchema" FromRole="ObjectSchema" ToRole="ContentItems" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="ObjectXsltSets">
+        <EntityType Name="ObjectXslts" Abstract="true">
           <Key>
-            <PropertyRef Name="ObjectXsltSetId" /></Key>
-          <Property Type="Int32" Name="ObjectXsltSetId" Nullable="false" />
-          <Property Type="String" Name="DisplayXslt" Nullable="false" />
-          <NavigationProperty Name="ContentItems" Relationship="DataObjects.ObjectXsltSetContentItems" FromRole="ObjectXsltSet" ToRole="ContentItems" />
-          <NavigationProperty Name="ObjectSchema" Relationship="DataObjects.ObjectSchemaObjectXsltSets" FromRole="ObjectXsltSets" ToRole="ObjectSchema" />
-          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" /></EntityType>
+            <PropertyRef Name="ObjectXsltId" /></Key>
+          <Property Type="Int32" Name="ObjectXsltId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="ObjectXslt" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentItems" Relationship="DataAccess.ObjectXsltSetContentItems" FromRole="ObjectXsltSet" ToRole="ContentItems" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectXsltSets" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" /></EntityType>
         <Association Name="ObjectXsltSetContentItems">
-          <End Type="DataObjects.ObjectXsltSets" Role="ObjectXsltSet" Multiplicity="1" />
-          <End Type="DataObjects.ContentItems" Role="ContentItems" Multiplicity="*" />
+          <End Type="DataAccess.ObjectXslts" Role="ObjectXsltSet" Multiplicity="1" />
+          <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ObjectXsltSet">
-              <PropertyRef Name="ObjectXsltSetId" /></Principal>
+              <PropertyRef Name="ObjectXsltId" /></Principal>
             <Dependent Role="ContentItems">
-              <PropertyRef Name="ObjectXsltSetId" /></Dependent></ReferentialConstraint></Association>
+              <PropertyRef Name="ObjectXsltId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ObjectSchemaObjectXsltSets">
-          <End Type="DataObjects.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
-          <End Type="DataObjects.ObjectXsltSets" Role="ObjectXsltSets" Multiplicity="*" />
+          <End Type="DataAccess.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
+          <End Type="DataAccess.ObjectXslts" Role="ObjectXsltSets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ObjectSchema">
               <PropertyRef Name="ObjectSchemaId" /></Principal>
             <Dependent Role="ObjectXsltSets">
               <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="ObjectTypes">
+        <EntityType Name="ObjectTypes" Abstract="true">
           <Key>
             <PropertyRef Name="ObjectTypeId" /></Key>
-          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" />
-          <NavigationProperty Name="ObjectSchemas" Relationship="DataObjects.ObjectTypesObjectSchema" FromRole="ObjectTypes" ToRole="ObjectSchema" />
-          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ObjectSchemas" Relationship="DataAccess.ObjectTypesObjectSchema" FromRole="ObjectTypes" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="Description" Nullable="false" cg:SetterAccess="Protected" />
           </EntityType>
         <Association Name="ObjectTypesObjectSchema">
-          <End Type="DataObjects.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
-          <End Type="DataObjects.ObjectSchema" Role="ObjectSchema" Multiplicity="*" />
+          <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
+          <End Type="DataAccess.ObjectSchema" Role="ObjectSchema" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ObjectTypes">
               <PropertyRef Name="ObjectTypeId" /></Principal>
             <Dependent Role="ObjectSchema">
               <PropertyRef Name="ObjectTypeId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ObjectSchemaTemplateElement">
-          <End Type="DataObjects.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
-          <End Type="DataObjects.TemplateElement" Role="TemplateElement" Multiplicity="*" />
+          <End Type="DataAccess.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
+          <End Type="DataAccess.TemplateElement" Role="TemplateElement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ObjectSchema">
               <PropertyRef Name="ObjectSchemaId" /></Principal>
             <Dependent Role="TemplateElement">
               <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="Settings">
+        <EntityType Name="Settings" Abstract="true">
           <Key>
             <PropertyRef Name="SettingId" /></Key>
-          <Property Type="Int32" Name="SettingId" Nullable="false" />
+          <Property Type="Int32" Name="SettingId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="LicenceKey" Nullable="false" cg:SetterAccess="Protected" />
           </EntityType>
         <Association Name="MenusMenus">
-          <End Type="DataObjects.Menus" Role="Menus" Multiplicity="1" />
-          <End Type="DataObjects.Menus" Role="Menus1" Multiplicity="*" />
+          <End Type="DataAccess.Menus" Role="Menus" Multiplicity="1" />
+          <End Type="DataAccess.Menus" Role="Menus1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Menus">
               <PropertyRef Name="MenuId" /></Principal>
             <Dependent Role="Menus1">
               <PropertyRef Name="ParentMenuId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="MenusMenus1">
-          <End Type="DataObjects.Menus" Role="Menus" Multiplicity="1" />
-          <End Type="DataObjects.Menus" Role="Menus1" Multiplicity="*" />
+          <End Type="DataAccess.Menus" Role="Menus" Multiplicity="1" />
+          <End Type="DataAccess.Menus" Role="Menus1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Menus">
               <PropertyRef Name="MenuId" /></Principal>
             <Dependent Role="Menus1">
               <PropertyRef Name="RootMenuId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="MenusAliases">
-          <End Type="DataObjects.Menus" Role="Menus" Multiplicity="*" />
-          <End Type="DataObjects.Aliases" Role="Aliases" Multiplicity="1" />
+        <Association Name="ContentItemsObjectSchema">
+          <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="*" />
+          <End Type="DataAccess.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ObjectSchema">
+              <PropertyRef Name="ObjectSchemaId" /></Principal>
+            <Dependent Role="ContentItems">
+              <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="TemplateElementContentItems">
+          <End Type="DataAccess.TemplateElement" Role="TemplateElement" Multiplicity="*" />
+          <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ContentItems">
+              <PropertyRef Name="ContentItemId" /></Principal>
+            <Dependent Role="TemplateElement">
+              <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="AliasesMenuItems">
+          <End Type="DataAccess.Aliases" Role="Aliases" Multiplicity="1" />
+          <End Type="DataAccess.MenuItems" Role="MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aliases">
+              <PropertyRef Name="AliasId" /></Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="AliasId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="AliasesMenus">
+          <End Type="DataAccess.Aliases" Role="Aliases" Multiplicity="1" />
+          <End Type="DataAccess.Menus" Role="Menus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Aliases">
               <PropertyRef Name="AliasId" /></Principal>
@@ -689,13 +1555,296 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="Model1" />
-        <Alias Key="Target" Value="Model1.Store" />
-        <EntityContainerMapping CdmEntityContainer="DataObjectsContainer" StorageEntityContainer="Model1TargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataAccessStoreContainer" CdmEntityContainer="DataObjectsContainer">
+    <EntitySetMapping Name="ContentItems">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ContentItems)">
+        <MappingFragment StoreEntitySet="ContentItems">
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+          <ScalarProperty Name="ContentHtml" ColumnName="ContentHtml" />
+          <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+          <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="ContentStatus" ColumnName="ContentStatus" />
+          <ScalarProperty Name="ObjectXsltId" ColumnName="ObjectXsltId" />
+          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.UserRoles)">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersToUserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.UsersToUserRoles)">
+        <MappingFragment StoreEntitySet="UsersToUserRoles">
+          <ScalarProperty Name="UserToUserRoleId" ColumnName="UserToUserRoleId" />
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Folders">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Folders)">
+        <MappingFragment StoreEntitySet="Folders">
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="InheritPermissions" ColumnName="InheritPermissions" />
+          <ScalarProperty Name="ParentFolderId" ColumnName="ParentFolderId" />
+          <ScalarProperty Name="InheritMetaData" ColumnName="InheritMetaData" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="PermissionsId" ColumnName="PermissionsId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LibraryItems">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.LibraryItems)">
+        <MappingFragment StoreEntitySet="LibraryItems">
+          <ScalarProperty Name="LibraryItemId" ColumnName="LibraryItemId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Desciprtion" ColumnName="Desciprtion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Menus)">
+        <MappingFragment StoreEntitySet="Menus">
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Property" ColumnName="Property" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ParentMenuId" ColumnName="ParentMenuId" />
+          <ScalarProperty Name="RootMenuId" ColumnName="RootMenuId" />
+          <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuItems">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MenuItems)">
+        <MappingFragment StoreEntitySet="MenuItems">
+          <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendars">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Calendars)">
+        <MappingFragment StoreEntitySet="Calendars">
+          <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CalendarEvents">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.CalendarEvents)">
+        <MappingFragment StoreEntitySet="CalendarEvents">
+          <ScalarProperty Name="CalendarEventIds" ColumnName="CalendarEventIds" />
+          <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="iCalSettings" ColumnName="iCalSettings" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aliases">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Aliases)">
+        <MappingFragment StoreEntitySet="Aliases">
+          <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+          <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaDataTypesToContentItems">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MetaDataTypesToContentItems)">
+        <MappingFragment StoreEntitySet="MetaDataTypesToContentItems">
+          <ScalarProperty Name="MetaDataTypesToContentItemsId" ColumnName="MetaDataTypesToContentItemsId" />
+          <ScalarProperty Name="MetaDataTypeId" ColumnName="MetaDataTypeId" />
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaDataTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MetaDataTypes)">
+        <MappingFragment StoreEntitySet="MetaDataTypes">
+          <ScalarProperty Name="MetaDataTypeId" ColumnName="MetaDataTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="MetaDataValueTypesId" ColumnName="MetaDataValueTypesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Languages)">
+        <MappingFragment StoreEntitySet="Languages">
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="LangId" ColumnName="LangId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Users)">
+        <MappingFragment StoreEntitySet="UsersSet">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Templates">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Templates)">
+        <MappingFragment StoreEntitySet="Templates">
+          <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsUserDefined" ColumnName="IsUserDefined" />
+          <ScalarProperty Name="TemplateFileUrl" ColumnName="TemplateFileUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TemplateElements">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.TemplateElement)">
+        <MappingFragment StoreEntitySet="TemplateElements">
+          <ScalarProperty Name="TemplateElementId" ColumnName="TemplateElementId" />
+          <ScalarProperty Name="XsltId" ColumnName="XsltId" />
+          <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DynamicParamName" ColumnName="DynamicParamName" />
+          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Permissions)">
+        <MappingFragment StoreEntitySet="Permissions">
+          <ScalarProperty Name="PermissionsId" ColumnName="PermissionsId" />
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+          <ScalarProperty Name="CanReadContent" ColumnName="CanReadContent" />
+          <ScalarProperty Name="CanAddContent" ColumnName="CanAddContent" />
+          <ScalarProperty Name="CanDeleteContent" ColumnName="CanDeleteContent" />
+          <ScalarProperty Name="CanReadMenus" ColumnName="CanReadMenus" />
+          <ScalarProperty Name="CanAddMenus" ColumnName="CanAddMenus" />
+          <ScalarProperty Name="CanDeleteMenus" ColumnName="CanDeleteMenus" />
+          <ScalarProperty Name="CanReadFolders" ColumnName="CanReadFolders" />
+          <ScalarProperty Name="CanAddFolders" ColumnName="CanAddFolders" />
+          <ScalarProperty Name="CanDeleteFoldres" ColumnName="CanDeleteFoldres" />
+          <ScalarProperty Name="CanReadCalendars" ColumnName="CanReadCalendars" />
+          <ScalarProperty Name="CanAddCalendars" ColumnName="CanAddCalendars" />
+          <ScalarProperty Name="CanDeleteCalednars" ColumnName="CanDeleteCalednars" />
+          <ScalarProperty Name="CanEditContent" ColumnName="CanEditContent" />
+          <ScalarProperty Name="CanEditMenus" ColumnName="CanEditMenus" />
+          <ScalarProperty Name="CanEditFolder" ColumnName="CanEditFolder" />
+          <ScalarProperty Name="CanEditCalendar" ColumnName="CanEditCalendar" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="IsPageAdmin" ColumnName="IsPageAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaDataTypeToFolders">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MetaDataTypeToFolder)">
+        <MappingFragment StoreEntitySet="MetaDataTypeToFolders">
+          <ScalarProperty Name="MetaDataTypeToFolderId" ColumnName="MetaDataTypeToFolderId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="MetaDataTypeId" ColumnName="MetaDataTypeId" />
+          <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaDataValueTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MetaDataValueTypes)">
+        <MappingFragment StoreEntitySet="MetaDataValueTypes">
+          <ScalarProperty Name="MetaDataValueTypesId" ColumnName="MetaDataValueTypesId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentHistories">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ContentHistory)">
+        <MappingFragment StoreEntitySet="ContentHistories">
+          <ScalarProperty Name="ContentHistoryId" ColumnName="ContentHistoryId" />
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+          <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+          <ScalarProperty Name="ContentHtml" ColumnName="ContentHtml" />
+          <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="MetaDataXml" ColumnName="MetaDataXml" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectSchemas">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectSchema)">
+        <MappingFragment StoreEntitySet="ObjectSchemas">
+          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+          <ScalarProperty Name="SchemaXml" ColumnName="SchemaXml" />
+          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
+          <ScalarProperty Name="DataEntryXslt" ColumnName="DataEntryXslt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectXslts">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectXslts)">
+        <MappingFragment StoreEntitySet="ObjectXslts">
+          <ScalarProperty Name="ObjectXsltId" ColumnName="ObjectXsltId" />
+          <ScalarProperty Name="ObjectXslt" ColumnName="ObjectXslt" />
+          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectTypes)">
+        <MappingFragment StoreEntitySet="ObjectTypes">
+          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Settings">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Settings)">
+        <MappingFragment StoreEntitySet="Settings">
+          <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+          <ScalarProperty Name="LicenceKey" ColumnName="LicenceKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LanguagesFolders" TypeName="DataAccess.LanguagesFolders" StoreEntitySet="Folders">
+      <EndProperty Name="Languages">
+        <ScalarProperty Name="LanguageId" ColumnName="Language_LanguageId" />
+      </EndProperty>
+      <EndProperty Name="Folders">
+        <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
@@ -712,171 +1861,232 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="100" >
-        <EntityTypeShape EntityType="DataObjects.ContentItems" Width="1.5" PointX="2.375" PointY="2.375" Height="3.8931689453124996" />
-        <EntityTypeShape EntityType="DataObjects.UserRoles" Width="1.5" PointX="8.375" PointY="3.875" Height="1.5923063151041665" />
-        <EntityTypeShape EntityType="DataObjects.Users" Width="1.5" PointX="4.25" PointY="3.875" Height="2.7427376302083326" />
-        <EntityTypeShape EntityType="DataObjects.UsersToUserRoles" PointX="6.125" PointY="3.875" Width="1.875" Height="1.7566536458333326" />
-        <AssociationConnector Association="DataObjects.UsersContentItems">
-          <ConnectorPoint PointX="4.25" PointY="5.07158447265625" />
-          <ConnectorPoint PointX="4.208333333333333" PointY="5.0715844726562489" />
-          <ConnectorPoint PointX="4.041666666666667" PointY="5.07158447265625" />
-          <ConnectorPoint PointX="3.875" PointY="5.07158447265625" /></AssociationConnector>
-        <AssociationConnector Association="DataObjects.UsersContentItems1">
-          <ConnectorPoint PointX="4.25" PointY="4.4107922363281249" />
-          <ConnectorPoint PointX="4.208333333333333" PointY="4.410792236328124" />
-          <ConnectorPoint PointX="4.041666666666667" PointY="4.4107922363281249" />
-          <ConnectorPoint PointX="3.875" PointY="4.4107922363281249" /></AssociationConnector>
-        <AssociationConnector Association="DataObjects.UsersToUserRolesUsers">
-          <ConnectorPoint PointX="6.125" PointY="4.7533268229166659" />
-          <ConnectorPoint PointX="5.75" PointY="4.7533268229166659" />
+      <Diagram Name="Model1" ZoomLevel="75" >
+        <EntityTypeShape EntityType="DataAccess.ContentItems" Width="1.5" PointX="4" PointY="4.375" Height="4.2218636067708326" />
+        <EntityTypeShape EntityType="DataAccess.UserRoles" Width="1.5" PointX="10.25" PointY="11.125" Height="1.5923063151041665" />
+        <EntityTypeShape EntityType="DataAccess.Users" Width="1.5" PointX="7.625" PointY="9.125" Height="2.7427376302083326" />
+        <EntityTypeShape EntityType="DataAccess.UsersToUserRoles" PointX="9.75" PointY="9" Width="1.875" Height="1.7566536458333326" />
+        <AssociationConnector Association="DataAccess.UsersContentItems">
+          <ConnectorPoint PointX="7.625" PointY="9.61718875" />
+          <ConnectorPoint PointX="5.958333333333333" PointY="9.61718875" />
+          <ConnectorPoint PointX="5.791666666666667" PointY="9.61718875" />
+          <ConnectorPoint PointX="5.05468625" PointY="9.61718875" />
+          <ConnectorPoint PointX="5.05468625" PointY="8.5968636067708317" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.Folders" Width="1.375" PointX="4.25" PointY="9.25" Height="4.2218636067708335" />
-        <EntityTypeShape EntityType="DataObjects.LibraryItems" Width="1.5" PointX="6.125" PointY="10.625" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="DataObjects.Menus" Width="1.5" PointX="2.375" PointY="9" Height="2.5783902994791656" />
-        <EntityTypeShape EntityType="DataObjects.MenuItems" Width="1.5" PointX="2.375" PointY="12.625" Height="2.0853483072916674" />
-        <EntityTypeShape EntityType="DataObjects.Calendars" Width="1.5" PointX="5.125" PointY="14" Height="1.7566536458333326" />
-        <EntityTypeShape EntityType="DataObjects.CalendarEvents" Width="1.5" PointX="7.125" PointY="13.875" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="DataObjects.Aliases" Width="1.5" PointX="0.5" PointY="10.5" Height="2.4140429687499996" />
-        <EntityTypeShape EntityType="DataObjects.MetaDataTypesToContentItems" Width="1.5" PointX="0.5" PointY="3.75" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="DataObjects.MetaDataTypes" Width="1.5" PointX="0.5" PointY="6.125" Height="2.0853483072916665" />
-        <AssociationConnector Association="DataObjects.FoldersContentItems" ManuallyRouted="true">
-          <ConnectorPoint PointX="4.968752" PointY="9.25" />
-          <ConnectorPoint PointX="4.968752" PointY="8.890625" />
-          <ConnectorPoint PointX="4.125" PointY="8.890625" />
-          <ConnectorPoint PointX="4.125" PointY="3.7033902994791656" />
-          <ConnectorPoint PointX="4" PointY="3.7033902994791656" />
-          <ConnectorPoint PointX="4" PointY="3.5496456909179681" />
-          <ConnectorPoint PointX="3.875" PointY="3.5496456909179681" />
+        <AssociationConnector Association="DataAccess.UsersContentItems1">
+          <ConnectorPoint PointX="7.625" PointY="9.2343725" />
+          <ConnectorPoint PointX="5.958333333333333" PointY="9.2343725" />
+          <ConnectorPoint PointX="5.791666666666667" PointY="9.2343725" />
+          <ConnectorPoint PointX="5.3593775" PointY="9.2343725" />
+          <ConnectorPoint PointX="5.3593775" PointY="8.5968636067708317" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.Languages" Width="1.5" PointX="4.25" PointY="7" Height="1.7566536458333335" />
-        <AssociationConnector Association="DataObjects.LanguagesUsers">
-          <ConnectorPoint PointX="5" PointY="7" />
-          <ConnectorPoint PointX="5" PointY="6.6177376302083326" />
+        <AssociationConnector Association="DataAccess.UsersToUserRolesUsers">
+          <ConnectorPoint PointX="9.75" PointY="9.9408268229166659" />
+          <ConnectorPoint PointX="9.5208333333333339" PointY="9.9408268229166659" />
+          <ConnectorPoint PointX="9.3541666666666661" PointY="9.9408268229166659" />
+          <ConnectorPoint PointX="9.125" PointY="9.9408268229166659" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.LanguagesFolders">
-          <ConnectorPoint PointX="5.4130665470634485" PointY="8.7566536458333335" />
-          <ConnectorPoint PointX="5.4130665470634485" PointY="9.25" />
+        <EntityTypeShape EntityType="DataAccess.Folders" Width="1.375" PointX="8.625" PointY="14.625" Height="4.2218636067708335" />
+        <EntityTypeShape EntityType="DataAccess.LibraryItems" Width="1.5" PointX="15.125" PointY="13.375" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataAccess.Menus" Width="1.5" PointX="6.625" PointY="21.25" Height="2.9070849609374996" />
+        <EntityTypeShape EntityType="DataAccess.MenuItems" Width="1.5" PointX="4.5" PointY="21.25" Height="1.7566536458333353" />
+        <EntityTypeShape EntityType="DataAccess.Calendars" Width="1.5" PointX="11.5" PointY="22" Height="1.7566536458333326" />
+        <EntityTypeShape EntityType="DataAccess.CalendarEvents" Width="1.5" PointX="13.25" PointY="22" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataAccess.Aliases" Width="1.5" PointX="0.5" PointY="16.625" Height="2.2496956380208353" />
+        <EntityTypeShape EntityType="DataAccess.MetaDataTypesToContentItems" Width="2.5" PointX="0.5" PointY="7.625" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataAccess.MetaDataTypes" Width="2.125" PointX="0.5" PointY="10" Height="2.0853483072916665" />
+        <AssociationConnector Association="DataAccess.FoldersContentItems" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.4375" PointY="14.625" />
+          <ConnectorPoint PointX="9.4375" PointY="6.6806341317749016" />
+          <ConnectorPoint PointX="5.958333333333333" PointY="6.6806341317749007" />
+          <ConnectorPoint PointX="5.791666666666667" PointY="6.6806341317749016" />
+          <ConnectorPoint PointX="5.5" PointY="6.6806341317749016" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.CalendarsFolders" ManuallyRouted="false">
-          <ConnectorPoint PointX="5.375" PointY="14" />
-          <ConnectorPoint PointX="5.375" PointY="13.471863606770834" />
+        <EntityTypeShape EntityType="DataAccess.Languages" Width="1.5" PointX="7.625" PointY="12.125" Height="2.0853483072916674" />
+        <AssociationConnector Association="DataAccess.LanguagesUsers">
+          <ConnectorPoint PointX="8.375" PointY="12.125" />
+          <ConnectorPoint PointX="8.375" PointY="11.867737630208332" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.CalendarsCalendarEvents">
-          <ConnectorPoint PointX="6.625" PointY="14.878326822916666" />
-          <ConnectorPoint PointX="7.125" PointY="14.878326822916666" />
+        <AssociationConnector Association="DataAccess.LanguagesFolders">
+          <ConnectorPoint PointX="8.875" PointY="14.210348307291667" />
+          <ConnectorPoint PointX="8.875" PointY="14.625" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.MenusFolders">
-          <ConnectorPoint PointX="3.875" PointY="10.57854248046875" />
-          <ConnectorPoint PointX="4.25" PointY="10.57854248046875" />
+        <AssociationConnector Association="DataAccess.CalendarsFolders" ManuallyRouted="false">
+          <ConnectorPoint PointX="12.46875" PointY="22" />
+          <ConnectorPoint PointX="12.46875" PointY="18.4174609375" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="18.4174609375" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="18.4174609375" />
+          <ConnectorPoint PointX="10" PointY="18.4174609375" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.MenuItemsMenus">
-          <ConnectorPoint PointX="3.611456463011943" PointY="12.625" />
-          <ConnectorPoint PointX="3.611456463011943" PointY="12.235779622395834" />
+        <AssociationConnector Association="DataAccess.CalendarsCalendarEvents">
+          <ConnectorPoint PointX="13" PointY="22.878326822916666" />
+          <ConnectorPoint PointX="13.25" PointY="22.878326822916666" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.LibraryItemsFolders" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.125" PointY="11.58550048828125" />
-          <ConnectorPoint PointX="5.625" PointY="11.58550048828125" />
+        <AssociationConnector Association="DataAccess.MenusFolders">
+          <ConnectorPoint PointX="7.375" PointY="21.25" />
+          <ConnectorPoint PointX="7.375" PointY="16.735931803385416" />
+          <ConnectorPoint PointX="8.625" PointY="16.735931803385416" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.UsersToUserRolesUserRoles">
-          <ConnectorPoint PointX="8" PointY="4.6711531575520837" />
-          <ConnectorPoint PointX="8.375" PointY="4.6711531575520837" />
+        <AssociationConnector Association="DataAccess.MenuItemsMenus">
+          <ConnectorPoint PointX="6" PointY="22.128326822916669" />
+          <ConnectorPoint PointX="6.625" PointY="22.128326822916669" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.Templates" Width="1.5" PointX="0.5" PointY="14" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="DataObjects.TemplateElement" Width="2" PointX="2.375" PointY="14.875" Height="2.7427376302083353" />
-        <AssociationConnector Association="DataObjects.AdminElementAdminPages">
-          <ConnectorPoint PointX="2.375" PointY="15.398000488281252" />
-          <ConnectorPoint PointX="2" PointY="15.398000488281252" />
+        <AssociationConnector Association="DataAccess.LibraryItemsFolders" ManuallyRouted="false">
+          <ConnectorPoint PointX="15.875" PointY="15.2960009765625" />
+          <ConnectorPoint PointX="15.875" PointY="18.171507102864581" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="18.171507102864581" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="18.171507102864581" />
+          <ConnectorPoint PointX="10" PointY="18.171507102864581" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.PagesAliases">
-          <ConnectorPoint PointX="1.25" PointY="14" />
-          <ConnectorPoint PointX="1.25" PointY="12.91404296875" /></AssociationConnector>
-        <AssociationConnector Association="DataObjects.ChildFolders">
-          <ConnectorPoint PointX="4.7375961538461535" PointY="13.471863606770834" />
-          <ConnectorPoint PointX="4.7375961538461535" PointY="13.721863606770832" />
-          <ConnectorPoint PointX="5.1469230769230769" PointY="13.721863606770832" />
-          <ConnectorPoint PointX="5.1469230769230769" PointY="13.471863606770834" />
+        <AssociationConnector Association="DataAccess.UsersToUserRolesUserRoles">
+          <ConnectorPoint PointX="10.9375" PointY="10.756653645833332" />
+          <ConnectorPoint PointX="10.9375" PointY="11.125" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.Permissions" Width="1.5" PointX="6.125" PointY="5.875" Height="4.5505582682291656" />
-        <AssociationConnector Association="DataObjects.PermissionsUserRoles">
-          <ConnectorPoint PointX="7.625" PointY="6.1201479957217249" />
-          <ConnectorPoint PointX="9.125" PointY="6.1201479957217249" />
-          <ConnectorPoint PointX="9.125" PointY="5.4673063151041665" />
+        <EntityTypeShape EntityType="DataAccess.Templates" Width="1.5" PointX="11.25" PointY="1" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataAccess.TemplateElement" Width="2" PointX="8.625" PointY="1" Height="2.7427376302083331" />
+        <AssociationConnector Association="DataAccess.AdminElementAdminPages">
+          <ConnectorPoint PointX="10.625" PointY="1.9605004882812498" />
+          <ConnectorPoint PointX="11.25" PointY="1.9605004882812498" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.MenuItemsAliases">
-          <ConnectorPoint PointX="2.375" PointY="12.851695149739584" />
-          <ConnectorPoint PointX="2" PointY="12.851695149739584" />
+        <AssociationConnector Association="DataAccess.PagesAliases" ManuallyRouted="true">
+          <ConnectorPoint PointX="12.203125" PointY="2.9210009765624996" />
+          <ConnectorPoint PointX="12.203125" PointY="19.561008843315975" />
+          <ConnectorPoint PointX="7.458333333333333" PointY="19.561008843315975" />
+          <ConnectorPoint PointX="7.291666666666667" PointY="19.561008843315975" />
+          <ConnectorPoint PointX="5.36703125" PointY="19.561008843315975" />
+          <ConnectorPoint PointX="5.36703125" PointY="18.974203287760417" />
+          <ConnectorPoint PointX="2" PointY="18.974203287760417" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.PermissionsFolders">
-          <ConnectorPoint PointX="6.125" PointY="9.8377791341145837" />
-          <ConnectorPoint PointX="5.625" PointY="9.8377791341145837" /></AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.MetaDataTypeToFolder" Width="1.5" PointX="2.375" PointY="6.625" Height="1.9210009765624996" />
-        <AssociationConnector Association="DataObjects.MetaDataTypeToFolderFolders" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.875" PointY="8.5460009765625" />
-          <ConnectorPoint PointX="4.25" PointY="9.25" />
+        <AssociationConnector Association="DataAccess.ChildFolders">
+          <ConnectorPoint PointX="9.1125961538461535" PointY="18.846863606770832" />
+          <ConnectorPoint PointX="9.1125961538461535" PointY="19.346863606770832" />
+          <ConnectorPoint PointX="9.5219230769230769" PointY="19.346863606770832" />
+          <ConnectorPoint PointX="9.5219230769230769" PointY="18.846863606770832" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.MetaDataTypeToFolderMetaDataTypes">
-          <ConnectorPoint PointX="2.375" PointY="7.4176741536458337" />
-          <ConnectorPoint PointX="2" PointY="7.4176741536458337" /></AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.MetaDataValueTypes" Width="1.75" PointX="0.5" PointY="8.625" Height="1.427958984375" />
-        <AssociationConnector Association="DataObjects.MetaDataValueTypesMetaDataTypes">
-          <ConnectorPoint PointX="1.25" PointY="8.625" />
-          <ConnectorPoint PointX="1.25" PointY="8.2103483072916674" />
+        <EntityTypeShape EntityType="DataAccess.Permissions" Width="1.5" PointX="10.375" PointY="13.375" Height="4.5505582682291656" />
+        <AssociationConnector Association="DataAccess.PermissionsUserRoles">
+          <ConnectorPoint PointX="11.0625" PointY="13.375" />
+          <ConnectorPoint PointX="11.0625" PointY="12.717306315104167" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.MetaDataTypesToContentItemsMetaDataTypes">
-          <ConnectorPoint PointX="1.25" PointY="5.6710009765625" />
-          <ConnectorPoint PointX="1.25" PointY="6.125" /></AssociationConnector>
-        <AssociationConnector Association="DataObjects.MetaDataTypesToContentItemsContentItems">
-          <ConnectorPoint PointX="2" PointY="4.71050048828125" />
-          <ConnectorPoint PointX="2.375" PointY="4.71050048828125" /></AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.ContentHistory" Width="1.5" PointX="4.25" PointY="0.875" Height="2.5783902994791661" />
-        <AssociationConnector Association="DataObjects.ContentHistoryContentItems">
-          <ConnectorPoint PointX="4.25" PointY="2.8058220590820313" />
-          <ConnectorPoint PointX="3.875" PointY="2.8058220590820313" />
+        <AssociationConnector Association="DataAccess.PermissionsFolders">
+          <ConnectorPoint PointX="10.375" PointY="16.275279134114584" />
+          <ConnectorPoint PointX="10" PointY="16.275279134114584" /></AssociationConnector>
+        <EntityTypeShape EntityType="DataAccess.MetaDataTypeToFolder" Width="2" PointX="2.625" PointY="12.25" Height="1.9210009765624996" />
+        <AssociationConnector Association="DataAccess.MetaDataTypeToFolderFolders" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.625" PointY="14.1710009765625" />
+          <ConnectorPoint PointX="3.625" PointY="15.649213401692707" />
+          <ConnectorPoint PointX="4.7565072916666669" PointY="15.649213401692707" />
+          <ConnectorPoint PointX="4.9231739583333329" PointY="15.649213401692707" />
+          <ConnectorPoint PointX="8.625" PointY="15.649213401692707" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.ContentHistoryUsers">
-          <ConnectorPoint PointX="5" PointY="3.4533902994791661" />
-          <ConnectorPoint PointX="5" PointY="3.875" />
+        <AssociationConnector Association="DataAccess.MetaDataTypeToFolderMetaDataTypes">
+          <ConnectorPoint PointX="3.6250005" PointY="12.25" />
+          <ConnectorPoint PointX="3.6250005" PointY="11.042674153645834" />
+          <ConnectorPoint PointX="2.625" PointY="11.042674153645834" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.AliasesContentItems">
-          <ConnectorPoint PointX="2" PointY="11.5410087421875" />
-          <ConnectorPoint PointX="2.3125" PointY="11.5410087421875" />
-          <ConnectorPoint PointX="2.3125" PointY="6.3619189453125" />
-          <ConnectorPoint PointX="3.125" PointY="6.3619189453125" />
-          <ConnectorPoint PointX="3.125" PointY="6.2681689453125" />
+        <EntityTypeShape EntityType="DataAccess.MetaDataValueTypes" Width="1.875" PointX="0.5" PointY="12.5" Height="1.427958984375" />
+        <AssociationConnector Association="DataAccess.MetaDataValueTypesMetaDataTypes">
+          <ConnectorPoint PointX="1.4375" PointY="12.5" />
+          <ConnectorPoint PointX="1.4375" PointY="12.085348307291667" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.ObjectSchema" Width="1.5" PointX="9" PointY="1.125" Height="2.085348307291667" />
-        <EntityTypeShape EntityType="DataObjects.ObjectXsltSets" Width="1.5" PointX="0.5" PointY="0.5" Height="1.7566536458333335" />
-        <AssociationConnector Association="DataObjects.ObjectXsltSetContentItems">
-          <ConnectorPoint PointX="2" PointY="2.2566536458333335" />
-          <ConnectorPoint PointX="2.375" PointY="2.375" />
+        <AssociationConnector Association="DataAccess.MetaDataTypesToContentItemsMetaDataTypes">
+          <ConnectorPoint PointX="1.5625" PointY="9.5460009765625" />
+          <ConnectorPoint PointX="1.5625" PointY="10" /></AssociationConnector>
+        <AssociationConnector Association="DataAccess.MetaDataTypesToContentItemsContentItems">
+          <ConnectorPoint PointX="3" PointY="8.1109318033854159" />
+          <ConnectorPoint PointX="4" PointY="8.1109318033854159" />
           </AssociationConnector>
-        <AssociationConnector Association="DataObjects.ObjectSchemaObjectXsltSets">
-          <ConnectorPoint PointX="9.75" PointY="1.125" />
-          <ConnectorPoint PointX="9.75" PointY="0.65624999999999989" />
-          <ConnectorPoint PointX="2" PointY="0.65624999999999989" /></AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.ObjectTypes" Width="1.5" PointX="6.375" PointY="1.75" Height="1.4279589843749996" />
-        <AssociationConnector Association="DataObjects.ObjectTypesObjectSchema">
-          <ConnectorPoint PointX="7.875" PointY="2.4639794921875" />
-          <ConnectorPoint PointX="9" PointY="2.4639794921875" /></AssociationConnector>
-        <AssociationConnector Association="DataObjects.ObjectSchemaTemplateElement">
-          <ConnectorPoint PointX="10.21875" PointY="3.210348307291667" />
-          <ConnectorPoint PointX="10.21875" PointY="16.738119303385417" />
-          <ConnectorPoint PointX="4.375" PointY="16.738119303385417" /></AssociationConnector>
-        <EntityTypeShape EntityType="DataObjects.Settings" Width="1.5" PointX="8" PointY="6.5" Height="1.0992643229166657" />
-        <AssociationConnector Association="DataObjects.MenusMenus">
-          <ConnectorPoint PointX="3.125" PointY="12.235779622395834" />
-          <ConnectorPoint PointX="3.125" PointY="12.485779622395832" />
-          <ConnectorPoint PointX="2.6847185048101712" PointY="12.485779622395832" />
-          <ConnectorPoint PointX="2.6847185048101712" PointY="12.235779622395832" /></AssociationConnector>
-        <AssociationConnector Association="DataObjects.MenusMenus1">
-          <ConnectorPoint PointX="2.9069230769230767" PointY="9" />
-          <ConnectorPoint PointX="2.9069230769230767" PointY="8.75" />
-          <ConnectorPoint PointX="3.3534615384615383" PointY="8.75" />
-          <ConnectorPoint PointX="3.3534615384615383" PointY="9" /></AssociationConnector>
-        <AssociationConnector Association="DataObjects.MenusAliases">
-          <ConnectorPoint PointX="2.375" PointY="11.093048630208333" />
-          <ConnectorPoint PointX="2" PointY="11.093048630208333" /></AssociationConnector>
+        <EntityTypeShape EntityType="DataAccess.ContentHistory" Width="1.5" PointX="4" PointY="1" Height="2.5783902994791661" />
+        <AssociationConnector Association="DataAccess.ContentHistoryContentItems">
+          <ConnectorPoint PointX="4.75" PointY="3.5783902994791661" />
+          <ConnectorPoint PointX="4.75" PointY="4.375" />
+          </AssociationConnector>
+        <AssociationConnector Association="DataAccess.ContentHistoryUsers">
+          <ConnectorPoint PointX="5.5" PointY="3.5783902994791661" />
+          <ConnectorPoint PointX="5.875" PointY="4.25" />
+          <ConnectorPoint PointX="5.875" PointY="10.496368815104166" />
+          <ConnectorPoint PointX="7.625" PointY="10.496368815104166" />
+          </AssociationConnector>
+        <AssociationConnector Association="DataAccess.AliasesContentItems">
+          <ConnectorPoint PointX="2" PointY="17.721474143880208" />
+          <ConnectorPoint PointX="4.839840625" PointY="17.721474143880208" />
+          <ConnectorPoint PointX="4.839840625" PointY="8.5968636067708317" />
+          </AssociationConnector>
+        <EntityTypeShape EntityType="DataAccess.ObjectSchema" Width="1.5" PointX="16.25" PointY="0.5" Height="2.2496956380208339" />
+        <EntityTypeShape EntityType="DataAccess.ObjectXslts" Width="1.5" PointX="14.25" PointY="0.5" Height="1.7566536458333335" />
+        <AssociationConnector Association="DataAccess.ObjectXsltSetContentItems">
+          <ConnectorPoint PointX="15" PointY="2.2566536458333335" />
+          <ConnectorPoint PointX="15" PointY="7.5726502050781237" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="7.5726502050781228" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="7.5726502050781237" />
+          <ConnectorPoint PointX="9.5208333333333339" PointY="7.5726502050781228" />
+          <ConnectorPoint PointX="9.3541666666666661" PointY="7.5726502050781237" />
+          <ConnectorPoint PointX="5.958333333333333" PointY="7.5726502050781228" />
+          <ConnectorPoint PointX="5.791666666666667" PointY="7.5726502050781237" />
+          <ConnectorPoint PointX="5.5" PointY="7.5726502050781237" />
+          </AssociationConnector>
+        <AssociationConnector Association="DataAccess.ObjectSchemaObjectXsltSets">
+          <ConnectorPoint PointX="16.25" PointY="1.3783268229166668" />
+          <ConnectorPoint PointX="15.75" PointY="1.3783268229166668" />
+          </AssociationConnector>
+        <EntityTypeShape EntityType="DataAccess.ObjectTypes" Width="1.5" PointX="18.125" PointY="0.5" Height="1.4279589843749996" />
+        <AssociationConnector Association="DataAccess.ObjectTypesObjectSchema">
+          <ConnectorPoint PointX="18.125" PointY="1.2139794921874998" />
+          <ConnectorPoint PointX="17.75" PointY="1.2139794921874998" />
+          </AssociationConnector>
+        <AssociationConnector Association="DataAccess.ObjectSchemaTemplateElement">
+          <ConnectorPoint PointX="17.20312625" PointY="2.7496956380208339" />
+          <ConnectorPoint PointX="17.20312625" PointY="3.3631193033854165" />
+          <ConnectorPoint PointX="16.677080833333331" PointY="3.3631193033854161" />
+          <ConnectorPoint PointX="16.510414166666667" PointY="3.3631193033854165" />
+          <ConnectorPoint PointX="15.083333333333334" PointY="3.3631193033854161" />
+          <ConnectorPoint PointX="14.916666666666666" PointY="3.3631193033854165" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="3.3631193033854161" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="3.3631193033854165" />
+          <ConnectorPoint PointX="10.625" PointY="3.3631193033854165" />
+          </AssociationConnector>
+        <EntityTypeShape EntityType="DataAccess.Settings" Width="1.5" PointX="18" PointY="9.375" Height="1.2636116536458326" />
+        <AssociationConnector Association="DataAccess.MenusMenus">
+          <ConnectorPoint PointX="7.1569230769230776" PointY="24.1570849609375" />
+          <ConnectorPoint PointX="7.1569230769230776" PointY="24.407084960937496" />
+          <ConnectorPoint PointX="7.6034615384615387" PointY="24.407084960937496" />
+          <ConnectorPoint PointX="7.6034615384615387" PointY="24.1570849609375" /></AssociationConnector>
+        <AssociationConnector Association="DataAccess.MenusMenus1">
+          <ConnectorPoint PointX="8.125" PointY="22.258167217548074" />
+          <ConnectorPoint PointX="8.375" PointY="22.258167217548074" />
+          <ConnectorPoint PointX="8.375" PointY="23.170126089242785" />
+          <ConnectorPoint PointX="8.125" PointY="23.170126089242785" />
+          </AssociationConnector>
+        <AssociationConnector Association="DataAccess.ContentItemsObjectSchema">
+          <ConnectorPoint PointX="5.5" PointY="5.024897438557943" />
+          <ConnectorPoint PointX="5.791666666666667" PointY="5.0248974385579421" />
+          <ConnectorPoint PointX="5.958333333333333" PointY="5.024897438557943" />
+          <ConnectorPoint PointX="9.9479166666666661" PointY="5.0248974385579421" />
+          <ConnectorPoint PointX="10.114583333333334" PointY="5.024897438557943" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="5.0248974385579421" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="5.024897438557943" />
+          <ConnectorPoint PointX="14.916666666666666" PointY="5.0248974385579421" />
+          <ConnectorPoint PointX="15.083333333333334" PointY="5.024897438557943" />
+          <ConnectorPoint PointX="16.5937475" PointY="5.024897438557943" />
+          <ConnectorPoint PointX="16.5937475" PointY="2.7496956380208339" />
+          </AssociationConnector>
+        <AssociationConnector Association="DataAccess.TemplateElementContentItems">
+          <ConnectorPoint PointX="10.03125" PointY="3.7427376302083331" />
+          <ConnectorPoint PointX="10.03125" PointY="5.7886180584716795" />
+          <ConnectorPoint PointX="5.958333333333333" PointY="5.7886180584716787" />
+          <ConnectorPoint PointX="5.791666666666667" PointY="5.7886180584716795" />
+          <ConnectorPoint PointX="5.5" PointY="5.7886180584716795" />
+          </AssociationConnector>
+        <AssociationConnector Association="DataAccess.AliasesMenuItems">
+          <ConnectorPoint PointX="1.07812625" PointY="19.039042968750003" />
+          <ConnectorPoint PointX="1.07812625" PointY="22.292674153645834" />
+          <ConnectorPoint PointX="1.4869822916666668" PointY="22.292674153645834" />
+          <ConnectorPoint PointX="1.6536489583333334" PointY="22.292674153645834" />
+          <ConnectorPoint PointX="4.5" PointY="22.292674153645834" /></AssociationConnector>
+        <AssociationConnector Association="DataAccess.AliasesMenus">
+          <ConnectorPoint PointX="1.570315625" PointY="19.039042968750003" />
+          <ConnectorPoint PointX="1.570315625" PointY="23.941813964843753" />
+          <ConnectorPoint PointX="6.625" PointY="23.941813964843753" /></AssociationConnector>
         </Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
