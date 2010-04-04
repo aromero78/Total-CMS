@@ -1,6 +1,291 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
-  <Alias Key="Model" Value="Model1" />
-  <Alias Key="Target" Value="Model1.Store" />
-  <EntityContainerMapping CdmEntityContainer="DataObjectsContainer" StorageEntityContainer="Model1TargetContainer" />
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataAccessStoreContainer" CdmEntityContainer="DataObjectsContainer">
+    <EntitySetMapping Name="ContentItems">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ContentItems)">
+        <MappingFragment StoreEntitySet="ContentItems">
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+          <ScalarProperty Name="ContentHtml" ColumnName="ContentHtml" />
+          <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+          <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="ContentStatus" ColumnName="ContentStatus" />
+          <ScalarProperty Name="ObjectXsltId" ColumnName="ObjectXsltId" />
+          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.UserRoles)">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersToUserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.UsersToUserRoles)">
+        <MappingFragment StoreEntitySet="UsersToUserRoles">
+          <ScalarProperty Name="UserToUserRoleId" ColumnName="UserToUserRoleId" />
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Folders">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Folders)">
+        <MappingFragment StoreEntitySet="Folders">
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="InheritPermissions" ColumnName="InheritPermissions" />
+          <ScalarProperty Name="ParentFolderId" ColumnName="ParentFolderId" />
+          <ScalarProperty Name="InheritMetaData" ColumnName="InheritMetaData" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="PermissionsId" ColumnName="PermissionsId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LibraryItems">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.LibraryItems)">
+        <MappingFragment StoreEntitySet="LibraryItems">
+          <ScalarProperty Name="LibraryItemId" ColumnName="LibraryItemId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Desciprtion" ColumnName="Desciprtion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Menus)">
+        <MappingFragment StoreEntitySet="Menus">
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Property" ColumnName="Property" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ParentMenuId" ColumnName="ParentMenuId" />
+          <ScalarProperty Name="RootMenuId" ColumnName="RootMenuId" />
+          <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuItems">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MenuItems)">
+        <MappingFragment StoreEntitySet="MenuItems">
+          <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendars">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Calendars)">
+        <MappingFragment StoreEntitySet="Calendars">
+          <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CalendarEvents">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.CalendarEvents)">
+        <MappingFragment StoreEntitySet="CalendarEvents">
+          <ScalarProperty Name="CalendarEventIds" ColumnName="CalendarEventIds" />
+          <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="iCalSettings" ColumnName="iCalSettings" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aliases">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Aliases)">
+        <MappingFragment StoreEntitySet="Aliases">
+          <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+          <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaDataTypesToContentItems">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MetaDataTypesToContentItems)">
+        <MappingFragment StoreEntitySet="MetaDataTypesToContentItems">
+          <ScalarProperty Name="MetaDataTypesToContentItemsId" ColumnName="MetaDataTypesToContentItemsId" />
+          <ScalarProperty Name="MetaDataTypeId" ColumnName="MetaDataTypeId" />
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaDataTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MetaDataTypes)">
+        <MappingFragment StoreEntitySet="MetaDataTypes">
+          <ScalarProperty Name="MetaDataTypeId" ColumnName="MetaDataTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="MetaDataValueTypesId" ColumnName="MetaDataValueTypesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Languages)">
+        <MappingFragment StoreEntitySet="Languages">
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="LangId" ColumnName="LangId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Users)">
+        <MappingFragment StoreEntitySet="UsersSet">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Templates">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Templates)">
+        <MappingFragment StoreEntitySet="Templates">
+          <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsUserDefined" ColumnName="IsUserDefined" />
+          <ScalarProperty Name="TemplateFileUrl" ColumnName="TemplateFileUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TemplateElements">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.TemplateElement)">
+        <MappingFragment StoreEntitySet="TemplateElements">
+          <ScalarProperty Name="TemplateElementId" ColumnName="TemplateElementId" />
+          <ScalarProperty Name="XsltId" ColumnName="XsltId" />
+          <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DynamicParamName" ColumnName="DynamicParamName" />
+          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Permissions)">
+        <MappingFragment StoreEntitySet="Permissions">
+          <ScalarProperty Name="PermissionsId" ColumnName="PermissionsId" />
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+          <ScalarProperty Name="CanReadContent" ColumnName="CanReadContent" />
+          <ScalarProperty Name="CanAddContent" ColumnName="CanAddContent" />
+          <ScalarProperty Name="CanDeleteContent" ColumnName="CanDeleteContent" />
+          <ScalarProperty Name="CanReadMenus" ColumnName="CanReadMenus" />
+          <ScalarProperty Name="CanAddMenus" ColumnName="CanAddMenus" />
+          <ScalarProperty Name="CanDeleteMenus" ColumnName="CanDeleteMenus" />
+          <ScalarProperty Name="CanReadFolders" ColumnName="CanReadFolders" />
+          <ScalarProperty Name="CanAddFolders" ColumnName="CanAddFolders" />
+          <ScalarProperty Name="CanDeleteFoldres" ColumnName="CanDeleteFoldres" />
+          <ScalarProperty Name="CanReadCalendars" ColumnName="CanReadCalendars" />
+          <ScalarProperty Name="CanAddCalendars" ColumnName="CanAddCalendars" />
+          <ScalarProperty Name="CanDeleteCalednars" ColumnName="CanDeleteCalednars" />
+          <ScalarProperty Name="CanEditContent" ColumnName="CanEditContent" />
+          <ScalarProperty Name="CanEditMenus" ColumnName="CanEditMenus" />
+          <ScalarProperty Name="CanEditFolder" ColumnName="CanEditFolder" />
+          <ScalarProperty Name="CanEditCalendar" ColumnName="CanEditCalendar" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="IsPageAdmin" ColumnName="IsPageAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaDataTypeToFolders">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MetaDataTypeToFolder)">
+        <MappingFragment StoreEntitySet="MetaDataTypeToFolders">
+          <ScalarProperty Name="MetaDataTypeToFolderId" ColumnName="MetaDataTypeToFolderId" />
+          <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+          <ScalarProperty Name="MetaDataTypeId" ColumnName="MetaDataTypeId" />
+          <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaDataValueTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MetaDataValueTypes)">
+        <MappingFragment StoreEntitySet="MetaDataValueTypes">
+          <ScalarProperty Name="MetaDataValueTypesId" ColumnName="MetaDataValueTypesId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentHistories">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ContentHistory)">
+        <MappingFragment StoreEntitySet="ContentHistories">
+          <ScalarProperty Name="ContentHistoryId" ColumnName="ContentHistoryId" />
+          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+          <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+          <ScalarProperty Name="ContentHtml" ColumnName="ContentHtml" />
+          <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="MetaDataXml" ColumnName="MetaDataXml" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectSchemas">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectSchema)">
+        <MappingFragment StoreEntitySet="ObjectSchemas">
+          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+          <ScalarProperty Name="SchemaXml" ColumnName="SchemaXml" />
+          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
+          <ScalarProperty Name="DataEntryXslt" ColumnName="DataEntryXslt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectXslts">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectXslts)">
+        <MappingFragment StoreEntitySet="ObjectXslts">
+          <ScalarProperty Name="ObjectXsltId" ColumnName="ObjectXsltId" />
+          <ScalarProperty Name="ObjectXslt" ColumnName="ObjectXslt" />
+          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectTypes)">
+        <MappingFragment StoreEntitySet="ObjectTypes">
+          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Settings">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.Settings)">
+        <MappingFragment StoreEntitySet="Settings">
+          <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+          <ScalarProperty Name="LicenceKey" ColumnName="LicenceKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LanguagesFolders" TypeName="DataAccess.LanguagesFolders" StoreEntitySet="Folders">
+      <EndProperty Name="Languages">
+        <ScalarProperty Name="LanguageId" ColumnName="Language_LanguageId" />
+      </EndProperty>
+      <EndProperty Name="Folders">
+        <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
 </Mapping>
