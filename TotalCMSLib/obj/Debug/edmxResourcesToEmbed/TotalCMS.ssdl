@@ -181,6 +181,8 @@
     <Property Name="ContentStatus" Type="nvarchar" Nullable="false" MaxLength="2" />
     <Property Name="ObjectXsltId" Type="int" Nullable="false" />
     <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
+    <Property Name="ContentDisplayId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="UserRoles">
     <Key>

@@ -60,22 +60,28 @@ namespace TotalCMS
             }
         }
         */
-        static string _connectionString;
-        internal static string ConnectionString {
+        static ConnectionStringSettings _connectionString;
+        internal static ConnectionStringSettings ConnectionString {
             get {
-                if (_connectionString == null || _connectionString == string.Empty) {
+                if (_connectionString == null) {
                     string _connectionStringName = ConfigurationManager.AppSettings["TotalCMSConnectionStringName"];
-                    if (_connectionStringName != null && _connectionStringName != string.Empty) {
-                        ConnectionStringSettings _connectionStringSettings = ConfigurationManager.ConnectionStrings[_connectionStringName];
-                        if (_connectionStringSettings != null && _connectionStringSettings.ConnectionString != string.Empty) {
-                            _connectionString = _connectionStringSettings.ConnectionString;
-                        }
-                    }
+                    _connectionString = (_connectionStringName != null && _connectionStringName != string.Empty?
+                        ConfigurationManager.ConnectionStrings[_connectionStringName]:
+                        (ConfigurationManager.ConnectionStrings.Count > 0?ConfigurationManager.ConnectionStrings[0]:null));
                 }
-                if (_connectionString == null || _connectionString == string.Empty && ConfigurationManager.ConnectionStrings.Count > 0) {
-                    _connectionString = ConfigurationManager.ConnectionStrings[0].ConnectionString;
-                }
+                if (_connectionString == null) 
+                    throw new SettingsPropertyNotFoundException("There is no connection string avaliable in the config file, please check the config.");
                 return _connectionString;
+            }
+        }
+
+        static string _securityKey;
+        internal static string Securitykey {
+            get {
+                _securityKey = ConfigurationManager.AppSettings["TotalCMS_SecurityKey"];
+                if(_securityKey == null || _securityKey == string.Empty)
+                    throw new SettingsPropertyNotFoundException("There is no security key avaliable in the config file, please check the config.");
+                return _securityKey;
             }
         }
         /*

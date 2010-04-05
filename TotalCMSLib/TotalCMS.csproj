@@ -48,16 +48,20 @@
     <Compile Include="Content\ContentHistory.cs" />
     <Compile Include="Content\ContentItems.cs" />
     <Compile Include="Content\ObjectXslt.cs" />
-    <Compile Include="ContextDataProviders\BaseDebugLogger.cs" />
-    <Compile Include="ContextDataProviders\Database\iDataManager.cs" />
-    <Compile Include="ContextDataProviders\Database\SqlDataManager.cs" />
-    <Compile Include="ContextDataProviders\iDebugLogProvider.cs" />
-    <Compile Include="ContextDataProviders\WebDebugLog.cs" />
+    <Compile Include="Data\ContextDataProviders\BaseDebugLogger.cs" />
+    <Compile Include="Data\Database\iDataManager.cs" />
+    <Compile Include="Data\Database\SqlDataManager.cs" />
+    <Compile Include="Data\ContextDataProviders\iDebugLogProvider.cs" />
+    <Compile Include="Data\ContextDataProviders\WebDebugLog.cs" />
+    <Compile Include="Controls\GenericEventArgs.cs" />
+    <Compile Include="Data\CacheManager.cs" />
     <Compile Include="iBaseObject.cs" />
-    <Compile Include="ContextDataProviders\iContextDataProvider.cs" />
-    <Compile Include="ContextDataProviders\WebContextData.cs" />
+    <Compile Include="Data\ContextDataProviders\iContextDataProvider.cs" />
+    <Compile Include="Data\ContextDataProviders\WebContextData.cs" />
     <Compile Include="MetaData\MetaDataContentValue.cs" />
     <Compile Include="MetaData\MetaDataTypes.cs" />
+    <Compile Include="Misc\Encryption.cs" />
+    <Compile Include="Misc\RandomPassword.cs" />
     <Compile Include="Page\Page.cs" />
     <Compile Include="Page\Template.cs" />
     <Compile Include="Page\TemplateElement.cs" />
@@ -70,6 +74,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserRoles.cs" />
+    <Compile Include="Web\Uri.cs" />
+    <Compile Include="Xml\XslHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="TotalCMS.edmx">
@@ -83,6 +89,7 @@
   <ItemGroup>
     <Content Include="TotalCMS.edmx.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

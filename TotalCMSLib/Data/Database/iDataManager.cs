@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.ContextDataProviders.Database {
+namespace TotalCMS.Data.ContextDataProviders.Database {
     /// <summary>
     /// Encapsulates all of the necessary code needed to execute an SQL command. This classes uses the value found in TotalCMS.SiteSettings.ConnectionString as the connection string, please update this value to specify a different connection string value. The default connection string is the connection string at position:0
     /// </summary>
@@ -150,7 +150,7 @@ namespace TotalCMS.ContextDataProviders.Database {
             throw new NotImplementedException();
         }
 
-        internal protected DbCommand GetCommand(DbConnection conn, string SqlCmd, CommandType CType, DbParameter[] Params) {
+        internal protected DbCommand GetCommand(System.Configuration.ConnectionStringSettings ConnectionString, string SqlCmd, CommandType CType, DbParameter[] Params) {
             throw new NotImplementedException();
         }
         #endregion       

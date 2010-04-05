@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.ContextDataProviders {
+namespace TotalCMS.Data.ContextDataProviders {
     public class BaseDebugLogger :iDebugLogProvider {
         #region iDebugLogProvider Members
 

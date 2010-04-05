@@ -1,6 +1,6 @@
 
 -- --------------------------------------------------
--- Date Created: 04/04/2010 00:10:51
+-- Date Created: 04/04/2010 21:22:54
 -- Generated from EDMX file: C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\TotalCMS.edmx
 -- --------------------------------------------------
 
@@ -216,7 +216,9 @@ CREATE TABLE [dbo].[ContentItems] (
     [FolderId] int  NOT NULL,
     [ContentStatus] nvarchar(2)  NOT NULL,
     [ObjectXsltId] int  NOT NULL,
-    [ObjectSchemaId] int  NOT NULL
+    [ObjectSchemaId] int  NOT NULL,
+    [ContentDisplayId] int  NOT NULL,
+    [IsActive] bit  NOT NULL
 );
 GO
 -- Creating table 'UserRoles'

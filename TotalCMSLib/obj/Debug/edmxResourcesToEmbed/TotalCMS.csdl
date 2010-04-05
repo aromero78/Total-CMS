@@ -190,6 +190,8 @@
     <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ContentItemsObjectSchema" FromRole="ContentItems" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
     <NavigationProperty Name="TemplateElements" Relationship="DataAccess.TemplateElementContentItems" FromRole="ContentItems" ToRole="TemplateElement" cg:SetterAccess="Protected" />
+    <Property Type="Int32" Name="ContentDisplayId" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
   </EntityType>
   <EntityType Name="UserRoles" Abstract="true">
     <Key>

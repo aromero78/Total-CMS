@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace TotalCMS.ContextDataProviders {
+namespace TotalCMS.Data.ContextDataProviders {
     internal sealed class WebContextData : iContextDataProvider {
         #region iRequestDataProvider Members
 
@@ -45,6 +45,14 @@ namespace TotalCMS.ContextDataProviders {
             }
         }
 
+        static System.Web.Caching.Cache _cache;
+        public System.Web.Caching.Cache Cache {
+            get {
+                if (_cache == null)
+                    _cache = System.Web.HttpContext.Current.Cache;
+                return _cache;
+            }
+        }
         #endregion
     }
 }

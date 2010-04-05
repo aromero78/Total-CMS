@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.ContextDataProviders.Database {
+namespace TotalCMS.Data.ContextDataProviders.Database {
     public class SqlDataManager : iDataManager {
         string SingleQuote_Const = "'", DoubleSingleQuote_Const = "''";
         #region DataSet
@@ -47,14 +47,13 @@ namespace TotalCMS.ContextDataProviders.Database {
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The DataSet that resulted from the SQL Command.</returns>
         public override DataSet GetDataSet(string SqlCmd, CommandType CType, params DbParameter[] Params) {
-            SqlConnection connection = new SqlConnection(TotalCMS.SiteSettings.ConnectionString);
-            SqlCommand cmd = GetCommand(connection, SqlCmd, CType, Params);
+            SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
             SqlDataAdapter Adapt = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
 
-            connection.Open();
+            cmd.Connection.Open();
             Adapt.Fill(ds);
-            connection.Close();
+            cmd.Connection.Close();
             return ds;
         }
         #endregion
@@ -96,11 +95,10 @@ namespace TotalCMS.ContextDataProviders.Database {
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The Scalar that resulted from the SQL Command.</returns>
         public override object GetScalar(string SqlCmd, CommandType CType, params DbParameter[] Params) {
-            SqlConnection connection = new SqlConnection(TotalCMS.SiteSettings.ConnectionString);
-            SqlCommand cmd = GetCommand(connection, SqlCmd, CType, Params);
-            connection.Open();
+            SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
+            cmd.Connection.Open();
             object val = cmd.ExecuteScalar();
-            connection.Close();
+            cmd.Connection.Close();
             return val;
         }
         #endregion
@@ -141,13 +139,12 @@ namespace TotalCMS.ContextDataProviders.Database {
         /// <param name="Params">A List of DbParameters to be passed to the stored procedure. Pass null if there are none.</param>
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The number of rows affected.</returns>
-        public override int ExecuteSql(string SqlCmd, CommandType CType, params DbParameter[] Params) {
-            SqlConnection connection = new SqlConnection(TotalCMS.SiteSettings.ConnectionString);
-            SqlCommand cmd = GetCommand(connection, SqlCmd, CType, Params);
+        public override int ExecuteSql(string SqlCmd, CommandType CType, params DbParameter[] Params) {            
+            SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
             int RowsAffected = -1;
-            connection.Open();
+            cmd.Connection.Open();
             RowsAffected = cmd.ExecuteNonQuery();
-            connection.Close();
+            cmd.Connection.Close();
             return RowsAffected;
         }
         #endregion
@@ -167,7 +164,7 @@ namespace TotalCMS.ContextDataProviders.Database {
         /// <param name="SqlCmd">The name of the procedure to be executed.</param>
         /// <param name="Params">A List of DbParameters to be passed to the stored procedure. Pass null if there are none.</param>
         /// <returns>The SqlDataReader that resulted from the SQL Command.</returns>
-        public new  SqlDataReader GetDataReader(string SqlCmd, List<DbParameter> Params) {
+        public new SqlDataReader GetDataReader(string SqlCmd, List<DbParameter> Params) {
             return GetDataReader(SqlCmd, CommandType.StoredProcedure, Params.ToArray());
         }
 
@@ -188,17 +185,16 @@ namespace TotalCMS.ContextDataProviders.Database {
         /// <param name="Params">A List of DbParameters to be passed to the stored procedure. Pass null if there are none.</param>
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The SqlDataReader that resulted from the SQL Command.</returns>
-        public new SqlDataReader GetDataReader(string SqlCmd, CommandType CType, params DbParameter[] Params) {
-            SqlConnection connection = new SqlConnection(TotalCMS.SiteSettings.ConnectionString);
-            connection.Open();
-            SqlCommand cmd = GetCommand(connection, SqlCmd, CType, Params);           
+        public new SqlDataReader GetDataReader(string SqlCmd, CommandType CType, params DbParameter[] Params) {            
+            SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
+            cmd.Connection.Open();
             SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             return reader;
         }
         #endregion
 
-        internal protected new SqlCommand GetCommand(DbConnection conn, string SqlCmd, CommandType CType, DbParameter[] Params) {
-            SqlCommand cmd = new SqlCommand(SqlCmd, (SqlConnection)conn);
+        internal protected new SqlCommand GetCommand(System.Configuration.ConnectionStringSettings ConnectionString, string SqlCmd, CommandType CType, DbParameter[] Params) {
+            SqlCommand cmd = new SqlCommand(SqlCmd, new SqlConnection(ConnectionString.ConnectionString));
             cmd.CommandType = CType;
             cmd.Parameters.AddRange(Params);
             return cmd;
