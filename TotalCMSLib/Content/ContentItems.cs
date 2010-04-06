@@ -37,7 +37,7 @@ namespace TotalCMS.Content {
                 if (_createdByUser == null) {
                     _createdByUser = new User.User();
                     _createdByUser.UserId = _createdByUserId;
-                    _createdByUser.LoadObject();
+                    _createdByUser.Load();
                     
                 }
                 return _createdByUser; 
@@ -50,7 +50,7 @@ namespace TotalCMS.Content {
             set { _modifiedByUserId = value; }
         }
 
-        protected internal override void ResetObject() {
+        protected internal override void Reset() {
             throw new NotImplementedException();
         }
 
@@ -58,21 +58,26 @@ namespace TotalCMS.Content {
             throw new NotImplementedException();
         }
 
-        protected internal override void LoadObject() {
-            if (_contentItemId != 0) { 
-                
+        protected internal override void Load() {
+            if (_contentItemId != 0) {
+                System.Data.Common.DbDataReader dataReader = SiteSettings.ContextData.DataAccess.ContentItemGet(_contentItemId);
+
+                dataReader.Close();
+            }
+            else {
+                throw new Exception("The content item id is not set.");
             }
         }
 
-        protected internal override void SaveObject() {
+        protected internal override void Save() {
             throw new NotImplementedException();
         }
 
-        protected internal override void UpdateObject() {
+        protected internal override void Update() {
             throw new NotImplementedException();
         }
 
-        protected internal override void DeleteObject() {
+        protected internal override void Delete() {
             throw new NotImplementedException();
         }
     }

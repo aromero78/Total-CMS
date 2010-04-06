@@ -53,6 +53,29 @@ namespace TotalCMS.Data.ContextDataProviders {
                 return _cache;
             }
         }
+
+        Database.iDataManager _dataAccess;
+        public Database.iDataManager DataAccess {
+            get { 
+                if(_dataAccess == null)
+
+                return _dataAccess;             
+            }
+        }
+
+        static Language _currentLanguage;
+        public static Language CurrentLanguage {
+            get {
+                if (_currentLanguage == null) {
+                    //[##Replace - needs to actually pull from the database##]
+                    _currentLanguage = new Language(1033);
+                }
+                return _currentLanguage;
+            }
+            set {
+                _currentLanguage = value;
+            }
+        }
         #endregion
     }
 }

@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.User {
-    public class User : iBaseDataObject {
-
-        int _userId;
-        public int UserId {
-            get { return _userId; }
-            internal set { _userId = value; }
-        }
-
+namespace TotalCMS.Xml {
+    public class ObjectSchema : iBaseDataObject {
         protected internal override void Reset() {
             throw new NotImplementedException();
         }

@@ -58,6 +58,7 @@
     <Compile Include="iBaseObject.cs" />
     <Compile Include="Data\ContextDataProviders\iContextDataProvider.cs" />
     <Compile Include="Data\ContextDataProviders\WebContextData.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="MetaData\MetaDataContentValue.cs" />
     <Compile Include="MetaData\MetaDataTypes.cs" />
     <Compile Include="Misc\Encryption.cs" />
@@ -75,6 +76,9 @@
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserRoles.cs" />
     <Compile Include="Web\Uri.cs" />
+    <Compile Include="Xml\ObjectSchema.cs" />
+    <Compile Include="Xml\ObjectType.cs" />
+    <Compile Include="Xml\ObjectXslt.cs" />
     <Compile Include="Xml\XslHelper.cs" />
   </ItemGroup>
   <ItemGroup>

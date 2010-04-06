@@ -244,7 +244,7 @@ namespace TotalCMS.Misc {
 			byte[] keyArray;
 			byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
 
-			string key = Constants.SecurityKey;
+			string key = SiteSettings.SecurityKey;
 			//System.Windows.Forms.MessageBox.Show(key);
 			//If hashing use get hashcode regards to your key
 			if (useHashing) {
@@ -299,7 +299,7 @@ namespace TotalCMS.Misc {
 			}
 
 			//Get your key from config file to open the lock!
-            string key = SiteSettings.Securitykey;
+            string key = SiteSettings.SecurityKey;
 
 			if (useHashing) {
 				//if hashing was used get the hash code with regards to your key

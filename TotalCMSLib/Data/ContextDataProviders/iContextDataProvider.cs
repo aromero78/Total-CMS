@@ -10,5 +10,7 @@ namespace TotalCMS.Data.ContextDataProviders {
         int RequestedContentId { get; }
         iDebugLogProvider DebugLog { get; }
         System.Web.Caching.Cache Cache { get; }
+        Database.iDataManager DataAccess {get;}
+        Language CurrentLanguage { get; set; }
     }
 }

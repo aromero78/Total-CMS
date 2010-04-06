@@ -119,7 +119,7 @@ namespace TotalCMS.Data {
             string TimeName = UniqueCacheName + DependAugment, DataName = UniqueCacheName + DataAugment;//Create two unique names.
             object CacheData = SiteSettings.ContextData.Cache[DataName];//Retrieve the current object in the cache.
             IComparable CacheDepend = null;//Default the cache time stamp.
-            if (SiteSettings.ContextData.Context.Cache[TimeName] != null)//If it exsits retrieve the real cache time stamp value.
+            if (SiteSettings.ContextData.Cache[TimeName] != null)//If it exsits retrieve the real cache time stamp value.
                 CacheDepend = (IComparable)SiteSettings.ContextData.Cache[TimeName];
             OnFetchExpICompareEvent(new Controls.GenericEventArgs<IComparable, object>(null, e.Identifier));//Raise event to last time that the actual data store(not the cache) was updated
             /* - If the cache is null
