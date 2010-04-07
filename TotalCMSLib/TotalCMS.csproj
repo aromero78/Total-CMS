@@ -46,8 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content\ContentHistory.cs" />
-    <Compile Include="Content\ContentItems.cs" />
-    <Compile Include="Content\ObjectXslt.cs" />
+    <Compile Include="Content\ContentItem.cs" />
+    <Compile Include="Content\Folder.cs" />
+    <Compile Include="Content\iWorkFlowItem.cs" />
     <Compile Include="Data\ContextDataProviders\BaseDebugLogger.cs" />
     <Compile Include="Data\Database\iDataManager.cs" />
     <Compile Include="Data\Database\SqlDataManager.cs" />
@@ -55,12 +56,12 @@
     <Compile Include="Data\ContextDataProviders\WebDebugLog.cs" />
     <Compile Include="Controls\GenericEventArgs.cs" />
     <Compile Include="Data\CacheManager.cs" />
-    <Compile Include="iBaseObject.cs" />
+    <Compile Include="BaseObject.cs" />
     <Compile Include="Data\ContextDataProviders\iContextDataProvider.cs" />
     <Compile Include="Data\ContextDataProviders\WebContextData.cs" />
     <Compile Include="Language.cs" />
-    <Compile Include="MetaData\MetaDataContentValue.cs" />
-    <Compile Include="MetaData\MetaDataTypes.cs" />
+    <Compile Include="Content\MetaData\MetaDataContentValue.cs" />
+    <Compile Include="Content\MetaData\MetaDataType.cs" />
     <Compile Include="Misc\Encryption.cs" />
     <Compile Include="Misc\RandomPassword.cs" />
     <Compile Include="Page\Page.cs" />
@@ -76,9 +77,9 @@
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserRoles.cs" />
     <Compile Include="Web\Uri.cs" />
-    <Compile Include="Xml\ObjectSchema.cs" />
-    <Compile Include="Xml\ObjectType.cs" />
-    <Compile Include="Xml\ObjectXslt.cs" />
+    <Compile Include="Content\Xml\ObjectSchema.cs" />
+    <Compile Include="Content\Xml\ObjectType.cs" />
+    <Compile Include="Content\Xml\ObjectXslt.cs" />
     <Compile Include="Xml\XslHelper.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Xml {
-    public class ObjectSchema : iBaseDataObject {
+namespace TotalCMS.Content.Xml {
+    public class ObjectSchema : BaseDataObject {
         protected internal override void Reset() {
             throw new NotImplementedException();
         }

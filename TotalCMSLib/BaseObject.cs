@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TotalCMS
 {
-    public abstract class iBaseDataObject
+    public abstract class BaseDataObject
     {
         public bool CacheData { get; set; }
         internal protected abstract void Reset();
@@ -14,6 +14,6 @@ namespace TotalCMS
         internal protected abstract void Save();
         internal protected abstract void Update();
         internal protected abstract void Delete();
-
+        internal protected Data.CacheManager CacheManager;
     }
 }

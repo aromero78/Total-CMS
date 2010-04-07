@@ -56,15 +56,15 @@ namespace TotalCMS.Data.ContextDataProviders {
 
         Database.iDataManager _dataAccess;
         public Database.iDataManager DataAccess {
-            get { 
-                if(_dataAccess == null)
-
+            get {
+                if (_dataAccess == null)
+                    _dataAccess = new Database.SqlDataManager();
                 return _dataAccess;             
             }
         }
 
         static Language _currentLanguage;
-        public static Language CurrentLanguage {
+        public Language CurrentLanguage {
             get {
                 if (_currentLanguage == null) {
                     //[##Replace - needs to actually pull from the database##]

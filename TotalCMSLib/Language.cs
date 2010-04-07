@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalCMS {
-    public class Language : iBaseDataObject {
+    public class Language : BaseDataObject {
         int _languageId;
         public int LanguageId {
             get { return _languageId; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.MetaData {
-    class MetaDataTypes {
+namespace TotalCMS.Content.Xml {
+    public class ObjectXslt {
     }
 }

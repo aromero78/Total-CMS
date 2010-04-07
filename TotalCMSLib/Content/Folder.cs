@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.User {
-    public class User : BaseDataObject {
+namespace TotalCMS.Content {
+    public class Folder : BaseDataObject {
 
-        int _userId;
-        public int UserId {
-            get { return _userId; }
-            internal set { _userId = value; }
+        int _FolderId;
+        public int FolderId {
+            get { return _FolderId; }
+            internal set { _FolderId = value; }
         }
-
         protected internal override void Reset() {
             throw new NotImplementedException();
         }
