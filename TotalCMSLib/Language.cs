@@ -46,10 +46,6 @@ namespace TotalCMS {
             
         }
 
-        protected internal override void ResetMemeber(params string[] PropertyName) {
-            throw new NotImplementedException();
-        }
-
         protected internal override void Load() {
             throw new NotImplementedException();
         }

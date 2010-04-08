@@ -750,12 +750,12 @@
       <PropertyRef Name="ObjectSchemaId" />
     </Key>
     <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
-    <Property Type="String" Name="SchemaXml" Nullable="false" cg:SetterAccess="Protected" />
+    <Property Type="String" Name="SchemaXmlUri" Nullable="false" cg:SetterAccess="Protected" />
     <NavigationProperty Name="ObjectXsltSets" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectSchema" ToRole="ObjectXsltSets" cg:SetterAccess="Protected" />
     <NavigationProperty Name="ObjectType" Relationship="DataAccess.ObjectTypesObjectSchema" FromRole="ObjectSchema" ToRole="ObjectTypes" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ObjectTypeId" Nullable="false" cg:SetterAccess="Protected" />
     <NavigationProperty Name="TemplateElements" Relationship="DataAccess.ObjectSchemaTemplateElement" FromRole="ObjectSchema" ToRole="TemplateElement" cg:SetterAccess="Protected" />
-    <Property Type="String" Name="DataEntryXslt" Nullable="false" cg:SetterAccess="Protected" />
+    <Property Type="String" Name="DataEntryXsltUri" Nullable="false" cg:SetterAccess="Protected" />
     <NavigationProperty Name="ContentItems" Relationship="DataAccess.ContentItemsObjectSchema" FromRole="ObjectSchema" ToRole="ContentItems" cg:SetterAccess="Protected" />
   </EntityType>
   <EntityType Name="ObjectXslts" Abstract="true">
@@ -763,7 +763,7 @@
       <PropertyRef Name="ObjectXsltId" />
     </Key>
     <Property Type="Int32" Name="ObjectXsltId" Nullable="false" cg:SetterAccess="Protected" />
-    <Property Type="String" Name="ObjectXslt" Nullable="false" cg:SetterAccess="Protected" />
+    <Property Type="String" Name="ObjectXsltUri" Nullable="false" cg:SetterAccess="Protected" />
     <NavigationProperty Name="ContentItems" Relationship="DataAccess.ObjectXsltSetContentItems" FromRole="ObjectXsltSet" ToRole="ContentItems" cg:SetterAccess="Protected" />
     <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectXsltSets" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />

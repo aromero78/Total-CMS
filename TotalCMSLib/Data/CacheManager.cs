@@ -56,7 +56,7 @@ namespace TotalCMS.Data {
     /// This class is used to handle cache management.
     /// </summary>
     public class CacheManager {
-        const string DataAugment = "Data", DependAugment = "Depend";
+        const string DataAugment = "Data", DependAugment = "Depend", NameSpaceAugment = "TotalCMS_";
         /// <summary>
         /// Manages a single cache "type". Event handlers must be defined for the FetchDataEvent and FetchExpDateEvent to ensure proper functioning.
         /// </summary>
@@ -116,7 +116,7 @@ namespace TotalCMS.Data {
         /// </param>
         /// <returns>Returns the most current version of the object.</returns>
         public object ManageCache(string UniqueCacheName, Controls.GenericEventArgs<TotalCMS.Data.CacheLevels, object> e, int CacheLength, ComparisonType CompareType) {
-            string TimeName = UniqueCacheName + DependAugment, DataName = UniqueCacheName + DataAugment;//Create two unique names.
+            string TimeName = NameSpaceAugment + UniqueCacheName + DependAugment, DataName = NameSpaceAugment + UniqueCacheName + DataAugment;//Create two unique names.
             object CacheData = SiteSettings.ContextData.Cache[DataName];//Retrieve the current object in the cache.
             IComparable CacheDepend = null;//Default the cache time stamp.
             if (SiteSettings.ContextData.Cache[TimeName] != null)//If it exsits retrieve the real cache time stamp value.
@@ -158,7 +158,7 @@ namespace TotalCMS.Data {
         /// <param name="CacheUsage">How the cache should be used.</param>
         /// <returns></returns>
         public object ManageCache(string UniqueCacheName, int CacheLength, ComparisonType CompareType, object ValueToCache, IComparable CacheDependency, CacheLevels CacheUsage) {
-            string DataName = UniqueCacheName + DataAugment, TimeName = UniqueCacheName + DependAugment;
+            string DataName = NameSpaceAugment + UniqueCacheName + DataAugment, TimeName = NameSpaceAugment + UniqueCacheName + DependAugment;
             object CacheData = SiteSettings.ContextData.Cache[DataName];
             _CompareValue = CacheDependency;
             IComparable CacheDepend = (IComparable)SiteSettings.ContextData.Cache[TimeName];
@@ -185,7 +185,7 @@ namespace TotalCMS.Data {
         /// <param name="UniqueCacheName">The unique id before it was orginally passed to cache manager.</param>
         /// <returns>The unique id after being processed by cache manager.</returns>
         public static string GetFinalCacheObjectName(string UniqueCacheName) {
-            return UniqueCacheName + DataAugment;
+            return NameSpaceAugment + UniqueCacheName + DataAugment;
         }
 
         private bool CompareCacheDependency(IComparable CacheValue, IComparable ValueToCompare, ComparisonType CompareType) {

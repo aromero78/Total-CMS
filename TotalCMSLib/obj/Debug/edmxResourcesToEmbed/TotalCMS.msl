@@ -250,9 +250,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectSchema)">
         <MappingFragment StoreEntitySet="ObjectSchemas">
           <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
-          <ScalarProperty Name="SchemaXml" ColumnName="SchemaXml" />
+          <ScalarProperty Name="SchemaXmlUri" ColumnName="SchemaXml" />
           <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
-          <ScalarProperty Name="DataEntryXslt" ColumnName="DataEntryXslt" />
+          <ScalarProperty Name="DataEntryXsltUri" ColumnName="DataEntryXslt" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -260,7 +260,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectXslts)">
         <MappingFragment StoreEntitySet="ObjectXslts">
           <ScalarProperty Name="ObjectXsltId" ColumnName="ObjectXsltId" />
-          <ScalarProperty Name="ObjectXslt" ColumnName="ObjectXslt" />
+          <ScalarProperty Name="ObjectXsltUri" ColumnName="ObjectXslt" />
           <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
         </MappingFragment>
       </EntityTypeMapping>

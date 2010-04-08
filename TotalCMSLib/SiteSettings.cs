@@ -58,8 +58,8 @@ namespace TotalCMS
                         ConfigurationManager.ConnectionStrings[_connectionStringName]:
                         (ConfigurationManager.ConnectionStrings.Count > 0?ConfigurationManager.ConnectionStrings[0]:null));
                 }
-                if (_connectionString == null) 
-                    throw new SettingsPropertyNotFoundException("There is no connection string avaliable in the config file, please check the config.");
+                if (_connectionString == null)
+                    SiteSettings.ContextData.DebugLog.WriteDebugMessage(new SettingsPropertyNotFoundException("There is no connection string avaliable in the config file, please check the config."));
                 return _connectionString;
             }
         }
@@ -69,7 +69,7 @@ namespace TotalCMS
             get {
                 _securityKey = ConfigurationManager.AppSettings["TotalCMS_SecurityKey"];
                 if(_securityKey == null || _securityKey == string.Empty)
-                    throw new SettingsPropertyNotFoundException("There is no security key avaliable in the config file, please check the config.");
+                    SiteSettings.ContextData.DebugLog.WriteDebugMessage(new SettingsPropertyNotFoundException("There is no security key avaliable in the config file, please check the config.");
                 return _securityKey;
             }
         }               

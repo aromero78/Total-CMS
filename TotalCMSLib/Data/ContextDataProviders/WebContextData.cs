@@ -76,6 +76,10 @@ namespace TotalCMS.Data.ContextDataProviders {
                 _currentLanguage = value;
             }
         }
+
+        public string MapPath(string PathToMap) {
+            return System.Web.HttpContext.Current.Server.MapPath(PathToMap);
+        }
         #endregion
     }
 }

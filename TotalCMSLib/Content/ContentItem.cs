@@ -86,10 +86,12 @@ namespace TotalCMS.Content {
             }
         }
 
-        ContentStatuses _ContentStatus;
+        ContentStatuses _contentStatus;
         public ContentStatuses ContentStatus {
-            get { return _ContentStatus; }
+            get { return _contentStatus; }
         }
+
+
 
         public void SetModifiedByUser(int UserId) {
             _modifiedByUserId = UserId;
@@ -100,10 +102,6 @@ namespace TotalCMS.Content {
         }
 
         protected internal override void Reset() {
-            throw new NotImplementedException();
-        }
-
-        protected internal override void ResetMemeber(params string[] PropertyName) {
             throw new NotImplementedException();
         }
 
@@ -118,10 +116,19 @@ namespace TotalCMS.Content {
                 _createdByUserId = dataReader.GetInt32(5);
                 _modifiedByUserId = dataReader.GetInt32(6);
                 _folderId = dataReader.GetInt32(7);
+                switch (dataReader.GetString(8)) { 
+                    case "IN":
+                        _contentStatus = ContentStatuses.CheckedIn;
+                        break;
+                    case "OT":
+                        _contentStatus = ContentStatuses.CheckedOut;
+                        break;
+                }
+
                 dataReader.Close();
             }
             else {
-                throw new Exception("The content item id is not set.");
+                SiteSettings.ContextData.DebugLog.WriteDebugMessage("The content item id is not set.");
             }
         }
 
