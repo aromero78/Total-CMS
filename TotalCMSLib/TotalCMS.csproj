@@ -76,7 +76,6 @@
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserRoles.cs" />
     <Compile Include="Web\Uri.cs" />
-    <Compile Include="Content\Xml\ObjectSchema.cs" />
     <Compile Include="Content\Xml\ObjectType.cs" />
     <Compile Include="Content\Xml\ObjectXslt.cs" />
     <Compile Include="Xml\XslHelper.cs" />
