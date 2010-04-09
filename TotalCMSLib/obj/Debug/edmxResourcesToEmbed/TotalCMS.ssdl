@@ -1,212 +1,166 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DataAccess.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="DataAccessStoreContainer">
-    <EntitySet Name="Aliases" EntityType="DataAccess.Store.Aliases" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CalendarEvents" EntityType="DataAccess.Store.CalendarEvents" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Calendars" EntityType="DataAccess.Store.Calendars" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ContentHistories" EntityType="DataAccess.Store.ContentHistories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentItems" EntityType="DataAccess.Store.ContentItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRoles" EntityType="DataAccess.Store.UserRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsersToUserRoles" EntityType="DataAccess.Store.UsersToUserRoles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Folders" EntityType="DataAccess.Store.Folders" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Languages" EntityType="DataAccess.Store.Languages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LibraryItems" EntityType="DataAccess.Store.LibraryItems" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MenuItems" EntityType="DataAccess.Store.MenuItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Menus" EntityType="DataAccess.Store.Menus" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MetaDataTypes" EntityType="DataAccess.Store.MetaDataTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MenuItems" EntityType="DataAccess.Store.MenuItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Calendars" EntityType="DataAccess.Store.Calendars" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CalendarEvents" EntityType="DataAccess.Store.CalendarEvents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Aliases" EntityType="DataAccess.Store.Aliases" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MetaDataTypesToContentItems" EntityType="DataAccess.Store.MetaDataTypesToContentItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaDataTypes" EntityType="DataAccess.Store.MetaDataTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Languages" EntityType="DataAccess.Store.Languages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsersSet" EntityType="DataAccess.Store.UsersSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Templates" EntityType="DataAccess.Store.Templates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TemplateElements" EntityType="DataAccess.Store.TemplateElements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Permissions" EntityType="DataAccess.Store.Permissions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MetaDataTypeToFolders" EntityType="DataAccess.Store.MetaDataTypeToFolders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MetaDataValueTypes" EntityType="DataAccess.Store.MetaDataValueTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ObjectSchemas" EntityType="DataAccess.Store.ObjectSchemas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentHistories" EntityType="DataAccess.Store.ContentHistories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ObjectTypes" EntityType="DataAccess.Store.ObjectTypes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ObjectXslts" EntityType="DataAccess.Store.ObjectXslts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Permissions" EntityType="DataAccess.Store.Permissions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Settings" EntityType="DataAccess.Store.Settings" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TemplateElements" EntityType="DataAccess.Store.TemplateElements" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Templates" EntityType="DataAccess.Store.Templates" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UserRoles" EntityType="DataAccess.Store.UserRoles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UsersSet" EntityType="DataAccess.Store.UsersSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UsersToUserRoles" EntityType="DataAccess.Store.UsersToUserRoles" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_AdminElementAdminPages" Association="DataAccess.Store.FK_AdminElementAdminPages">
-      <End Role="Templates" EntitySet="Templates" />
-      <End Role="TemplateElements" EntitySet="TemplateElements" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AliasesContentItems" Association="DataAccess.Store.FK_AliasesContentItems">
+    <AssociationSet Name="UsersContentItems" Association="DataAccess.Store.UsersContentItems">
+      <End Role="Users" EntitySet="UsersSet" />
       <End Role="ContentItems" EntitySet="ContentItems" />
-      <End Role="Aliases" EntitySet="Aliases" />
     </AssociationSet>
-    <AssociationSet Name="FK_AliasesMenuItems" Association="DataAccess.Store.FK_AliasesMenuItems">
-      <End Role="Aliases" EntitySet="Aliases" />
-      <End Role="MenuItems" EntitySet="MenuItems" />
+    <AssociationSet Name="UsersContentItems1" Association="DataAccess.Store.UsersContentItems1">
+      <End Role="Users" EntitySet="UsersSet" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
     </AssociationSet>
-    <AssociationSet Name="FK_AliasesMenus" Association="DataAccess.Store.FK_AliasesMenus">
-      <End Role="Aliases" EntitySet="Aliases" />
-      <End Role="Menus" EntitySet="Menus" />
+    <AssociationSet Name="UsersToUserRolesUsers" Association="DataAccess.Store.UsersToUserRolesUsers">
+      <End Role="UsersToUserRoles" EntitySet="UsersToUserRoles" />
+      <End Role="Users" EntitySet="UsersSet" />
     </AssociationSet>
-    <AssociationSet Name="FK_CalendarsCalendarEvents" Association="DataAccess.Store.FK_CalendarsCalendarEvents">
+    <AssociationSet Name="FoldersContentItems" Association="DataAccess.Store.FoldersContentItems">
+      <End Role="Folders" EntitySet="Folders" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="LanguagesUsers" Association="DataAccess.Store.LanguagesUsers">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Users" EntitySet="UsersSet" />
+    </AssociationSet>
+    <AssociationSet Name="LanguagesFolders" Association="DataAccess.Store.LanguagesFolders">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="CalendarsFolders" Association="DataAccess.Store.CalendarsFolders">
+      <End Role="Calendars" EntitySet="Calendars" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="CalendarsCalendarEvents" Association="DataAccess.Store.CalendarsCalendarEvents">
       <End Role="Calendars" EntitySet="Calendars" />
       <End Role="CalendarEvents" EntitySet="CalendarEvents" />
     </AssociationSet>
-    <AssociationSet Name="FK_CalendarsFolders" Association="DataAccess.Store.FK_CalendarsFolders">
+    <AssociationSet Name="MenusFolders" Association="DataAccess.Store.MenusFolders">
+      <End Role="Menus" EntitySet="Menus" />
       <End Role="Folders" EntitySet="Folders" />
-      <End Role="Calendars" EntitySet="Calendars" />
     </AssociationSet>
-    <AssociationSet Name="FK_ChildFolders" Association="DataAccess.Store.FK_ChildFolders">
+    <AssociationSet Name="MenuItemsMenus" Association="DataAccess.Store.MenuItemsMenus">
+      <End Role="MenuItems" EntitySet="MenuItems" />
+      <End Role="Menus" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryItemsFolders" Association="DataAccess.Store.LibraryItemsFolders">
+      <End Role="LibraryItems" EntitySet="LibraryItems" />
+      <End Role="Folders" EntitySet="Folders" />
+    </AssociationSet>
+    <AssociationSet Name="UsersToUserRolesUserRoles" Association="DataAccess.Store.UsersToUserRolesUserRoles">
+      <End Role="UsersToUserRoles" EntitySet="UsersToUserRoles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="AdminElementAdminPages" Association="DataAccess.Store.AdminElementAdminPages">
+      <End Role="AdminElement" EntitySet="TemplateElements" />
+      <End Role="AdminPages" EntitySet="Templates" />
+    </AssociationSet>
+    <AssociationSet Name="PagesAliases" Association="DataAccess.Store.PagesAliases">
+      <End Role="Pages" EntitySet="Templates" />
+      <End Role="Aliases" EntitySet="Aliases" />
+    </AssociationSet>
+    <AssociationSet Name="ChildFolders" Association="DataAccess.Store.ChildFolders">
       <End Role="Folders" EntitySet="Folders" />
       <End Role="Folders1" EntitySet="Folders" />
     </AssociationSet>
-    <AssociationSet Name="FK_ContentHistoryContentItems" Association="DataAccess.Store.FK_ContentHistoryContentItems">
-      <End Role="ContentItems" EntitySet="ContentItems" />
-      <End Role="ContentHistories" EntitySet="ContentHistories" />
+    <AssociationSet Name="PermissionsUserRoles" Association="DataAccess.Store.PermissionsUserRoles">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK_ContentHistoryUsers" Association="DataAccess.Store.FK_ContentHistoryUsers">
-      <End Role="UsersSet" EntitySet="UsersSet" />
-      <End Role="ContentHistories" EntitySet="ContentHistories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ContentItemsObjectSchema" Association="DataAccess.Store.FK_ContentItemsObjectSchema">
-      <End Role="ObjectSchemas" EntitySet="ObjectSchemas" />
-      <End Role="ContentItems" EntitySet="ContentItems" />
-    </AssociationSet>
-    <AssociationSet Name="FK_FoldersContentItems" Association="DataAccess.Store.FK_FoldersContentItems">
-      <End Role="Folders" EntitySet="Folders" />
-      <End Role="ContentItems" EntitySet="ContentItems" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LanguagesFolders" Association="DataAccess.Store.FK_LanguagesFolders">
-      <End Role="Languages" EntitySet="Languages" />
+    <AssociationSet Name="PermissionsFolders" Association="DataAccess.Store.PermissionsFolders">
+      <End Role="Permissions" EntitySet="Permissions" />
       <End Role="Folders" EntitySet="Folders" />
     </AssociationSet>
-    <AssociationSet Name="FK_LanguagesUsers" Association="DataAccess.Store.FK_LanguagesUsers">
-      <End Role="Languages" EntitySet="Languages" />
-      <End Role="UsersSet" EntitySet="UsersSet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LibraryItemsFolders" Association="DataAccess.Store.FK_LibraryItemsFolders">
+    <AssociationSet Name="MetaDataTypeToFolderFolders" Association="DataAccess.Store.MetaDataTypeToFolderFolders">
+      <End Role="MetaDataTypeToFolder" EntitySet="MetaDataTypeToFolders" />
       <End Role="Folders" EntitySet="Folders" />
-      <End Role="LibraryItems" EntitySet="LibraryItems" />
     </AssociationSet>
-    <AssociationSet Name="FK_MenuItemsMenus" Association="DataAccess.Store.FK_MenuItemsMenus">
-      <End Role="Menus" EntitySet="Menus" />
-      <End Role="MenuItems" EntitySet="MenuItems" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MenusFolders" Association="DataAccess.Store.FK_MenusFolders">
-      <End Role="Folders" EntitySet="Folders" />
-      <End Role="Menus" EntitySet="Menus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MenusMenus" Association="DataAccess.Store.FK_MenusMenus">
-      <End Role="Menus" EntitySet="Menus" />
-      <End Role="Menus1" EntitySet="Menus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MenusMenus1" Association="DataAccess.Store.FK_MenusMenus1">
-      <End Role="Menus" EntitySet="Menus" />
-      <End Role="Menus1" EntitySet="Menus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MetaDataTypesToContentItemsContentItems" Association="DataAccess.Store.FK_MetaDataTypesToContentItemsContentItems">
-      <End Role="ContentItems" EntitySet="ContentItems" />
-      <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MetaDataTypesToContentItemsMetaDataTypes" Association="DataAccess.Store.FK_MetaDataTypesToContentItemsMetaDataTypes">
+    <AssociationSet Name="MetaDataTypeToFolderMetaDataTypes" Association="DataAccess.Store.MetaDataTypeToFolderMetaDataTypes">
+      <End Role="MetaDataTypeToFolder" EntitySet="MetaDataTypeToFolders" />
       <End Role="MetaDataTypes" EntitySet="MetaDataTypes" />
-      <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
     </AssociationSet>
-    <AssociationSet Name="FK_MetaDataTypeToFolderFolders" Association="DataAccess.Store.FK_MetaDataTypeToFolderFolders">
-      <End Role="Folders" EntitySet="Folders" />
-      <End Role="MetaDataTypeToFolders" EntitySet="MetaDataTypeToFolders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MetaDataTypeToFolderMetaDataTypes" Association="DataAccess.Store.FK_MetaDataTypeToFolderMetaDataTypes">
-      <End Role="MetaDataTypes" EntitySet="MetaDataTypes" />
-      <End Role="MetaDataTypeToFolders" EntitySet="MetaDataTypeToFolders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MetaDataValueTypesMetaDataTypes" Association="DataAccess.Store.FK_MetaDataValueTypesMetaDataTypes">
+    <AssociationSet Name="MetaDataValueTypesMetaDataTypes" Association="DataAccess.Store.MetaDataValueTypesMetaDataTypes">
       <End Role="MetaDataValueTypes" EntitySet="MetaDataValueTypes" />
       <End Role="MetaDataTypes" EntitySet="MetaDataTypes" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectSchemaObjectXsltSets" Association="DataAccess.Store.FK_ObjectSchemaObjectXsltSets">
-      <End Role="ObjectSchemas" EntitySet="ObjectSchemas" />
-      <End Role="ObjectXslts" EntitySet="ObjectXslts" />
+    <AssociationSet Name="MetaDataTypesToContentItemsMetaDataTypes" Association="DataAccess.Store.MetaDataTypesToContentItemsMetaDataTypes">
+      <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
+      <End Role="MetaDataTypes" EntitySet="MetaDataTypes" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectSchemaTemplateElement" Association="DataAccess.Store.FK_ObjectSchemaTemplateElement">
-      <End Role="ObjectSchemas" EntitySet="ObjectSchemas" />
-      <End Role="TemplateElements" EntitySet="TemplateElements" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ObjectTypesObjectSchema" Association="DataAccess.Store.FK_ObjectTypesObjectSchema">
-      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
-      <End Role="ObjectSchemas" EntitySet="ObjectSchemas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ObjectXsltSetContentItems" Association="DataAccess.Store.FK_ObjectXsltSetContentItems">
-      <End Role="ObjectXslts" EntitySet="ObjectXslts" />
+    <AssociationSet Name="MetaDataTypesToContentItemsContentItems" Association="DataAccess.Store.MetaDataTypesToContentItemsContentItems">
+      <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
       <End Role="ContentItems" EntitySet="ContentItems" />
     </AssociationSet>
-    <AssociationSet Name="FK_PagesAliases" Association="DataAccess.Store.FK_PagesAliases">
-      <End Role="Templates" EntitySet="Templates" />
+    <AssociationSet Name="ContentHistoryContentItems" Association="DataAccess.Store.ContentHistoryContentItems">
+      <End Role="ContentHistory" EntitySet="ContentHistories" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="ContentHistoryUsers" Association="DataAccess.Store.ContentHistoryUsers">
+      <End Role="ContentHistory" EntitySet="ContentHistories" />
+      <End Role="Users" EntitySet="UsersSet" />
+    </AssociationSet>
+    <AssociationSet Name="AliasesContentItems" Association="DataAccess.Store.AliasesContentItems">
       <End Role="Aliases" EntitySet="Aliases" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PermissionsFolders" Association="DataAccess.Store.FK_PermissionsFolders">
-      <End Role="Folders" EntitySet="Folders" />
-      <End Role="Permissions" EntitySet="Permissions" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PermissionsUserRoles" Association="DataAccess.Store.FK_PermissionsUserRoles">
-      <End Role="UserRoles" EntitySet="UserRoles" />
-      <End Role="Permissions" EntitySet="Permissions" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TemplateElementContentItems" Association="DataAccess.Store.FK_TemplateElementContentItems">
       <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectXsltSetContentItems" Association="DataAccess.Store.ObjectXsltSetContentItems">
+      <End Role="ObjectXsltSet" EntitySet="ObjectXslts" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectSchemaObjectXsltSets" Association="DataAccess.Store.ObjectSchemaObjectXsltSets">
+      <End Role="ObjectSchema" EntitySet="ObjectTypes" />
+      <End Role="ObjectXsltSets" EntitySet="ObjectXslts" />
+    </AssociationSet>
+    <AssociationSet Name="MenusMenus" Association="DataAccess.Store.MenusMenus">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Menus1" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="MenusMenus1" Association="DataAccess.Store.MenusMenus1">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Menus1" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="ContentItemsObjectTypes" Association="DataAccess.Store.ContentItemsObjectTypes">
+      <End Role="ContentItems" EntitySet="ContentItems" />
+      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
+    </AssociationSet>
+    <AssociationSet Name="TemplateElementContentItems" Association="DataAccess.Store.TemplateElementContentItems">
+      <End Role="TemplateElement" EntitySet="TemplateElements" />
+      <End Role="ContentItems" EntitySet="ContentItems" />
+    </AssociationSet>
+    <AssociationSet Name="AliasesMenuItems" Association="DataAccess.Store.AliasesMenuItems">
+      <End Role="Aliases" EntitySet="Aliases" />
+      <End Role="MenuItems" EntitySet="MenuItems" />
+    </AssociationSet>
+    <AssociationSet Name="AliasesMenus" Association="DataAccess.Store.AliasesMenus">
+      <End Role="Aliases" EntitySet="Aliases" />
+      <End Role="Menus" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectTypesTemplateElements" Association="DataAccess.Store.ObjectTypesTemplateElements">
+      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
       <End Role="TemplateElements" EntitySet="TemplateElements" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsersContentItems" Association="DataAccess.Store.FK_UsersContentItems">
-      <End Role="UsersSet" EntitySet="UsersSet" />
-      <End Role="ContentItems" EntitySet="ContentItems" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsersContentItems1" Association="DataAccess.Store.FK_UsersContentItems1">
-      <End Role="UsersSet" EntitySet="UsersSet" />
-      <End Role="ContentItems" EntitySet="ContentItems" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsersToUserRolesUserRoles" Association="DataAccess.Store.FK_UsersToUserRolesUserRoles">
-      <End Role="UserRoles" EntitySet="UserRoles" />
-      <End Role="UsersToUserRoles" EntitySet="UsersToUserRoles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsersToUserRolesUsers" Association="DataAccess.Store.FK_UsersToUserRolesUsers">
-      <End Role="UsersSet" EntitySet="UsersSet" />
-      <End Role="UsersToUserRoles" EntitySet="UsersToUserRoles" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Aliases">
-    <Key>
-      <PropertyRef Name="AliasId" />
-    </Key>
-    <Property Name="AliasId" Type="int" Nullable="false" />
-    <Property Name="TemplateId" Type="int" Nullable="false" />
-    <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
-    <Property Name="ContentItemId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CalendarEvents">
-    <Key>
-      <PropertyRef Name="CalendarEventIds" />
-    </Key>
-    <Property Name="CalendarEventIds" Type="int" Nullable="false" />
-    <Property Name="CalendarId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="iCalSettings" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Calendars">
-    <Key>
-      <PropertyRef Name="CalendarId" />
-    </Key>
-    <Property Name="CalendarId" Type="int" Nullable="false" />
-    <Property Name="FolderId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ContentHistories">
-    <Key>
-      <PropertyRef Name="ContentHistoryId" />
-    </Key>
-    <Property Name="ContentHistoryId" Type="int" Nullable="false" />
-    <Property Name="ContentItemId" Type="int" Nullable="false" />
-    <Property Name="VersionNumber" Type="float" Nullable="false" />
-    <Property Name="ContentHtml" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ContentSummary" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="MetaDataXml" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="ContentItems">
     <Key>
       <PropertyRef Name="ContentItemId" />
@@ -215,15 +169,30 @@
     <Property Name="ContentHtml" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ContentSummary" Type="nvarchar" Nullable="false" MaxLength="250" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="DateModified" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" Nullable="true" />
     <Property Name="CreatedByUserId" Type="int" Nullable="false" />
-    <Property Name="ModifiedByUserId" Type="int" />
+    <Property Name="ModifiedByUserId" Type="int" Nullable="true" />
     <Property Name="FolderId" Type="int" Nullable="false" />
     <Property Name="ContentStatus" Type="nvarchar" Nullable="false" MaxLength="2" />
     <Property Name="ObjectXsltId" Type="int" Nullable="false" />
     <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
     <Property Name="ContentDisplayId" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Name="UserRoleId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsersToUserRoles">
+    <Key>
+      <PropertyRef Name="UserToUserRoleId" />
+    </Key>
+    <Property Name="UserToUserRoleId" Type="int" Nullable="false" />
+    <Property Name="UserRoleId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Folders">
     <Key>
@@ -234,23 +203,13 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="InheritPermissions" Type="bit" Nullable="false" />
-    <Property Name="ParentFolderId" Type="int" />
+    <Property Name="ParentFolderId" Type="int" Nullable="true" />
     <Property Name="InheritMetaData" Type="bit" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="DateModified" Type="nvarchar(max)" />
+    <Property Name="DateModified" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PermissionsId" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="Language_LanguageId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Languages">
-    <Key>
-      <PropertyRef Name="LanguageId" />
-    </Key>
-    <Property Name="LanguageId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
-    <Property Name="IsDefault" Type="bit" Nullable="false" />
-    <Property Name="LangId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="LibraryItems">
     <Key>
@@ -261,16 +220,6 @@
     <Property Name="FileUrl" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Desciprtion" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MenuItems">
-    <Key>
-      <PropertyRef Name="MenuItemId" />
-    </Key>
-    <Property Name="MenuItemId" Type="int" Nullable="false" />
-    <Property Name="MenuId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="OrderId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AliasId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Menus">
     <Key>
@@ -285,6 +234,53 @@
     <Property Name="RootMenuId" Type="int" Nullable="false" />
     <Property Name="AliasId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="MenuItems">
+    <Key>
+      <PropertyRef Name="MenuItemId" />
+    </Key>
+    <Property Name="MenuItemId" Type="int" Nullable="false" />
+    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AliasId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Calendars">
+    <Key>
+      <PropertyRef Name="CalendarId" />
+    </Key>
+    <Property Name="CalendarId" Type="int" Nullable="false" />
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CalendarEvents">
+    <Key>
+      <PropertyRef Name="CalendarEventIds" />
+    </Key>
+    <Property Name="CalendarEventIds" Type="int" Nullable="false" />
+    <Property Name="CalendarId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iCalSettings" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Aliases">
+    <Key>
+      <PropertyRef Name="AliasId" />
+    </Key>
+    <Property Name="AliasId" Type="int" Nullable="false" />
+    <Property Name="TemplateId" Type="int" Nullable="false" />
+    <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="ContentItemId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MetaDataTypesToContentItems">
+    <Key>
+      <PropertyRef Name="MetaDataTypesToContentItemsId" />
+    </Key>
+    <Property Name="MetaDataTypesToContentItemsId" Type="int" Nullable="false" />
+    <Property Name="MetaDataTypeId" Type="int" Nullable="false" />
+    <Property Name="ContentItemId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
   <EntityType Name="MetaDataTypes">
     <Key>
       <PropertyRef Name="MetaDataTypeId" />
@@ -294,54 +290,48 @@
     <Property Name="DefaultValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="MetaDataValueTypesId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="MetaDataTypesToContentItems">
+  <EntityType Name="Languages">
     <Key>
-      <PropertyRef Name="MetaDataTypesToContentItemsId" />
+      <PropertyRef Name="LanguageId" />
     </Key>
-    <Property Name="MetaDataTypesToContentItemsId" Type="int" Nullable="false" />
-    <Property Name="MetaDataTypeId" Type="int" Nullable="false" />
-    <Property Name="ContentItemId" Type="int" Nullable="false" />
-    <Property Name="Value" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="MetaDataTypeToFolders">
-    <Key>
-      <PropertyRef Name="MetaDataTypeToFolderId" />
-    </Key>
-    <Property Name="MetaDataTypeToFolderId" Type="int" Nullable="false" />
-    <Property Name="FolderId" Type="int" Nullable="false" />
-    <Property Name="MetaDataTypeId" Type="int" Nullable="false" />
-    <Property Name="IsRequired" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MetaDataValueTypes">
-    <Key>
-      <PropertyRef Name="MetaDataValueTypesId" />
-    </Key>
-    <Property Name="MetaDataValueTypesId" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" Nullable="false" />
+    <Property Name="LangId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="ObjectSchemas">
+  <EntityType Name="UsersSet">
     <Key>
-      <PropertyRef Name="ObjectSchemaId" />
+      <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
-    <Property Name="SchemaXml" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ObjectTypeId" Type="int" Nullable="false" />
-    <Property Name="DataEntryXslt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="ObjectTypes">
+  <EntityType Name="Templates">
     <Key>
-      <PropertyRef Name="ObjectTypeId" />
+      <PropertyRef Name="TemplateId" />
     </Key>
-    <Property Name="ObjectTypeId" Type="int" Nullable="false" />
+    <Property Name="TemplateId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsUserDefined" Type="bit" Nullable="false" />
+    <Property Name="TemplateFileUrl" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TemplateElements">
+    <Key>
+      <PropertyRef Name="TemplateElementId" />
+    </Key>
+    <Property Name="TemplateElementId" Type="int" Nullable="false" />
+    <Property Name="XsltId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TemplateId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ObjectXslts">
-    <Key>
-      <PropertyRef Name="ObjectXsltId" />
-    </Key>
-    <Property Name="ObjectXsltId" Type="int" Nullable="false" />
-    <Property Name="ObjectXslt" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
+    <Property Name="DynamicParamName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ContentItemId" Type="int" Nullable="true" />
+    <Property Name="ObjectTypeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Permissions">
     <Key>
@@ -368,6 +358,55 @@
     <Property Name="FolderId" Type="int" Nullable="false" />
     <Property Name="IsPageAdmin" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="MetaDataTypeToFolders">
+    <Key>
+      <PropertyRef Name="MetaDataTypeToFolderId" />
+    </Key>
+    <Property Name="MetaDataTypeToFolderId" Type="int" Nullable="false" />
+    <Property Name="FolderId" Type="int" Nullable="false" />
+    <Property Name="MetaDataTypeId" Type="int" Nullable="false" />
+    <Property Name="IsRequired" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MetaDataValueTypes">
+    <Key>
+      <PropertyRef Name="MetaDataValueTypesId" />
+    </Key>
+    <Property Name="MetaDataValueTypesId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentHistories">
+    <Key>
+      <PropertyRef Name="ContentHistoryId" />
+    </Key>
+    <Property Name="ContentHistoryId" Type="int" Nullable="false" />
+    <Property Name="ContentItemId" Type="int" Nullable="false" />
+    <Property Name="VersionNumber" Type="float" Nullable="false" />
+    <Property Name="ContentHtml" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContentSummary" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="MetaDataXml" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectTypes">
+    <Key>
+      <PropertyRef Name="ObjectTypeId" />
+    </Key>
+    <Property Name="ObjectTypeId" Type="int" Nullable="false" />
+    <Property Name="DataEntryXslt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DefaultDisplayXslt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SchemaXml" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectXslts">
+    <Key>
+      <PropertyRef Name="ObjectXsltId" />
+    </Key>
+    <Property Name="ObjectXsltId" Type="int" Nullable="false" />
+    <Property Name="ObjectXsltUri" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isValidated" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Settings">
     <Key>
       <PropertyRef Name="SettingId" />
@@ -375,175 +414,43 @@
     <Property Name="SettingId" Type="int" Nullable="false" />
     <Property Name="LicenceKey" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="TemplateElements">
-    <Key>
-      <PropertyRef Name="TemplateElementId" />
-    </Key>
-    <Property Name="TemplateElementId" Type="int" Nullable="false" />
-    <Property Name="XsltId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="TemplateId" Type="int" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DynamicParamName" Type="nvarchar(max)" />
-    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
-    <Property Name="ContentItemId" Type="int" />
-  </EntityType>
-  <EntityType Name="Templates">
-    <Key>
-      <PropertyRef Name="TemplateId" />
-    </Key>
-    <Property Name="TemplateId" Type="int" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsUserDefined" Type="bit" Nullable="false" />
-    <Property Name="TemplateFileUrl" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UserRoles">
-    <Key>
-      <PropertyRef Name="UserRoleId" />
-    </Key>
-    <Property Name="UserRoleId" Type="int" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UsersSet">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="LanguageId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UsersToUserRoles">
-    <Key>
-      <PropertyRef Name="UserToUserRoleId" />
-    </Key>
-    <Property Name="UserToUserRoleId" Type="int" Nullable="false" />
-    <Property Name="UserRoleId" Type="int" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_AdminElementAdminPages">
-    <End Role="Templates" Type="DataAccess.Store.Templates" Multiplicity="1" />
-    <End Role="TemplateElements" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
+  <Association Name="UsersContentItems">
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Templates">
-        <PropertyRef Name="TemplateId" />
-      </Principal>
-      <Dependent Role="TemplateElements">
-        <PropertyRef Name="TemplateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AliasesContentItems">
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
-    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ContentItems">
-        <PropertyRef Name="ContentItemId" />
-      </Principal>
-      <Dependent Role="Aliases">
-        <PropertyRef Name="ContentItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AliasesMenuItems">
-    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="1" />
-    <End Role="MenuItems" Type="DataAccess.Store.MenuItems" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Aliases">
-        <PropertyRef Name="AliasId" />
-      </Principal>
-      <Dependent Role="MenuItems">
-        <PropertyRef Name="AliasId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AliasesMenus">
-    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="1" />
-    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Aliases">
-        <PropertyRef Name="AliasId" />
-      </Principal>
-      <Dependent Role="Menus">
-        <PropertyRef Name="AliasId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CalendarsCalendarEvents">
-    <End Role="Calendars" Type="DataAccess.Store.Calendars" Multiplicity="1" />
-    <End Role="CalendarEvents" Type="DataAccess.Store.CalendarEvents" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Calendars">
-        <PropertyRef Name="CalendarId" />
-      </Principal>
-      <Dependent Role="CalendarEvents">
-        <PropertyRef Name="CalendarId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CalendarsFolders">
-    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
-    <End Role="Calendars" Type="DataAccess.Store.Calendars" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Folders">
-        <PropertyRef Name="FolderId" />
-      </Principal>
-      <Dependent Role="Calendars">
-        <PropertyRef Name="FolderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ChildFolders">
-    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="0..1" />
-    <End Role="Folders1" Type="DataAccess.Store.Folders" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Folders">
-        <PropertyRef Name="FolderId" />
-      </Principal>
-      <Dependent Role="Folders1">
-        <PropertyRef Name="ParentFolderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ContentHistoryContentItems">
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
-    <End Role="ContentHistories" Type="DataAccess.Store.ContentHistories" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ContentItems">
-        <PropertyRef Name="ContentItemId" />
-      </Principal>
-      <Dependent Role="ContentHistories">
-        <PropertyRef Name="ContentItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ContentHistoryUsers">
-    <End Role="UsersSet" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
-    <End Role="ContentHistories" Type="DataAccess.Store.ContentHistories" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UsersSet">
+      <Principal Role="Users">
         <PropertyRef Name="UserId" />
       </Principal>
-      <Dependent Role="ContentHistories">
+      <Dependent Role="ContentItems">
         <PropertyRef Name="CreatedByUserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ContentItemsObjectSchema">
-    <End Role="ObjectSchemas" Type="DataAccess.Store.ObjectSchemas" Multiplicity="1" />
+  <Association Name="UsersContentItems1">
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="0..1" />
     <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ObjectSchemas">
-        <PropertyRef Name="ObjectSchemaId" />
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
       </Principal>
       <Dependent Role="ContentItems">
-        <PropertyRef Name="ObjectSchemaId" />
+        <PropertyRef Name="ModifiedByUserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_FoldersContentItems">
+  <Association Name="UsersToUserRolesUsers">
+    <End Role="UsersToUserRoles" Type="DataAccess.Store.UsersToUserRoles" Multiplicity="*" />
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UsersToUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FoldersContentItems">
     <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
     <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
     <ReferentialConstraint>
@@ -555,7 +462,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_LanguagesFolders">
+  <Association Name="LanguagesUsers">
+    <End Role="Languages" Type="DataAccess.Store.Languages" Multiplicity="1" />
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LanguagesFolders">
     <End Role="Languages" Type="DataAccess.Store.Languages" Multiplicity="1" />
     <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="*" />
     <ReferentialConstraint>
@@ -567,45 +486,33 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_LanguagesUsers">
-    <End Role="Languages" Type="DataAccess.Store.Languages" Multiplicity="1" />
-    <End Role="UsersSet" Type="DataAccess.Store.UsersSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Languages">
-        <PropertyRef Name="LanguageId" />
-      </Principal>
-      <Dependent Role="UsersSet">
-        <PropertyRef Name="LanguageId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LibraryItemsFolders">
+  <Association Name="CalendarsFolders">
+    <End Role="Calendars" Type="DataAccess.Store.Calendars" Multiplicity="*" />
     <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
-    <End Role="LibraryItems" Type="DataAccess.Store.LibraryItems" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Folders">
         <PropertyRef Name="FolderId" />
       </Principal>
-      <Dependent Role="LibraryItems">
+      <Dependent Role="Calendars">
         <PropertyRef Name="FolderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MenuItemsMenus">
-    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
-    <End Role="MenuItems" Type="DataAccess.Store.MenuItems" Multiplicity="*" />
+  <Association Name="CalendarsCalendarEvents">
+    <End Role="Calendars" Type="DataAccess.Store.Calendars" Multiplicity="1" />
+    <End Role="CalendarEvents" Type="DataAccess.Store.CalendarEvents" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Menus">
-        <PropertyRef Name="MenuId" />
+      <Principal Role="Calendars">
+        <PropertyRef Name="CalendarId" />
       </Principal>
-      <Dependent Role="MenuItems">
-        <PropertyRef Name="MenuId" />
+      <Dependent Role="CalendarEvents">
+        <PropertyRef Name="CalendarId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MenusFolders">
-    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+  <Association Name="MenusFolders">
     <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="*" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Folders">
         <PropertyRef Name="FolderId" />
@@ -615,79 +522,127 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MenusMenus">
+  <Association Name="MenuItemsMenus">
+    <End Role="MenuItems" Type="DataAccess.Store.MenuItems" Multiplicity="*" />
     <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
-    <End Role="Menus1" Type="DataAccess.Store.Menus" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Menus">
         <PropertyRef Name="MenuId" />
       </Principal>
-      <Dependent Role="Menus1">
-        <PropertyRef Name="ParentMenuId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MenusMenus1">
-    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
-    <End Role="Menus1" Type="DataAccess.Store.Menus" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Menus">
+      <Dependent Role="MenuItems">
         <PropertyRef Name="MenuId" />
-      </Principal>
-      <Dependent Role="Menus1">
-        <PropertyRef Name="RootMenuId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MetaDataTypesToContentItemsContentItems">
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
-    <End Role="MetaDataTypesToContentItems" Type="DataAccess.Store.MetaDataTypesToContentItems" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ContentItems">
-        <PropertyRef Name="ContentItemId" />
-      </Principal>
-      <Dependent Role="MetaDataTypesToContentItems">
-        <PropertyRef Name="ContentItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MetaDataTypesToContentItemsMetaDataTypes">
-    <End Role="MetaDataTypes" Type="DataAccess.Store.MetaDataTypes" Multiplicity="1" />
-    <End Role="MetaDataTypesToContentItems" Type="DataAccess.Store.MetaDataTypesToContentItems" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MetaDataTypes">
-        <PropertyRef Name="MetaDataTypeId" />
-      </Principal>
-      <Dependent Role="MetaDataTypesToContentItems">
-        <PropertyRef Name="MetaDataTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MetaDataTypeToFolderFolders">
+  <Association Name="LibraryItemsFolders">
+    <End Role="LibraryItems" Type="DataAccess.Store.LibraryItems" Multiplicity="*" />
     <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
-    <End Role="MetaDataTypeToFolders" Type="DataAccess.Store.MetaDataTypeToFolders" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Folders">
         <PropertyRef Name="FolderId" />
       </Principal>
-      <Dependent Role="MetaDataTypeToFolders">
+      <Dependent Role="LibraryItems">
         <PropertyRef Name="FolderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MetaDataTypeToFolderMetaDataTypes">
+  <Association Name="UsersToUserRolesUserRoles">
+    <End Role="UsersToUserRoles" Type="DataAccess.Store.UsersToUserRoles" Multiplicity="*" />
+    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="UsersToUserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdminElementAdminPages">
+    <End Role="AdminElement" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
+    <End Role="AdminPages" Type="DataAccess.Store.Templates" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AdminPages">
+        <PropertyRef Name="TemplateId" />
+      </Principal>
+      <Dependent Role="AdminElement">
+        <PropertyRef Name="TemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PagesAliases">
+    <End Role="Pages" Type="DataAccess.Store.Templates" Multiplicity="1" />
+    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pages">
+        <PropertyRef Name="TemplateId" />
+      </Principal>
+      <Dependent Role="Aliases">
+        <PropertyRef Name="TemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ChildFolders">
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="0..1" />
+    <End Role="Folders1" Type="DataAccess.Store.Folders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="Folders1">
+        <PropertyRef Name="ParentFolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PermissionsUserRoles">
+    <End Role="Permissions" Type="DataAccess.Store.Permissions" Multiplicity="*" />
+    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="Permissions">
+        <PropertyRef Name="UserRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PermissionsFolders">
+    <End Role="Permissions" Type="DataAccess.Store.Permissions" Multiplicity="*" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="Permissions">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaDataTypeToFolderFolders">
+    <End Role="MetaDataTypeToFolder" Type="DataAccess.Store.MetaDataTypeToFolders" Multiplicity="*" />
+    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Folders">
+        <PropertyRef Name="FolderId" />
+      </Principal>
+      <Dependent Role="MetaDataTypeToFolder">
+        <PropertyRef Name="FolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaDataTypeToFolderMetaDataTypes">
+    <End Role="MetaDataTypeToFolder" Type="DataAccess.Store.MetaDataTypeToFolders" Multiplicity="*" />
     <End Role="MetaDataTypes" Type="DataAccess.Store.MetaDataTypes" Multiplicity="1" />
-    <End Role="MetaDataTypeToFolders" Type="DataAccess.Store.MetaDataTypeToFolders" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MetaDataTypes">
         <PropertyRef Name="MetaDataTypeId" />
       </Principal>
-      <Dependent Role="MetaDataTypeToFolders">
+      <Dependent Role="MetaDataTypeToFolder">
         <PropertyRef Name="MetaDataTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MetaDataValueTypesMetaDataTypes">
+  <Association Name="MetaDataValueTypesMetaDataTypes">
     <End Role="MetaDataValueTypes" Type="DataAccess.Store.MetaDataValueTypes" Multiplicity="1" />
     <End Role="MetaDataTypes" Type="DataAccess.Store.MetaDataTypes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -699,152 +654,172 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectSchemaObjectXsltSets">
-    <End Role="ObjectSchemas" Type="DataAccess.Store.ObjectSchemas" Multiplicity="1" />
-    <End Role="ObjectXslts" Type="DataAccess.Store.ObjectXslts" Multiplicity="*" />
+  <Association Name="MetaDataTypesToContentItemsMetaDataTypes">
+    <End Role="MetaDataTypesToContentItems" Type="DataAccess.Store.MetaDataTypesToContentItems" Multiplicity="*" />
+    <End Role="MetaDataTypes" Type="DataAccess.Store.MetaDataTypes" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="ObjectSchemas">
-        <PropertyRef Name="ObjectSchemaId" />
+      <Principal Role="MetaDataTypes">
+        <PropertyRef Name="MetaDataTypeId" />
       </Principal>
-      <Dependent Role="ObjectXslts">
-        <PropertyRef Name="ObjectSchemaId" />
+      <Dependent Role="MetaDataTypesToContentItems">
+        <PropertyRef Name="MetaDataTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectSchemaTemplateElement">
-    <End Role="ObjectSchemas" Type="DataAccess.Store.ObjectSchemas" Multiplicity="1" />
-    <End Role="TemplateElements" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectSchemas">
-        <PropertyRef Name="ObjectSchemaId" />
-      </Principal>
-      <Dependent Role="TemplateElements">
-        <PropertyRef Name="ObjectSchemaId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ObjectTypesObjectSchema">
-    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
-    <End Role="ObjectSchemas" Type="DataAccess.Store.ObjectSchemas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectTypes">
-        <PropertyRef Name="ObjectTypeId" />
-      </Principal>
-      <Dependent Role="ObjectSchemas">
-        <PropertyRef Name="ObjectTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ObjectXsltSetContentItems">
-    <End Role="ObjectXslts" Type="DataAccess.Store.ObjectXslts" Multiplicity="1" />
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectXslts">
-        <PropertyRef Name="ObjectXsltId" />
-      </Principal>
-      <Dependent Role="ContentItems">
-        <PropertyRef Name="ObjectXsltId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PagesAliases">
-    <End Role="Templates" Type="DataAccess.Store.Templates" Multiplicity="1" />
-    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Templates">
-        <PropertyRef Name="TemplateId" />
-      </Principal>
-      <Dependent Role="Aliases">
-        <PropertyRef Name="TemplateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PermissionsFolders">
-    <End Role="Folders" Type="DataAccess.Store.Folders" Multiplicity="1" />
-    <End Role="Permissions" Type="DataAccess.Store.Permissions" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Folders">
-        <PropertyRef Name="FolderId" />
-      </Principal>
-      <Dependent Role="Permissions">
-        <PropertyRef Name="FolderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PermissionsUserRoles">
-    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
-    <End Role="Permissions" Type="DataAccess.Store.Permissions" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserRoles">
-        <PropertyRef Name="UserRoleId" />
-      </Principal>
-      <Dependent Role="Permissions">
-        <PropertyRef Name="UserRoleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TemplateElementContentItems">
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="0..1" />
-    <End Role="TemplateElements" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
+  <Association Name="MetaDataTypesToContentItemsContentItems">
+    <End Role="MetaDataTypesToContentItems" Type="DataAccess.Store.MetaDataTypesToContentItems" Multiplicity="*" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="ContentItems">
         <PropertyRef Name="ContentItemId" />
       </Principal>
-      <Dependent Role="TemplateElements">
+      <Dependent Role="MetaDataTypesToContentItems">
         <PropertyRef Name="ContentItemId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UsersContentItems">
-    <End Role="UsersSet" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
+  <Association Name="ContentHistoryContentItems">
+    <End Role="ContentHistory" Type="DataAccess.Store.ContentHistories" Multiplicity="*" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="UsersSet">
+      <Principal Role="ContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Principal>
+      <Dependent Role="ContentHistory">
+        <PropertyRef Name="ContentItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContentHistoryUsers">
+    <End Role="ContentHistory" Type="DataAccess.Store.ContentHistories" Multiplicity="*" />
+    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
         <PropertyRef Name="UserId" />
       </Principal>
-      <Dependent Role="ContentItems">
+      <Dependent Role="ContentHistory">
         <PropertyRef Name="CreatedByUserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UsersContentItems1">
-    <End Role="UsersSet" Type="DataAccess.Store.UsersSet" Multiplicity="0..1" />
+  <Association Name="AliasesContentItems">
+    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="*" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Principal>
+      <Dependent Role="Aliases">
+        <PropertyRef Name="ContentItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ObjectXsltSetContentItems">
+    <End Role="ObjectXsltSet" Type="DataAccess.Store.ObjectXslts" Multiplicity="1" />
     <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="UsersSet">
-        <PropertyRef Name="UserId" />
+      <Principal Role="ObjectXsltSet">
+        <PropertyRef Name="ObjectXsltId" />
       </Principal>
       <Dependent Role="ContentItems">
-        <PropertyRef Name="ModifiedByUserId" />
+        <PropertyRef Name="ObjectXsltId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UsersToUserRolesUserRoles">
-    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
-    <End Role="UsersToUserRoles" Type="DataAccess.Store.UsersToUserRoles" Multiplicity="*" />
+  <Association Name="ObjectSchemaObjectXsltSets">
+    <End Role="ObjectSchema" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
+    <End Role="ObjectXsltSets" Type="DataAccess.Store.ObjectXslts" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="UserRoles">
-        <PropertyRef Name="UserRoleId" />
+      <Principal Role="ObjectSchema">
+        <PropertyRef Name="ObjectTypeId" />
       </Principal>
-      <Dependent Role="UsersToUserRoles">
-        <PropertyRef Name="UserRoleId" />
+      <Dependent Role="ObjectXsltSets">
+        <PropertyRef Name="ObjectSchemaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UsersToUserRolesUsers">
-    <End Role="UsersSet" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
-    <End Role="UsersToUserRoles" Type="DataAccess.Store.UsersToUserRoles" Multiplicity="*" />
+  <Association Name="MenusMenus">
+    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
+    <End Role="Menus1" Type="DataAccess.Store.Menus" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="UsersSet">
-        <PropertyRef Name="UserId" />
+      <Principal Role="Menus">
+        <PropertyRef Name="MenuId" />
       </Principal>
-      <Dependent Role="UsersToUserRoles">
-        <PropertyRef Name="UserId" />
+      <Dependent Role="Menus1">
+        <PropertyRef Name="ParentMenuId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="contentItemGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ContentDisplayId" Type="int" Mode="In" />
-    <Parameter Name="LangId" Type="int" Mode="In" />
-  </Function>
+  <Association Name="MenusMenus1">
+    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
+    <End Role="Menus1" Type="DataAccess.Store.Menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="Menus1">
+        <PropertyRef Name="RootMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContentItemsObjectTypes">
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
+    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectTypes">
+        <PropertyRef Name="ObjectTypeId" />
+      </Principal>
+      <Dependent Role="ContentItems">
+        <PropertyRef Name="ObjectSchemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TemplateElementContentItems">
+    <End Role="TemplateElement" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
+    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentItems">
+        <PropertyRef Name="ContentItemId" />
+      </Principal>
+      <Dependent Role="TemplateElement">
+        <PropertyRef Name="ContentItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AliasesMenuItems">
+    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="1" />
+    <End Role="MenuItems" Type="DataAccess.Store.MenuItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aliases">
+        <PropertyRef Name="AliasId" />
+      </Principal>
+      <Dependent Role="MenuItems">
+        <PropertyRef Name="AliasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AliasesMenus">
+    <End Role="Aliases" Type="DataAccess.Store.Aliases" Multiplicity="1" />
+    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aliases">
+        <PropertyRef Name="AliasId" />
+      </Principal>
+      <Dependent Role="Menus">
+        <PropertyRef Name="AliasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ObjectTypesTemplateElements">
+    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
+    <End Role="TemplateElements" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectTypes">
+        <PropertyRef Name="ObjectTypeId" />
+      </Principal>
+      <Dependent Role="TemplateElements">
+        <PropertyRef Name="ObjectTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

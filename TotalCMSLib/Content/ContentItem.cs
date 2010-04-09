@@ -15,7 +15,7 @@ namespace TotalCMS.Content {
         CheckedIn = 1
     }
 
-    public class ContentItem : BaseDataObject, iWorkFlowItem {
+    public class ContentItem : BaseDataObject {
 
         int _contentItemId;
         public int ContactItemId {
@@ -144,19 +144,20 @@ namespace TotalCMS.Content {
             throw new NotImplementedException();
         }
 
-        public void CheckOut() {
+
+        public override void CheckOut() {
             throw new NotImplementedException();
         }
 
-        public void CheckIn() {
+        public override void CheckIn() {
             throw new NotImplementedException();
         }
 
-        public void Stage() {
+        public override void Stage() {
             throw new NotImplementedException();
         }
 
-        public void Publish() {
+        public override void Publish() {
             throw new NotImplementedException();
         }
     }

@@ -31,5 +31,21 @@ namespace TotalCMS.User {
         protected internal override void Delete() {
             throw new NotImplementedException();
         }
+
+        public override void CheckOut() {
+            throw new NotImplementedException();
+        }
+
+        public override void CheckIn() {
+            throw new NotImplementedException();
+        }
+
+        public override void Stage() {
+            throw new NotImplementedException();
+        }
+
+        public override void Publish() {
+            throw new NotImplementedException();
+        }
     }
 }

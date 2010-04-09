@@ -65,8 +65,8 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         /// </summary>
         /// <param name="SqlCmd">The Sql Command to be executed.</param>
         /// <returns>The Scalar that resulted from the SQL Command.</returns>
-        protected override object GetScalar(string SqlCmd) {
-            return GetScalar(SqlCmd, CommandType.Text, new DbParameter[0]);
+        protected override T  GetScalar<T>(string SqlCmd) {
+            return GetScalar<T>(SqlCmd, CommandType.Text, new DbParameter[0]);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         /// <param name="SqlCmd">The name of the procedure to be executed.</param>
         /// <param name="Params">A List of DbParameters to be passed to the stored procedure. Pass null if there are none.</param>
         /// <returns>The Scalar that resulted from the SQL Command.</returns>
-        protected override object GetScalar(string SqlCmd, List<DbParameter> Params) {
-            return GetScalar(SqlCmd, CommandType.StoredProcedure, Params.ToArray());
+        protected override T GetScalar<T>(string SqlCmd, List<DbParameter> Params) {
+            return GetScalar<T>(SqlCmd, CommandType.StoredProcedure, Params.ToArray());
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         /// <param name="SqlCmd">The name of the procedure to be executed.</param>
         /// <param name="Param">A set of DbParameters to be passed to the stored procedure. Pass null if there are none.</param>
         /// <returns>The Scalar that resulted from the SQL Command.</returns>
-        protected override object GetScalar(string SqlCmd, params DbParameter[] Params) {
-            return GetScalar(SqlCmd, CommandType.StoredProcedure, Params);
+        protected override T GetScalar<T>(string SqlCmd, params DbParameter[] Params) {
+            return GetScalar<T>(SqlCmd, CommandType.StoredProcedure, Params);
         }
 
         /// <summary>
@@ -96,10 +96,10 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         /// <param name="Params">A List of DbParameters to be passed to the stored procedure. Pass null if there are none.</param>
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The Scalar that resulted from the SQL Command.</returns>
-        protected override object GetScalar(string SqlCmd, CommandType CType, params DbParameter[] Params) {
+        protected override T GetScalar<T>(string SqlCmd, CommandType CType, params DbParameter[] Params) {
             SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
             cmd.Connection.Open();
-            object val = cmd.ExecuteScalar();
+            T val = (T)cmd.ExecuteScalar();
             cmd.Connection.Close();
             return val;
         }
@@ -219,6 +219,24 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
             return GetDataReader("contentItemGet",
                 new SqlParameter("ContentDisplayId", ContentDisplayId),
                 new SqlParameter("LangId", SiteSettings.ContextData.CurrentLanguage.LangId));
+        }
+
+        public new SqlDataReader ObjectTypeGet(int ObjectTypeId) {
+            return GetDataReader("ObjectTypeGet",
+                new SqlParameter("ObjectTypeId", ObjectTypeId));
+        }
+
+        public new DateTime ObjectTypeCheckModifiedDate(int ObjectTypeId) {
+            return GetScalar<DateTime>("ObjectTypeCheckModifiedDate",
+                new SqlParameter("ObjectTypeId", ObjectTypeId));
+        }
+
+        public int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml) {
+            return GetScalar<int>("ObjectTypeSave",
+                new SqlParameter("DataEntryXslt", DataEntryXslt),
+                new SqlParameter("Name", Name),
+                new SqlParameter("DefaultDisplayXslt", DefaultDisplayXslt),
+                new SqlParameter("SchemaXml", SchemaXml));
         }
         #endregion
     }

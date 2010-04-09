@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace TotalCMS
 {
-    static class SiteSettings
+    public static class SiteSettings
     {
         static string ContextProviderClassName = 
             ConfigurationManager.AppSettings["TotalCMS_ContextProviderClassName"];
@@ -32,6 +32,11 @@ namespace TotalCMS
                 }
                 return _contextData;
             }
+        }
+
+        static int _cacheLength = 20;
+        public static int CacheLength{
+            get { return _cacheLength; }
         }
 
 
@@ -69,7 +74,7 @@ namespace TotalCMS
             get {
                 _securityKey = ConfigurationManager.AppSettings["TotalCMS_SecurityKey"];
                 if(_securityKey == null || _securityKey == string.Empty)
-                    SiteSettings.ContextData.DebugLog.WriteDebugMessage(new SettingsPropertyNotFoundException("There is no security key avaliable in the config file, please check the config.");
+                    SiteSettings.ContextData.DebugLog.WriteDebugMessage(new SettingsPropertyNotFoundException("There is no security key avaliable in the config file, please check the config."));
                 return _securityKey;
             }
         }               

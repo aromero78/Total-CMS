@@ -175,7 +175,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TemplateElements">
-      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.TemplateElement)">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.TemplateElements)">
         <MappingFragment StoreEntitySet="TemplateElements">
           <ScalarProperty Name="TemplateElementId" ColumnName="TemplateElementId" />
           <ScalarProperty Name="XsltId" ColumnName="XsltId" />
@@ -183,8 +183,8 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DynamicParamName" ColumnName="DynamicParamName" />
-          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
           <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -246,13 +246,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ObjectSchemas">
-      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectSchema)">
-        <MappingFragment StoreEntitySet="ObjectSchemas">
-          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
-          <ScalarProperty Name="SchemaXmlUri" ColumnName="SchemaXml" />
+    <EntitySetMapping Name="ObjectTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectTypes)">
+        <MappingFragment StoreEntitySet="ObjectTypes">
           <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
-          <ScalarProperty Name="DataEntryXsltUri" ColumnName="DataEntryXslt" />
+          <ScalarProperty Name="DataEntryXslt" ColumnName="DataEntryXslt" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DefaultDisplayXslt" ColumnName="DefaultDisplayXslt" />
+          <ScalarProperty Name="SchemaXml" ColumnName="SchemaXml" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -260,16 +261,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectXslts)">
         <MappingFragment StoreEntitySet="ObjectXslts">
           <ScalarProperty Name="ObjectXsltId" ColumnName="ObjectXsltId" />
-          <ScalarProperty Name="ObjectXsltUri" ColumnName="ObjectXslt" />
+          <ScalarProperty Name="ObjectXsltUri" ColumnName="ObjectXsltUri" />
           <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ObjectTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectTypes)">
-        <MappingFragment StoreEntitySet="ObjectTypes">
-          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="isValidated" ColumnName="isValidated" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

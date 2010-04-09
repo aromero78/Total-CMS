@@ -64,7 +64,7 @@
       <End EntitySet="UserRoles" Role="UserRoles" />
     </AssociationSet>
     <EntitySet Name="Templates" EntityType="DataAccess.Templates" />
-    <EntitySet Name="TemplateElements" EntityType="DataAccess.TemplateElement" />
+    <EntitySet Name="TemplateElements" EntityType="DataAccess.TemplateElements" />
     <AssociationSet Name="AdminElementAdminPages" Association="DataAccess.AdminElementAdminPages">
       <End Role="AdminElement" EntitySet="TemplateElements" />
       <End Role="AdminPages" EntitySet="Templates" />
@@ -121,24 +121,15 @@
       <End Role="Aliases" EntitySet="Aliases" />
       <End Role="ContentItems" EntitySet="ContentItems" />
     </AssociationSet>
-    <EntitySet Name="ObjectSchemas" EntityType="DataAccess.ObjectSchema" />
+    <EntitySet Name="ObjectTypes" EntityType="DataAccess.ObjectTypes" />
     <EntitySet Name="ObjectXslts" EntityType="DataAccess.ObjectXslts" />
     <AssociationSet Name="ObjectXsltSetContentItems" Association="DataAccess.ObjectXsltSetContentItems">
       <End Role="ObjectXsltSet" EntitySet="ObjectXslts" />
       <End Role="ContentItems" EntitySet="ContentItems" />
     </AssociationSet>
     <AssociationSet Name="ObjectSchemaObjectXsltSets" Association="DataAccess.ObjectSchemaObjectXsltSets">
-      <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
+      <End Role="ObjectSchema" EntitySet="ObjectTypes" />
       <End Role="ObjectXsltSets" EntitySet="ObjectXslts" />
-    </AssociationSet>
-    <EntitySet Name="ObjectTypes" EntityType="DataAccess.ObjectTypes" />
-    <AssociationSet Name="ObjectTypesObjectSchema" Association="DataAccess.ObjectTypesObjectSchema">
-      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
-      <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
-    </AssociationSet>
-    <AssociationSet Name="ObjectSchemaTemplateElement" Association="DataAccess.ObjectSchemaTemplateElement">
-      <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
-      <End Role="TemplateElement" EntitySet="TemplateElements" />
     </AssociationSet>
     <EntitySet Name="Settings" EntityType="DataAccess.Settings" />
     <AssociationSet Name="MenusMenus" Association="DataAccess.MenusMenus">
@@ -149,9 +140,9 @@
       <End Role="Menus" EntitySet="Menus" />
       <End Role="Menus1" EntitySet="Menus" />
     </AssociationSet>
-    <AssociationSet Name="ContentItemsObjectSchema" Association="DataAccess.ContentItemsObjectSchema">
+    <AssociationSet Name="ContentItemsObjectTypes" Association="DataAccess.ContentItemsObjectTypes">
       <End Role="ContentItems" EntitySet="ContentItems" />
-      <End Role="ObjectSchema" EntitySet="ObjectSchemas" />
+      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
     </AssociationSet>
     <AssociationSet Name="TemplateElementContentItems" Association="DataAccess.TemplateElementContentItems">
       <End Role="TemplateElement" EntitySet="TemplateElements" />
@@ -164,6 +155,10 @@
     <AssociationSet Name="AliasesMenus" Association="DataAccess.AliasesMenus">
       <End Role="Aliases" EntitySet="Aliases" />
       <End Role="Menus" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectTypesTemplateElements" Association="DataAccess.ObjectTypesTemplateElements">
+      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
+      <End Role="TemplateElements" EntitySet="TemplateElements" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ContentItems" Abstract="true">
@@ -187,7 +182,7 @@
     <NavigationProperty Name="Aliases" Relationship="DataAccess.AliasesContentItems" FromRole="ContentItems" ToRole="Aliases" cg:SetterAccess="Protected" />
     <NavigationProperty Name="ObjectXslt" Relationship="DataAccess.ObjectXsltSetContentItems" FromRole="ContentItems" ToRole="ObjectXsltSet" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ObjectXsltId" Nullable="false" cg:SetterAccess="Public" />
-    <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ContentItemsObjectSchema" FromRole="ContentItems" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
+    <NavigationProperty Name="ObjectTypes" Relationship="DataAccess.ContentItemsObjectTypes" FromRole="ContentItems" ToRole="ObjectTypes" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
     <NavigationProperty Name="TemplateElements" Relationship="DataAccess.TemplateElementContentItems" FromRole="ContentItems" ToRole="TemplateElement" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ContentDisplayId" Nullable="false" />
@@ -512,7 +507,7 @@
     <NavigationProperty Name="Aliases" Relationship="DataAccess.PagesAliases" FromRole="Pages" ToRole="Aliases" cg:SetterAccess="Protected" />
     <Property Type="String" Name="TemplateFileUrl" Nullable="false" cg:SetterAccess="Public" />
   </EntityType>
-  <EntityType Name="TemplateElement" Abstract="true">
+  <EntityType Name="TemplateElements" Abstract="true">
     <Key>
       <PropertyRef Name="TemplateElementId" />
     </Key>
@@ -523,13 +518,13 @@
     <Property Type="String" Name="Title" Nullable="false" cg:SetterAccess="Protected" />
     <Property Type="String" Name="Description" Nullable="false" cg:SetterAccess="Protected" />
     <Property Type="String" Name="DynamicParamName" Nullable="true" cg:SetterAccess="Protected" />
-    <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ObjectSchemaTemplateElement" FromRole="TemplateElement" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
-    <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
     <NavigationProperty Name="ContentItem" Relationship="DataAccess.TemplateElementContentItems" FromRole="TemplateElement" ToRole="ContentItems" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ContentItemId" Nullable="true" cg:SetterAccess="Protected" />
+    <NavigationProperty Name="ObjectType" Relationship="DataAccess.ObjectTypesTemplateElements" FromRole="TemplateElements" ToRole="ObjectTypes" />
+    <Property Type="Int32" Name="ObjectTypeId" Nullable="false" />
   </EntityType>
   <Association Name="AdminElementAdminPages">
-    <End Type="DataAccess.TemplateElement" Role="AdminElement" Multiplicity="*" />
+    <End Type="DataAccess.TemplateElements" Role="AdminElement" Multiplicity="*" />
     <End Type="DataAccess.Templates" Role="AdminPages" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="AdminPages">
@@ -745,18 +740,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="ObjectSchema" Abstract="true">
+  <EntityType Name="ObjectTypes" Abstract="true">
     <Key>
-      <PropertyRef Name="ObjectSchemaId" />
+      <PropertyRef Name="ObjectTypeId" />
     </Key>
-    <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
-    <Property Type="String" Name="SchemaXmlUri" Nullable="false" cg:SetterAccess="Protected" />
-    <NavigationProperty Name="ObjectXsltSets" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectSchema" ToRole="ObjectXsltSets" cg:SetterAccess="Protected" />
-    <NavigationProperty Name="ObjectType" Relationship="DataAccess.ObjectTypesObjectSchema" FromRole="ObjectSchema" ToRole="ObjectTypes" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ObjectTypeId" Nullable="false" cg:SetterAccess="Protected" />
-    <NavigationProperty Name="TemplateElements" Relationship="DataAccess.ObjectSchemaTemplateElement" FromRole="ObjectSchema" ToRole="TemplateElement" cg:SetterAccess="Protected" />
-    <Property Type="String" Name="DataEntryXsltUri" Nullable="false" cg:SetterAccess="Protected" />
-    <NavigationProperty Name="ContentItems" Relationship="DataAccess.ContentItemsObjectSchema" FromRole="ObjectSchema" ToRole="ContentItems" cg:SetterAccess="Protected" />
+    <NavigationProperty Name="ObjectXsltSets" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectSchema" ToRole="ObjectXsltSets" cg:SetterAccess="Protected" />
+    <Property Type="String" Name="DataEntryXslt" Nullable="false" cg:SetterAccess="Protected" />
+    <NavigationProperty Name="ContentItems" Relationship="DataAccess.ContentItemsObjectTypes" FromRole="ObjectTypes" ToRole="ContentItems" cg:SetterAccess="Protected" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="DefaultDisplayXslt" Nullable="false" />
+    <Property Type="String" Name="SchemaXml" Nullable="false" />
+    <NavigationProperty Name="TemplateElements" Relationship="DataAccess.ObjectTypesTemplateElements" FromRole="ObjectTypes" ToRole="TemplateElements" />
   </EntityType>
   <EntityType Name="ObjectXslts" Abstract="true">
     <Key>
@@ -767,6 +762,8 @@
     <NavigationProperty Name="ContentItems" Relationship="DataAccess.ObjectXsltSetContentItems" FromRole="ObjectXsltSet" ToRole="ContentItems" cg:SetterAccess="Protected" />
     <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectXsltSets" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
     <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Boolean" Name="isValidated" Nullable="false" />
   </EntityType>
   <Association Name="ObjectXsltSetContentItems">
     <End Type="DataAccess.ObjectXslts" Role="ObjectXsltSet" Multiplicity="1" />
@@ -781,45 +778,13 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ObjectSchemaObjectXsltSets">
-    <End Type="DataAccess.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
+    <End Type="DataAccess.ObjectTypes" Role="ObjectSchema" Multiplicity="1" />
     <End Type="DataAccess.ObjectXslts" Role="ObjectXsltSets" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectSchema">
-        <PropertyRef Name="ObjectSchemaId" />
+        <PropertyRef Name="ObjectTypeId" />
       </Principal>
       <Dependent Role="ObjectXsltSets">
-        <PropertyRef Name="ObjectSchemaId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="ObjectTypes" Abstract="true">
-    <Key>
-      <PropertyRef Name="ObjectTypeId" />
-    </Key>
-    <Property Type="Int32" Name="ObjectTypeId" Nullable="false" cg:SetterAccess="Protected" />
-    <NavigationProperty Name="ObjectSchemas" Relationship="DataAccess.ObjectTypesObjectSchema" FromRole="ObjectTypes" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
-    <Property Type="String" Name="Description" Nullable="false" cg:SetterAccess="Protected" />
-  </EntityType>
-  <Association Name="ObjectTypesObjectSchema">
-    <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
-    <End Type="DataAccess.ObjectSchema" Role="ObjectSchema" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectTypes">
-        <PropertyRef Name="ObjectTypeId" />
-      </Principal>
-      <Dependent Role="ObjectSchema">
-        <PropertyRef Name="ObjectTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ObjectSchemaTemplateElement">
-    <End Type="DataAccess.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
-    <End Type="DataAccess.TemplateElement" Role="TemplateElement" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectSchema">
-        <PropertyRef Name="ObjectSchemaId" />
-      </Principal>
-      <Dependent Role="TemplateElement">
         <PropertyRef Name="ObjectSchemaId" />
       </Dependent>
     </ReferentialConstraint>
@@ -855,12 +820,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ContentItemsObjectSchema">
+  <Association Name="ContentItemsObjectTypes">
     <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="*" />
-    <End Type="DataAccess.ObjectSchema" Role="ObjectSchema" Multiplicity="1" />
+    <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="ObjectSchema">
-        <PropertyRef Name="ObjectSchemaId" />
+      <Principal Role="ObjectTypes">
+        <PropertyRef Name="ObjectTypeId" />
       </Principal>
       <Dependent Role="ContentItems">
         <PropertyRef Name="ObjectSchemaId" />
@@ -868,7 +833,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="TemplateElementContentItems">
-    <End Type="DataAccess.TemplateElement" Role="TemplateElement" Multiplicity="*" />
+    <End Type="DataAccess.TemplateElements" Role="TemplateElement" Multiplicity="*" />
     <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="ContentItems">
@@ -900,6 +865,18 @@
       </Principal>
       <Dependent Role="Menus">
         <PropertyRef Name="AliasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ObjectTypesTemplateElements">
+    <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
+    <End Type="DataAccess.TemplateElements" Role="TemplateElements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectTypes">
+        <PropertyRef Name="ObjectTypeId" />
+      </Principal>
+      <Dependent Role="TemplateElements">
+        <PropertyRef Name="ObjectTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

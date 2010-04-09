@@ -51,7 +51,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
 		/// </summary>
 		/// <param name="SqlCmd">The Sql Command to be executed.</param>
 		/// <returns>The Scalar that resulted from the SQL Command.</returns>
-        protected abstract object GetScalar(string SqlCmd);
+        protected abstract T GetScalar<T>(string SqlCmd);
 
         /// <summary>
 		/// Executes a stored procedure and returns a Scalar.
@@ -59,7 +59,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
 		/// <param name="SqlCmd">The name of the procedure to be executed.</param>
 		/// <param name="Params">A List of SqlParameters to be passed to the stored procedure. Pass null if there are none.</param>
 		/// <returns>The Scalar that resulted from the SQL Command.</returns>
-        protected abstract object GetScalar(string SqlCmd, List<DbParameter> Params);
+        protected abstract T GetScalar<T>(string SqlCmd, List<DbParameter> Params);
 
         /// <summary>
 		/// Executes a stored procedure and returns a Scalar.
@@ -67,7 +67,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
 		/// <param name="SqlCmd">The name of the procedure to be executed.</param>
 		/// <param name="Param">A set of SqlParameters to be passed to the stored procedure. Pass null if there are none.</param>
 		/// <returns>The Scalar that resulted from the SQL Command.</returns>
-        protected abstract object GetScalar(string SqlCmd, params DbParameter[] Param);
+        protected abstract T GetScalar<T>(string SqlCmd, params DbParameter[] Param);
 
         /// <summary>
 		/// Executes a SQL Command and returns a Scalar.
@@ -76,7 +76,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
 		/// <param name="Params">A List of SqlParameters to be passed to the stored procedure. Pass null if there are none.</param>
 		/// <param name="CType">The type of the command to be executed.</param>
 		/// <returns>The Scalar that resulted from the SQL Command.</returns>
-        protected abstract object GetScalar(string SqlCmd, CommandType CType, params DbParameter[] Param);
+        protected abstract T GetScalar<T>(string SqlCmd, CommandType CType, params DbParameter[] Param);
         #endregion
         #region NonQuery
         /// <summary>
@@ -162,6 +162,18 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
 
         #region Content Functions
         public DbDataReader ContentItemGet(int ContentDisplayId) {
+            throw new NotImplementedException();
+        }
+
+        public DbDataReader ObjectTypeGet(int ObjectTypeId) {
+            throw new NotImplementedException();
+        }
+
+        public DateTime ObjectTypeCheckModifiedDate(int ObjectTypeId) {
+            throw new NotImplementedException();
+        }
+
+        public int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml) {
             throw new NotImplementedException();
         }
         #endregion

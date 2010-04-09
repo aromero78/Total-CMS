@@ -48,7 +48,6 @@
     <Compile Include="Content\ContentHistory.cs" />
     <Compile Include="Content\ContentItem.cs" />
     <Compile Include="Content\Folder.cs" />
-    <Compile Include="Content\iWorkFlowItem.cs" />
     <Compile Include="Data\ContextDataProviders\BaseDebugLogger.cs" />
     <Compile Include="Data\Database\iDataManager.cs" />
     <Compile Include="Data\Database\SqlDataManager.cs" />
