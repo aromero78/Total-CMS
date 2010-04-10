@@ -1311,7 +1311,7 @@
             <End Role="MenuHistories" EntitySet="MenuHistories" />
             <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
           </EntityContainer>
-        <EntityType Name="ContentItems" Abstract="true">
+        <EntityType Name="ContentItems" Abstract="false">
           <Key>
             <PropertyRef Name="ContentItemId" /></Key>
           <Property Type="Int32" Name="ContentItemId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1339,7 +1339,7 @@
           <NavigationProperty Name="WorkFlowInstance" Relationship="DataAccess.WorkFlowInstancesContentItems" FromRole="ContentItems" ToRole="WorkFlowInstances" />
           <Property Type="Int32" Name="WorkFlowInstanceId" Nullable="true" />
           </EntityType>
-        <EntityType Name="UserRoles" Abstract="true">
+        <EntityType Name="UserRoles" Abstract="false">
           <Key>
             <PropertyRef Name="UserRoleId" /></Key>
           <Property Type="Int32" Name="UserRoleId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1349,7 +1349,7 @@
           <NavigationProperty Name="WorkFlowSteps" Relationship="DataAccess.WorkFlowStepsUserRoles" FromRole="UserRoles" ToRole="WorkFlowSteps" />
           <Property Type="Boolean" Name="IsSingleton" Nullable="false" />
           </EntityType>
-        <EntityType Name="Users" Abstract="true">
+        <EntityType Name="Users" Abstract="false">
           <Key>
             <PropertyRef Name="UserId" /></Key>
           <Property Type="Int32" Name="UserId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1368,7 +1368,7 @@
           <NavigationProperty Name="ObjectTypeHistories" Relationship="DataAccess.ObjectTypeHistoriesUsers" FromRole="Users" ToRole="ObjectTypeHistories" />
           <NavigationProperty Name="MenuHistories" Relationship="DataAccess.MenuHistoriesUsers" FromRole="Users" ToRole="MenuHistories" />
           </EntityType>
-        <EntityType Name="UsersToUserRoles" Abstract="true">
+        <EntityType Name="UsersToUserRoles" Abstract="false">
           <Key>
             <PropertyRef Name="UserToUserRoleId" /></Key>
           <Property Name="UserToUserRoleId" cg:SetterAccess="Protected" Nullable="false" Type="Int32" />
@@ -1404,7 +1404,7 @@
             <Dependent Role="UsersToUserRoles">
               <PropertyRef Name="UserId" /></Dependent></ReferentialConstraint>
           </Association>
-        <EntityType Name="Folders" Abstract="true">
+        <EntityType Name="Folders" Abstract="false">
           <Key>
             <PropertyRef Name="FolderId" /></Key>
           <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1433,7 +1433,7 @@
           <Property Type="Boolean" Name="AddCalendarsToWorkflow" Nullable="false" />
           <Property Type="Boolean" Name="AddMenusToWorkflow" Nullable="false" />
           </EntityType>
-        <EntityType Name="LibraryItems" Abstract="true">
+        <EntityType Name="LibraryItems" Abstract="false">
           <Key>
             <PropertyRef Name="LibraryItemId" /></Key>
           <Property Type="Int32" Name="LibraryItemId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1442,7 +1442,7 @@
           <Property Type="String" Name="FileUrl" Nullable="false" cg:SetterAccess="Public" />
           <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Public" />
           <Property Type="String" Name="Desciprtion" Nullable="false" cg:SetterAccess="Public" /></EntityType>
-        <EntityType Name="Menus" Abstract="true">
+        <EntityType Name="Menus" Abstract="false">
           <Key>
             <PropertyRef Name="MenuId" /></Key>
           <Property Type="Int32" Name="MenuId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1463,7 +1463,7 @@
           <Property Type="Int32" Name="WorkFlowInstanceId" Nullable="true" />
           <NavigationProperty Name="MenuHistories" Relationship="DataAccess.MenuHistoriesMenus" FromRole="Menus" ToRole="MenuHistories" />
           </EntityType>
-        <EntityType Name="MenuItems" Abstract="true">
+        <EntityType Name="MenuItems" Abstract="false">
           <Key>
             <PropertyRef Name="MenuItemId" /></Key>
           <Property Type="Int32" Name="MenuItemId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1474,7 +1474,7 @@
           <NavigationProperty Name="Alias" Relationship="DataAccess.AliasesMenuItems" FromRole="MenuItems" ToRole="Aliases" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="AliasId" Nullable="false" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="Calendars" Abstract="true">
+        <EntityType Name="Calendars" Abstract="false">
           <Key>
             <PropertyRef Name="CalendarId" /></Key>
           <Property Type="Int32" Name="CalendarId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1484,7 +1484,7 @@
           <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Public" />
           <NavigationProperty Name="WorkFlowInstance" Relationship="DataAccess.WorkFlowInstancesCalendars" FromRole="Calendars" ToRole="WorkFlowInstances" />
           <Property Type="Int32" Name="WorkFlowInstanceId" Nullable="true" /></EntityType>
-        <EntityType Name="CalendarEvents" Abstract="true">
+        <EntityType Name="CalendarEvents" Abstract="false">
           <Key>
             <PropertyRef Name="CalendarEventIds" /></Key>
           <Property Type="Int32" Name="CalendarEventIds" Nullable="false" cg:SetterAccess="Protected" />
@@ -1493,7 +1493,7 @@
           <Property Type="String" Name="Name" Nullable="false" cg:SetterAccess="Public" />
           <Property Type="String" Name="Description" Nullable="false" cg:SetterAccess="Public" />
           <Property Type="String" Name="iCalSettings" Nullable="false" cg:SetterAccess="Public" /></EntityType>
-        <EntityType Name="Aliases" Abstract="true">
+        <EntityType Name="Aliases" Abstract="false">
           <Key>
             <PropertyRef Name="AliasId" /></Key>
           <Property Type="Int32" Name="AliasId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1506,7 +1506,7 @@
           <NavigationProperty Name="MenuItem" Relationship="DataAccess.AliasesMenuItems" FromRole="Aliases" ToRole="MenuItems" cg:SetterAccess="Protected" />
           <NavigationProperty Name="Menu" Relationship="DataAccess.AliasesMenus" FromRole="Aliases" ToRole="Menus" cg:SetterAccess="Protected" />
           </EntityType>
-        <EntityType Name="MetaDataTypesToContentItems" Abstract="true">
+        <EntityType Name="MetaDataTypesToContentItems" Abstract="false">
           <Key>
             <PropertyRef Name="MetaDataTypesToContentItemId" /></Key>
           <Property Type="Int32" Name="MetaDataTypesToContentItemId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1515,7 +1515,7 @@
           <NavigationProperty Name="ContentItem" Relationship="DataAccess.MetaDataTypesToContentItemsContentItems" FromRole="MetaDataTypesToContentItems" ToRole="ContentItems" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="ContentItemId" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="String" Name="Value" Nullable="true" cg:SetterAccess="Protected" /></EntityType>
-        <EntityType Name="MetaDataTypes" Abstract="true">
+        <EntityType Name="MetaDataTypes" Abstract="false">
           <Key>
             <PropertyRef Name="MetaDataTypeId" /></Key>
           <Property Type="Int32" Name="MetaDataTypeId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1604,7 +1604,7 @@
               <PropertyRef Name="UserRoleId" /></Principal>
             <Dependent Role="UsersToUserRoles">
               <PropertyRef Name="UserRoleId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="Templates" Abstract="true">
+        <EntityType Name="Templates" Abstract="false">
           <Key>
             <PropertyRef Name="TemplateId" /></Key>
           <Property Type="Int32" Name="TemplateId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1615,7 +1615,7 @@
           <Property Type="String" Name="TemplateFileUrl" Nullable="false" cg:SetterAccess="Public" />
           <NavigationProperty Name="WorkFlowInstance" Relationship="DataAccess.WorkFlowInstancesTemplates" FromRole="Templates" ToRole="WorkFlowInstances" />
           <Property Type="Int32" Name="WorkFlowInstanceId" Nullable="true" /></EntityType>
-        <EntityType Name="TemplateElements" Abstract="true">
+        <EntityType Name="TemplateElements" Abstract="false">
           <Key>
             <PropertyRef Name="TemplateElementId" /></Key>
           <Property Type="Int32" Name="TemplateElementId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1654,7 +1654,7 @@
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="Folders1">
               <PropertyRef Name="ParentFolderId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="Permissions" Abstract="true">
+        <EntityType Name="Permissions" Abstract="false">
           <Key>
             <PropertyRef Name="PermissionId" /></Key>
           <Property Type="Int32" Name="PermissionId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1698,7 +1698,7 @@
               <PropertyRef Name="FolderId" /></Principal>
             <Dependent Role="Permissions">
               <PropertyRef Name="FolderId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="MetaDataTypeToFolder" Abstract="true">
+        <EntityType Name="MetaDataTypeToFolder" Abstract="false">
           <Key>
             <PropertyRef Name="MetaDataTypeToFolderId" /></Key>
           <Property Type="Int32" Name="MetaDataTypeToFolderId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1724,7 +1724,7 @@
               <PropertyRef Name="MetaDataTypeId" /></Principal>
             <Dependent Role="MetaDataTypeToFolder">
               <PropertyRef Name="MetaDataTypeId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="MetaDataValueTypes" Abstract="true">
+        <EntityType Name="MetaDataValueTypes" Abstract="false">
           <Key>
             <PropertyRef Name="MetaDataValueTypeId" /></Key>
           <Property Type="Int32" Name="MetaDataValueTypeId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1754,7 +1754,7 @@
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="MetaDataTypesToContentItems">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="ContentHistories" Abstract="true">
+        <EntityType Name="ContentHistories" Abstract="false">
           <Key>
             <PropertyRef Name="ContentHistoryId" /></Key>
           <Property Type="Int32" Name="ContentHistoryId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1790,7 +1790,7 @@
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="Aliases">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="ObjectTypes" Abstract="true">
+        <EntityType Name="ObjectTypes" Abstract="false">
           <Key>
             <PropertyRef Name="ObjectTypeId" /></Key>
           <Property Type="Int32" Name="ObjectTypeId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1807,7 +1807,7 @@
           <NavigationProperty Name="ObjectTypeHistories" Relationship="DataAccess.ObjectTypeHistoriesObjectTypes" FromRole="ObjectTypes" ToRole="ObjectTypeHistories" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           </EntityType>
-        <EntityType Name="ObjectXslts" Abstract="true">
+        <EntityType Name="ObjectXslts" Abstract="false">
           <Key>
             <PropertyRef Name="ObjectXsltId" /></Key>
           <Property Type="Int32" Name="ObjectXsltId" Nullable="false" cg:SetterAccess="Protected" />
@@ -1834,7 +1834,7 @@
               <PropertyRef Name="ObjectTypeId" /></Principal>
             <Dependent Role="ObjectXsltSets">
               <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="Settings" Abstract="true">
+        <EntityType Name="Settings" Abstract="false">
           <Key>
             <PropertyRef Name="SettingId" /></Key>
           <Property Type="Int32" Name="SettingId" Nullable="false" cg:SetterAccess="Protected" />
@@ -2444,7 +2444,7 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="65" >
+      <Diagram Name="Model1" ZoomLevel="49" >
         <EntityTypeShape EntityType="DataAccess.ContentItems" Width="1.5" PointX="4" PointY="4.375" Height="4.5505582682291656" />
         <EntityTypeShape EntityType="DataAccess.UserRoles" Width="1.5" PointX="10.25" PointY="11.125" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataAccess.Users" Width="1.5" PointX="7.625" PointY="9.125" Height="2.9070849609374996" />

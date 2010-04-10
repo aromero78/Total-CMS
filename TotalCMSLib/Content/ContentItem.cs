@@ -15,7 +15,7 @@ namespace TotalCMS.Content {
         CheckedIn = 1
     }
 
-    public class ContentItem : BaseDataObject {
+    public class ContentItem : BaseDataObject<ContentItem> {
 
         int _contentItemId;
         public int ContactItemId {
@@ -105,33 +105,6 @@ namespace TotalCMS.Content {
             throw new NotImplementedException();
         }
 
-        protected internal override void Load() {
-            if (_contentItemId != 0) {
-                System.Data.Common.DbDataReader dataReader = SiteSettings.ContextData.DataAccess.ContentItemGet(_contentItemId);
-                _contentItemId = dataReader.GetInt32(0);
-                _contentHtml = dataReader.GetString(1);
-                _contentSummary = dataReader.GetString(2);
-                _dateCreated = dataReader.GetDateTime(3);
-                _dateModified = dataReader.GetDateTime(4);
-                _createdByUserId = dataReader.GetInt32(5);
-                _modifiedByUserId = dataReader.GetInt32(6);
-                _folderId = dataReader.GetInt32(7);
-                switch (dataReader.GetString(8)) { 
-                    case "IN":
-                        _contentStatus = ContentStatuses.CheckedIn;
-                        break;
-                    case "OT":
-                        _contentStatus = ContentStatuses.CheckedOut;
-                        break;
-                }
-
-                dataReader.Close();
-            }
-            else {
-                SiteSettings.ContextData.DebugLog.WriteDebugMessage("The content item id is not set.");
-            }
-        }
-
         protected internal override void Save() {
             throw new NotImplementedException();
         }
@@ -159,6 +132,36 @@ namespace TotalCMS.Content {
 
         public override void Publish() {
             throw new NotImplementedException();
+        }
+
+        protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData() {
+            if (_contentItemId != 0) {
+                System.Data.Common.DbDataReader dataReader = SiteSettings.ContextData.DataAccess.ContentItemGet(_contentItemId);
+                _contentItemId = dataReader.GetInt32(0);
+                _contentHtml = dataReader.GetString(1);
+                _contentSummary = dataReader.GetString(2);
+                _dateCreated = dataReader.GetDateTime(3);
+                _dateModified = dataReader.GetDateTime(4);
+                _createdByUserId = dataReader.GetInt32(5);
+                _modifiedByUserId = dataReader.GetInt32(6);
+                _folderId = dataReader.GetInt32(7);
+                switch (dataReader.GetString(8)) {
+                    case "IN":
+                        _contentStatus = ContentStatuses.CheckedIn;
+                        break;
+                    case "OT":
+                        _contentStatus = ContentStatuses.CheckedOut;
+                        break;
+                }
+                dataReader.Close();
+            }
+            else {
+                SiteSettings.ContextData.DebugLog.WriteDebugMessage("The content item id is not set.");
+            }
         }
     }
 }

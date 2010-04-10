@@ -55,7 +55,7 @@
     <Compile Include="Data\ContextDataProviders\WebDebugLog.cs" />
     <Compile Include="Controls\GenericEventArgs.cs" />
     <Compile Include="Data\CacheManager.cs" />
-    <Compile Include="BaseObject.cs" />
+    <Compile Include="BaseDataObject.cs" />
     <Compile Include="Data\ContextDataProviders\iContextDataProvider.cs" />
     <Compile Include="Data\ContextDataProviders\WebContextData.cs" />
     <Compile Include="Language.cs" />
@@ -67,11 +67,6 @@
     <Compile Include="Page\Template.cs" />
     <Compile Include="Page\TemplateElement.cs" />
     <Compile Include="SiteSettings.cs" />
-    <Compile Include="TotalCMS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TotalCMS.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserRoles.cs" />
@@ -81,10 +76,7 @@
     <Compile Include="Xml\XslHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="TotalCMS.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TotalCMS.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <None Include="TotalCMS.edmx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

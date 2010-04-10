@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalCMS.User {
-    public class User : BaseDataObject {
+    public class User : BaseDataObject<User> {
 
         int _userId;
         public int UserId {
@@ -13,10 +13,6 @@ namespace TotalCMS.User {
         }
 
         protected internal override void Reset() {
-            throw new NotImplementedException();
-        }
-
-        protected internal override void Load() {
             throw new NotImplementedException();
         }
 
@@ -45,6 +41,14 @@ namespace TotalCMS.User {
         }
 
         public override void Publish() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData() {
             throw new NotImplementedException();
         }
     }

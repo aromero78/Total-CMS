@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalCMS.Content {
-    public class Folder : BaseDataObject {
+    public class Folder : BaseDataObject<Folder> {
 
         int _FolderId;
         public int FolderId {
@@ -12,10 +12,6 @@ namespace TotalCMS.Content {
             internal set { _FolderId = value; }
         }
         protected internal override void Reset() {
-            throw new NotImplementedException();
-        }
-
-        protected internal override void Load() {
             throw new NotImplementedException();
         }
 
@@ -44,6 +40,14 @@ namespace TotalCMS.Content {
         }
 
         public override void Publish() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData() {
             throw new NotImplementedException();
         }
     }

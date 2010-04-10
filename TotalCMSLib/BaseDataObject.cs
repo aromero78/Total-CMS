@@ -8,7 +8,7 @@ namespace TotalCMS
     /// <summary>
     /// Base object for all objects that presist on the presentation layer and/or use workflow
     /// </summary>
-    public abstract class BaseDataObject
+    public abstract class BaseDataObject<CacheType> where CacheType : BaseDataObject<CacheType>
     {
         /// <summary>
         /// If set to true the data retreived from the database will be cached
@@ -21,18 +21,37 @@ namespace TotalCMS
         /// </summary>
         internal protected abstract void Reset();
 
+        public void Load() {
+            CacheManager.FetchDataEvent += new Data.CacheManager<CacheType>.FetchData(CacheManager_FetchDataEvent);
+            CacheManager.FetchExpICompareEvent += new Data.CacheManager<CacheType>.FetchExpICompare(CacheManager_FetchExpICompareEvent);
+            Controls.GenericEventArgs<Data.CacheLevels, CacheType> e = new Controls.GenericEventArgs<Data.CacheLevels, CacheType>(Data.CacheLevels.UseCache, default(CacheType));
+            if (UseCache) {                
+                CacheManager.ManageCache(GetHashCode().ToString(), e, SiteSettings.CacheLength, Data.ComparisonType.LessThen);               
+            }
+            else {
+                LoadData();
+                CacheManager.ManageCache(GetHashCode().ToString(), SiteSettings.CacheLength, Data.ComparisonType.LessThen, default(CacheType), DateTime.Now, Data.CacheLevels.NoCache);
+            }
+        }
+
+        protected internal void CacheManager_FetchDataEvent(object sender, Controls.GenericEventArgs<CacheType, object> e) {
+            LoadData();
+        }
+
+        internal protected abstract void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e);
+
         /// <summary>
         /// Retreives data from the database, assumes that the primary key for the object has been set.
         /// </summary>
-        internal protected abstract void Load();
-        internal protected abstract void Save();
-        internal protected abstract void Update();
-        internal protected abstract void Delete();
-        protected Data.CacheManager _cacheManager;
-        internal protected Data.CacheManager CacheManager {
+        internal abstract void LoadData();
+        internal abstract void Save();
+        internal abstract void Update();
+        internal abstract void Delete();
+        protected Data.CacheManager<CacheType> _cacheManager;
+        internal protected Data.CacheManager<CacheType> CacheManager {
             get {
                 if (_cacheManager == null)
-                    _cacheManager = new Data.CacheManager();
+                    _cacheManager = new Data.CacheManager<CacheType>();
                 return _cacheManager;
             }
         }

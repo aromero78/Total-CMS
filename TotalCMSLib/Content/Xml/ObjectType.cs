@@ -11,7 +11,7 @@ namespace TotalCMS.Content.Xml {
     /// <summary>
     /// Used as the definition for data within a content item.
     /// </summary>
-    public class ObjectType : BaseDataObject {
+    public class ObjectType : BaseDataObject<ObjectType> {
         const string WARNING = "WARNING: ", ERROR = "ERROR: ";
 
         int _objectTypeId;
@@ -96,28 +96,7 @@ namespace TotalCMS.Content.Xml {
             _defaultDisplayXslt = null;
         }
 
-        protected internal override void Load() {
-            CacheManager.FetchDataEvent += new Data.CacheManager.FetchData(CacheManager_FetchDataEvent);
-            CacheManager.FetchExpICompareEvent += new Data.CacheManager.FetchExpICompare(CacheManager_FetchExpICompareEvent);
-            if (UseCache) {
-                Controls.GenericEventArgs<Data.CacheLevels, object> e = new Controls.GenericEventArgs<Data.CacheLevels, object>(Data.CacheLevels.UseCache, null);
-                CacheManager.ManageCache("ObjectType_" + _objectTypeId.ToString(), e, SiteSettings.CacheLength, Data.ComparisonType.LessThen);
-            }
-            else {
-                LoadData();
-            }
-        }
-
-        void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
-            e.Value = SiteSettings.ContextData.DataAccess.ObjectTypeCheckModifiedDate(_objectTypeId);
-        }
-
-        void CacheManager_FetchDataEvent(object sender, Controls.GenericEventArgs<object, object> e) {
-            LoadData();
-            e.Value = this;
-        }
-
-        void LoadData() {
+        protected internal override void LoadData() {
             System.Data.Common.DbDataReader reader = SiteSettings.ContextData.DataAccess.ObjectTypeGet(_objectTypeId);
             _objectTypeId = reader.GetInt32(0);
             _rawDataEntryXslt = reader.GetString(1);
@@ -129,6 +108,10 @@ namespace TotalCMS.Content.Xml {
             _schemaXml = null;
             _isActive = reader.GetBoolean(5);
             reader.Close();
+        }        
+
+        protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
+            throw new NotImplementedException();
         }
 
         protected internal override void Save() {
@@ -157,6 +140,6 @@ namespace TotalCMS.Content.Xml {
 
         public override void Publish() {
             throw new NotImplementedException();
-        }
+        }        
     }
 }

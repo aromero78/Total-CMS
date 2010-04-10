@@ -1,6 +1,6 @@
 
 -- --------------------------------------------------
--- Date Created: 04/09/2010 00:49:46
+-- Date Created: 04/10/2010 18:10:13
 -- Generated from EDMX file: C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\TotalCMS.edmx
 -- --------------------------------------------------
 
@@ -84,10 +84,10 @@ IF OBJECT_ID(N'[dbo].[FK_MetaDataTypesToContentItemsContentItems]', 'F') IS NOT 
     ALTER TABLE [dbo].[MetaDataTypesToContentItems] DROP CONSTRAINT [FK_MetaDataTypesToContentItemsContentItems]
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContentHistoryContentItems]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentHistories1] DROP CONSTRAINT [FK_ContentHistoryContentItems]
+    ALTER TABLE [dbo].[ContentHistories] DROP CONSTRAINT [FK_ContentHistoryContentItems]
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContentHistoryUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentHistories1] DROP CONSTRAINT [FK_ContentHistoryUsers]
+    ALTER TABLE [dbo].[ContentHistories] DROP CONSTRAINT [FK_ContentHistoryUsers]
 GO
 IF OBJECT_ID(N'[dbo].[FK_AliasesContentItems]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Aliases] DROP CONSTRAINT [FK_AliasesContentItems]
@@ -159,10 +159,10 @@ IF OBJECT_ID(N'[dbo].[FK_ObjectTypeHistoriesUsers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ObjectTypeHistories] DROP CONSTRAINT [FK_ObjectTypeHistoriesUsers]
 GO
 IF OBJECT_ID(N'[dbo].[FK_MenuHistoriesMenus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MenuHistories1] DROP CONSTRAINT [FK_MenuHistoriesMenus]
+    ALTER TABLE [dbo].[MenuHistories] DROP CONSTRAINT [FK_MenuHistoriesMenus]
 GO
 IF OBJECT_ID(N'[dbo].[FK_MenuHistoriesUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MenuHistories1] DROP CONSTRAINT [FK_MenuHistoriesUsers]
+    ALTER TABLE [dbo].[MenuHistories] DROP CONSTRAINT [FK_MenuHistoriesUsers]
 GO
 
 -- --------------------------------------------------
@@ -226,8 +226,8 @@ GO
 IF OBJECT_ID(N'[dbo].[MetaDataValueTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MetaDataValueTypes];
 GO
-IF OBJECT_ID(N'[dbo].[ContentHistories1]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ContentHistories1];
+IF OBJECT_ID(N'[dbo].[ContentHistories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentHistories];
 GO
 IF OBJECT_ID(N'[dbo].[ObjectTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ObjectTypes];
@@ -250,8 +250,8 @@ GO
 IF OBJECT_ID(N'[dbo].[WorkFlowInstances]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkFlowInstances];
 GO
-IF OBJECT_ID(N'[dbo].[MenuHistories1]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[MenuHistories1];
+IF OBJECT_ID(N'[dbo].[MenuHistories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MenuHistories];
 GO
 
 -- --------------------------------------------------

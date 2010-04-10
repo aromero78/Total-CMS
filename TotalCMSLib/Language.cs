@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalCMS {
-    public class Language : BaseDataObject {
+    public class Language : BaseDataObject<Language> {
         int _languageId;
         public int LanguageId {
             get { return _languageId; }
@@ -46,10 +46,6 @@ namespace TotalCMS {
             
         }
 
-        protected internal override void Load() {
-            throw new NotImplementedException();
-        }
-
         protected internal override void Save() {
             throw new NotImplementedException();
         }
@@ -75,6 +71,14 @@ namespace TotalCMS {
         }
 
         public override void Publish() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData() {
             throw new NotImplementedException();
         }
     }
