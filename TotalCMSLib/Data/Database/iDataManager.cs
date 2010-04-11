@@ -10,7 +10,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
     /// <summary>
     /// Encapsulates all of the necessary code needed to execute an SQL command. This classes uses the value found in TotalCMS.SiteSettings.ConnectionString as the connection string, please update this value to specify a different connection string value. The default connection string is the connection string at position:0
     /// </summary>
-    public abstract class iDataManager {
+    internal abstract class iDataManager {
         #region Database Access
         #region DataSet
         /// <summary>
@@ -153,29 +153,53 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         }        
         #endregion       
 
+        /// <summary>
+        /// Is used to get an initialized database command used for the type of database that the application is currently connnected to.
+        /// </summary>
+        /// <param name="ConnectionString">The connection string to be used.</param>
+        /// <param name="SqlCmd">The sql that represents the command being created</param>
+        /// <param name="CType">The type of command being executed.</param>
+        /// <param name="Params">Any parameters that the command may accept.</param>
+        /// <returns>An initialized data base command</returns>
         protected DbCommand GetCommand(System.Configuration.ConnectionStringSettings ConnectionString, string SqlCmd, CommandType CType, DbParameter[] Params) {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// A function used to clean string input before being sent to the database for use. This should be the final point at which SQL injection and insertion of javascript into the database can be caught.
+        /// </summary>
+        /// <param name="Input">The string to be cleaned</param>
+        /// <returns></returns>
         public abstract string CleanInput(string Input);
         #endregion
 
-        #region Content Functions
-        public DbDataReader ContentItemGet(int ContentDisplayId) {
-            throw new NotImplementedException();
-        }
+        #region ContentItem Functions
+        /// <summary>
+        /// Retrieves the content item, metadata, object xslt, and object schema data for a given content display id and returns it as a data reader. 
+        /// </summary>
+        /// <param name="ContentDisplayId">The id to retrieve the data for.</param>
+        /// <returns>A data reader with all of the data needed to initalize a content item.</returns>
+        public abstract DbDataReader ContentItemGet(int ContentDisplayId);
+        #endregion
 
-        public DbDataReader ObjectTypeGet(int ObjectTypeId) {
-            throw new NotImplementedException();
-        }
+        #region ObjectType Functions
+        /// <summary>
+        /// Retrieves the object type data for a given object type id.
+        /// </summary>
+        /// <param name="ObjectTypeId">The id to retrieve the data for.</param>
+        /// <returns>A data reader with all of the data needed to initalize a object type.</returns>
+        public abstract DbDataReader ObjectTypeGet(int ObjectTypeId);
 
-        public DateTime ObjectTypeCheckModifiedDate(int ObjectTypeId) {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// Retrieves the lastest modifieddate for the given objecttypeid
+        /// </summary>
+        /// <param name="ObjectTypeId">The id to retrieve the data for.</param>
+        /// <returns>A datetime object that represents the last time the object was updated.</returns>
+        public abstract DateTime ObjectTypeCheckModifiedDate(int ObjectTypeId);
 
-        public int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml) {
-            throw new NotImplementedException();
-        }
+        public abstract int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId);
+
+        public abstract int ObjectTypeUpdate(int ObjectTypeId, string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId, bool IsActive);
         #endregion
     }
 }

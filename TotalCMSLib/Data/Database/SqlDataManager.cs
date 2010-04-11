@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalCMS.Data.ContextDataProviders.Database {
-    public class SqlDataManager : iDataManager {
+    internal class SqlDataManager : iDataManager {
         const string SingleQuote_Const = "'", DoubleSingleQuote_Const = "''";
         #region Database Access
         #region DataSet
@@ -214,29 +214,45 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         
         #endregion
 
-        #region Content Functiosn
-        public new SqlDataReader ContentItemGet(int ContentDisplayId) {
+        #region Content Item Functions
+        public override DbDataReader ContentItemGet(int ContentDisplayId) {
             return GetDataReader("contentItemGet",
                 new SqlParameter("ContentDisplayId", ContentDisplayId),
                 new SqlParameter("LangId", SiteSettings.ContextData.CurrentLanguage.LangId));
         }
+        #endregion
 
-        public new SqlDataReader ObjectTypeGet(int ObjectTypeId) {
+        #region ObjectType Functions
+        public override DbDataReader ObjectTypeGet(int ObjectTypeId) {
             return GetDataReader("ObjectTypeGet",
                 new SqlParameter("ObjectTypeId", ObjectTypeId));
         }
 
-        public new DateTime ObjectTypeCheckModifiedDate(int ObjectTypeId) {
+        public override DateTime ObjectTypeCheckModifiedDate(int ObjectTypeId) {
             return GetScalar<DateTime>("ObjectTypeCheckModifiedDate",
                 new SqlParameter("ObjectTypeId", ObjectTypeId));
         }
 
-        public int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml) {
+        public override int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId) {
             return GetScalar<int>("ObjectTypeSave",
                 new SqlParameter("DataEntryXslt", DataEntryXslt),
                 new SqlParameter("Name", Name),
                 new SqlParameter("DefaultDisplayXslt", DefaultDisplayXslt),
-                new SqlParameter("SchemaXml", SchemaXml));
+                new SqlParameter("SchemaXml", SchemaXml),
+                new SqlParameter("Status", (Status == ContentStatuses.CheckedIn ? "IN" : "OT")),
+                new SqlParameter("WorkFlowInstanceId", WorkFlowInstanceId));
+        }
+
+        public override int ObjectTypeUpdate(int ObjectTypeId, string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId, bool IsActive) {
+            return ExecuteSql("ObjectTypeUpdate",
+                new SqlParameter("ObjectTypeId", ObjectTypeId),
+                new SqlParameter("DataEntryXslt", DataEntryXslt),
+                new SqlParameter("Name", Name),
+                new SqlParameter("DefaultDisplayXslt", DefaultDisplayXslt),
+                new SqlParameter("SchemaXml", SchemaXml),
+                new SqlParameter("Status", (Status == ContentStatuses.CheckedIn ? "IN" : "OT")),
+                new SqlParameter("WorkInstanceId", WorkFlowInstanceId),
+                new SqlParameter("IsActive", IsActive));
         }
         #endregion
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalCMS.User {
-    public class User : BaseDataObject<User> {
+    public class User : BaseWorkFlowObject<User> {
 
         int _userId;
         public int UserId {
@@ -12,19 +12,29 @@ namespace TotalCMS.User {
             internal set { _userId = value; }
         }
 
-        protected internal override void Reset() {
+        List<UserRoles> _roles;
+        public List<UserRoles> Roles {
+            get {
+                if (_roles == null) {
+                    _roles = new List<UserRoles>();
+                }
+                return _roles;
+            }
+        }
+
+        internal override void Reset() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Save() {
+        internal override void Save() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Update() {
+        internal override void Update() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Delete() {
+        internal override void Delete() {
             throw new NotImplementedException();
         }
 
@@ -48,7 +58,7 @@ namespace TotalCMS.User {
             throw new NotImplementedException();
         }
 
-        protected internal override void LoadData() {
+        internal override void LoadData() {
             throw new NotImplementedException();
         }
     }

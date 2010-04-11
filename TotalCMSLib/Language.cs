@@ -42,35 +42,19 @@ namespace TotalCMS {
             _langId = LangId;
         }
 
-        protected internal override void Reset() {
+        internal override void Reset() {
             
         }
 
-        protected internal override void Save() {
+        internal override void Save() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Update() {
+        internal override void Update() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Delete() {
-            throw new NotImplementedException();
-        }
-
-        public override void CheckOut() {
-            throw new NotImplementedException();
-        }
-
-        public override void CheckIn() {
-            throw new NotImplementedException();
-        }
-
-        public override void Stage() {
-            throw new NotImplementedException();
-        }
-
-        public override void Publish() {
+        internal override void Delete() {
             throw new NotImplementedException();
         }
 
@@ -78,7 +62,7 @@ namespace TotalCMS {
             throw new NotImplementedException();
         }
 
-        protected internal override void LoadData() {
+        internal override void LoadData() {
             throw new NotImplementedException();
         }
     }

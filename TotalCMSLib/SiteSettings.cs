@@ -34,6 +34,15 @@ namespace TotalCMS
             }
         }
 
+        static TotalCMS.Data.ContextDataProviders.Database.iDataManager _dataAccess;
+        internal static TotalCMS.Data.ContextDataProviders.Database.iDataManager DataAccess {
+            get {
+                if (_dataAccess == null)
+                    _dataAccess = new TotalCMS.Data.ContextDataProviders.Database.SqlDataManager();
+                return _dataAccess;
+            }
+        }
+
         static int _cacheLength = 20;
         public static int CacheLength{
             get { return _cacheLength; }
@@ -53,7 +62,7 @@ namespace TotalCMS
                 return _CMSSettings;        
             }
         }
-        */
+        */      
         static ConnectionStringSettings _connectionString;
         internal static ConnectionStringSettings ConnectionString {
             get {

@@ -25,7 +25,6 @@ namespace TotalCMS.Data.ContextDataProviders {
         
         iDebugLogProvider DebugLog { get; }
         System.Web.Caching.Cache Cache { get; }
-        Database.iDataManager DataAccess {get;}
         Language CurrentLanguage { get; set; }
 
         string MapPath(string PathToMap);

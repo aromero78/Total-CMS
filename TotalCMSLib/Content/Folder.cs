@@ -11,43 +11,48 @@ namespace TotalCMS.Content {
             get { return _FolderId; }
             internal set { _FolderId = value; }
         }
-        protected internal override void Reset() {
+
+        Dictionary<int, WorkFlow.Permissions> _userPermissions;
+        internal Dictionary<int, WorkFlow.Permissions> UserPermissions {
+            get {
+                if (_userPermissions == null) {
+                    _userPermissions = new Dictionary<int, WorkFlow.Permissions>();
+                }
+                return _userPermissions;
+            }
+        }
+
+        Dictionary<int, WorkFlow.Permissions> _userRolePermissions;
+        internal Dictionary<int, WorkFlow.Permissions> UserRolePermissions {
+            get {
+                if (_userRolePermissions == null) {
+                    _userRolePermissions = new Dictionary<int, WorkFlow.Permissions>();
+                }
+                return _userRolePermissions;
+            }
+        }
+
+        internal override void Reset() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Save() {
+        internal override void Save() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Update() {
+        internal override void Update() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Delete() {
+        internal override void Delete() {
             throw new NotImplementedException();
         }
 
-        public override void CheckOut() {
-            throw new NotImplementedException();
-        }
-
-        public override void CheckIn() {
-            throw new NotImplementedException();
-        }
-
-        public override void Stage() {
-            throw new NotImplementedException();
-        }
-
-        public override void Publish() {
+        internal override void LoadData() {
             throw new NotImplementedException();
         }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
-            throw new NotImplementedException();
-        }
-
-        protected internal override void LoadData() {
             throw new NotImplementedException();
         }
     }

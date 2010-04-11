@@ -4,18 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalCMS.Content {
-    public enum ContentStatuses { 
-        /// <summary>
-        /// If the content is not currently being edited allow the user to edit
-        /// </summary>
-        CheckedOut = 0,
-        /// <summary>
-        /// If the user if finished editing the content allow other users to edit
-        /// </summary>
-        CheckedIn = 1
-    }
-
-    public class ContentItem : BaseDataObject<ContentItem> {
+    public class ContentItem : BaseWorkFlowObject<ContentItem> {
 
         int _contentItemId;
         public int ContactItemId {
@@ -101,19 +90,19 @@ namespace TotalCMS.Content {
             _folderId = FolderId;
         }
 
-        protected internal override void Reset() {
+        internal override void Reset() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Save() {
+        internal override void Save() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Update() {
+        internal override void Update() {
             throw new NotImplementedException();
         }
 
-        protected internal override void Delete() {
+        internal override void Delete() {
             throw new NotImplementedException();
         }
 
@@ -138,9 +127,9 @@ namespace TotalCMS.Content {
             throw new NotImplementedException();
         }
 
-        protected internal override void LoadData() {
+        internal override void LoadData() {
             if (_contentItemId != 0) {
-                System.Data.Common.DbDataReader dataReader = SiteSettings.ContextData.DataAccess.ContentItemGet(_contentItemId);
+                System.Data.Common.DbDataReader dataReader = SiteSettings.DataAccess.ContentItemGet(_contentItemId);
                 _contentItemId = dataReader.GetInt32(0);
                 _contentHtml = dataReader.GetString(1);
                 _contentSummary = dataReader.GetString(2);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalCMS.User {
-    class UserRoles {
+    public class UserRoles {
+
     }
 }

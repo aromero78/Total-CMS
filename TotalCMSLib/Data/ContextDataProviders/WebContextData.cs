@@ -52,16 +52,7 @@ namespace TotalCMS.Data.ContextDataProviders {
                     _cache = System.Web.HttpContext.Current.Cache;
                 return _cache;
             }
-        }
-
-        Database.iDataManager _dataAccess;
-        public Database.iDataManager DataAccess {
-            get {
-                if (_dataAccess == null)
-                    _dataAccess = new Database.SqlDataManager();
-                return _dataAccess;             
-            }
-        }
+        }        
 
         static Language _currentLanguage;
         public Language CurrentLanguage {

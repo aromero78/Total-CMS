@@ -45,10 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseWorkFlowObject.cs" />
     <Compile Include="Content\ContentHistory.cs" />
     <Compile Include="Content\ContentItem.cs" />
     <Compile Include="Content\Folder.cs" />
+    <Compile Include="Content\WorkFlow\WorkFlowInstance.cs" />
     <Compile Include="Data\ContextDataProviders\BaseDebugLogger.cs" />
+    <Compile Include="Data\ContextDataProviders\WindowsContextData.cs" />
     <Compile Include="Data\Database\iDataManager.cs" />
     <Compile Include="Data\Database\SqlDataManager.cs" />
     <Compile Include="Data\ContextDataProviders\iDebugLogProvider.cs" />

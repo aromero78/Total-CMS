@@ -11,7 +11,7 @@ namespace TotalCMS.Content.Xml {
     /// <summary>
     /// Used as the definition for data within a content item.
     /// </summary>
-    public class ObjectType : BaseDataObject<ObjectType> {
+    public class ObjectType : BaseWorkFlowObject<ObjectType> {
         const string WARNING = "WARNING: ", ERROR = "ERROR: ";
 
         int _objectTypeId;
@@ -84,20 +84,39 @@ namespace TotalCMS.Content.Xml {
             }
         }
 
+        ContentStatuses _status;
+        public ContentStatuses Status {
+            get { return _status; }
+            set { _status = value; }
+        }
+
+        int _workFlowInstanceId;
+        WorkFlow.WorkFlowInstance _workFlowInstance;
+        WorkFlow.WorkFlowInstance WorkFlowInstance {
+            get {
+                if (_workFlowInstance == null || _workFlowInstanceId != _workFlowInstance.WorkFlowInstanceId){
+                    _workFlowInstance = new WorkFlow.WorkFlowInstance();
+                    _workFlowInstance.WorkFlowInstanceId = _workFlowInstanceId;
+                    _workFlowInstance.Load();
+                }
+                return _workFlowInstance;
+            }
+        }
+
         bool _isActive;
         public bool IsActive {
             get { return _isActive; }
             set { _isActive = value; }
         }
 
-        protected internal override void Reset() {
+        internal override void Reset() {
             _schemaXml = null;
             _dataEntryXslt = null;
             _defaultDisplayXslt = null;
         }
 
-        protected internal override void LoadData() {
-            System.Data.Common.DbDataReader reader = SiteSettings.ContextData.DataAccess.ObjectTypeGet(_objectTypeId);
+        internal override void LoadData() {
+            System.Data.Common.DbDataReader reader = SiteSettings.DataAccess.ObjectTypeGet(_objectTypeId);
             _objectTypeId = reader.GetInt32(0);
             _rawDataEntryXslt = reader.GetString(1);
             _dataEntryXslt = null;
@@ -111,22 +130,23 @@ namespace TotalCMS.Content.Xml {
         }        
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
-            throw new NotImplementedException();
+            e.Value = SiteSettings.DataAccess.ObjectTypeCheckModifiedDate(_objectTypeId);
         }
 
-        protected internal override void Save() {
-            _objectTypeId = SiteSettings.ContextData.DataAccess.ObjectTypeSave(_rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml);
+        internal override void Save() {
+            _objectTypeId = SiteSettings.DataAccess.ObjectTypeSave(_rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, _status, _workFlowInstanceId);
         }
 
-        protected internal override void Update() {
-            throw new NotImplementedException();
+        internal override void Update() {
+            SiteSettings.DataAccess.ObjectTypeUpdate(_objectTypeId, _rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, _status, _workFlowInstanceId, _isActive);
         }
 
-        protected internal override void Delete() {
+        internal override void Delete() {
             throw new NotImplementedException();
         }
 
         public override void CheckOut() {
+            base.CheckOut();
             throw new NotImplementedException();
         }
 
