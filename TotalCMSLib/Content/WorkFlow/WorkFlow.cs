@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.User {
-    public class UserRoles : BaseDataObject<UserRoles> {
-        public int UserRoleId { get; internal set; }
-
-        public UserRoles(int RoleId) {
-            UserRoleId = RoleId;
-            Load();
-        }
-
+namespace TotalCMS.Content.WorkFlow {
+    public class WorkFlow : BaseDataObject<WorkFlow> {
         internal override void Reset() {
             throw new NotImplementedException();
         }

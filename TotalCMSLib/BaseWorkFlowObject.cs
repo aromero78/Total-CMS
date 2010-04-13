@@ -5,10 +5,17 @@ using System.Text;
 
 namespace TotalCMS {
     public abstract class BaseWorkFlowObject<CacheType> : BaseDataObject<CacheType> where CacheType : BaseDataObject<CacheType> {
-        public abstract Content.Folder Folder;
-        public bool CanCheckOut();
-        public bool CanCompleteCurrentStep();
-        public bool HasMoreWorkFlowSteps();
+        public Content.Folder Folder;
+
+        public bool CanCheckOut() {
+            return false;
+        }
+        public bool CanCompleteCurrentStep() {
+            return false;
+        }
+        public bool HasMoreWorkFlowSteps() { 
+            return false;
+        }
         
 
         /// <summary>

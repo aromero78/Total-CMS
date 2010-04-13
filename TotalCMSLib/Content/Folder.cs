@@ -6,29 +6,23 @@ using System.Text;
 namespace TotalCMS.Content {
     public class Folder : BaseDataObject<Folder> {
 
-        int _FolderId;
+        int _folderId;
         public int FolderId {
-            get { return _FolderId; }
-            internal set { _FolderId = value; }
+            get { return _folderId; }
+            internal set { _folderId = value; }
         }
 
-        Dictionary<int, WorkFlow.Permissions> _userPermissions;
-        internal Dictionary<int, WorkFlow.Permissions> UserPermissions {
-            get {
-                if (_userPermissions == null) {
-                    _userPermissions = new Dictionary<int, WorkFlow.Permissions>();
-                }
-                return _userPermissions;
-            }
+        internal Folder(int FolderId) {
+            _folderId = FolderId;
+            Load();
         }
 
-        Dictionary<int, WorkFlow.Permissions> _userRolePermissions;
-        internal Dictionary<int, WorkFlow.Permissions> UserRolePermissions {
+        WorkFlow.Permissions _currentUserPermissions;
+        internal WorkFlow.Permissions CurrentUserRolePermissions {
             get {
-                if (_userRolePermissions == null) {
-                    _userRolePermissions = new Dictionary<int, WorkFlow.Permissions>();
-                }
-                return _userRolePermissions;
+                if (_currentUserPermissions == null)
+                    _currentUserPermissions = new WorkFlow.Permissions(SiteSettings.ContextData.CurrentUser, this);
+                return _currentUserPermissions;
             }
         }
 

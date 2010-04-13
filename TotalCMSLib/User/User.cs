@@ -22,6 +22,11 @@ namespace TotalCMS.User {
             }
         }
 
+        public User(int UserId) {
+            _userId = UserId;
+            Load();
+        }
+
         internal override void Reset() {
             throw new NotImplementedException();
         }
@@ -38,7 +43,7 @@ namespace TotalCMS.User {
             throw new NotImplementedException();
         }
 
-        public override void CheckOut() {
+        /*public override void CheckOut() {
             throw new NotImplementedException();
         }
 
@@ -52,7 +57,7 @@ namespace TotalCMS.User {
 
         public override void Publish() {
             throw new NotImplementedException();
-        }
+        }*/
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();

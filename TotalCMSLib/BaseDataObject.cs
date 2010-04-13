@@ -21,6 +21,11 @@ namespace TotalCMS
     /// </summary>
     public abstract class BaseDataObject<CacheType> where CacheType : BaseDataObject<CacheType>
     {
+        public delegate void DataBindHandler(BaseDataObject<CacheType> sender, Controls.GenericEventArgs<object, object> e);
+        public delegate void DataBoundHandler(BaseDataObject<CacheType> sender, Controls.GenericEventArgs<object, object> e);
+        public event DataBindHandler DataBind;
+        public event DataBoundHandler DataBound;
+
         /// <summary>
         /// If set to true the data retreived from the database will be cached
         /// </summary>
@@ -33,6 +38,10 @@ namespace TotalCMS
         internal abstract void Reset();
 
         public void Load() {
+            if(DataBind != null){
+                Controls.GenericEventArgs<object, object> evnt = new Controls.GenericEventArgs<object,object>(null, null);
+                DataBind(this, evnt);
+            }
             CacheManager.FetchDataEvent += new Data.CacheManager<CacheType>.FetchData(CacheManager_FetchDataEvent);
             CacheManager.FetchExpICompareEvent += new Data.CacheManager<CacheType>.FetchExpICompare(CacheManager_FetchExpICompareEvent);
             Controls.GenericEventArgs<Data.CacheLevels, CacheType> e = new Controls.GenericEventArgs<Data.CacheLevels, CacheType>(Data.CacheLevels.UseCache, default(CacheType));
@@ -42,6 +51,10 @@ namespace TotalCMS
             else {
                 LoadData();
                 CacheManager.ManageCache(GetHashCode().ToString(), SiteSettings.CacheLength, Data.ComparisonType.LessThen, default(CacheType), DateTime.Now, Data.CacheLevels.NoCache);
+            }
+            if (DataBound != null) {
+                Controls.GenericEventArgs<object, object> evnt = new Controls.GenericEventArgs<object, object>(null, null);
+                DataBound(this, evnt);
             }
         }
 

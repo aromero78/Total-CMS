@@ -14,7 +14,7 @@ namespace TotalCMS.Data.ContextDataProviders {
             get {
                 User.User _currentUser = null;
                 if (System.Web.HttpContext.Current.Session[SessionUserKey] == null) {
-                    _currentUser = new User.User();
+                    _currentUser = new User.User(999999999);
                     System.Web.HttpContext.Current.Session[SessionUserKey] = _currentUser;
                 }
                 else _currentUser = (User.User)System.Web.HttpContext.Current.Session[SessionUserKey];

@@ -145,7 +145,7 @@ namespace TotalCMS.Content.Xml {
             throw new NotImplementedException();
         }
 
-        public override void CheckOut() {
+        /*public override void CheckOut() {
             base.CheckOut();
             throw new NotImplementedException();
         }
@@ -160,6 +160,6 @@ namespace TotalCMS.Content.Xml {
 
         public override void Publish() {
             throw new NotImplementedException();
-        }        
+        }  */      
     }
 }

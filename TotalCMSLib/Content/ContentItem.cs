@@ -41,9 +41,7 @@ namespace TotalCMS.Content {
         public User.User CreatedByUser {
             get {
                 if (_createdByUser == null || _createdByUser.UserId == default(int)) {
-                    _createdByUser = new User.User();
-                    _createdByUser.UserId = _createdByUserId;
-                    _createdByUser.Load();                    
+                    _createdByUser = new User.User(_createdByUserId);                  
                 }
                 return _createdByUser; 
             }
@@ -54,9 +52,7 @@ namespace TotalCMS.Content {
         public User.User ModifiedByUser {
             get {
                 if (_modifiedByUser == null || _modifiedByUser.UserId != _modifiedByUserId) {
-                    _modifiedByUser = new User.User();
-                    _modifiedByUser.UserId = _modifiedByUserId;
-                    _modifiedByUser.Load();
+                    _modifiedByUser = new User.User(_modifiedByUserId);
                 }
                 return _modifiedByUser;
             }
@@ -67,9 +63,7 @@ namespace TotalCMS.Content {
         public Folder Folder {
             get {
                 if (_folder == null || _folder.FolderId != _folderId) {
-                    _folder = new Folder();
-                    _folder.FolderId = _folderId;
-                    _folder.Load();
+                    _folder = new Folder(_folderId);
                 }
                 return _folder;             
             }
@@ -107,7 +101,7 @@ namespace TotalCMS.Content {
         }
 
 
-        public override void CheckOut() {
+        /*public override void CheckOut() {
             throw new NotImplementedException();
         }
 
@@ -121,7 +115,7 @@ namespace TotalCMS.Content {
 
         public override void Publish() {
             throw new NotImplementedException();
-        }
+        }*/
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
