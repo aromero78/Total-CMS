@@ -8,8 +8,8 @@
     <ProjectGuid>{CFD032ED-8A9B-4BB9-A6A1-526B08870EDF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TotalCMS</RootNamespace>
-    <AssemblyName>TotalCMSLib</AssemblyName>
+    <RootNamespace>TotalTech.CMS</RootNamespace>
+    <AssemblyName>TotalTechCMS</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -50,6 +50,7 @@
     <Compile Include="Content\ContentItem.cs" />
     <Compile Include="Content\Folder.cs" />
     <Compile Include="Content\WorkFlow\Permissions.cs" />
+    <Compile Include="Content\WorkFlow\UserRolesToWorkFlowStep.cs" />
     <Compile Include="Content\WorkFlow\WorkFlow.cs" />
     <Compile Include="Content\WorkFlow\WorkFlowInstance.cs" />
     <Compile Include="Content\WorkFlow\WorkFlowStep.cs" />

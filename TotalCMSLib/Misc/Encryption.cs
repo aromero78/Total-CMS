@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace TotalCMS.Misc {
+namespace TotalTech.CMS.Misc {
     public class Encryption {
         private static byte[] sharedkey = {0x01, 0x02, 0x03, 0x05, 0x07, 0x0B, 0x0D, 0x11, 0x12, 0x11, 
 											  0x0D, 0x0B, 0x07, 0x02, 0x04, 0x08};

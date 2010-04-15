@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-namespace TotalCMS
+namespace TotalTech.CMS
 {
     public static class SiteSettings
     {
@@ -20,7 +20,7 @@ namespace TotalCMS
                         if (ContextProviderClassName == null || ContextProviderClassName == "WebContextDataProvider")
                             _contextData = new Data.ContextDataProviders.WebContextData();
                         else
-                            _contextData = (Data.ContextDataProviders.iContextDataProvider)Assembly.GetExecutingAssembly().CreateInstance("TotalCMS.ContextDataProviders." + ContextProviderClassName);                                                             
+                            _contextData = (Data.ContextDataProviders.iContextDataProvider)Assembly.GetExecutingAssembly().CreateInstance("TotalTech.CMS.ContextDataProviders." + ContextProviderClassName);                                                             
                     }
                     catch (Exception ex) {
                         _contextData = new Data.ContextDataProviders.WebContextData();
@@ -34,11 +34,11 @@ namespace TotalCMS
             }
         }
 
-        static TotalCMS.Data.ContextDataProviders.Database.iDataManager _dataAccess;
-        internal static TotalCMS.Data.ContextDataProviders.Database.iDataManager DataAccess {
+        static TotalTech.CMS.Data.ContextDataProviders.Database.iDataManager _dataAccess;
+        internal static TotalTech.CMS.Data.ContextDataProviders.Database.iDataManager DataAccess {
             get {
                 if (_dataAccess == null)
-                    _dataAccess = new TotalCMS.Data.ContextDataProviders.Database.SqlDataManager();
+                    _dataAccess = new TotalTech.CMS.Data.ContextDataProviders.Database.SqlDataManager();
                 return _dataAccess;
             }
         }
@@ -51,7 +51,7 @@ namespace TotalCMS
 
         /*
         static Settings _CMSSettings;
-        public static TotalCMS.Settings CMSSettings {
+        public static TotalTech.CMS.Settings CMSSettings {
             get {
                 if (_CMSSettings == null) {                    
                     _CMSSettings = ObjectContainer.Settings.First();   

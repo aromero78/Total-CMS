@@ -3,8 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Content.WorkFlow {
+namespace TotalTech.CMS.Content.WorkFlow {
     public class WorkFlow : BaseDataObject<WorkFlow> {
+        int _workFlowId;
+        public int WorkFlowid {
+            get {
+                return _workFlowId;
+            }
+        }
+
+        public WorkFlow(int WorkFlowId) {
+            _workFlowId = WorkFlowId;
+            Load();
+        }
+
         internal override void Reset() {
             throw new NotImplementedException();
         }

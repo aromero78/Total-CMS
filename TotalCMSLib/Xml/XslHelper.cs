@@ -7,7 +7,7 @@ using System.Xml.Xsl;
 using System.Xml.XPath;
 using System.IO;
 
-namespace TotalCMS.Xml {
+namespace TotalTech.CMS.Xml {
     /// <summary>
     /// Transforms a xml fragment using the specified xslt for output onto a portion of a page.
     /// </summary>

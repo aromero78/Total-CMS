@@ -3,23 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS
-{
-    public enum ContentStatuses {
-        /// <summary>
-        /// If the content is not currently being edited allow the user to edit
-        /// </summary>
-        CheckedOut = 0,
-        /// <summary>
-        /// If the user if finished editing the content allow other users to edit
-        /// </summary>
-        CheckedIn = 1
-    }
-
+namespace TotalTech.CMS
+{    
     /// <summary>
     /// Base object for all objects that presist on the presentation layer and/or use workflow
     /// </summary>
-    public abstract class BaseDataObject<CacheType> where CacheType : BaseDataObject<CacheType>
+    public abstract class BaseDataObject<CacheType> where CacheType : class
     {
         public delegate void DataBindHandler(BaseDataObject<CacheType> sender, Controls.GenericEventArgs<object, object> e);
         public delegate void DataBoundHandler(BaseDataObject<CacheType> sender, Controls.GenericEventArgs<object, object> e);

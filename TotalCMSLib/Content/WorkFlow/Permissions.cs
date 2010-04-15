@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Content.WorkFlow {
+namespace TotalTech.CMS.Content.WorkFlow {
     public class Permissions : BaseDataObject<Permissions> {
 
         int _permissionId;
@@ -18,7 +18,7 @@ namespace TotalCMS.Content.WorkFlow {
         public User.UserRoles UserRole {
             get {
                 if (_userRole == null || _userRole.UserRoleId != _userRoleId)
-                    _userRole = new TotalCMS.User.UserRoles(_userRoleId);
+                    _userRole = new TotalTech.CMS.User.UserRoles(_userRoleId);
                 return _userRole;
             }
         }
@@ -44,14 +44,42 @@ namespace TotalCMS.Content.WorkFlow {
             }
         }
 
+        public bool CanReadContent { get; }
+        public bool CanAddContent { get; }
+        public bool CanDeleteContent { get; }
+        public bool CanReadMenus { get; }
+        public bool CanAddMenus { get; }
+        public bool CanDeleteMenus { get; }
+        public bool CanReadFolders { get; }
+        public bool CanAddFolders { get; }
+        public bool CanDeleteFolders { get; }
+        public bool CanReadCalendars { get; }
+        public bool CanAddCalendars { get; }
+        public bool CanDeleteCalendars { get; }
+        public bool CanEditContent { get; }
+        public bool CanEditMenus { get; }
+        public bool CanEditFolders { get; }
+        public bool CanEditCalendar { get; }
+        public bool CanReadPages { get; }
+        public bool CanEditPages { get; }
+        public bool CanAddPages { get; }
+        public bool CanDeletePages { get; }
+
         internal Permissions(User.User CurrentUser, Content.Folder CurrentFolder) {
             _user = CurrentUser;
             _folder = CurrentFolder;
+            Load();
         }
 
         internal Permissions(User.UserRoles CurrentRole, Content.Folder CurrentFolder) {
             _userRole = CurrentRole;
             _folder = CurrentFolder;
+            Load();
+        }
+
+        internal Permissions(int PermissionId) {
+            _permissionId = PermissionId;
+            Load();
         }
 
         internal override void Reset() {

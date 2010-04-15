@@ -1,6 +1,6 @@
 C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\TotalCMSLib.dll
-C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\TotalCMSLib.pdb
-C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalCMSLib.dll.config
-C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalCMSLib.dll
-C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalCMSLib.pdb
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalTechCMS.dll.config
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalTechCMS.dll
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalTechCMS.pdb
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\TotalTechCMS.dll
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\TotalTechCMS.pdb

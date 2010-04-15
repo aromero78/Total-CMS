@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace TotalCMS.Data.ContextDataProviders {
+namespace TotalTech.CMS.Data.ContextDataProviders {
     internal sealed class WebContextData : iContextDataProvider {
         #region iRequestDataProvider Members
 

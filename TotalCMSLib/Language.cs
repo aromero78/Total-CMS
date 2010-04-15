@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS {
+namespace TotalTech.CMS {
     public class Language : BaseDataObject<Language> {
         int _languageId;
         public int LanguageId {

@@ -34,6 +34,7 @@
     <EntitySet Name="WorkFlowSteps" EntityType="DataAccess.Store.WorkFlowSteps" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkFlowInstances" EntityType="DataAccess.Store.WorkFlowInstances" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MenuHistories" EntityType="DataAccess.Store.MenuHistories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRolesToWorkFlowSteps" EntityType="DataAccess.Store.UserRolesToWorkFlowSteps" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UsersContentItems" Association="DataAccess.Store.UsersContentItems">
       <End Role="Users" EntitySet="UsersSet" />
       <End Role="ContentItems" EntitySet="ContentItems" />
@@ -178,10 +179,6 @@
       <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" />
       <End Role="Workflows" EntitySet="Workflows" />
     </AssociationSet>
-    <AssociationSet Name="WorkFlowStepsUserRoles" Association="DataAccess.Store.WorkFlowStepsUserRoles">
-      <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" />
-      <End Role="UserRoles" EntitySet="UserRoles" />
-    </AssociationSet>
     <AssociationSet Name="WorkFlowInstancesWorkflows" Association="DataAccess.Store.WorkFlowInstancesWorkflows">
       <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
       <End Role="Workflows" EntitySet="Workflows" />
@@ -206,14 +203,6 @@
       <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
       <End Role="Menus" EntitySet="Menus" />
     </AssociationSet>
-    <AssociationSet Name="PermissionsUsers" Association="DataAccess.Store.PermissionsUsers">
-      <End Role="Permissions" EntitySet="Permissions" />
-      <End Role="Users" EntitySet="UsersSet" />
-    </AssociationSet>
-    <AssociationSet Name="WorkFlowStepsUsers1" Association="DataAccess.Store.WorkFlowStepsUsers1">
-      <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" />
-      <End Role="Users" EntitySet="UsersSet" />
-    </AssociationSet>
     <AssociationSet Name="ObjectTypeHistoriesObjectTypes" Association="DataAccess.Store.ObjectTypeHistoriesObjectTypes">
       <End Role="ObjectTypeHistories" EntitySet="ObjectTypeHistories" />
       <End Role="ObjectTypes" EntitySet="ObjectTypes" />
@@ -229,6 +218,14 @@
     <AssociationSet Name="MenuHistoriesUsers" Association="DataAccess.Store.MenuHistoriesUsers">
       <End Role="MenuHistories" EntitySet="MenuHistories" />
       <End Role="Users" EntitySet="UsersSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserRolesToWorkFlowStepsUserRoles" Association="DataAccess.Store.UserRolesToWorkFlowStepsUserRoles">
+      <End Role="UserRolesToWorkFlowSteps" EntitySet="UserRolesToWorkFlowSteps" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="UserRolesToWorkFlowStepsWorkFlowSteps" Association="DataAccess.Store.UserRolesToWorkFlowStepsWorkFlowSteps">
+      <End Role="UserRolesToWorkFlowSteps" EntitySet="UserRolesToWorkFlowSteps" />
+      <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ContentItems">
@@ -417,7 +414,7 @@
       <PropertyRef Name="PermissionId" />
     </Key>
     <Property Name="PermissionId" Type="int" Nullable="false" />
-    <Property Name="UserRoleId" Type="int" Nullable="true" />
+    <Property Name="UserRoleId" Type="int" Nullable="false" />
     <Property Name="CanReadContent" Type="bit" Nullable="false" />
     <Property Name="CanAddContent" Type="bit" Nullable="false" />
     <Property Name="CanDeleteContent" Type="bit" Nullable="false" />
@@ -435,8 +432,10 @@
     <Property Name="CanEditFolder" Type="bit" Nullable="false" />
     <Property Name="CanEditCalendar" Type="bit" Nullable="false" />
     <Property Name="FolderId" Type="int" Nullable="false" />
-    <Property Name="IsPageAdmin" Type="bit" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="true" />
+    <Property Name="CanReadPages" Type="bit" Nullable="false" />
+    <Property Name="CanEditPages" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CanAddPages" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CanDeletePages" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="MetaDataTypeToFolders">
     <Key>
@@ -519,9 +518,7 @@
     </Key>
     <Property Name="WorkFlowStepId" Type="int" Nullable="false" />
     <Property Name="WorkflowId" Type="int" Nullable="false" />
-    <Property Name="UserRoleId" Type="int" Nullable="true" />
     <Property Name="StepOrder" Type="int" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="WorkFlowInstances">
     <Key>
@@ -530,6 +527,7 @@
     <Property Name="WorkFlowInstanceId" Type="int" Nullable="false" />
     <Property Name="WorkflowId" Type="int" Nullable="false" />
     <Property Name="CurrentStep" Type="int" Nullable="false" />
+    <Property Name="IsComplete" Type="bit" Nullable="false" DefaultValue="false" />
   </EntityType>
   <EntityType Name="MenuHistories">
     <Key>
@@ -541,6 +539,15 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="SerializedData" Type="varbinary(max)" Nullable="false" />
     <Property Name="VersionNumber" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRolesToWorkFlowSteps">
+    <Key>
+      <PropertyRef Name="UserRolesToWorkFlowStepId" />
+    </Key>
+    <Property Name="UserRolesToWorkFlowStepId" Type="int" Nullable="false" />
+    <Property Name="UserRolesUserRoleId" Type="int" Nullable="false" />
+    <Property Name="WorkFlowStepsWorkFlowStepId" Type="int" Nullable="false" />
+    <Property Name="IsApprover" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="UsersContentItems">
     <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
@@ -724,7 +731,7 @@
   </Association>
   <Association Name="PermissionsUserRoles">
     <End Role="Permissions" Type="DataAccess.Store.Permissions" Multiplicity="*" />
-    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="UserRoles">
         <PropertyRef Name="UserRoleId" />
@@ -974,18 +981,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="WorkFlowStepsUserRoles">
-    <End Role="WorkFlowSteps" Type="DataAccess.Store.WorkFlowSteps" Multiplicity="*" />
-    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="UserRoles">
-        <PropertyRef Name="UserRoleId" />
-      </Principal>
-      <Dependent Role="WorkFlowSteps">
-        <PropertyRef Name="UserRoleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="WorkFlowInstancesWorkflows">
     <End Role="WorkFlowInstances" Type="DataAccess.Store.WorkFlowInstances" Multiplicity="*" />
     <End Role="Workflows" Type="DataAccess.Store.Workflows" Multiplicity="1" />
@@ -1058,30 +1053,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PermissionsUsers">
-    <End Role="Permissions" Type="DataAccess.Store.Permissions" Multiplicity="*" />
-    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Permissions">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="WorkFlowStepsUsers1">
-    <End Role="WorkFlowSteps" Type="DataAccess.Store.WorkFlowSteps" Multiplicity="*" />
-    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="WorkFlowSteps">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ObjectTypeHistoriesObjectTypes">
     <End Role="ObjectTypeHistories" Type="DataAccess.Store.ObjectTypeHistories" Multiplicity="*" />
     <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
@@ -1127,6 +1098,30 @@
       </Principal>
       <Dependent Role="MenuHistories">
         <PropertyRef Name="CreatedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRolesToWorkFlowStepsUserRoles">
+    <End Role="UserRolesToWorkFlowSteps" Type="DataAccess.Store.UserRolesToWorkFlowSteps" Multiplicity="*" />
+    <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserRoles">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="UserRolesToWorkFlowSteps">
+        <PropertyRef Name="UserRolesUserRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRolesToWorkFlowStepsWorkFlowSteps">
+    <End Role="UserRolesToWorkFlowSteps" Type="DataAccess.Store.UserRolesToWorkFlowSteps" Multiplicity="*" />
+    <End Role="WorkFlowSteps" Type="DataAccess.Store.WorkFlowSteps" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WorkFlowSteps">
+        <PropertyRef Name="WorkFlowStepId" />
+      </Principal>
+      <Dependent Role="UserRolesToWorkFlowSteps">
+        <PropertyRef Name="WorkFlowStepsWorkFlowStepId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1269,9 +1264,6 @@
           <AssociationSet Name="WorkFlowStepsWorkflows" Association="DataAccess.WorkFlowStepsWorkflows">
             <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" />
             <End Role="Workflows" EntitySet="Workflows" /></AssociationSet>
-          <AssociationSet Name="WorkFlowStepsUserRoles" Association="DataAccess.WorkFlowStepsUserRoles">
-            <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" />
-            <End Role="UserRoles" EntitySet="UserRoles" /></AssociationSet>
           <EntitySet Name="WorkFlowInstances" EntityType="DataAccess.WorkFlowInstances" />
           <AssociationSet Name="WorkFlowInstancesWorkflows" Association="DataAccess.WorkFlowInstancesWorkflows">
             <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
@@ -1291,12 +1283,6 @@
           <AssociationSet Name="WorkFlowInstancesMenus" Association="DataAccess.WorkFlowInstancesMenus">
             <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
             <End Role="Menus" EntitySet="Menus" /></AssociationSet>
-          <AssociationSet Name="PermissionsUsers" Association="DataAccess.PermissionsUsers">
-            <End Role="Permissions" EntitySet="Permissions" />
-            <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
-          <AssociationSet Name="WorkFlowStepsUsers1" Association="DataAccess.WorkFlowStepsUsers1">
-            <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" />
-            <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
           <AssociationSet Name="ObjectTypeHistoriesObjectTypes" Association="DataAccess.ObjectTypeHistoriesObjectTypes">
             <End Role="ObjectTypeHistories" EntitySet="ObjectTypeHistories" />
             <End Role="ObjectTypes" EntitySet="ObjectTypes" /></AssociationSet>
@@ -1310,6 +1296,13 @@
           <AssociationSet Name="MenuHistoriesUsers" Association="DataAccess.MenuHistoriesUsers">
             <End Role="MenuHistories" EntitySet="MenuHistories" />
             <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
+          <EntitySet Name="UserRolesToWorkFlowSteps" EntityType="DataAccess.UserRolesToWorkFlowSteps" />
+          <AssociationSet Name="UserRolesToWorkFlowStepsUserRoles" Association="DataAccess.UserRolesToWorkFlowStepsUserRoles">
+            <End Role="UserRolesToWorkFlowSteps" EntitySet="UserRolesToWorkFlowSteps" />
+            <End Role="UserRoles" EntitySet="UserRoles" /></AssociationSet>
+          <AssociationSet Name="UserRolesToWorkFlowStepsWorkFlowSteps" Association="DataAccess.UserRolesToWorkFlowStepsWorkFlowSteps">
+            <End Role="UserRolesToWorkFlowSteps" EntitySet="UserRolesToWorkFlowSteps" />
+            <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" /></AssociationSet>
           </EntityContainer>
         <EntityType Name="ContentItems" Abstract="false">
           <Key>
@@ -1346,8 +1339,8 @@
           <Property Type="String" Name="Description" Nullable="false" />
           <NavigationProperty Name="UsersToUserRoles" Relationship="DataAccess.UsersToUserRolesUserRoles" FromRole="UserRoles" ToRole="UsersToUserRoles" cg:SetterAccess="Protected" />
           <NavigationProperty Name="Permissions" Relationship="DataAccess.PermissionsUserRoles" FromRole="UserRoles" ToRole="Permissions" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="WorkFlowSteps" Relationship="DataAccess.WorkFlowStepsUserRoles" FromRole="UserRoles" ToRole="WorkFlowSteps" />
           <Property Type="Boolean" Name="IsSingleton" Nullable="false" />
+          <NavigationProperty Name="UserRolesToWorkFlowStep" Relationship="DataAccess.UserRolesToWorkFlowStepsUserRoles" FromRole="UserRoles" ToRole="UserRolesToWorkFlowSteps" />
           </EntityType>
         <EntityType Name="Users" Abstract="false">
           <Key>
@@ -1363,8 +1356,6 @@
           <NavigationProperty Name="Language" Relationship="DataAccess.LanguagesUsers" FromRole="Users" ToRole="Languages" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="LanguageId" Nullable="false" />
           <NavigationProperty Name="ContentHistories" Relationship="DataAccess.ContentHistoryUsers" FromRole="Users" ToRole="ContentHistory" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="Permissions" Relationship="DataAccess.PermissionsUsers" FromRole="Users" ToRole="Permissions" />
-          <NavigationProperty Name="WorkFlowSteps" Relationship="DataAccess.WorkFlowStepsUsers1" FromRole="Users" ToRole="WorkFlowSteps" />
           <NavigationProperty Name="ObjectTypeHistories" Relationship="DataAccess.ObjectTypeHistoriesUsers" FromRole="Users" ToRole="ObjectTypeHistories" />
           <NavigationProperty Name="MenuHistories" Relationship="DataAccess.MenuHistoriesUsers" FromRole="Users" ToRole="MenuHistories" />
           </EntityType>
@@ -1659,7 +1650,7 @@
             <PropertyRef Name="PermissionId" /></Key>
           <Property Type="Int32" Name="PermissionId" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="UserRole" Relationship="DataAccess.PermissionsUserRoles" FromRole="Permissions" ToRole="UserRoles" cg:SetterAccess="Protected" />
-          <Property Type="Int32" Name="UserRoleId" Nullable="true" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="UserRoleId" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="Boolean" Name="CanReadContent" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="Boolean" Name="CanAddContent" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="Boolean" Name="CanDeleteContent" Nullable="false" cg:SetterAccess="Protected" />
@@ -1678,13 +1669,14 @@
           <Property Type="Boolean" Name="CanEditCalendar" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="Folder" Relationship="DataAccess.PermissionsFolders" FromRole="Permissions" ToRole="Folders" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Protected" />
-          <Property Type="Boolean" Name="IsPageAdmin" Nullable="false" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="User" Relationship="DataAccess.PermissionsUsers" FromRole="Permissions" ToRole="Users" />
-          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Boolean" Name="CanReadPages" Nullable="false" />
+          <Property Type="String" Name="CanEditPages" Nullable="false" />
+          <Property Type="String" Name="CanAddPages" Nullable="false" />
+          <Property Type="String" Name="CanDeletePages" Nullable="false" />
           </EntityType>
         <Association Name="PermissionsUserRoles">
           <End Type="DataAccess.Permissions" Role="Permissions" Multiplicity="*" />
-          <End Type="DataAccess.UserRoles" Role="UserRoles" Multiplicity="0..1" />
+          <End Type="DataAccess.UserRoles" Role="UserRoles" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="UserRoles">
               <PropertyRef Name="UserRoleId" /></Principal>
@@ -1928,11 +1920,8 @@
           <Property Type="Int32" Name="WorkFlowStepId" Nullable="false" />
           <NavigationProperty Name="Workflow" Relationship="DataAccess.WorkFlowStepsWorkflows" FromRole="WorkFlowSteps" ToRole="Workflows" />
           <Property Type="Int32" Name="WorkflowId" Nullable="false" />
-          <NavigationProperty Name="UserRole" Relationship="DataAccess.WorkFlowStepsUserRoles" FromRole="WorkFlowSteps" ToRole="UserRoles" />
-          <Property Type="Int32" Name="UserRoleId" Nullable="true" />
           <Property Type="Int32" Name="StepOrder" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DataAccess.WorkFlowStepsUsers1" FromRole="WorkFlowSteps" ToRole="Users" />
-          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <NavigationProperty Name="ApproversEditorRoles" Relationship="DataAccess.UserRolesToWorkFlowStepsWorkFlowSteps" FromRole="WorkFlowSteps" ToRole="UserRolesToWorkFlowSteps" />
           </EntityType>
         <Association Name="WorkFlowStepsWorkflows">
           <End Type="DataAccess.WorkFlowSteps" Role="WorkFlowSteps" Multiplicity="*" />
@@ -1942,14 +1931,6 @@
               <PropertyRef Name="WorkflowId" /></Principal>
             <Dependent Role="WorkFlowSteps">
               <PropertyRef Name="WorkflowId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="WorkFlowStepsUserRoles">
-          <End Type="DataAccess.WorkFlowSteps" Role="WorkFlowSteps" Multiplicity="*" />
-          <End Type="DataAccess.UserRoles" Role="UserRoles" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="UserRoles">
-              <PropertyRef Name="UserRoleId" /></Principal>
-            <Dependent Role="WorkFlowSteps">
-              <PropertyRef Name="UserRoleId" /></Dependent></ReferentialConstraint></Association>
         <EntityType Name="WorkFlowInstances">
           <Key>
             <PropertyRef Name="WorkFlowInstanceId" /></Key>
@@ -1961,7 +1942,8 @@
           <NavigationProperty Name="ObjectTypes" Relationship="DataAccess.WorkFlowInstancesObjectTypes" FromRole="WorkFlowInstances" ToRole="ObjectTypes" />
           <NavigationProperty Name="Calendars" Relationship="DataAccess.WorkFlowInstancesCalendars" FromRole="WorkFlowInstances" ToRole="Calendars" />
           <NavigationProperty Name="Templates" Relationship="DataAccess.WorkFlowInstancesTemplates" FromRole="WorkFlowInstances" ToRole="Templates" />
-          <NavigationProperty Name="Menus" Relationship="DataAccess.WorkFlowInstancesMenus" FromRole="WorkFlowInstances" ToRole="Menus" /></EntityType>
+          <NavigationProperty Name="Menus" Relationship="DataAccess.WorkFlowInstancesMenus" FromRole="WorkFlowInstances" ToRole="Menus" />
+          <Property Type="Boolean" Name="IsComplete" Nullable="false" DefaultValue="False" /></EntityType>
         <Association Name="WorkFlowInstancesWorkflows">
           <End Type="DataAccess.WorkFlowInstances" Role="WorkFlowInstances" Multiplicity="*" />
           <End Type="DataAccess.Workflows" Role="Workflows" Multiplicity="1" />
@@ -2010,22 +1992,6 @@
               <PropertyRef Name="WorkFlowInstanceId" /></Principal>
             <Dependent Role="Menus">
               <PropertyRef Name="WorkFlowInstanceId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="PermissionsUsers">
-          <End Type="DataAccess.Permissions" Role="Permissions" Multiplicity="*" />
-          <End Type="DataAccess.Users" Role="Users" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" /></Principal>
-            <Dependent Role="Permissions">
-              <PropertyRef Name="UserId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="WorkFlowStepsUsers1">
-          <End Type="DataAccess.WorkFlowSteps" Role="WorkFlowSteps" Multiplicity="*" />
-          <End Type="DataAccess.Users" Role="Users" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" /></Principal>
-            <Dependent Role="WorkFlowSteps">
-              <PropertyRef Name="UserId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ObjectTypeHistoriesObjectTypes">
           <End Type="DataAccess.ObjectTypeHistories" Role="ObjectTypeHistories" Multiplicity="*" />
           <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
@@ -2065,6 +2031,31 @@
               <PropertyRef Name="UserId" /></Principal>
             <Dependent Role="MenuHistories">
               <PropertyRef Name="CreatedByUserId" /></Dependent></ReferentialConstraint></Association>
+        <EntityType Name="UserRolesToWorkFlowSteps" cg:TypeAccess="Public">
+          <Key>
+            <PropertyRef Name="UserRolesToWorkFlowStepId" /></Key>
+          <Property Type="Int32" Name="UserRolesToWorkFlowStepId" Nullable="false" />
+          <NavigationProperty Name="UserRole" Relationship="DataAccess.UserRolesToWorkFlowStepsUserRoles" FromRole="UserRolesToWorkFlowSteps" ToRole="UserRoles" />
+          <Property Type="Int32" Name="UserRolesUserRoleId" Nullable="false" />
+          <NavigationProperty Name="WorkFlowStep" Relationship="DataAccess.UserRolesToWorkFlowStepsWorkFlowSteps" FromRole="UserRolesToWorkFlowSteps" ToRole="WorkFlowSteps" />
+          <Property Type="Int32" Name="WorkFlowStepsWorkFlowStepId" Nullable="false" />
+          <Property Type="Boolean" Name="IsApprover" Nullable="false" /></EntityType>
+        <Association Name="UserRolesToWorkFlowStepsUserRoles">
+          <End Type="DataAccess.UserRolesToWorkFlowSteps" Role="UserRolesToWorkFlowSteps" Multiplicity="*" />
+          <End Type="DataAccess.UserRoles" Role="UserRoles" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="UserRoleId" /></Principal>
+            <Dependent Role="UserRolesToWorkFlowSteps">
+              <PropertyRef Name="UserRolesUserRoleId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="UserRolesToWorkFlowStepsWorkFlowSteps">
+          <End Type="DataAccess.UserRolesToWorkFlowSteps" Role="UserRolesToWorkFlowSteps" Multiplicity="*" />
+          <End Type="DataAccess.WorkFlowSteps" Role="WorkFlowSteps" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="WorkFlowSteps">
+              <PropertyRef Name="WorkFlowStepId" /></Principal>
+            <Dependent Role="UserRolesToWorkFlowSteps">
+              <PropertyRef Name="WorkFlowStepsWorkFlowStepId" /></Dependent></ReferentialConstraint></Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2289,8 +2280,10 @@
           <ScalarProperty Name="CanEditFolder" ColumnName="CanEditFolder" />
           <ScalarProperty Name="CanEditCalendar" ColumnName="CanEditCalendar" />
           <ScalarProperty Name="FolderId" ColumnName="FolderId" />
-          <ScalarProperty Name="IsPageAdmin" ColumnName="IsPageAdmin" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CanReadPages" ColumnName="CanReadPages" />
+          <ScalarProperty Name="CanEditPages" ColumnName="CanEditPages" />
+          <ScalarProperty Name="CanAddPages" ColumnName="CanAddPages" />
+          <ScalarProperty Name="CanDeletePages" ColumnName="CanDeletePages" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2381,9 +2374,7 @@
         <MappingFragment StoreEntitySet="WorkFlowSteps">
           <ScalarProperty Name="WorkFlowStepId" ColumnName="WorkFlowStepId" />
           <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
-          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
           <ScalarProperty Name="StepOrder" ColumnName="StepOrder" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2393,6 +2384,7 @@
           <ScalarProperty Name="WorkFlowInstanceId" ColumnName="WorkFlowInstanceId" />
           <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
           <ScalarProperty Name="CurrentStep" ColumnName="CurrentStep" />
+          <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2405,6 +2397,16 @@
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="SerializedData" ColumnName="SerializedData" />
           <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRolesToWorkFlowSteps">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.UserRolesToWorkFlowSteps)">
+        <MappingFragment StoreEntitySet="UserRolesToWorkFlowSteps">
+          <ScalarProperty Name="UserRolesToWorkFlowStepId" ColumnName="UserRolesToWorkFlowStepId" />
+          <ScalarProperty Name="UserRolesUserRoleId" ColumnName="UserRolesUserRoleId" />
+          <ScalarProperty Name="WorkFlowStepsWorkFlowStepId" ColumnName="WorkFlowStepsWorkFlowStepId" />
+          <ScalarProperty Name="IsApprover" ColumnName="IsApprover" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2444,7 +2446,7 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="49" >
+      <Diagram Name="Model1" ZoomLevel="74" >
         <EntityTypeShape EntityType="DataAccess.ContentItems" Width="1.5" PointX="4" PointY="4.375" Height="4.5505582682291656" />
         <EntityTypeShape EntityType="DataAccess.UserRoles" Width="1.5" PointX="10.25" PointY="11.125" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataAccess.Users" Width="1.5" PointX="7.625" PointY="9.125" Height="2.9070849609374996" />
@@ -2462,8 +2464,8 @@
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.UsersToUserRolesUsers">
           <ConnectorPoint PointX="10" PointY="9.5658268229166659" />
-          <ConnectorPoint PointX="9.8020833333333339" PointY="9.5658268229166659" />
-          <ConnectorPoint PointX="9.6354166666666661" PointY="9.5658268229166659" />
+          <ConnectorPoint PointX="9.7786458333333339" PointY="9.5658268229166659" />
+          <ConnectorPoint PointX="9.6119791666666661" PointY="9.5658268229166659" />
           <ConnectorPoint PointX="9.125" PointY="9.5658268229166659" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.Folders" Width="2" PointX="8" PointY="14.625" Height="5.0436002604166674" />
@@ -2476,11 +2478,11 @@
         <EntityTypeShape EntityType="DataAccess.MetaDataTypesToContentItems" Width="2.5" PointX="0.5" PointY="7.625" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataAccess.MetaDataTypes" Width="2.125" PointX="0.5" PointY="10" Height="2.0853483072916665" />
         <AssociationConnector Association="DataAccess.FoldersContentItems" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.71875" PointY="14.625" />
-          <ConnectorPoint PointX="9.71875" PointY="7.9849711636753771" />
-          <ConnectorPoint PointX="8.2083328333333352" PointY="7.9849711636753762" />
-          <ConnectorPoint PointX="8.0416661666666673" PointY="7.9849711636753771" />
-          <ConnectorPoint PointX="5.5" PointY="7.9849711636753771" />
+          <ConnectorPoint PointX="9.6953125" PointY="14.625" />
+          <ConnectorPoint PointX="9.6953125" PointY="8.0352895459287321" />
+          <ConnectorPoint PointX="5.677083333333333" PointY="8.0352895459287321" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="8.0352895459287321" />
+          <ConnectorPoint PointX="5.5" PointY="8.0352895459287321" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.Languages" Width="1.5" PointX="6.25" PointY="12.875" Height="2.0853483072916674" />
         <AssociationConnector Association="DataAccess.LanguagesUsers">
@@ -2494,21 +2496,21 @@
           <ConnectorPoint PointX="8" PointY="17.146800130208334" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.CalendarsFolders" ManuallyRouted="false">
-          <ConnectorPoint PointX="16.243581736842856" PointY="21.375" />
-          <ConnectorPoint PointX="16.243581736842856" PointY="19.217442122577097" />
-          <ConnectorPoint PointX="13.046493817149772" PointY="19.217442122577097" />
-          <ConnectorPoint PointX="12.879827150483104" PointY="19.217442122577097" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="19.217442122577097" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="19.217442122577097" />
-          <ConnectorPoint PointX="10" PointY="19.217442122577097" />
+          <ConnectorPoint PointX="16.279644184210714" PointY="21.375" />
+          <ConnectorPoint PointX="16.279644184210714" PointY="19.137350260416667" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="19.137350260416667" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="19.137350260416667" />
+          <ConnectorPoint PointX="12.083333333333334" PointY="19.137350260416667" />
+          <ConnectorPoint PointX="11.916666666666666" PointY="19.137350260416667" />
+          <ConnectorPoint PointX="10" PointY="19.137350260416667" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.CalendarsCalendarEvents">
           <ConnectorPoint PointX="17.375" PointY="22.335500488281248" />
           <ConnectorPoint PointX="17.875" PointY="22.335500488281248" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.MenusFolders">
-          <ConnectorPoint PointX="8.125" PointY="24.339020041003046" />
-          <ConnectorPoint PointX="9.0069230769230764" PointY="24.339020041003046" />
+          <ConnectorPoint PointX="8.125" PointY="24.171670219820577" />
+          <ConnectorPoint PointX="9.0069230769230764" PointY="24.171670219820577" />
           <ConnectorPoint PointX="9.0069230769230764" PointY="19.668600260416667" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.MenuItemsMenus">
@@ -2533,17 +2535,19 @@
           <ConnectorPoint PointX="11.25" PointY="1.9605004882812498" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.PagesAliases" ManuallyRouted="true">
-          <ConnectorPoint PointX="12.203125" PointY="3.2496956380208335" />
+          <ConnectorPoint PointX="12.203125" PointY="3.2496956380208331" />
           <ConnectorPoint PointX="12.203125" PointY="20.599786143021319" />
           <ConnectorPoint PointX="9.7356405256410259" PointY="20.599786143021319" />
           <ConnectorPoint PointX="9.568973858974358" PointY="20.599786143021319" />
           <ConnectorPoint PointX="9.09025641025641" PointY="20.599786143021319" />
           <ConnectorPoint PointX="8.9235897435897424" PointY="20.599786143021319" />
+          <ConnectorPoint PointX="7.458333333333333" PointY="20.599786143021319" />
+          <ConnectorPoint PointX="7.291666666666667" PointY="20.599786143021319" />
           <ConnectorPoint PointX="5.989583333333333" PointY="20.599786143021319" />
           <ConnectorPoint PointX="5.822916666666667" PointY="20.599786143021319" />
           <ConnectorPoint PointX="5.36703125" PointY="20.599786143021319" />
           <ConnectorPoint PointX="5.36703125" PointY="19.145819964771562" />
-          <ConnectorPoint PointX="2" PointY="18.484110553585214" />
+          <ConnectorPoint PointX="2" PointY="18.619924417402341" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ChildFolders">
           <ConnectorPoint PointX="8.70923076923077" PointY="19.668600260416667" />
@@ -2551,14 +2555,14 @@
           <ConnectorPoint PointX="9.304615384615385" PointY="19.918600260416667" />
           <ConnectorPoint PointX="9.304615384615385" PointY="19.668600260416667" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataAccess.Permissions" Width="1.5" PointX="10.375" PointY="13.5" Height="4.8792529296875031" />
+        <EntityTypeShape EntityType="DataAccess.Permissions" Width="1.5" PointX="10.375" PointY="13.5" Height="5.0436002604166674" />
         <AssociationConnector Association="DataAccess.PermissionsUserRoles">
-          <ConnectorPoint PointX="11.170669608079873" PointY="13.5" />
-          <ConnectorPoint PointX="11.170669608079873" PointY="13.0460009765625" />
+          <ConnectorPoint PointX="11.0625" PointY="13.5" />
+          <ConnectorPoint PointX="11.0625" PointY="13.0460009765625" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.PermissionsFolders">
-          <ConnectorPoint PointX="10.375" PointY="16.502126464843752" />
-          <ConnectorPoint PointX="10" PointY="16.502126464843752" /></AssociationConnector>
+          <ConnectorPoint PointX="10.375" PointY="16.584300130208334" />
+          <ConnectorPoint PointX="10" PointY="16.584300130208334" /></AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.MetaDataTypeToFolder" Width="2" PointX="2.625" PointY="12.25" Height="1.9210009765624996" />
         <AssociationConnector Association="DataAccess.MetaDataTypeToFolderFolders" ManuallyRouted="false">
           <ConnectorPoint PointX="3.625" PointY="14.1710009765625" />
@@ -2594,9 +2598,9 @@
           <ConnectorPoint PointX="4.75" PointY="4.375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ContentHistoryUsers">
-          <ConnectorPoint PointX="5.625" PointY="2.8740350691763812" />
-          <ConnectorPoint PointX="8.1249995000000013" PointY="2.8740350691763812" />
-          <ConnectorPoint PointX="8.1249995000000013" PointY="9.125" />
+          <ConnectorPoint PointX="5.59375" PointY="3.2496956380208331" />
+          <ConnectorPoint PointX="5.59375" PointY="9.787452244900102" />
+          <ConnectorPoint PointX="7.625" PointY="9.787452244900102" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.AliasesContentItems">
           <ConnectorPoint PointX="2" PointY="17.794962917254566" />
@@ -2606,13 +2610,15 @@
         <EntityTypeShape EntityType="DataAccess.ObjectTypes" Width="1.5" PointX="18" PointY="0.5" Height="3.0714322916666661" />
         <EntityTypeShape EntityType="DataAccess.ObjectXslts" Width="1.5" PointX="16" PointY="0.5" Height="2.0853483072916665" />
         <AssociationConnector Association="DataAccess.ObjectXsltSetContentItems">
-          <ConnectorPoint PointX="16.75" PointY="2.5853483072916665" />
-          <ConnectorPoint PointX="16.75" PointY="6.8449373273507526" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="6.8449373273507517" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="6.8449373273507526" />
-          <ConnectorPoint PointX="8.2083328333333352" PointY="6.8449373273507517" />
-          <ConnectorPoint PointX="8.0416661666666673" PointY="6.8449373273507526" />
-          <ConnectorPoint PointX="5.5" PointY="6.8449373273507526" />
+          <ConnectorPoint PointX="16.78125" PointY="2.5853483072916665" />
+          <ConnectorPoint PointX="16.78125" PointY="6.9455740918574618" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="6.9455740918574609" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="6.9455740918574618" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="6.9455740918574609" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="6.9455740918574618" />
+          <ConnectorPoint PointX="5.677083333333333" PointY="6.9455740918574609" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="6.9455740918574618" />
+          <ConnectorPoint PointX="5.5" PointY="6.9455740918574618" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ObjectSchemaObjectXsltSets">
           <ConnectorPoint PointX="18" PointY="1.5426741536458333" />
@@ -2625,32 +2631,34 @@
           <ConnectorPoint PointX="7.7073076923076931" PointY="25.228821614583339" />
           <ConnectorPoint PointX="7.7073076923076931" PointY="24.978821614583335" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.MenusMenus1">
-          <ConnectorPoint PointX="8.125" PointY="22.258167217548074" />
-          <ConnectorPoint PointX="8.375" PointY="22.258167217548074" />
-          <ConnectorPoint PointX="8.375" PointY="23.170126089242785" />
-          <ConnectorPoint PointX="8.125" PointY="23.170126089242785" />
+          <ConnectorPoint PointX="7.0426923076923078" PointY="21.25" />
+          <ConnectorPoint PointX="7.0426923076923078" PointY="21" />
+          <ConnectorPoint PointX="7.375" PointY="21" />
+          <ConnectorPoint PointX="7.375" PointY="21.25" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ContentItemsObjectTypes">
-          <ConnectorPoint PointX="5.5" PointY="4.977152413675376" />
-          <ConnectorPoint PointX="8.0416661666666673" PointY="4.9771524136753751" />
-          <ConnectorPoint PointX="8.2083328333333352" PointY="4.977152413675376" />
-          <ConnectorPoint PointX="9.2291666666666661" PointY="4.9771524136753751" />
-          <ConnectorPoint PointX="9.3958333333333339" PointY="4.977152413675376" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="4.9771524136753751" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="4.977152413675376" />
-          <ConnectorPoint PointX="16.666666666666668" PointY="4.9771524136753751" />
-          <ConnectorPoint PointX="16.833333333333332" PointY="4.977152413675376" />
-          <ConnectorPoint PointX="18.334391100260419" PointY="4.9771524136753751" />
-          <ConnectorPoint PointX="18.501057766927083" PointY="4.977152413675376" />
-          <ConnectorPoint PointX="18.9604488671875" PointY="4.977152413675376" />
-          <ConnectorPoint PointX="18.9604488671875" PointY="3.5714322916666661" />
+          <ConnectorPoint PointX="5.5" PointY="4.9407306761830592" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="4.9407306761830583" />
+          <ConnectorPoint PointX="5.677083333333333" PointY="4.9407306761830592" />
+          <ConnectorPoint PointX="9.3697916666666661" PointY="4.9407306761830583" />
+          <ConnectorPoint PointX="9.5364583333333339" PointY="4.9407306761830592" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="4.9407306761830583" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="4.9407306761830592" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="4.9407306761830583" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="4.9407306761830592" />
+          <ConnectorPoint PointX="16.697916666666668" PointY="4.9407306761830583" />
+          <ConnectorPoint PointX="16.864583333333332" PointY="4.9407306761830592" />
+          <ConnectorPoint PointX="18.349224025065105" PointY="4.9407306761830583" />
+          <ConnectorPoint PointX="18.515890691731769" PointY="4.9407306761830592" />
+          <ConnectorPoint PointX="18.990114716796874" PointY="4.9407306761830592" />
+          <ConnectorPoint PointX="18.990114716796874" PointY="3.5714322916666661" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.TemplateElementContentItems">
-          <ConnectorPoint PointX="9.3125" PointY="3.7427376302083331" />
-          <ConnectorPoint PointX="9.3125" PointY="6.084914769801002" />
-          <ConnectorPoint PointX="8.2083328333333352" PointY="6.0849147698010011" />
-          <ConnectorPoint PointX="8.0416661666666673" PointY="6.084914769801002" />
-          <ConnectorPoint PointX="5.5" PointY="6.084914769801002" />
+          <ConnectorPoint PointX="9.453125" PointY="3.7427376302083331" />
+          <ConnectorPoint PointX="9.453125" PointY="6.2624394596041064" />
+          <ConnectorPoint PointX="5.677083333333333" PointY="6.2624394596041055" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="6.2624394596041064" />
+          <ConnectorPoint PointX="5.5" PointY="6.2624394596041064" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.AliasesMenuItems">
           <ConnectorPoint PointX="1.25" PointY="19.039042968750003" />
@@ -2665,128 +2673,99 @@
           <ConnectorPoint PointX="5.989583333333333" PointY="23.914180631917318" />
           <ConnectorPoint PointX="6.625" PointY="23.914180631917318" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.ObjectTypesTemplateElements">
-          <ConnectorPoint PointX="18" PointY="3.4418139648437496" />
-          <ConnectorPoint PointX="16.833333333333332" PointY="3.4418139648437491" />
-          <ConnectorPoint PointX="16.666666666666668" PointY="3.4418139648437496" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="3.4418139648437491" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="3.4418139648437496" />
-          <ConnectorPoint PointX="11.778643833333334" PointY="3.4418139648437491" />
-          <ConnectorPoint PointX="11.611977166666666" PointY="3.4418139648437496" />
-          <ConnectorPoint PointX="10.625" PointY="3.4418139648437496" />
+          <ConnectorPoint PointX="18" PointY="3.470284574969555" />
+          <ConnectorPoint PointX="16.864583333333332" PointY="3.4702845749695546" />
+          <ConnectorPoint PointX="16.697916666666668" PointY="3.470284574969555" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="3.4702845749695546" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="3.470284574969555" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="3.4702845749695546" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="3.470284574969555" />
+          <ConnectorPoint PointX="10.625" PointY="3.470284574969555" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.ObjectTypeHistories" Width="2" PointX="20.125" PointY="0.5" Height="2.2496956380208331" />
         <EntityTypeShape EntityType="DataAccess.Workflows" Width="1.75" PointX="17.25" PointY="15.25" Height="1.5923063151041674" />
         <AssociationConnector Association="DataAccess.WorkflowsFolders">
           <ConnectorPoint PointX="18.125" PointY="16.842306315104167" />
-          <ConnectorPoint PointX="18.125" PointY="18.703778984737525" />
-          <ConnectorPoint PointX="16.758001807019046" PointY="18.703778984737525" />
-          <ConnectorPoint PointX="16.591335140352381" PointY="18.703778984737525" />
-          <ConnectorPoint PointX="13.046493817149772" PointY="18.703778984737525" />
-          <ConnectorPoint PointX="12.879827150483104" PointY="18.703778984737525" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="18.703778984737525" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="18.703778984737525" />
-          <ConnectorPoint PointX="10" PointY="18.703778984737525" />
+          <ConnectorPoint PointX="18.125" PointY="18.840472760416667" />
+          <ConnectorPoint PointX="16.830126701754761" PointY="18.840472760416667" />
+          <ConnectorPoint PointX="16.663460035088097" PointY="18.840472760416667" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="18.840472760416667" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="18.840472760416667" />
+          <ConnectorPoint PointX="12.083333333333334" PointY="18.840472760416667" />
+          <ConnectorPoint PointX="11.916666666666666" PointY="18.840472760416667" />
+          <ConnectorPoint PointX="10" PointY="18.840472760416667" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataAccess.WorkFlowSteps" Width="1.5" PointX="19.75" PointY="15.25" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="DataAccess.WorkFlowSteps" Width="1.5" PointX="19.75" PointY="15.25" Height="1.592306315104171" />
         <AssociationConnector Association="DataAccess.WorkFlowStepsWorkflows">
           <ConnectorPoint PointX="19.75" PointY="16.046153157552084" />
           <ConnectorPoint PointX="19" PointY="16.046153157552084" /></AssociationConnector>
-        <AssociationConnector Association="DataAccess.WorkFlowStepsUserRoles">
-          <ConnectorPoint PointX="20.611327656249998" PointY="15.25" />
-          <ConnectorPoint PointX="20.611327656249998" PointY="11.71875" />
-          <ConnectorPoint PointX="20.23274466145833" PointY="11.71875" />
-          <ConnectorPoint PointX="20.066077994791666" PointY="11.71875" />
-          <ConnectorPoint PointX="18.501057766927083" PointY="11.71875" />
-          <ConnectorPoint PointX="18.334391100260419" PointY="11.71875" />
-          <ConnectorPoint PointX="17.950029700520833" PointY="11.71875" />
-          <ConnectorPoint PointX="17.783363033854169" PointY="11.71875" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="11.71875" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="11.71875" />
-          <ConnectorPoint PointX="11.75" PointY="11.71875" />
-          </AssociationConnector>
-        <EntityTypeShape EntityType="DataAccess.WorkFlowInstances" Width="1.75" PointX="17.375" PointY="12.375" Height="1.4279589843749996" />
+        <EntityTypeShape EntityType="DataAccess.WorkFlowInstances" Width="1.75" PointX="17.375" PointY="12.375" Height="2.5783902994791656" />
         <AssociationConnector Association="DataAccess.WorkFlowInstancesWorkflows">
-          <ConnectorPoint PointX="18.2187525" PointY="13.802958984375" />
-          <ConnectorPoint PointX="18.2187525" PointY="15.25" /></AssociationConnector>
+          <ConnectorPoint PointX="18.1875" PointY="14.953390299479166" />
+          <ConnectorPoint PointX="18.1875" PointY="15.25" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesContentItems">
-          <ConnectorPoint PointX="17.8666963671875" PointY="12.375" />
-          <ConnectorPoint PointX="17.8666963671875" PointY="5.6418098273507518" />
-          <ConnectorPoint PointX="16.833333333333332" PointY="5.6418098273507509" />
-          <ConnectorPoint PointX="16.666666666666668" PointY="5.6418098273507518" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="5.6418098273507509" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="5.6418098273507518" />
-          <ConnectorPoint PointX="9.3958333333333339" PointY="5.6418098273507509" />
-          <ConnectorPoint PointX="9.2291666666666661" PointY="5.6418098273507518" />
-          <ConnectorPoint PointX="8.2083328333333352" PointY="5.6418098273507509" />
-          <ConnectorPoint PointX="8.0416661666666673" PointY="5.6418098273507518" />
-          <ConnectorPoint PointX="5.5" PointY="5.6418098273507518" />
+          <ConnectorPoint PointX="17.87252617919922" PointY="12.375" />
+          <ConnectorPoint PointX="17.87252617919922" PointY="5.6015850678935823" />
+          <ConnectorPoint PointX="16.864583333333332" PointY="5.6015850678935815" />
+          <ConnectorPoint PointX="16.697916666666668" PointY="5.6015850678935823" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="5.6015850678935815" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="5.6015850678935823" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="5.6015850678935815" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="5.6015850678935823" />
+          <ConnectorPoint PointX="9.5364583333333339" PointY="5.6015850678935815" />
+          <ConnectorPoint PointX="9.3697916666666661" PointY="5.6015850678935823" />
+          <ConnectorPoint PointX="5.677083333333333" PointY="5.6015850678935815" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="5.6015850678935823" />
+          <ConnectorPoint PointX="5.5" PointY="5.6015850678935823" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesObjectTypes">
-          <ConnectorPoint PointX="18.417724433593751" PointY="12.375" />
-          <ConnectorPoint PointX="18.417724433593751" PointY="3.5714322916666661" />
+          <ConnectorPoint PointX="18.432557358398437" PointY="12.375" />
+          <ConnectorPoint PointX="18.432557358398437" PointY="3.5714322916666661" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesCalendars">
-          <ConnectorPoint PointX="17.375" PointY="13.400464676758553" />
-          <ConnectorPoint PointX="16.674668473685713" PointY="13.400464676758553" />
-          <ConnectorPoint PointX="16.674668473685713" PointY="21.375" />
+          <ConnectorPoint PointX="17.375" PointY="14.072108561197917" />
+          <ConnectorPoint PointX="16.746793368421429" PointY="14.072108561197917" />
+          <ConnectorPoint PointX="16.746793368421429" PointY="21.375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesTemplates">
-          <ConnectorPoint PointX="17.375" PointY="12.574739553470543" />
-          <ConnectorPoint PointX="12.125" PointY="12.574739553470543" />
-          <ConnectorPoint PointX="12.125" PointY="3.6246956380208335" />
-          <ConnectorPoint PointX="11.6953105" PointY="3.6246956380208335" />
-          <ConnectorPoint PointX="11.6953105" PointY="3.2496956380208331" />
+          <ConnectorPoint PointX="17.375" PointY="13.27300048828125" />
+          <ConnectorPoint PointX="12.507815" PointY="13.27300048828125" />
+          <ConnectorPoint PointX="12.507815" PointY="3.2496956380208331" />
           </AssociationConnector>
-        <AssociationConnector Association="DataAccess.WorkFlowInstancesMenus" ManuallyRouted="true">
-          <ConnectorPoint PointX="17.375" PointY="13.136633745445405" />
-          <ConnectorPoint PointX="12.963160483816438" PointY="13.136633745445405" />
-          <ConnectorPoint PointX="12.963160483816438" PointY="21.035045668019009" />
-          <ConnectorPoint PointX="9.7356405256410259" PointY="21.035045668019009" />
-          <ConnectorPoint PointX="9.568973858974358" PointY="21.035045668019009" />
-          <ConnectorPoint PointX="7.5742201875" PointY="21.035045668019009" />
-          <ConnectorPoint PointX="7.5742201875" PointY="21.25" />
-          </AssociationConnector>
-        <AssociationConnector Association="DataAccess.PermissionsUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="10.528834216159746" PointY="13.5" />
-          <ConnectorPoint PointX="10.528834216159746" PointY="13.2960009765625" />
-          <ConnectorPoint PointX="9.8020833333333339" PointY="13.2960009765625" />
-          <ConnectorPoint PointX="9.6354166666666661" PointY="13.2960009765625" />
-          <ConnectorPoint PointX="9.5" PointY="13.2960009765625" />
-          <ConnectorPoint PointX="9.5" PointY="11.733432172145786" />
-          <ConnectorPoint PointX="9.125" PointY="11.733432172145786" />
-          </AssociationConnector>
-        <AssociationConnector Association="DataAccess.WorkFlowStepsUsers1">
-          <ConnectorPoint PointX="20.149411328124998" PointY="15.25" />
-          <ConnectorPoint PointX="20.149411328124998" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="18.501057766927083" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="18.334391100260419" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="17.950029700520833" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="17.783363033854169" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="11.083333333333334" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="10.916666666666666" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="9.8020833333333339" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="9.6354166666666661" PointY="10.74947364052586" />
-          <ConnectorPoint PointX="9.125" PointY="10.74947364052586" />
+        <AssociationConnector Association="DataAccess.WorkFlowInstancesMenus" ManuallyRouted="false">
+          <ConnectorPoint PointX="17.375" PointY="12.792748244140626" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="12.792748244140626" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="12.792748244140626" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="12.792748244140626" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="12.792748244140626" />
+          <ConnectorPoint PointX="12" PointY="12.792748244140626" />
+          <ConnectorPoint PointX="12" PointY="19.949850260416667" />
+          <ConnectorPoint PointX="9.7356405256410259" PointY="19.949850260416667" />
+          <ConnectorPoint PointX="9.568973858974358" PointY="19.949850260416667" />
+          <ConnectorPoint PointX="9.09025641025641" PointY="19.949850260416667" />
+          <ConnectorPoint PointX="8.9235897435897424" PointY="19.949850260416667" />
+          <ConnectorPoint PointX="7.375" PointY="19.949850260416667" />
+          <ConnectorPoint PointX="7.375" PointY="21.25" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ObjectTypeHistoriesObjectTypes">
           <ConnectorPoint PointX="20.125" PointY="1.6248478190104168" />
           <ConnectorPoint PointX="19.5" PointY="1.6248478190104168" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.ObjectTypeHistoriesUsers">
-          <ConnectorPoint PointX="21.125" PointY="2.7496956380208331" />
-          <ConnectorPoint PointX="21.125" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="18.501057766927083" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="18.334391100260419" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="17.950029700520833" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="17.783363033854169" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="11.083333333333334" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="10.916666666666666" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="9.8020833333333339" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="9.6354166666666661" PointY="10.448875015426722" />
-          <ConnectorPoint PointX="9.125" PointY="10.448875015426722" />
+          <ConnectorPoint PointX="20.28125" PointY="2.7496956380208331" />
+          <ConnectorPoint PointX="20.28125" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="18.515890691731769" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="18.349224025065105" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="17.955859512532552" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="17.789192845865887" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="11.083333333333334" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="10.916666666666666" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="9.7786458333333339" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="9.6119791666666661" PointY="10.565826822916666" />
+          <ConnectorPoint PointX="9.125" PointY="10.565826822916666" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.MenuHistories" Width="1.5" PointX="4.625" PointY="24.75" Height="2.2496956380208353" />
         <AssociationConnector Association="DataAccess.MenuHistoriesMenus">
@@ -2798,6 +2777,21 @@
           <ConnectorPoint PointX="5.90625" PointY="11.29200063396854" />
           <ConnectorPoint PointX="7.625" PointY="11.29200063396854" />
           </AssociationConnector>
+        <EntityTypeShape EntityType="DataAccess.UserRolesToWorkFlowSteps" Width="2.125" PointX="20.5" PointY="11.5" Height="1.9210009765624996" />
+        <AssociationConnector Association="DataAccess.UserRolesToWorkFlowStepsUserRoles">
+          <ConnectorPoint PointX="20.5" PointY="11.90625" />
+          <ConnectorPoint PointX="18.515890691731769" PointY="11.90625" />
+          <ConnectorPoint PointX="18.349224025065105" PointY="11.90625" />
+          <ConnectorPoint PointX="17.955859512532552" PointY="11.90625" />
+          <ConnectorPoint PointX="17.789192845865887" PointY="11.90625" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="11.90625" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="11.90625" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="11.90625" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="11.90625" />
+          <ConnectorPoint PointX="11.75" PointY="11.90625" /></AssociationConnector>
+        <AssociationConnector Association="DataAccess.UserRolesToWorkFlowStepsWorkFlowSteps">
+          <ConnectorPoint PointX="20.875" PointY="13.4210009765625" />
+          <ConnectorPoint PointX="20.875" PointY="15.25" /></AssociationConnector>
         </Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

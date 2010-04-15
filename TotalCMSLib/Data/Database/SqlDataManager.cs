@@ -7,7 +7,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Data.ContextDataProviders.Database {
+namespace TotalTech.CMS.Data.ContextDataProviders.Database {
     internal class SqlDataManager : iDataManager {
         const string SingleQuote_Const = "'", DoubleSingleQuote_Const = "''";
         #region Database Access
@@ -49,7 +49,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The DataSet that resulted from the SQL Command.</returns>
         protected override DataSet GetDataSet(string SqlCmd, CommandType CType, params DbParameter[] Params) {
-            SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
+            SqlCommand cmd = GetCommand(TotalTech.CMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
             SqlDataAdapter Adapt = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
 
@@ -97,7 +97,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The Scalar that resulted from the SQL Command.</returns>
         protected override T GetScalar<T>(string SqlCmd, CommandType CType, params DbParameter[] Params) {
-            SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
+            SqlCommand cmd = GetCommand(TotalTech.CMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
             cmd.Connection.Open();
             T val = (T)cmd.ExecuteScalar();
             cmd.Connection.Close();
@@ -142,7 +142,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The number of rows affected.</returns>
         protected override int ExecuteSql(string SqlCmd, CommandType CType, params DbParameter[] Params) {            
-            SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
+            SqlCommand cmd = GetCommand(TotalTech.CMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
             int RowsAffected = -1;
             cmd.Connection.Open();
             RowsAffected = cmd.ExecuteNonQuery();
@@ -188,7 +188,7 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         /// <param name="CType">The type of the command to be executed.</param>
         /// <returns>The SqlDataReader that resulted from the SQL Command.</returns>
         protected new SqlDataReader GetDataReader(string SqlCmd, CommandType CType, params DbParameter[] Params) {            
-            SqlCommand cmd = GetCommand(TotalCMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
+            SqlCommand cmd = GetCommand(TotalTech.CMS.SiteSettings.ConnectionString, SqlCmd, CType, Params);
             cmd.Connection.Open();
             SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             return reader;

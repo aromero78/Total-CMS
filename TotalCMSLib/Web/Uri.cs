@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Web {
+namespace TotalTech.CMS.Web {
     internal struct ValueStatus {
         bool _IsValid;
         object _Value;

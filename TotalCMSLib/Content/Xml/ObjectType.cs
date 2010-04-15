@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using System.Xml.Schema;
 
-namespace TotalCMS.Content.Xml {
+namespace TotalTech.CMS.Content.Xml {
     /// <summary>
     /// Used as the definition for data within a content item.
     /// </summary>
@@ -90,19 +90,6 @@ namespace TotalCMS.Content.Xml {
             set { _status = value; }
         }
 
-        int _workFlowInstanceId;
-        WorkFlow.WorkFlowInstance _workFlowInstance;
-        WorkFlow.WorkFlowInstance WorkFlowInstance {
-            get {
-                if (_workFlowInstance == null || _workFlowInstanceId != _workFlowInstance.WorkFlowInstanceId){
-                    _workFlowInstance = new WorkFlow.WorkFlowInstance();
-                    _workFlowInstance.WorkFlowInstanceId = _workFlowInstanceId;
-                    _workFlowInstance.Load();
-                }
-                return _workFlowInstance;
-            }
-        }
-
         bool _isActive;
         public bool IsActive {
             get { return _isActive; }
@@ -143,23 +130,6 @@ namespace TotalCMS.Content.Xml {
 
         internal override void Delete() {
             throw new NotImplementedException();
-        }
-
-        /*public override void CheckOut() {
-            base.CheckOut();
-            throw new NotImplementedException();
-        }
-
-        public override void CheckIn() {
-            throw new NotImplementedException();
-        }
-
-        public override void Stage() {
-            throw new NotImplementedException();
-        }
-
-        public override void Publish() {
-            throw new NotImplementedException();
-        }  */      
+        }    
     }
 }

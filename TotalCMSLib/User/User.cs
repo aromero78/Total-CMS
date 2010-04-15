@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.User {
+namespace TotalTech.CMS.User {
     public class User : BaseWorkFlowObject<User> {
 
         int _userId;

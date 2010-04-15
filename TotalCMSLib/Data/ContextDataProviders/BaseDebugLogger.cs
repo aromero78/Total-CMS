@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Data.ContextDataProviders {
+namespace TotalTech.CMS.Data.ContextDataProviders {
     public class BaseDebugLogger :iDebugLogProvider {
         #region iDebugLogProvider Members
         protected const string _errorPrefix = "Total CMS Error: ";

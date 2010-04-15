@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Content.Xml {
+namespace TotalTech.CMS.Content.Xml {
     public class ObjectXslt {
     }
 }

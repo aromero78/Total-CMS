@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Content {
+namespace TotalTech.CMS.Content {
     public class Folder : BaseDataObject<Folder> {
 
         int _folderId;

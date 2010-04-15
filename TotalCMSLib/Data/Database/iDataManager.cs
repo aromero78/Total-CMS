@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Data.ContextDataProviders.Database {
+namespace TotalTech.CMS.Data.ContextDataProviders.Database {
     /// <summary>
-    /// Encapsulates all of the necessary code needed to execute an SQL command. This classes uses the value found in TotalCMS.SiteSettings.ConnectionString as the connection string, please update this value to specify a different connection string value. The default connection string is the connection string at position:0
+    /// Encapsulates all of the necessary code needed to execute an SQL command. This classes uses the value found in TotalTech.CMS.SiteSettings.ConnectionString as the connection string, please update this value to specify a different connection string value. The default connection string is the connection string at position:0
     /// </summary>
     internal abstract class iDataManager {
         #region Database Access
@@ -200,6 +200,10 @@ namespace TotalCMS.Data.ContextDataProviders.Database {
         public abstract int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId);
 
         public abstract int ObjectTypeUpdate(int ObjectTypeId, string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId, bool IsActive);
+        #endregion
+
+        #region WorkFlow Functions
+        
         #endregion
     }
 }

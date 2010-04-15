@@ -4,7 +4,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Web.Security;
 
-namespace TotalCMS.Misc {
+namespace TotalTech.CMS.Misc {
 	/// <summary>
 	/// A class that can be used to generate a random password.
 	/// </summary>

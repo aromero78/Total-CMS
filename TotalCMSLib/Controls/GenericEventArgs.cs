@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TotalCMS.Controls {
+namespace TotalTech.CMS.Controls {
 	/// <summary>
 	/// This is an Event Arugments class that uses generics to be flexible enough to accept two of any kind of object as its arguments.
 	/// </summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Data {
+namespace TotalTech.CMS.Data {
     /// <summary>
     /// The cahe settings allowed in this framework.
     /// </summary>
@@ -55,7 +55,7 @@ namespace TotalCMS.Data {
     /// <summary>
     /// This class is used to handle cache management.
     /// </summary>
-    public class CacheManager<T> where T : BaseDataObject<T> {
+    public class CacheManager<T> where T : class {        
         const string DataAugment = "Data", DependAugment = "Depend", NameSpaceAugment = "TotalCMS_";
         /// <summary>
         /// Manages a single cache "type". Event handlers must be defined for the FetchDataEvent and FetchExpDateEvent to ensure proper functioning.
@@ -115,7 +115,7 @@ namespace TotalCMS.Data {
         /// <example>If the CompareType is Equal then if CachedIComparable.CompareTo(EventDrivenIComparable) = 0 that cache will be updated.</example>
         /// </param>
         /// <returns>Returns the most current version of the object.</returns>
-        public T ManageCache(string UniqueCacheName, Controls.GenericEventArgs<TotalCMS.Data.CacheLevels, T> e, int CacheLength, ComparisonType CompareType) {
+        public T ManageCache(string UniqueCacheName, Controls.GenericEventArgs<TotalTech.CMS.Data.CacheLevels, T> e, int CacheLength, ComparisonType CompareType) {
             string TimeName = NameSpaceAugment + UniqueCacheName + DependAugment, DataName = NameSpaceAugment + UniqueCacheName + DataAugment;//Create two unique names.
             object CacheData = CacheData = SiteSettings.ContextData.Cache[DataName];//Retrieve the current object in the cache. 
             IComparable CacheDepend = null;//Default the cache time stamp.
@@ -130,13 +130,13 @@ namespace TotalCMS.Data {
                  */
             }
             
-            if (CacheData == null || e.Value != TotalCMS.Data.CacheLevels.UseCache || (CacheDepend != null && CompareCacheDependency(CacheDepend, _CompareValue, CompareType))) {
+            if (CacheData == null || e.Value != TotalTech.CMS.Data.CacheLevels.UseCache || (CacheDepend != null && CompareCacheDependency(CacheDepend, _CompareValue, CompareType))) {
                 OnFetchDataEvent(new Controls.GenericEventArgs<T, object>(default(T), e.Identifier));//Raise the fetch new data event.
                 if (CacheData != null) {//remove old cache values
                     SiteSettings.ContextData.Cache.Remove(DataName);
                     SiteSettings.ContextData.Cache.Remove(TimeName);
                 }
-                if (e.Value != TotalCMS.Data.CacheLevels.NoCache) {//store the new value in the cache if the user wants too
+                if (e.Value != TotalTech.CMS.Data.CacheLevels.NoCache) {//store the new value in the cache if the user wants too
                     SiteSettings.ContextData.Cache.Add(DataName, _DataObject, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheLength), System.Web.Caching.CacheItemPriority.Default, null);
                     SiteSettings.ContextData.Cache.Add(TimeName, _CompareValue, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheLength), System.Web.Caching.CacheItemPriority.Default, null);
                 }
@@ -165,14 +165,14 @@ namespace TotalCMS.Data {
             object CacheData = SiteSettings.ContextData.Cache[DataName];
             _CompareValue = CacheDependency;
             IComparable CacheDepend = (IComparable)SiteSettings.ContextData.Cache[TimeName];
-            if (CacheData == null || CacheUsage != TotalCMS.Data.CacheLevels.UseCache || (CacheDepend != null && CompareCacheDependency(CacheDepend, _CompareValue, CompareType))) {
+            if (CacheData == null || CacheUsage != TotalTech.CMS.Data.CacheLevels.UseCache || (CacheDepend != null && CompareCacheDependency(CacheDepend, _CompareValue, CompareType))) {
                 _DataObject = ValueToCache;
                 _CompareValue = CacheDependency;
                 if (CacheData != null) {//remove old cache values
                     SiteSettings.ContextData.Cache.Remove(DataName);
                     SiteSettings.ContextData.Cache.Remove(TimeName);
                 }
-                if (CacheUsage != TotalCMS.Data.CacheLevels.NoCache) {//store the new value in the cache if the user wants too
+                if (CacheUsage != TotalTech.CMS.Data.CacheLevels.NoCache) {//store the new value in the cache if the user wants too
                     SiteSettings.ContextData.Cache.Add(DataName, _DataObject, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheLength), System.Web.Caching.CacheItemPriority.Default, null);
                     SiteSettings.ContextData.Cache.Add(TimeName, _CompareValue, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheLength), System.Web.Caching.CacheItemPriority.Default, null);
                 }

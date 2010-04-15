@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace TotalCMS.Data.ContextDataProviders {
+namespace TotalTech.CMS.Data.ContextDataProviders {
     public enum RequestType { 
         Page = 0,
         ContentItem = 1,

@@ -1,6 +1,6 @@
 
 -- --------------------------------------------------
--- Date Created: 04/10/2010 18:10:13
+-- Date Created: 04/15/2010 00:32:46
 -- Generated from EDMX file: C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\TotalCMS.edmx
 -- --------------------------------------------------
 
@@ -125,9 +125,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_WorkFlowStepsWorkflows]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WorkFlowSteps] DROP CONSTRAINT [FK_WorkFlowStepsWorkflows]
 GO
-IF OBJECT_ID(N'[dbo].[FK_WorkFlowStepsUserRoles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WorkFlowSteps] DROP CONSTRAINT [FK_WorkFlowStepsUserRoles]
-GO
 IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstancesWorkflows]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WorkFlowInstances] DROP CONSTRAINT [FK_WorkFlowInstancesWorkflows]
 GO
@@ -146,12 +143,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstancesMenus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Menus] DROP CONSTRAINT [FK_WorkFlowInstancesMenus]
 GO
-IF OBJECT_ID(N'[dbo].[FK_PermissionsUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Permissions] DROP CONSTRAINT [FK_PermissionsUsers]
-GO
-IF OBJECT_ID(N'[dbo].[FK_WorkFlowStepsUsers1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WorkFlowSteps] DROP CONSTRAINT [FK_WorkFlowStepsUsers1]
-GO
 IF OBJECT_ID(N'[dbo].[FK_ObjectTypeHistoriesObjectTypes]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ObjectTypeHistories] DROP CONSTRAINT [FK_ObjectTypeHistoriesObjectTypes]
 GO
@@ -163,6 +154,12 @@ IF OBJECT_ID(N'[dbo].[FK_MenuHistoriesMenus]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_MenuHistoriesUsers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MenuHistories] DROP CONSTRAINT [FK_MenuHistoriesUsers]
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserRolesToWorkFlowStepsUserRoles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] DROP CONSTRAINT [FK_UserRolesToWorkFlowStepsUserRoles]
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserRolesToWorkFlowStepsWorkFlowSteps]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] DROP CONSTRAINT [FK_UserRolesToWorkFlowStepsWorkFlowSteps]
 GO
 
 -- --------------------------------------------------
@@ -252,6 +249,9 @@ IF OBJECT_ID(N'[dbo].[WorkFlowInstances]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[MenuHistories]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MenuHistories];
+GO
+IF OBJECT_ID(N'[dbo].[UserRolesToWorkFlowSteps]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserRolesToWorkFlowSteps];
 GO
 
 -- --------------------------------------------------
@@ -426,7 +426,7 @@ GO
 -- Creating table 'Permissions'
 CREATE TABLE [dbo].[Permissions] (
     [PermissionId] int  NOT NULL,
-    [UserRoleId] int  NULL,
+    [UserRoleId] int  NOT NULL,
     [CanReadContent] bit  NOT NULL,
     [CanAddContent] bit  NOT NULL,
     [CanDeleteContent] bit  NOT NULL,
@@ -444,8 +444,10 @@ CREATE TABLE [dbo].[Permissions] (
     [CanEditFolder] bit  NOT NULL,
     [CanEditCalendar] bit  NOT NULL,
     [FolderId] int  NOT NULL,
-    [IsPageAdmin] bit  NOT NULL,
-    [UserId] int  NULL
+    [CanReadPages] bit  NOT NULL,
+    [CanEditPages] nvarchar(max)  NOT NULL,
+    [CanAddPages] nvarchar(max)  NOT NULL,
+    [CanDeletePages] nvarchar(max)  NOT NULL
 );
 GO
 -- Creating table 'MetaDataTypeToFolders'
@@ -519,16 +521,15 @@ GO
 CREATE TABLE [dbo].[WorkFlowSteps] (
     [WorkFlowStepId] int  NOT NULL,
     [WorkflowId] int  NOT NULL,
-    [UserRoleId] int  NULL,
-    [StepOrder] int  NOT NULL,
-    [UserId] int  NULL
+    [StepOrder] int  NOT NULL
 );
 GO
 -- Creating table 'WorkFlowInstances'
 CREATE TABLE [dbo].[WorkFlowInstances] (
     [WorkFlowInstanceId] int  NOT NULL,
     [WorkflowId] int  NOT NULL,
-    [CurrentStep] int  NOT NULL
+    [CurrentStep] int  NOT NULL,
+    [IsComplete] bit  NOT NULL
 );
 GO
 -- Creating table 'MenuHistories'
@@ -539,6 +540,14 @@ CREATE TABLE [dbo].[MenuHistories] (
     [CreatedDate] datetime  NOT NULL,
     [SerializedData] varbinary(max)  NOT NULL,
     [VersionNumber] nvarchar(max)  NOT NULL
+);
+GO
+-- Creating table 'UserRolesToWorkFlowSteps'
+CREATE TABLE [dbo].[UserRolesToWorkFlowSteps] (
+    [UserRolesToWorkFlowStepId] int  NOT NULL,
+    [UserRolesUserRoleId] int  NOT NULL,
+    [WorkFlowStepsWorkFlowStepId] int  NOT NULL,
+    [IsApprover] bit  NOT NULL
 );
 GO
 
@@ -712,6 +721,12 @@ GO
 ALTER TABLE [dbo].[MenuHistories] WITH NOCHECK 
 ADD CONSTRAINT [PK_MenuHistories]
     PRIMARY KEY CLUSTERED ([MenuHistoryId] ASC)
+    ON [PRIMARY]
+GO
+-- Creating primary key on [UserRolesToWorkFlowStepId] in table 'UserRolesToWorkFlowSteps'
+ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] WITH NOCHECK 
+ADD CONSTRAINT [PK_UserRolesToWorkFlowSteps]
+    PRIMARY KEY CLUSTERED ([UserRolesToWorkFlowStepId] ASC)
     ON [PRIMARY]
 GO
 
@@ -1007,14 +1022,6 @@ ADD CONSTRAINT [FK_WorkFlowStepsWorkflows]
         ([WorkflowId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
--- Creating foreign key on [UserRoleId] in table 'WorkFlowSteps'
-ALTER TABLE [dbo].[WorkFlowSteps] WITH NOCHECK 
-ADD CONSTRAINT [FK_WorkFlowStepsUserRoles]
-    FOREIGN KEY ([UserRoleId])
-    REFERENCES [dbo].[UserRoles]
-        ([UserRoleId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
 -- Creating foreign key on [WorkflowId] in table 'WorkFlowInstances'
 ALTER TABLE [dbo].[WorkFlowInstances] WITH NOCHECK 
 ADD CONSTRAINT [FK_WorkFlowInstancesWorkflows]
@@ -1063,22 +1070,6 @@ ADD CONSTRAINT [FK_WorkFlowInstancesMenus]
         ([WorkFlowInstanceId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
--- Creating foreign key on [UserId] in table 'Permissions'
-ALTER TABLE [dbo].[Permissions] WITH NOCHECK 
-ADD CONSTRAINT [FK_PermissionsUsers]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[UsersSet]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
--- Creating foreign key on [UserId] in table 'WorkFlowSteps'
-ALTER TABLE [dbo].[WorkFlowSteps] WITH NOCHECK 
-ADD CONSTRAINT [FK_WorkFlowStepsUsers1]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[UsersSet]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
 -- Creating foreign key on [ObjectTypeId] in table 'ObjectTypeHistories'
 ALTER TABLE [dbo].[ObjectTypeHistories] WITH NOCHECK 
 ADD CONSTRAINT [FK_ObjectTypeHistoriesObjectTypes]
@@ -1109,6 +1100,22 @@ ADD CONSTRAINT [FK_MenuHistoriesUsers]
     FOREIGN KEY ([CreatedByUserId])
     REFERENCES [dbo].[UsersSet]
         ([UserId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [UserRolesUserRoleId] in table 'UserRolesToWorkFlowSteps'
+ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] WITH NOCHECK 
+ADD CONSTRAINT [FK_UserRolesToWorkFlowStepsUserRoles]
+    FOREIGN KEY ([UserRolesUserRoleId])
+    REFERENCES [dbo].[UserRoles]
+        ([UserRoleId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [WorkFlowStepsWorkFlowStepId] in table 'UserRolesToWorkFlowSteps'
+ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] WITH NOCHECK 
+ADD CONSTRAINT [FK_UserRolesToWorkFlowStepsWorkFlowSteps]
+    FOREIGN KEY ([WorkFlowStepsWorkFlowStepId])
+    REFERENCES [dbo].[WorkFlowSteps]
+        ([WorkFlowStepId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
