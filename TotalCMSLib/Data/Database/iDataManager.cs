@@ -197,13 +197,17 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
         /// <returns>A datetime object that represents the last time the object was updated.</returns>
         public abstract DateTime ObjectTypeCheckModifiedDate(int ObjectTypeId);
 
-        public abstract int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId);
+        public abstract int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, TotalTech.CMS.WorkFlow.ContentStatuses Status, int WorkFlowInstanceId);
 
-        public abstract int ObjectTypeUpdate(int ObjectTypeId, string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId, bool IsActive);
+        public abstract int ObjectTypeUpdate(int ObjectTypeId, string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, TotalTech.CMS.WorkFlow.ContentStatuses Status, int WorkFlowInstanceId, bool IsActive);
         #endregion
 
         #region WorkFlow Functions
-        
+        public abstract int WorkFlowObjectHistoryAdd(int ObjectId, WorkFlow.WorkFlowObjectTypes ObjectType, WorkFlow.ContentStatuses OperationStatusType);
+
+        public abstract DbDataReader WorkFlowObjectHistoryGet(int ObjectId, WorkFlow.WorkFlowObjectTypes ObjecType);
+
+        public abstract int WorkFlowObjectRollBack(WorkFlow.ObjectHistory RollBackTo);
         #endregion
     }
 }

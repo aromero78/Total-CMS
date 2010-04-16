@@ -233,26 +233,40 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
                 new SqlParameter("ObjectTypeId", ObjectTypeId));
         }
 
-        public override int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId) {
+        public override int ObjectTypeSave(string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, TotalTech.CMS.WorkFlow.ContentStatuses Status, int WorkFlowInstanceId) {
             return GetScalar<int>("ObjectTypeSave",
                 new SqlParameter("DataEntryXslt", DataEntryXslt),
                 new SqlParameter("Name", Name),
                 new SqlParameter("DefaultDisplayXslt", DefaultDisplayXslt),
                 new SqlParameter("SchemaXml", SchemaXml),
-                new SqlParameter("Status", (Status == ContentStatuses.CheckedIn ? "IN" : "OT")),
+                new SqlParameter("Status", (Status == TotalTech.CMS.WorkFlow.ContentStatuses.CheckedIn ? "IN" : "OT")),
                 new SqlParameter("WorkFlowInstanceId", WorkFlowInstanceId));
         }
 
-        public override int ObjectTypeUpdate(int ObjectTypeId, string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, ContentStatuses Status, int WorkFlowInstanceId, bool IsActive) {
+        public override int ObjectTypeUpdate(int ObjectTypeId, string DataEntryXslt, string Name, string DefaultDisplayXslt, string SchemaXml, TotalTech.CMS.WorkFlow.ContentStatuses Status, int WorkFlowInstanceId, bool IsActive) {
             return ExecuteSql("ObjectTypeUpdate",
                 new SqlParameter("ObjectTypeId", ObjectTypeId),
                 new SqlParameter("DataEntryXslt", DataEntryXslt),
                 new SqlParameter("Name", Name),
                 new SqlParameter("DefaultDisplayXslt", DefaultDisplayXslt),
                 new SqlParameter("SchemaXml", SchemaXml),
-                new SqlParameter("Status", (Status == ContentStatuses.CheckedIn ? "IN" : "OT")),
+                new SqlParameter("Status", (Status == TotalTech.CMS.WorkFlow.ContentStatuses.CheckedIn ? "IN" : "OT")),
                 new SqlParameter("WorkInstanceId", WorkFlowInstanceId),
                 new SqlParameter("IsActive", IsActive));
+        }
+        #endregion
+
+        #region WorkFlow        
+        public override DbDataReader WorkFlowObjectHistoryGet(int ObjectId, WorkFlow.WorkFlowObjectTypes ObjecType) {
+            throw new NotImplementedException();
+        }
+
+        public override int WorkFlowObjectRollBack(WorkFlow.ObjectHistory RollBackTo) {
+            throw new NotImplementedException();
+        }
+
+        public override int WorkFlowObjectHistoryAdd(int ObjectId, WorkFlow.WorkFlowObjectTypes ObjectType, WorkFlow.ContentStatuses OperationStatusType) {
+            throw new NotImplementedException();
         }
         #endregion
     }

@@ -3,34 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalTech.CMS.Content.WorkFlow {
-    public class WorkFlowStep : BaseDataObject<WorkFlowStep>{
-        int _workFlowStepid;
-        public int WorkFlowStepId {
-            get { return _workFlowStepid; }
+namespace TotalTech.CMS.WorkFlow {
+    public class ObjectHistory : BaseDataObject<ObjectHistory> {
+        int _objectHistoryId;
+        public int ObjectHistoryId {
+            get;
+            set;
         }
-
-        public WorkFlowStep(int WorkFlowStepId) {
-            _workFlowStepid = WorkFlowStepId;
-            Load();
-        }
-
-        public bool UserIsStepEditor() {
-            return UserIsStepEditor(SiteSettings.ContextData.CurrentUser);
-        }
-
-        public bool UserIsStepEditor(User.User User){
-            throw new NotImplementedException();
-        }
-
-        public bool UserIsApprover() {
-            return UserIsApprover(SiteSettings.ContextData.CurrentUser);
-        }
-
-        public bool UserIsApprover(User.User User){
-            throw new NotImplementedException();
-        }
-
         internal override void Reset() {
             throw new NotImplementedException();
         }
@@ -52,6 +31,12 @@ namespace TotalTech.CMS.Content.WorkFlow {
         }
 
         internal override void Delete() {
+            throw new NotImplementedException();
+        }
+
+        internal static List<ObjectHistory> LoadHistory(int ObjectId, WorkFlowObjectTypes ObjectType){
+            System.Data.Common.DbDataReader reader = SiteSettings.DataAccess.WorkFlowObjectHistoryGet(ObjectId, ObjectType);
+            reader.Close();
             throw new NotImplementedException();
         }
     }

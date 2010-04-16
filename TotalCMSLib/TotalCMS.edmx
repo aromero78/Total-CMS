@@ -25,24 +25,15 @@
     <EntitySet Name="Permissions" EntityType="DataAccess.Store.Permissions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MetaDataTypeToFolders" EntityType="DataAccess.Store.MetaDataTypeToFolders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MetaDataValueTypes" EntityType="DataAccess.Store.MetaDataValueTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ContentHistories" EntityType="DataAccess.Store.ContentHistories" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ObjectTypes" EntityType="DataAccess.Store.ObjectTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ObjectXslts" EntityType="DataAccess.Store.ObjectXslts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ObjectHistories" EntityType="DataAccess.Store.ObjectHistories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentTypes" EntityType="DataAccess.Store.ContentTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentXslts" EntityType="DataAccess.Store.ContentXslts" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Settings" EntityType="DataAccess.Store.Settings" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ObjectTypeHistories" EntityType="DataAccess.Store.ObjectTypeHistories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Workflows" EntityType="DataAccess.Store.Workflows" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkFlowSteps" EntityType="DataAccess.Store.WorkFlowSteps" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkFlowInstances" EntityType="DataAccess.Store.WorkFlowInstances" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MenuHistories" EntityType="DataAccess.Store.MenuHistories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserRolesToWorkFlowSteps" EntityType="DataAccess.Store.UserRolesToWorkFlowSteps" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="UsersContentItems" Association="DataAccess.Store.UsersContentItems">
-      <End Role="Users" EntitySet="UsersSet" />
-      <End Role="ContentItems" EntitySet="ContentItems" />
-    </AssociationSet>
-    <AssociationSet Name="UsersContentItems1" Association="DataAccess.Store.UsersContentItems1">
-      <End Role="Users" EntitySet="UsersSet" />
-      <End Role="ContentItems" EntitySet="ContentItems" />
-    </AssociationSet>
+    <EntitySet Name="ObjectTypes" EntityType="DataAccess.Store.ObjectTypes" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UsersToUserRolesUsers" Association="DataAccess.Store.UsersToUserRolesUsers">
       <End Role="UsersToUserRoles" EntitySet="UsersToUserRoles" />
       <End Role="Users" EntitySet="UsersSet" />
@@ -123,12 +114,8 @@
       <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
       <End Role="ContentItems" EntitySet="ContentItems" />
     </AssociationSet>
-    <AssociationSet Name="ContentHistoryContentItems" Association="DataAccess.Store.ContentHistoryContentItems">
-      <End Role="ContentHistory" EntitySet="ContentHistories" />
-      <End Role="ContentItems" EntitySet="ContentItems" />
-    </AssociationSet>
     <AssociationSet Name="ContentHistoryUsers" Association="DataAccess.Store.ContentHistoryUsers">
-      <End Role="ContentHistory" EntitySet="ContentHistories" />
+      <End Role="ContentHistory" EntitySet="ObjectHistories" />
       <End Role="Users" EntitySet="UsersSet" />
     </AssociationSet>
     <AssociationSet Name="AliasesContentItems" Association="DataAccess.Store.AliasesContentItems">
@@ -136,12 +123,12 @@
       <End Role="ContentItems" EntitySet="ContentItems" />
     </AssociationSet>
     <AssociationSet Name="ObjectXsltSetContentItems" Association="DataAccess.Store.ObjectXsltSetContentItems">
-      <End Role="ObjectXsltSet" EntitySet="ObjectXslts" />
+      <End Role="ObjectXsltSet" EntitySet="ContentXslts" />
       <End Role="ContentItems" EntitySet="ContentItems" />
     </AssociationSet>
     <AssociationSet Name="ObjectSchemaObjectXsltSets" Association="DataAccess.Store.ObjectSchemaObjectXsltSets">
-      <End Role="ObjectSchema" EntitySet="ObjectTypes" />
-      <End Role="ObjectXsltSets" EntitySet="ObjectXslts" />
+      <End Role="ObjectSchema" EntitySet="ContentTypes" />
+      <End Role="ObjectXsltSets" EntitySet="ContentXslts" />
     </AssociationSet>
     <AssociationSet Name="MenusMenus" Association="DataAccess.Store.MenusMenus">
       <End Role="Menus" EntitySet="Menus" />
@@ -153,7 +140,7 @@
     </AssociationSet>
     <AssociationSet Name="ContentItemsObjectTypes" Association="DataAccess.Store.ContentItemsObjectTypes">
       <End Role="ContentItems" EntitySet="ContentItems" />
-      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
+      <End Role="ObjectTypes" EntitySet="ContentTypes" />
     </AssociationSet>
     <AssociationSet Name="TemplateElementContentItems" Association="DataAccess.Store.TemplateElementContentItems">
       <End Role="TemplateElement" EntitySet="TemplateElements" />
@@ -168,7 +155,7 @@
       <End Role="Menus" EntitySet="Menus" />
     </AssociationSet>
     <AssociationSet Name="ObjectTypesTemplateElements" Association="DataAccess.Store.ObjectTypesTemplateElements">
-      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
+      <End Role="ObjectTypes" EntitySet="ContentTypes" />
       <End Role="TemplateElements" EntitySet="TemplateElements" />
     </AssociationSet>
     <AssociationSet Name="WorkflowsFolders" Association="DataAccess.Store.WorkflowsFolders">
@@ -189,7 +176,7 @@
     </AssociationSet>
     <AssociationSet Name="WorkFlowInstancesObjectTypes" Association="DataAccess.Store.WorkFlowInstancesObjectTypes">
       <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
-      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
+      <End Role="ObjectTypes" EntitySet="ContentTypes" />
     </AssociationSet>
     <AssociationSet Name="WorkFlowInstancesCalendars" Association="DataAccess.Store.WorkFlowInstancesCalendars">
       <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
@@ -203,22 +190,6 @@
       <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
       <End Role="Menus" EntitySet="Menus" />
     </AssociationSet>
-    <AssociationSet Name="ObjectTypeHistoriesObjectTypes" Association="DataAccess.Store.ObjectTypeHistoriesObjectTypes">
-      <End Role="ObjectTypeHistories" EntitySet="ObjectTypeHistories" />
-      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
-    </AssociationSet>
-    <AssociationSet Name="ObjectTypeHistoriesUsers" Association="DataAccess.Store.ObjectTypeHistoriesUsers">
-      <End Role="ObjectTypeHistories" EntitySet="ObjectTypeHistories" />
-      <End Role="Users" EntitySet="UsersSet" />
-    </AssociationSet>
-    <AssociationSet Name="MenuHistoriesMenus" Association="DataAccess.Store.MenuHistoriesMenus">
-      <End Role="MenuHistories" EntitySet="MenuHistories" />
-      <End Role="Menus" EntitySet="Menus" />
-    </AssociationSet>
-    <AssociationSet Name="MenuHistoriesUsers" Association="DataAccess.Store.MenuHistoriesUsers">
-      <End Role="MenuHistories" EntitySet="MenuHistories" />
-      <End Role="Users" EntitySet="UsersSet" />
-    </AssociationSet>
     <AssociationSet Name="UserRolesToWorkFlowStepsUserRoles" Association="DataAccess.Store.UserRolesToWorkFlowStepsUserRoles">
       <End Role="UserRolesToWorkFlowSteps" EntitySet="UserRolesToWorkFlowSteps" />
       <End Role="UserRoles" EntitySet="UserRoles" />
@@ -226,6 +197,10 @@
     <AssociationSet Name="UserRolesToWorkFlowStepsWorkFlowSteps" Association="DataAccess.Store.UserRolesToWorkFlowStepsWorkFlowSteps">
       <End Role="UserRolesToWorkFlowSteps" EntitySet="UserRolesToWorkFlowSteps" />
       <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectHistoriesObjectTypes" Association="DataAccess.Store.ObjectHistoriesObjectTypes">
+      <End Role="ObjectHistories" EntitySet="ObjectHistories" />
+      <End Role="ObjectTypes" EntitySet="ObjectTypes" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ContentItems">
@@ -235,10 +210,6 @@
     <Property Name="ContentItemId" Type="int" Nullable="false" />
     <Property Name="ContentHtml" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ContentSummary" Type="nvarchar" Nullable="false" MaxLength="250" />
-    <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="DateModified" Type="datetime" Nullable="true" />
-    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
-    <Property Name="ModifiedByUserId" Type="int" Nullable="true" />
     <Property Name="FolderId" Type="int" Nullable="false" />
     <Property Name="ContentStatus" Type="nvarchar" Nullable="false" MaxLength="2" />
     <Property Name="ObjectXsltId" Type="int" Nullable="false" />
@@ -453,22 +424,23 @@
     <Property Name="MetaDataValueTypeId" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="ContentHistories">
+  <EntityType Name="ObjectHistories">
     <Key>
       <PropertyRef Name="ContentHistoryId" />
     </Key>
     <Property Name="ContentHistoryId" Type="int" Nullable="false" />
-    <Property Name="ContentItemId" Type="int" Nullable="false" />
+    <Property Name="ObjectItemId" Type="int" Nullable="true" />
     <Property Name="VersionNumber" Type="float" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="CreatedByUserId" Type="int" Nullable="false" />
-    <Property Name="SerializedData" Type="varbinary(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ObjectTypes">
-    <Key>
-      <PropertyRef Name="ObjectTypeId" />
-    </Key>
+    <Property Name="CompressedData" Type="varbinary(max)" Nullable="false" />
     <Property Name="ObjectTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentTypes">
+    <Key>
+      <PropertyRef Name="ContentTypeId" />
+    </Key>
+    <Property Name="ContentTypeId" Type="int" Nullable="false" />
     <Property Name="DataEntryXslt" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DefaultDisplayXslt" Type="nvarchar(max)" Nullable="false" />
@@ -477,13 +449,13 @@
     <Property Name="WorkFlowInstanceId" Type="int" Nullable="true" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="ObjectXslts">
+  <EntityType Name="ContentXslts">
     <Key>
-      <PropertyRef Name="ObjectXsltId" />
+      <PropertyRef Name="ContentXsltId" />
     </Key>
-    <Property Name="ObjectXsltId" Type="int" Nullable="false" />
-    <Property Name="ObjectXsltUri" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ObjectSchemaId" Type="int" Nullable="false" />
+    <Property Name="ContentXsltId" Type="int" Nullable="false" />
+    <Property Name="ContentXsltUri" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContentTypeId" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="isValidated" Type="bit" Nullable="false" />
   </EntityType>
@@ -493,18 +465,6 @@
     </Key>
     <Property Name="SettingId" Type="int" Nullable="false" />
     <Property Name="LicenceKey" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ObjectTypeHistories">
-    <Key>
-      <PropertyRef Name="ObjectTypeHistoryId" />
-    </Key>
-    <Property Name="ObjectTypeHistoryId" Type="int" Nullable="false" />
-    <Property Name="ObjectTypeId" Type="int" Nullable="false" />
-    <Property Name="SerializedData" Type="varbinary(max)" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="VersionNumber" Type="float" Nullable="false" />
-    <Property Name="User_UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Workflows">
     <Key>
@@ -529,17 +489,6 @@
     <Property Name="CurrentStep" Type="int" Nullable="false" />
     <Property Name="IsComplete" Type="bit" Nullable="false" DefaultValue="false" />
   </EntityType>
-  <EntityType Name="MenuHistories">
-    <Key>
-      <PropertyRef Name="MenuHistoryId" />
-    </Key>
-    <Property Name="MenuHistoryId" Type="int" Nullable="false" />
-    <Property Name="MenusMenuId" Type="int" Nullable="false" />
-    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="SerializedData" Type="varbinary(max)" Nullable="false" />
-    <Property Name="VersionNumber" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
   <EntityType Name="UserRolesToWorkFlowSteps">
     <Key>
       <PropertyRef Name="UserRolesToWorkFlowStepId" />
@@ -549,30 +498,13 @@
     <Property Name="WorkFlowStepsWorkFlowStepId" Type="int" Nullable="false" />
     <Property Name="IsApprover" Type="bit" Nullable="false" />
   </EntityType>
-  <Association Name="UsersContentItems">
-    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="ContentItems">
-        <PropertyRef Name="CreatedByUserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UsersContentItems1">
-    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="0..1" />
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="ContentItems">
-        <PropertyRef Name="ModifiedByUserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="ObjectTypes">
+    <Key>
+      <PropertyRef Name="ObjectTypeId" />
+    </Key>
+    <Property Name="ObjectTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <Association Name="UsersToUserRolesUsers">
     <End Role="UsersToUserRoles" Type="DataAccess.Store.UsersToUserRoles" Multiplicity="*" />
     <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
@@ -813,20 +745,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ContentHistoryContentItems">
-    <End Role="ContentHistory" Type="DataAccess.Store.ContentHistories" Multiplicity="*" />
-    <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="ContentItems">
-        <PropertyRef Name="ContentItemId" />
-      </Principal>
-      <Dependent Role="ContentHistory">
-        <PropertyRef Name="ContentItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ContentHistoryUsers">
-    <End Role="ContentHistory" Type="DataAccess.Store.ContentHistories" Multiplicity="*" />
+    <End Role="ContentHistory" Type="DataAccess.Store.ObjectHistories" Multiplicity="*" />
     <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -850,11 +770,11 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ObjectXsltSetContentItems">
-    <End Role="ObjectXsltSet" Type="DataAccess.Store.ObjectXslts" Multiplicity="1" />
+    <End Role="ObjectXsltSet" Type="DataAccess.Store.ContentXslts" Multiplicity="1" />
     <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectXsltSet">
-        <PropertyRef Name="ObjectXsltId" />
+        <PropertyRef Name="ContentXsltId" />
       </Principal>
       <Dependent Role="ContentItems">
         <PropertyRef Name="ObjectXsltId" />
@@ -862,14 +782,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ObjectSchemaObjectXsltSets">
-    <End Role="ObjectSchema" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
-    <End Role="ObjectXsltSets" Type="DataAccess.Store.ObjectXslts" Multiplicity="*" />
+    <End Role="ObjectSchema" Type="DataAccess.Store.ContentTypes" Multiplicity="1" />
+    <End Role="ObjectXsltSets" Type="DataAccess.Store.ContentXslts" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectSchema">
-        <PropertyRef Name="ObjectTypeId" />
+        <PropertyRef Name="ContentTypeId" />
       </Principal>
       <Dependent Role="ObjectXsltSets">
-        <PropertyRef Name="ObjectSchemaId" />
+        <PropertyRef Name="ContentTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -899,10 +819,10 @@
   </Association>
   <Association Name="ContentItemsObjectTypes">
     <End Role="ContentItems" Type="DataAccess.Store.ContentItems" Multiplicity="*" />
-    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
+    <End Role="ObjectTypes" Type="DataAccess.Store.ContentTypes" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="ObjectTypes">
-        <PropertyRef Name="ObjectTypeId" />
+        <PropertyRef Name="ContentTypeId" />
       </Principal>
       <Dependent Role="ContentItems">
         <PropertyRef Name="ObjectSchemaId" />
@@ -946,11 +866,11 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ObjectTypesTemplateElements">
-    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
+    <End Role="ObjectTypes" Type="DataAccess.Store.ContentTypes" Multiplicity="1" />
     <End Role="TemplateElements" Type="DataAccess.Store.TemplateElements" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectTypes">
-        <PropertyRef Name="ObjectTypeId" />
+        <PropertyRef Name="ContentTypeId" />
       </Principal>
       <Dependent Role="TemplateElements">
         <PropertyRef Name="ObjectTypeId" />
@@ -1007,7 +927,7 @@
   </Association>
   <Association Name="WorkFlowInstancesObjectTypes">
     <End Role="WorkFlowInstances" Type="DataAccess.Store.WorkFlowInstances" Multiplicity="0..1" />
-    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="*" />
+    <End Role="ObjectTypes" Type="DataAccess.Store.ContentTypes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkFlowInstances">
         <PropertyRef Name="WorkFlowInstanceId" />
@@ -1053,54 +973,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ObjectTypeHistoriesObjectTypes">
-    <End Role="ObjectTypeHistories" Type="DataAccess.Store.ObjectTypeHistories" Multiplicity="*" />
-    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectTypes">
-        <PropertyRef Name="ObjectTypeId" />
-      </Principal>
-      <Dependent Role="ObjectTypeHistories">
-        <PropertyRef Name="ObjectTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ObjectTypeHistoriesUsers">
-    <End Role="ObjectTypeHistories" Type="DataAccess.Store.ObjectTypeHistories" Multiplicity="*" />
-    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="ObjectTypeHistories">
-        <PropertyRef Name="User_UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="MenuHistoriesMenus">
-    <End Role="MenuHistories" Type="DataAccess.Store.MenuHistories" Multiplicity="*" />
-    <End Role="Menus" Type="DataAccess.Store.Menus" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Menus">
-        <PropertyRef Name="MenuId" />
-      </Principal>
-      <Dependent Role="MenuHistories">
-        <PropertyRef Name="MenusMenuId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="MenuHistoriesUsers">
-    <End Role="MenuHistories" Type="DataAccess.Store.MenuHistories" Multiplicity="*" />
-    <End Role="Users" Type="DataAccess.Store.UsersSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="MenuHistories">
-        <PropertyRef Name="CreatedByUserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="UserRolesToWorkFlowStepsUserRoles">
     <End Role="UserRolesToWorkFlowSteps" Type="DataAccess.Store.UserRolesToWorkFlowSteps" Multiplicity="*" />
     <End Role="UserRoles" Type="DataAccess.Store.UserRoles" Multiplicity="1" />
@@ -1125,6 +997,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ObjectHistoriesObjectTypes">
+    <End Role="ObjectHistories" Type="DataAccess.Store.ObjectHistories" Multiplicity="*" />
+    <End Role="ObjectTypes" Type="DataAccess.Store.ObjectTypes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectTypes">
+        <PropertyRef Name="ObjectTypeId" />
+      </Principal>
+      <Dependent Role="ObjectHistories">
+        <PropertyRef Name="ObjectTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1133,12 +1017,6 @@
           <EntitySet Name="ContentItems" EntityType="DataAccess.ContentItems" />
           <EntitySet Name="UserRoles" EntityType="DataAccess.UserRoles" />
           <EntitySet Name="UsersToUserRoles" EntityType="DataAccess.UsersToUserRoles" />
-          <AssociationSet Name="UsersContentItems" Association="DataAccess.UsersContentItems">
-            <End EntitySet="UsersSet" Role="Users" />
-            <End EntitySet="ContentItems" Role="ContentItems" /></AssociationSet>
-          <AssociationSet Name="UsersContentItems1" Association="DataAccess.UsersContentItems1">
-            <End EntitySet="UsersSet" Role="Users" />
-            <End EntitySet="ContentItems" Role="ContentItems" /></AssociationSet>
           <AssociationSet Name="UsersToUserRolesUsers" Association="DataAccess.UsersToUserRolesUsers">
             <End EntitySet="UsersToUserRoles" Role="UsersToUserRoles" />
             <End EntitySet="UsersSet" Role="Users" /></AssociationSet>
@@ -1215,24 +1093,21 @@
           <AssociationSet Name="MetaDataTypesToContentItemsContentItems" Association="DataAccess.MetaDataTypesToContentItemsContentItems">
             <End Role="MetaDataTypesToContentItems" EntitySet="MetaDataTypesToContentItems" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
-          <EntitySet Name="ContentHistories" EntityType="DataAccess.ContentHistories" />
-          <AssociationSet Name="ContentHistoryContentItems" Association="DataAccess.ContentHistoryContentItems">
-            <End Role="ContentHistory" EntitySet="ContentHistories" />
-            <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
+          <EntitySet Name="ObjectHistories" EntityType="DataAccess.ObjectHistories" />
           <AssociationSet Name="ContentHistoryUsers" Association="DataAccess.ContentHistoryUsers">
-            <End Role="ContentHistory" EntitySet="ContentHistories" />
+            <End Role="ContentHistory" EntitySet="ObjectHistories" />
             <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
           <AssociationSet Name="AliasesContentItems" Association="DataAccess.AliasesContentItems">
             <End Role="Aliases" EntitySet="Aliases" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
-          <EntitySet Name="ObjectTypes" EntityType="DataAccess.ObjectTypes" />
-          <EntitySet Name="ObjectXslts" EntityType="DataAccess.ObjectXslts" />
+          <EntitySet Name="ContentTypes" EntityType="DataAccess.ContentTypes" />
+          <EntitySet Name="ContentXslts" EntityType="DataAccess.ContentXslts" />
           <AssociationSet Name="ObjectXsltSetContentItems" Association="DataAccess.ObjectXsltSetContentItems">
-            <End Role="ObjectXsltSet" EntitySet="ObjectXslts" />
+            <End Role="ObjectXsltSet" EntitySet="ContentXslts" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
           <AssociationSet Name="ObjectSchemaObjectXsltSets" Association="DataAccess.ObjectSchemaObjectXsltSets">
-            <End Role="ObjectSchema" EntitySet="ObjectTypes" />
-            <End Role="ObjectXsltSets" EntitySet="ObjectXslts" /></AssociationSet>
+            <End Role="ObjectSchema" EntitySet="ContentTypes" />
+            <End Role="ObjectXsltSets" EntitySet="ContentXslts" /></AssociationSet>
           <EntitySet Name="Settings" EntityType="DataAccess.Settings" />
           <AssociationSet Name="MenusMenus" Association="DataAccess.MenusMenus">
             <End Role="Menus" EntitySet="Menus" />
@@ -1242,7 +1117,7 @@
             <End Role="Menus1" EntitySet="Menus" /></AssociationSet>
           <AssociationSet Name="ContentItemsObjectTypes" Association="DataAccess.ContentItemsObjectTypes">
             <End Role="ContentItems" EntitySet="ContentItems" />
-            <End Role="ObjectTypes" EntitySet="ObjectTypes" /></AssociationSet>
+            <End Role="ObjectTypes" EntitySet="ContentTypes" /></AssociationSet>
           <AssociationSet Name="TemplateElementContentItems" Association="DataAccess.TemplateElementContentItems">
             <End Role="TemplateElement" EntitySet="TemplateElements" />
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
@@ -1253,9 +1128,8 @@
             <End Role="Aliases" EntitySet="Aliases" />
             <End Role="Menus" EntitySet="Menus" /></AssociationSet>
           <AssociationSet Name="ObjectTypesTemplateElements" Association="DataAccess.ObjectTypesTemplateElements">
-            <End Role="ObjectTypes" EntitySet="ObjectTypes" />
+            <End Role="ObjectTypes" EntitySet="ContentTypes" />
             <End Role="TemplateElements" EntitySet="TemplateElements" /></AssociationSet>
-          <EntitySet Name="ObjectTypeHistories" EntityType="DataAccess.ObjectTypeHistories" />
           <EntitySet Name="Workflows" EntityType="DataAccess.Workflows" />
           <AssociationSet Name="WorkflowsFolders" Association="DataAccess.WorkflowsFolders">
             <End Role="Workflows" EntitySet="Workflows" />
@@ -1273,7 +1147,7 @@
             <End Role="ContentItems" EntitySet="ContentItems" /></AssociationSet>
           <AssociationSet Name="WorkFlowInstancesObjectTypes" Association="DataAccess.WorkFlowInstancesObjectTypes">
             <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
-            <End Role="ObjectTypes" EntitySet="ObjectTypes" /></AssociationSet>
+            <End Role="ObjectTypes" EntitySet="ContentTypes" /></AssociationSet>
           <AssociationSet Name="WorkFlowInstancesCalendars" Association="DataAccess.WorkFlowInstancesCalendars">
             <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
             <End Role="Calendars" EntitySet="Calendars" /></AssociationSet>
@@ -1283,19 +1157,6 @@
           <AssociationSet Name="WorkFlowInstancesMenus" Association="DataAccess.WorkFlowInstancesMenus">
             <End Role="WorkFlowInstances" EntitySet="WorkFlowInstances" />
             <End Role="Menus" EntitySet="Menus" /></AssociationSet>
-          <AssociationSet Name="ObjectTypeHistoriesObjectTypes" Association="DataAccess.ObjectTypeHistoriesObjectTypes">
-            <End Role="ObjectTypeHistories" EntitySet="ObjectTypeHistories" />
-            <End Role="ObjectTypes" EntitySet="ObjectTypes" /></AssociationSet>
-          <AssociationSet Name="ObjectTypeHistoriesUsers" Association="DataAccess.ObjectTypeHistoriesUsers">
-            <End Role="ObjectTypeHistories" EntitySet="ObjectTypeHistories" />
-            <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
-          <EntitySet Name="MenuHistories" EntityType="DataAccess.MenuHistories" />
-          <AssociationSet Name="MenuHistoriesMenus" Association="DataAccess.MenuHistoriesMenus">
-            <End Role="MenuHistories" EntitySet="MenuHistories" />
-            <End Role="Menus" EntitySet="Menus" /></AssociationSet>
-          <AssociationSet Name="MenuHistoriesUsers" Association="DataAccess.MenuHistoriesUsers">
-            <End Role="MenuHistories" EntitySet="MenuHistories" />
-            <End Role="Users" EntitySet="UsersSet" /></AssociationSet>
           <EntitySet Name="UserRolesToWorkFlowSteps" EntityType="DataAccess.UserRolesToWorkFlowSteps" />
           <AssociationSet Name="UserRolesToWorkFlowStepsUserRoles" Association="DataAccess.UserRolesToWorkFlowStepsUserRoles">
             <End Role="UserRolesToWorkFlowSteps" EntitySet="UserRolesToWorkFlowSteps" />
@@ -1303,6 +1164,10 @@
           <AssociationSet Name="UserRolesToWorkFlowStepsWorkFlowSteps" Association="DataAccess.UserRolesToWorkFlowStepsWorkFlowSteps">
             <End Role="UserRolesToWorkFlowSteps" EntitySet="UserRolesToWorkFlowSteps" />
             <End Role="WorkFlowSteps" EntitySet="WorkFlowSteps" /></AssociationSet>
+          <EntitySet Name="ObjectTypes" EntityType="DataAccess.ObjectTypes" />
+          <AssociationSet Name="ObjectHistoriesObjectTypes" Association="DataAccess.ObjectHistoriesObjectTypes">
+            <End Role="ObjectHistories" EntitySet="ObjectHistories" />
+            <End Role="ObjectTypes" EntitySet="ObjectTypes" /></AssociationSet>
           </EntityContainer>
         <EntityType Name="ContentItems" Abstract="false">
           <Key>
@@ -1310,21 +1175,14 @@
           <Property Type="Int32" Name="ContentItemId" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="String" Name="ContentHtml" Nullable="false" cg:SetterAccess="Public" />
           <Property Type="String" Name="ContentSummary" Nullable="false" MaxLength="250" cg:SetterAccess="Public" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="false" cg:SetterAccess="Protected" />
-          <Property Type="DateTime" Name="DateModified" Nullable="true" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="CreatedByUser" Relationship="DataAccess.UsersContentItems" FromRole="ContentItems" ToRole="Users" cg:SetterAccess="Protected" />
-          <Property Type="Int32" Name="CreatedByUserId" Nullable="false" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="ModifiedByUser" Relationship="DataAccess.UsersContentItems1" FromRole="ContentItems" ToRole="Users" cg:SetterAccess="Protected" />
-          <Property Type="Int32" Name="ModifiedByUserId" Nullable="true" cg:SetterAccess="Protected" />
           <NavigationProperty Name="Folder" Relationship="DataAccess.FoldersContentItems" FromRole="ContentItems" ToRole="Folders" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="FolderId" Nullable="false" cg:SetterAccess="Public" />
           <NavigationProperty Name="MetaDataTypesToContentItems" Relationship="DataAccess.MetaDataTypesToContentItemsContentItems" FromRole="ContentItems" ToRole="MetaDataTypesToContentItems" cg:SetterAccess="Protected" />
           <Property Type="String" Name="ContentStatus" Nullable="false" MaxLength="2" cg:SetterAccess="Public" />
-          <NavigationProperty Name="ContentHistories" Relationship="DataAccess.ContentHistoryContentItems" FromRole="ContentItems" ToRole="ContentHistory" cg:SetterAccess="Protected" />
           <NavigationProperty Name="Aliases" Relationship="DataAccess.AliasesContentItems" FromRole="ContentItems" ToRole="Aliases" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="ObjectXslt" Relationship="DataAccess.ObjectXsltSetContentItems" FromRole="ContentItems" ToRole="ObjectXsltSet" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentXslt" Relationship="DataAccess.ObjectXsltSetContentItems" FromRole="ContentItems" ToRole="ObjectXsltSet" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="ObjectXsltId" Nullable="false" cg:SetterAccess="Public" />
-          <NavigationProperty Name="ObjectTypes" Relationship="DataAccess.ContentItemsObjectTypes" FromRole="ContentItems" ToRole="ObjectTypes" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentTypes" Relationship="DataAccess.ContentItemsObjectTypes" FromRole="ContentItems" ToRole="ObjectTypes" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="TemplateElements" Relationship="DataAccess.TemplateElementContentItems" FromRole="ContentItems" ToRole="TemplateElement" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="ContentDisplayId" Nullable="false" />
@@ -1350,14 +1208,10 @@
           <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
-          <NavigationProperty Name="ItemsCreated" Relationship="DataAccess.UsersContentItems" FromRole="Users" ToRole="ContentItems" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="ItemsModified" Relationship="DataAccess.UsersContentItems1" FromRole="Users" ToRole="ContentItems" cg:SetterAccess="Protected" />
           <NavigationProperty Name="UsersToUserRoles" Relationship="DataAccess.UsersToUserRolesUsers" FromRole="Users" ToRole="UsersToUserRoles" cg:SetterAccess="Protected" />
           <NavigationProperty Name="Language" Relationship="DataAccess.LanguagesUsers" FromRole="Users" ToRole="Languages" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="LanguageId" Nullable="false" />
           <NavigationProperty Name="ContentHistories" Relationship="DataAccess.ContentHistoryUsers" FromRole="Users" ToRole="ContentHistory" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="ObjectTypeHistories" Relationship="DataAccess.ObjectTypeHistoriesUsers" FromRole="Users" ToRole="ObjectTypeHistories" />
-          <NavigationProperty Name="MenuHistories" Relationship="DataAccess.MenuHistoriesUsers" FromRole="Users" ToRole="MenuHistories" />
           </EntityType>
         <EntityType Name="UsersToUserRoles" Abstract="false">
           <Key>
@@ -1368,24 +1222,6 @@
           <Property Name="UserId" Nullable="false" Type="Int32" />
           <NavigationProperty Name="UserRole" Relationship="DataAccess.UsersToUserRolesUserRoles" FromRole="UsersToUserRoles" ToRole="UserRoles" cg:SetterAccess="Protected" />
           </EntityType>
-        <Association Name="UsersContentItems">
-          <End Type="DataAccess.Users" Multiplicity="1" Role="Users" />
-          <End Type="DataAccess.ContentItems" Multiplicity="*" Role="ContentItems" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" /></Principal>
-            <Dependent Role="ContentItems">
-              <PropertyRef Name="CreatedByUserId" /></Dependent></ReferentialConstraint>
-          </Association>
-        <Association Name="UsersContentItems1">
-          <End Type="DataAccess.Users" Multiplicity="0..1" Role="Users" />
-          <End Type="DataAccess.ContentItems" Multiplicity="*" Role="ContentItems" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" /></Principal>
-            <Dependent Role="ContentItems">
-              <PropertyRef Name="ModifiedByUserId" /></Dependent></ReferentialConstraint>
-          </Association>
         <Association Name="UsersToUserRolesUsers">
           <End Type="DataAccess.UsersToUserRoles" Multiplicity="*" Role="UsersToUserRoles" />
           <End Type="DataAccess.Users" Multiplicity="1" Role="Users" />
@@ -1452,7 +1288,6 @@
           <Property Type="Int32" Name="AliasId" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="WorkFlowInstance" Relationship="DataAccess.WorkFlowInstancesMenus" FromRole="Menus" ToRole="WorkFlowInstances" />
           <Property Type="Int32" Name="WorkFlowInstanceId" Nullable="true" />
-          <NavigationProperty Name="MenuHistories" Relationship="DataAccess.MenuHistoriesMenus" FromRole="Menus" ToRole="MenuHistories" />
           </EntityType>
         <EntityType Name="MenuItems" Abstract="false">
           <Key>
@@ -1746,28 +1581,21 @@
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="MetaDataTypesToContentItems">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="ContentHistories" Abstract="false">
+        <EntityType Name="ObjectHistories" Abstract="false">
           <Key>
             <PropertyRef Name="ContentHistoryId" /></Key>
           <Property Type="Int32" Name="ContentHistoryId" Nullable="false" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="ContentItem" Relationship="DataAccess.ContentHistoryContentItems" FromRole="ContentHistory" ToRole="ContentItems" cg:SetterAccess="Protected" />
-          <Property Type="Int32" Name="ContentItemId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ObjectItemId" Nullable="true" cg:SetterAccess="Protected" />
           <Property Type="Double" Name="VersionNumber" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="DateTime" Name="DateCreated" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="User" Relationship="DataAccess.ContentHistoryUsers" FromRole="ContentHistory" ToRole="Users" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="CreatedByUserId" Nullable="false" cg:SetterAccess="Protected" />
-          <Property Type="Binary" Name="SerializedData" Nullable="false" />
+          <Property Type="Binary" Name="CompressedData" Nullable="false" />
+          <NavigationProperty Name="ObjectType" Relationship="DataAccess.ObjectHistoriesObjectTypes" FromRole="ObjectHistories" ToRole="ObjectTypes" />
+          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" />
           </EntityType>
-        <Association Name="ContentHistoryContentItems">
-          <End Type="DataAccess.ContentHistories" Role="ContentHistory" Multiplicity="*" />
-          <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="ContentItems">
-              <PropertyRef Name="ContentItemId" /></Principal>
-            <Dependent Role="ContentHistory">
-              <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ContentHistoryUsers">
-          <End Type="DataAccess.ContentHistories" Role="ContentHistory" Multiplicity="*" />
+          <End Type="DataAccess.ObjectHistories" Role="ContentHistory" Multiplicity="*" />
           <End Type="DataAccess.Users" Role="Users" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -1782,11 +1610,11 @@
               <PropertyRef Name="ContentItemId" /></Principal>
             <Dependent Role="Aliases">
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="ObjectTypes" Abstract="false">
+        <EntityType Name="ContentTypes" Abstract="false">
           <Key>
-            <PropertyRef Name="ObjectTypeId" /></Key>
-          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="ObjectXsltSets" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectSchema" ToRole="ObjectXsltSets" cg:SetterAccess="Protected" />
+            <PropertyRef Name="ContentTypeId" /></Key>
+          <Property Type="Int32" Name="ContentTypeId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentXslts" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectSchema" ToRole="ObjectXsltSets" cg:SetterAccess="Protected" />
           <Property Type="String" Name="DataEntryXslt" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="ContentItems" Relationship="DataAccess.ContentItemsObjectTypes" FromRole="ObjectTypes" ToRole="ContentItems" cg:SetterAccess="Protected" />
           <Property Type="String" Name="Name" Nullable="false" />
@@ -1796,36 +1624,35 @@
           <Property Type="String" Name="Status" Nullable="false" />
           <NavigationProperty Name="WorkFlowInstance" Relationship="DataAccess.WorkFlowInstancesObjectTypes" FromRole="ObjectTypes" ToRole="WorkFlowInstances" />
           <Property Type="Int32" Name="WorkFlowInstanceId" Nullable="true" />
-          <NavigationProperty Name="ObjectTypeHistories" Relationship="DataAccess.ObjectTypeHistoriesObjectTypes" FromRole="ObjectTypes" ToRole="ObjectTypeHistories" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           </EntityType>
-        <EntityType Name="ObjectXslts" Abstract="false">
+        <EntityType Name="ContentXslts" Abstract="false">
           <Key>
-            <PropertyRef Name="ObjectXsltId" /></Key>
-          <Property Type="Int32" Name="ObjectXsltId" Nullable="false" cg:SetterAccess="Protected" />
-          <Property Type="String" Name="ObjectXsltUri" Nullable="false" cg:SetterAccess="Protected" />
+            <PropertyRef Name="ContentXsltId" /></Key>
+          <Property Type="Int32" Name="ContentXsltId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="String" Name="ContentXsltUri" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="ContentItems" Relationship="DataAccess.ObjectXsltSetContentItems" FromRole="ObjectXsltSet" ToRole="ContentItems" cg:SetterAccess="Protected" />
-          <NavigationProperty Name="ObjectSchema" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectXsltSets" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
-          <Property Type="Int32" Name="ObjectSchemaId" Nullable="false" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="ContentType" Relationship="DataAccess.ObjectSchemaObjectXsltSets" FromRole="ObjectXsltSets" ToRole="ObjectSchema" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="ContentTypeId" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="String" Name="Name" Nullable="false" />
           <Property Type="Boolean" Name="isValidated" Nullable="false" />
           </EntityType>
         <Association Name="ObjectXsltSetContentItems">
-          <End Type="DataAccess.ObjectXslts" Role="ObjectXsltSet" Multiplicity="1" />
+          <End Type="DataAccess.ContentXslts" Role="ObjectXsltSet" Multiplicity="1" />
           <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ObjectXsltSet">
-              <PropertyRef Name="ObjectXsltId" /></Principal>
+              <PropertyRef Name="ContentXsltId" /></Principal>
             <Dependent Role="ContentItems">
               <PropertyRef Name="ObjectXsltId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ObjectSchemaObjectXsltSets">
-          <End Type="DataAccess.ObjectTypes" Role="ObjectSchema" Multiplicity="1" />
-          <End Type="DataAccess.ObjectXslts" Role="ObjectXsltSets" Multiplicity="*" />
+          <End Type="DataAccess.ContentTypes" Role="ObjectSchema" Multiplicity="1" />
+          <End Type="DataAccess.ContentXslts" Role="ObjectXsltSets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ObjectSchema">
-              <PropertyRef Name="ObjectTypeId" /></Principal>
+              <PropertyRef Name="ContentTypeId" /></Principal>
             <Dependent Role="ObjectXsltSets">
-              <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
+              <PropertyRef Name="ContentTypeId" /></Dependent></ReferentialConstraint></Association>
         <EntityType Name="Settings" Abstract="false">
           <Key>
             <PropertyRef Name="SettingId" /></Key>
@@ -1850,10 +1677,10 @@
               <PropertyRef Name="RootMenuId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ContentItemsObjectTypes">
           <End Type="DataAccess.ContentItems" Role="ContentItems" Multiplicity="*" />
-          <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
+          <End Type="DataAccess.ContentTypes" Role="ObjectTypes" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="ObjectTypes">
-              <PropertyRef Name="ObjectTypeId" /></Principal>
+              <PropertyRef Name="ContentTypeId" /></Principal>
             <Dependent Role="ContentItems">
               <PropertyRef Name="ObjectSchemaId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="TemplateElementContentItems">
@@ -1881,24 +1708,13 @@
             <Dependent Role="Menus">
               <PropertyRef Name="AliasId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="ObjectTypesTemplateElements">
-          <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
+          <End Type="DataAccess.ContentTypes" Role="ObjectTypes" Multiplicity="1" />
           <End Type="DataAccess.TemplateElements" Role="TemplateElements" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ObjectTypes">
-              <PropertyRef Name="ObjectTypeId" /></Principal>
+              <PropertyRef Name="ContentTypeId" /></Principal>
             <Dependent Role="TemplateElements">
               <PropertyRef Name="ObjectTypeId" /></Dependent></ReferentialConstraint></Association>
-        <EntityType Name="ObjectTypeHistories">
-          <Key>
-            <PropertyRef Name="ObjectTypeHistoryId" /></Key>
-          <Property Type="Int32" Name="ObjectTypeHistoryId" Nullable="false" />
-          <NavigationProperty Name="ObjectType" Relationship="DataAccess.ObjectTypeHistoriesObjectTypes" FromRole="ObjectTypeHistories" ToRole="ObjectTypes" />
-          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" />
-          <Property Type="Binary" Name="SerializedData" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DataAccess.ObjectTypeHistoriesUsers" FromRole="ObjectTypeHistories" ToRole="Users" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="Double" Name="VersionNumber" Nullable="false" /></EntityType>
         <EntityType Name="Workflows">
           <Key>
             <PropertyRef Name="WorkflowId" /></Key>
@@ -1962,7 +1778,7 @@
               <PropertyRef Name="WorkFlowInstanceId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="WorkFlowInstancesObjectTypes">
           <End Type="DataAccess.WorkFlowInstances" Role="WorkFlowInstances" Multiplicity="0..1" />
-          <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="*" />
+          <End Type="DataAccess.ContentTypes" Role="ObjectTypes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WorkFlowInstances">
               <PropertyRef Name="WorkFlowInstanceId" /></Principal>
@@ -1992,45 +1808,6 @@
               <PropertyRef Name="WorkFlowInstanceId" /></Principal>
             <Dependent Role="Menus">
               <PropertyRef Name="WorkFlowInstanceId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="ObjectTypeHistoriesObjectTypes">
-          <End Type="DataAccess.ObjectTypeHistories" Role="ObjectTypeHistories" Multiplicity="*" />
-          <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="ObjectTypes">
-              <PropertyRef Name="ObjectTypeId" /></Principal>
-            <Dependent Role="ObjectTypeHistories">
-              <PropertyRef Name="ObjectTypeId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="ObjectTypeHistoriesUsers">
-          <End Type="DataAccess.ObjectTypeHistories" Role="ObjectTypeHistories" Multiplicity="*" />
-          <End Type="DataAccess.Users" Role="Users" Multiplicity="1" />
-          </Association>
-        <EntityType Name="MenuHistories">
-          <Key>
-            <PropertyRef Name="MenuHistoryId" /></Key>
-          <Property Type="Int32" Name="MenuHistoryId" Nullable="false" />
-          <NavigationProperty Name="Menu" Relationship="DataAccess.MenuHistoriesMenus" FromRole="MenuHistories" ToRole="Menus" />
-          <Property Type="Int32" Name="MenusMenuId" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DataAccess.MenuHistoriesUsers" FromRole="MenuHistories" ToRole="Users" />
-          <Property Type="Int32" Name="CreatedByUserId" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-          <Property Type="Binary" Name="SerializedData" Nullable="false" />
-          <Property Type="String" Name="VersionNumber" Nullable="false" /></EntityType>
-        <Association Name="MenuHistoriesMenus">
-          <End Type="DataAccess.MenuHistories" Role="MenuHistories" Multiplicity="*" />
-          <End Type="DataAccess.Menus" Role="Menus" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Menus">
-              <PropertyRef Name="MenuId" /></Principal>
-            <Dependent Role="MenuHistories">
-              <PropertyRef Name="MenusMenuId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="MenuHistoriesUsers">
-          <End Type="DataAccess.MenuHistories" Role="MenuHistories" Multiplicity="*" />
-          <End Type="DataAccess.Users" Role="Users" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" /></Principal>
-            <Dependent Role="MenuHistories">
-              <PropertyRef Name="CreatedByUserId" /></Dependent></ReferentialConstraint></Association>
         <EntityType Name="UserRolesToWorkFlowSteps" cg:TypeAccess="Public">
           <Key>
             <PropertyRef Name="UserRolesToWorkFlowStepId" /></Key>
@@ -2056,6 +1833,20 @@
               <PropertyRef Name="WorkFlowStepId" /></Principal>
             <Dependent Role="UserRolesToWorkFlowSteps">
               <PropertyRef Name="WorkFlowStepsWorkFlowStepId" /></Dependent></ReferentialConstraint></Association>
+        <EntityType Name="ObjectTypes">
+          <Key>
+            <PropertyRef Name="ObjectTypeId" /></Key>
+          <Property Type="Int32" Name="ObjectTypeId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="ObjectHistories" Relationship="DataAccess.ObjectHistoriesObjectTypes" FromRole="ObjectTypes" ToRole="ObjectHistories" /></EntityType>
+        <Association Name="ObjectHistoriesObjectTypes">
+          <End Type="DataAccess.ObjectHistories" Role="ObjectHistories" Multiplicity="*" />
+          <End Type="DataAccess.ObjectTypes" Role="ObjectTypes" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ObjectTypes">
+              <PropertyRef Name="ObjectTypeId" /></Principal>
+            <Dependent Role="ObjectHistories">
+              <PropertyRef Name="ObjectTypeId" /></Dependent></ReferentialConstraint></Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2068,10 +1859,6 @@
           <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
           <ScalarProperty Name="ContentHtml" ColumnName="ContentHtml" />
           <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
-          <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
           <ScalarProperty Name="FolderId" ColumnName="FolderId" />
           <ScalarProperty Name="ContentStatus" ColumnName="ContentStatus" />
           <ScalarProperty Name="ObjectXsltId" ColumnName="ObjectXsltId" />
@@ -2305,22 +2092,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ContentHistories">
-      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ContentHistories)">
-        <MappingFragment StoreEntitySet="ContentHistories">
+    <EntitySetMapping Name="ObjectHistories">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectHistories)">
+        <MappingFragment StoreEntitySet="ObjectHistories">
           <ScalarProperty Name="ContentHistoryId" ColumnName="ContentHistoryId" />
-          <ScalarProperty Name="ContentItemId" ColumnName="ContentItemId" />
+          <ScalarProperty Name="ObjectItemId" ColumnName="ObjectItemId" />
           <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
-          <ScalarProperty Name="SerializedData" ColumnName="SerializedData" />
+          <ScalarProperty Name="CompressedData" ColumnName="CompressedData" />
+          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ObjectTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectTypes)">
-        <MappingFragment StoreEntitySet="ObjectTypes">
-          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
+    <EntitySetMapping Name="ContentTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ContentTypes)">
+        <MappingFragment StoreEntitySet="ContentTypes">
+          <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
           <ScalarProperty Name="DataEntryXslt" ColumnName="DataEntryXslt" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DefaultDisplayXslt" ColumnName="DefaultDisplayXslt" />
@@ -2331,12 +2119,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ObjectXslts">
-      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectXslts)">
-        <MappingFragment StoreEntitySet="ObjectXslts">
-          <ScalarProperty Name="ObjectXsltId" ColumnName="ObjectXsltId" />
-          <ScalarProperty Name="ObjectXsltUri" ColumnName="ObjectXsltUri" />
-          <ScalarProperty Name="ObjectSchemaId" ColumnName="ObjectSchemaId" />
+    <EntitySetMapping Name="ContentXslts">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ContentXslts)">
+        <MappingFragment StoreEntitySet="ContentXslts">
+          <ScalarProperty Name="ContentXsltId" ColumnName="ContentXsltId" />
+          <ScalarProperty Name="ContentXsltUri" ColumnName="ContentXsltUri" />
+          <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="isValidated" ColumnName="isValidated" />
         </MappingFragment>
@@ -2347,18 +2135,6 @@
         <MappingFragment StoreEntitySet="Settings">
           <ScalarProperty Name="SettingId" ColumnName="SettingId" />
           <ScalarProperty Name="LicenceKey" ColumnName="LicenceKey" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ObjectTypeHistories">
-      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectTypeHistories)">
-        <MappingFragment StoreEntitySet="ObjectTypeHistories">
-          <ScalarProperty Name="ObjectTypeHistoryId" ColumnName="ObjectTypeHistoryId" />
-          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
-          <ScalarProperty Name="SerializedData" ColumnName="SerializedData" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2388,18 +2164,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MenuHistories">
-      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.MenuHistories)">
-        <MappingFragment StoreEntitySet="MenuHistories">
-          <ScalarProperty Name="MenuHistoryId" ColumnName="MenuHistoryId" />
-          <ScalarProperty Name="MenusMenuId" ColumnName="MenusMenuId" />
-          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="SerializedData" ColumnName="SerializedData" />
-          <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserRolesToWorkFlowSteps">
       <EntityTypeMapping TypeName="IsTypeOf(DataAccess.UserRolesToWorkFlowSteps)">
         <MappingFragment StoreEntitySet="UserRolesToWorkFlowSteps">
@@ -2410,20 +2174,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ObjectTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectTypes)">
+        <MappingFragment StoreEntitySet="ObjectTypes">
+          <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="LanguagesFolders" TypeName="DataAccess.LanguagesFolders" StoreEntitySet="Folders">
       <EndProperty Name="Languages">
         <ScalarProperty Name="LanguageId" ColumnName="Language_LanguageId" />
       </EndProperty>
       <EndProperty Name="Folders">
         <ScalarProperty Name="FolderId" ColumnName="FolderId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ObjectTypeHistoriesUsers" TypeName="DataAccess.ObjectTypeHistoriesUsers" StoreEntitySet="ObjectTypeHistories">
-      <EndProperty Name="Users">
-        <ScalarProperty Name="UserId" ColumnName="User_UserId" />
-      </EndProperty>
-      <EndProperty Name="ObjectTypeHistories">
-        <ScalarProperty Name="ObjectTypeHistoryId" ColumnName="ObjectTypeHistoryId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
@@ -2447,25 +2211,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Model1" ZoomLevel="74" >
-        <EntityTypeShape EntityType="DataAccess.ContentItems" Width="1.5" PointX="4" PointY="4.375" Height="4.5505582682291656" />
+        <EntityTypeShape EntityType="DataAccess.ContentItems" Width="1.5" PointX="4" PointY="4.375" Height="3.7288216145833317" />
         <EntityTypeShape EntityType="DataAccess.UserRoles" Width="1.5" PointX="10.25" PointY="11.125" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataAccess.Users" Width="1.5" PointX="7.625" PointY="9.125" Height="2.9070849609374996" />
         <EntityTypeShape EntityType="DataAccess.UsersToUserRoles" PointX="10" PointY="8.25" Width="1.875" Height="1.7566536458333326" />
-        <AssociationConnector Association="DataAccess.UsersContentItems">
-          <ConnectorPoint PointX="7.625" PointY="9.69594853923921" />
-          <ConnectorPoint PointX="7.25" PointY="9.69594853923921" />
-          <ConnectorPoint PointX="7.25" PointY="8.44183203689396" />
-          <ConnectorPoint PointX="5.5" PointY="8.44183203689396" />
-          </AssociationConnector>
-        <AssociationConnector Association="DataAccess.UsersContentItems1">
-          <ConnectorPoint PointX="7.625" PointY="10.345002153489194" />
-          <ConnectorPoint PointX="5.1378836734008795" PointY="10.345002153489194" />
-          <ConnectorPoint PointX="5.1378836734008795" PointY="9.2542529296875" />
-          </AssociationConnector>
         <AssociationConnector Association="DataAccess.UsersToUserRolesUsers">
           <ConnectorPoint PointX="10" PointY="9.5658268229166659" />
-          <ConnectorPoint PointX="9.7786458333333339" PointY="9.5658268229166659" />
-          <ConnectorPoint PointX="9.6119791666666661" PointY="9.5658268229166659" />
+          <ConnectorPoint PointX="9.6458333333333339" PointY="9.5658268229166659" />
+          <ConnectorPoint PointX="9.4791666666666661" PointY="9.5658268229166659" />
           <ConnectorPoint PointX="9.125" PointY="9.5658268229166659" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.Folders" Width="2" PointX="8" PointY="14.625" Height="5.0436002604166674" />
@@ -2478,17 +2231,17 @@
         <EntityTypeShape EntityType="DataAccess.MetaDataTypesToContentItems" Width="2.5" PointX="0.5" PointY="7.625" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataAccess.MetaDataTypes" Width="2.125" PointX="0.5" PointY="10" Height="2.0853483072916665" />
         <AssociationConnector Association="DataAccess.FoldersContentItems" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.6953125" PointY="14.625" />
-          <ConnectorPoint PointX="9.6953125" PointY="8.0352895459287321" />
-          <ConnectorPoint PointX="5.677083333333333" PointY="8.0352895459287321" />
-          <ConnectorPoint PointX="5.510416666666667" PointY="8.0352895459287321" />
-          <ConnectorPoint PointX="5.5" PointY="8.0352895459287321" />
+          <ConnectorPoint PointX="9.5625" PointY="14.625" />
+          <ConnectorPoint PointX="9.5625" PointY="5.8526483278152011" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="5.8526483278152" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="5.8526483278152011" />
+          <ConnectorPoint PointX="5.5" PointY="5.8526483278152011" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.Languages" Width="1.5" PointX="6.25" PointY="12.875" Height="2.0853483072916674" />
         <AssociationConnector Association="DataAccess.LanguagesUsers">
-          <ConnectorPoint PointX="6.906248" PointY="12.875" />
-          <ConnectorPoint PointX="6.906248" PointY="11.550606819363765" />
-          <ConnectorPoint PointX="7.625" PointY="11.550606819363765" />
+          <ConnectorPoint PointX="6.9062475" PointY="12.875" />
+          <ConnectorPoint PointX="6.9062475" PointY="11.501417229843272" />
+          <ConnectorPoint PointX="7.625" PointY="11.501417229843272" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.LanguagesFolders">
           <ConnectorPoint PointX="7" PointY="14.960348307291667" />
@@ -2515,8 +2268,6 @@
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.MenuItemsMenus">
           <ConnectorPoint PointX="5.625" PointY="22.292674153645834" />
-          <ConnectorPoint PointX="5.822916666666667" PointY="22.292674153645834" />
-          <ConnectorPoint PointX="5.989583333333333" PointY="22.292674153645834" />
           <ConnectorPoint PointX="6.625" PointY="22.292674153645834" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.LibraryItemsFolders" ManuallyRouted="false">
@@ -2539,15 +2290,13 @@
           <ConnectorPoint PointX="12.203125" PointY="20.599786143021319" />
           <ConnectorPoint PointX="9.7356405256410259" PointY="20.599786143021319" />
           <ConnectorPoint PointX="9.568973858974358" PointY="20.599786143021319" />
-          <ConnectorPoint PointX="9.09025641025641" PointY="20.599786143021319" />
-          <ConnectorPoint PointX="8.9235897435897424" PointY="20.599786143021319" />
+          <ConnectorPoint PointX="8.4691967179487175" PointY="20.599786143021319" />
+          <ConnectorPoint PointX="8.30253005128205" PointY="20.599786143021319" />
           <ConnectorPoint PointX="7.458333333333333" PointY="20.599786143021319" />
           <ConnectorPoint PointX="7.291666666666667" PointY="20.599786143021319" />
-          <ConnectorPoint PointX="5.989583333333333" PointY="20.599786143021319" />
-          <ConnectorPoint PointX="5.822916666666667" PointY="20.599786143021319" />
           <ConnectorPoint PointX="5.36703125" PointY="20.599786143021319" />
           <ConnectorPoint PointX="5.36703125" PointY="19.145819964771562" />
-          <ConnectorPoint PointX="2" PointY="18.619924417402341" />
+          <ConnectorPoint PointX="2" PointY="18.765659910446612" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ChildFolders">
           <ConnectorPoint PointX="8.70923076923077" PointY="19.668600260416667" />
@@ -2567,10 +2316,8 @@
         <AssociationConnector Association="DataAccess.MetaDataTypeToFolderFolders" ManuallyRouted="false">
           <ConnectorPoint PointX="3.625" PointY="14.1710009765625" />
           <ConnectorPoint PointX="3.625" PointY="16.209981458627283" />
-          <ConnectorPoint PointX="4.8321296451822926" PointY="16.209981458627283" />
-          <ConnectorPoint PointX="4.9987963118489587" PointY="16.209981458627283" />
-          <ConnectorPoint PointX="5.822916666666667" PointY="16.209981458627283" />
-          <ConnectorPoint PointX="5.989583333333333" PointY="16.209981458627283" />
+          <ConnectorPoint PointX="5.010416666666667" PointY="16.209981458627283" />
+          <ConnectorPoint PointX="5.177083333333333" PointY="16.209981458627283" />
           <ConnectorPoint PointX="6.916666666666667" PointY="16.209981458627283" />
           <ConnectorPoint PointX="7.083333333333333" PointY="16.209981458627283" />
           <ConnectorPoint PointX="8" PointY="16.209981458627283" />
@@ -2589,36 +2336,35 @@
           <ConnectorPoint PointX="1.5625" PointY="9.5460009765625" />
           <ConnectorPoint PointX="1.5625" PointY="10" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.MetaDataTypesToContentItemsContentItems">
-          <ConnectorPoint PointX="3" PointY="8.2752791341145837" />
-          <ConnectorPoint PointX="4" PointY="8.2752791341145837" />
+          <ConnectorPoint PointX="3" PointY="7.8644108072916659" />
+          <ConnectorPoint PointX="4" PointY="7.8644108072916659" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataAccess.ContentHistories" Width="1.625" PointX="4" PointY="1" Height="2.2496956380208331" />
-        <AssociationConnector Association="DataAccess.ContentHistoryContentItems">
-          <ConnectorPoint PointX="4.75" PointY="3.2496956380208331" />
-          <ConnectorPoint PointX="4.75" PointY="4.375" />
-          </AssociationConnector>
+        <EntityTypeShape EntityType="DataAccess.ObjectHistories" Width="1.625" PointX="2.625" PointY="0.5" Height="2.41404296875" />
         <AssociationConnector Association="DataAccess.ContentHistoryUsers">
-          <ConnectorPoint PointX="5.59375" PointY="3.2496956380208331" />
-          <ConnectorPoint PointX="5.59375" PointY="9.787452244900102" />
-          <ConnectorPoint PointX="7.625" PointY="9.787452244900102" />
+          <ConnectorPoint PointX="4.25" PointY="2.5444880429481627" />
+          <ConnectorPoint PointX="7.25" PointY="2.5444880429481627" />
+          <ConnectorPoint PointX="7.25" PointY="9.7609074050167326" />
+          <ConnectorPoint PointX="7.625" PointY="9.7609074050167326" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.AliasesContentItems">
-          <ConnectorPoint PointX="2" PointY="17.794962917254566" />
-          <ConnectorPoint PointX="4.9154629785156256" PointY="17.794962917254566" />
-          <ConnectorPoint PointX="4.9154629785156256" PointY="9.2542529296875" />
+          <ConnectorPoint PointX="2" PointY="17.664077455223307" />
+          <ConnectorPoint PointX="5.09375" PointY="17.664077455223307" />
+          <ConnectorPoint PointX="5.09375" PointY="8.1038216145833317" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataAccess.ObjectTypes" Width="1.5" PointX="18" PointY="0.5" Height="3.0714322916666661" />
-        <EntityTypeShape EntityType="DataAccess.ObjectXslts" Width="1.5" PointX="16" PointY="0.5" Height="2.0853483072916665" />
+        <EntityTypeShape EntityType="DataAccess.ContentTypes" Width="1.5" PointX="18" PointY="0.5" Height="3.0714322916666661" />
+        <EntityTypeShape EntityType="DataAccess.ContentXslts" Width="1.5" PointX="16" PointY="0.5" Height="2.0853483072916665" />
         <AssociationConnector Association="DataAccess.ObjectXsltSetContentItems">
-          <ConnectorPoint PointX="16.78125" PointY="2.5853483072916665" />
-          <ConnectorPoint PointX="16.78125" PointY="6.9455740918574618" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="6.9455740918574609" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="6.9455740918574618" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="6.9455740918574609" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="6.9455740918574618" />
-          <ConnectorPoint PointX="5.677083333333333" PointY="6.9455740918574609" />
-          <ConnectorPoint PointX="5.510416666666667" PointY="6.9455740918574618" />
-          <ConnectorPoint PointX="5.5" PointY="6.9455740918574618" />
+          <ConnectorPoint PointX="16.75" PointY="2.5853483072916665" />
+          <ConnectorPoint PointX="16.75" PointY="6.89359675075748" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="6.8935967507574789" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="6.89359675075748" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="6.8935967507574789" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="6.89359675075748" />
+          <ConnectorPoint PointX="9.6458333333333339" PointY="6.8935967507574789" />
+          <ConnectorPoint PointX="9.4791666666666661" PointY="6.89359675075748" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="6.8935967507574789" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="6.89359675075748" />
+          <ConnectorPoint PointX="5.5" PointY="6.89359675075748" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ObjectSchemaObjectXsltSets">
           <ConnectorPoint PointX="18" PointY="1.5426741536458333" />
@@ -2637,28 +2383,26 @@
           <ConnectorPoint PointX="7.375" PointY="21.25" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ContentItemsObjectTypes">
-          <ConnectorPoint PointX="5.5" PointY="4.9407306761830592" />
-          <ConnectorPoint PointX="5.510416666666667" PointY="4.9407306761830583" />
-          <ConnectorPoint PointX="5.677083333333333" PointY="4.9407306761830592" />
-          <ConnectorPoint PointX="9.3697916666666661" PointY="4.9407306761830583" />
-          <ConnectorPoint PointX="9.5364583333333339" PointY="4.9407306761830592" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="4.9407306761830583" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="4.9407306761830592" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="4.9407306761830583" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="4.9407306761830592" />
-          <ConnectorPoint PointX="16.697916666666668" PointY="4.9407306761830583" />
-          <ConnectorPoint PointX="16.864583333333332" PointY="4.9407306761830592" />
-          <ConnectorPoint PointX="18.349224025065105" PointY="4.9407306761830583" />
-          <ConnectorPoint PointX="18.515890691731769" PointY="4.9407306761830592" />
-          <ConnectorPoint PointX="18.990114716796874" PointY="4.9407306761830592" />
-          <ConnectorPoint PointX="18.990114716796874" PointY="3.5714322916666661" />
+          <ConnectorPoint PointX="5.5" PointY="5.3361768736893156" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="5.3361768736893147" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="5.3361768736893156" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="5.3361768736893147" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="5.3361768736893156" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="5.3361768736893147" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="5.3361768736893156" />
+          <ConnectorPoint PointX="16.666666666666668" PointY="5.3361768736893147" />
+          <ConnectorPoint PointX="16.833333333333332" PointY="5.3361768736893156" />
+          <ConnectorPoint PointX="18.352932256266278" PointY="5.3361768736893147" />
+          <ConnectorPoint PointX="18.519598922932943" PointY="5.3361768736893156" />
+          <ConnectorPoint PointX="18.999385294799808" PointY="5.3361768736893156" />
+          <ConnectorPoint PointX="18.999385294799808" PointY="3.4070849609375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.TemplateElementContentItems">
-          <ConnectorPoint PointX="9.453125" PointY="3.7427376302083331" />
-          <ConnectorPoint PointX="9.453125" PointY="6.2624394596041064" />
-          <ConnectorPoint PointX="5.677083333333333" PointY="6.2624394596041055" />
-          <ConnectorPoint PointX="5.510416666666667" PointY="6.2624394596041064" />
-          <ConnectorPoint PointX="5.5" PointY="6.2624394596041064" />
+          <ConnectorPoint PointX="8.625" PointY="3.3596402994791665" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="3.3596402994791661" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="3.3596402994791665" />
+          <ConnectorPoint PointX="4.90625" PointY="3.3596402994791665" />
+          <ConnectorPoint PointX="4.90625" PointY="4.375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.AliasesMenuItems">
           <ConnectorPoint PointX="1.25" PointY="19.039042968750003" />
@@ -2667,22 +2411,20 @@
           <ConnectorPoint PointX="1.7395858333333332" PointY="22.292674153645834" />
           <ConnectorPoint PointX="4.125" PointY="22.292674153645834" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.AliasesMenus">
-          <ConnectorPoint PointX="1.6562525" PointY="19.039042968750003" />
-          <ConnectorPoint PointX="1.6562525" PointY="23.914180631917318" />
-          <ConnectorPoint PointX="5.822916666666667" PointY="23.914180631917318" />
-          <ConnectorPoint PointX="5.989583333333333" PointY="23.914180631917318" />
-          <ConnectorPoint PointX="6.625" PointY="23.914180631917318" /></AssociationConnector>
-        <AssociationConnector Association="DataAccess.ObjectTypesTemplateElements">
-          <ConnectorPoint PointX="18" PointY="3.470284574969555" />
-          <ConnectorPoint PointX="16.864583333333332" PointY="3.4702845749695546" />
-          <ConnectorPoint PointX="16.697916666666668" PointY="3.470284574969555" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="3.4702845749695546" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="3.470284574969555" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="3.4702845749695546" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="3.470284574969555" />
-          <ConnectorPoint PointX="10.625" PointY="3.470284574969555" />
+          <ConnectorPoint PointX="1.5546893750000002" PointY="19.039042968750003" />
+          <ConnectorPoint PointX="1.5546893750000002" PointY="24.106161295572917" />
+          <ConnectorPoint PointX="6.625" PointY="24.106161295572917" />
           </AssociationConnector>
-        <EntityTypeShape EntityType="DataAccess.ObjectTypeHistories" Width="2" PointX="20.125" PointY="0.5" Height="2.2496956380208331" />
+        <AssociationConnector Association="DataAccess.ObjectTypesTemplateElements">
+          <ConnectorPoint PointX="18" PointY="3.3596402994791665" />
+          <ConnectorPoint PointX="16.833333333333332" PointY="3.3596402994791661" />
+          <ConnectorPoint PointX="16.666666666666668" PointY="3.3596402994791665" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="3.3596402994791661" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="3.3596402994791665" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="3.3596402994791661" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="3.3596402994791665" />
+          <ConnectorPoint PointX="10.625" PointY="3.3596402994791665" />
+          </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.Workflows" Width="1.75" PointX="17.25" PointY="15.25" Height="1.5923063151041674" />
         <AssociationConnector Association="DataAccess.WorkflowsFolders">
           <ConnectorPoint PointX="18.125" PointY="16.842306315104167" />
@@ -2704,23 +2446,23 @@
           <ConnectorPoint PointX="18.1875" PointY="14.953390299479166" />
           <ConnectorPoint PointX="18.1875" PointY="15.25" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesContentItems">
-          <ConnectorPoint PointX="17.87252617919922" PointY="12.375" />
-          <ConnectorPoint PointX="17.87252617919922" PointY="5.6015850678935823" />
-          <ConnectorPoint PointX="16.864583333333332" PointY="5.6015850678935815" />
-          <ConnectorPoint PointX="16.697916666666668" PointY="5.6015850678935823" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="5.6015850678935815" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="5.6015850678935823" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="5.6015850678935815" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="5.6015850678935823" />
-          <ConnectorPoint PointX="9.5364583333333339" PointY="5.6015850678935815" />
-          <ConnectorPoint PointX="9.3697916666666661" PointY="5.6015850678935823" />
-          <ConnectorPoint PointX="5.677083333333333" PointY="5.6015850678935815" />
-          <ConnectorPoint PointX="5.510416666666667" PointY="5.6015850678935823" />
-          <ConnectorPoint PointX="5.5" PointY="5.6015850678935823" />
+          <ConnectorPoint PointX="17.874380294799806" PointY="12.375" />
+          <ConnectorPoint PointX="17.874380294799806" PointY="6.3691197819410874" />
+          <ConnectorPoint PointX="16.833333333333332" PointY="6.3691197819410865" />
+          <ConnectorPoint PointX="16.666666666666668" PointY="6.3691197819410874" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="6.3691197819410865" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="6.3691197819410874" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="6.3691197819410865" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="6.3691197819410874" />
+          <ConnectorPoint PointX="9.6458333333333339" PointY="6.3691197819410865" />
+          <ConnectorPoint PointX="9.4791666666666661" PointY="6.3691197819410874" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="6.3691197819410865" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="6.3691197819410874" />
+          <ConnectorPoint PointX="5.5" PointY="6.3691197819410874" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesObjectTypes">
-          <ConnectorPoint PointX="18.432557358398437" PointY="12.375" />
-          <ConnectorPoint PointX="18.432557358398437" PointY="3.5714322916666661" />
+          <ConnectorPoint PointX="18.436265589599611" PointY="12.375" />
+          <ConnectorPoint PointX="18.436265589599611" PointY="3.4070849609375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesCalendars">
           <ConnectorPoint PointX="17.375" PointY="14.072108561197917" />
@@ -2747,43 +2489,13 @@
           <ConnectorPoint PointX="7.375" PointY="19.949850260416667" />
           <ConnectorPoint PointX="7.375" PointY="21.25" />
           </AssociationConnector>
-        <AssociationConnector Association="DataAccess.ObjectTypeHistoriesObjectTypes">
-          <ConnectorPoint PointX="20.125" PointY="1.6248478190104168" />
-          <ConnectorPoint PointX="19.5" PointY="1.6248478190104168" /></AssociationConnector>
-        <AssociationConnector Association="DataAccess.ObjectTypeHistoriesUsers">
-          <ConnectorPoint PointX="20.28125" PointY="2.7496956380208331" />
-          <ConnectorPoint PointX="20.28125" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="18.515890691731769" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="18.349224025065105" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="17.955859512532552" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="17.789192845865887" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="11.083333333333334" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="10.916666666666666" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="9.7786458333333339" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="9.6119791666666661" PointY="10.565826822916666" />
-          <ConnectorPoint PointX="9.125" PointY="10.565826822916666" />
-          </AssociationConnector>
-        <EntityTypeShape EntityType="DataAccess.MenuHistories" Width="1.5" PointX="4.625" PointY="24.75" Height="2.2496956380208353" />
-        <AssociationConnector Association="DataAccess.MenuHistoriesMenus">
-          <ConnectorPoint PointX="6.125" PointY="25.874847819010419" />
-          <ConnectorPoint PointX="7.375" PointY="25.874847819010419" />
-          <ConnectorPoint PointX="7.375" PointY="24.978821614583335" /></AssociationConnector>
-        <AssociationConnector Association="DataAccess.MenuHistoriesUsers">
-          <ConnectorPoint PointX="5.90625" PointY="24.75" />
-          <ConnectorPoint PointX="5.90625" PointY="11.29200063396854" />
-          <ConnectorPoint PointX="7.625" PointY="11.29200063396854" />
-          </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.UserRolesToWorkFlowSteps" Width="2.125" PointX="20.5" PointY="11.5" Height="1.9210009765624996" />
         <AssociationConnector Association="DataAccess.UserRolesToWorkFlowStepsUserRoles">
           <ConnectorPoint PointX="20.5" PointY="11.90625" />
-          <ConnectorPoint PointX="18.515890691731769" PointY="11.90625" />
-          <ConnectorPoint PointX="18.349224025065105" PointY="11.90625" />
-          <ConnectorPoint PointX="17.955859512532552" PointY="11.90625" />
-          <ConnectorPoint PointX="17.789192845865887" PointY="11.90625" />
+          <ConnectorPoint PointX="18.519598922932943" PointY="11.90625" />
+          <ConnectorPoint PointX="18.352932256266278" PointY="11.90625" />
+          <ConnectorPoint PointX="17.957713628133138" PointY="11.90625" />
+          <ConnectorPoint PointX="17.791046961466474" PointY="11.90625" />
           <ConnectorPoint PointX="12.591148333333335" PointY="11.90625" />
           <ConnectorPoint PointX="12.424481666666667" PointY="11.90625" />
           <ConnectorPoint PointX="12.286458333333334" PointY="11.90625" />
@@ -2792,6 +2504,10 @@
         <AssociationConnector Association="DataAccess.UserRolesToWorkFlowStepsWorkFlowSteps">
           <ConnectorPoint PointX="20.875" PointY="13.4210009765625" />
           <ConnectorPoint PointX="20.875" PointY="15.25" /></AssociationConnector>
+        <EntityTypeShape EntityType="DataAccess.ObjectTypes" Width="1.5" PointX="0.625" PointY="1.25" Height="1.2636116536458335" />
+        <AssociationConnector Association="DataAccess.ObjectHistoriesObjectTypes">
+          <ConnectorPoint PointX="2.625" PointY="1.9639794921875" />
+          <ConnectorPoint PointX="2.125" PointY="1.9639794921875" /></AssociationConnector>
         </Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

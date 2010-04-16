@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.Content {
-    public class ContentItem : BaseWorkFlowObject<ContentItem> {
+    public class ContentItem : TotalTech.CMS.WorkFlow.BaseWorkFlowObject<ContentItem> {
 
         int _contentItemId;
         public int ContactItemId {
@@ -69,8 +69,8 @@ namespace TotalTech.CMS.Content {
             }
         }
 
-        ContentStatuses _contentStatus;
-        public ContentStatuses ContentStatus {
+        TotalTech.CMS.WorkFlow.ContentStatuses _contentStatus;
+        public TotalTech.CMS.WorkFlow.ContentStatuses ContentStatus {
             get { return _contentStatus; }
         }
 
@@ -100,23 +100,6 @@ namespace TotalTech.CMS.Content {
             throw new NotImplementedException();
         }
 
-
-        /*public override void CheckOut() {
-            throw new NotImplementedException();
-        }
-
-        public override void CheckIn() {
-            throw new NotImplementedException();
-        }
-
-        public override void Stage() {
-            throw new NotImplementedException();
-        }
-
-        public override void Publish() {
-            throw new NotImplementedException();
-        }*/
-
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
@@ -134,10 +117,10 @@ namespace TotalTech.CMS.Content {
                 _folderId = dataReader.GetInt32(7);
                 switch (dataReader.GetString(8)) {
                     case "IN":
-                        _contentStatus = ContentStatuses.CheckedIn;
+                        _contentStatus = TotalTech.CMS.WorkFlow.ContentStatuses.CheckedIn;
                         break;
                     case "OT":
-                        _contentStatus = ContentStatuses.CheckedOut;
+                        _contentStatus = TotalTech.CMS.WorkFlow.ContentStatuses.CheckedOut;
                         break;
                 }
                 dataReader.Close();
@@ -145,6 +128,10 @@ namespace TotalTech.CMS.Content {
             else {
                 SiteSettings.ContextData.DebugLog.WriteDebugMessage("The content item id is not set.");
             }
+        }
+
+        protected override void AssignRollBackData(WorkFlow.ObjectHistory RollBackTo) {
+            throw new NotImplementedException();
         }
     }
 }

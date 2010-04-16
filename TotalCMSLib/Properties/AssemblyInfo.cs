@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TotalCMSLib")]
+[assembly: AssemblyTitle("Total Tech Inc. CMS")]
 [assembly: AssemblyDescription("API for CMS developed by Total Tech Inc.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Total Tech Inc.")]
-[assembly: AssemblyProduct("TotalCMSLib")]
+[assembly: AssemblyProduct("Total Tech Inc. CMS")]
 [assembly: AssemblyCopyright("Copyright © Total Tech Inc 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

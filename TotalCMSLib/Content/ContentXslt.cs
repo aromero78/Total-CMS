@@ -4,6 +4,6 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.Content {
-    class ContentHistory {
+    public class ContentXslt {
     }
 }

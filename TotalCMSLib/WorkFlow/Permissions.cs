@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalTech.CMS.Content.WorkFlow {
+namespace TotalTech.CMS.WorkFlow {
     public class Permissions : BaseDataObject<Permissions> {
 
         int _permissionId;
@@ -34,36 +34,36 @@ namespace TotalTech.CMS.Content.WorkFlow {
         }
 
         int _folderId;
-        Folder _folder;
-        public Folder Folder {
+        Content.Folder _folder;
+        public Content.Folder Folder {
             get {
                 if (_folder == null || _folder.FolderId != _folderId) {
-                    _folder = new Folder(_folderId);
+                    _folder = new Content.Folder(_folderId);
                 }
                 return _folder;
             }
         }
 
-        public bool CanReadContent { get; }
-        public bool CanAddContent { get; }
-        public bool CanDeleteContent { get; }
-        public bool CanReadMenus { get; }
-        public bool CanAddMenus { get; }
-        public bool CanDeleteMenus { get; }
-        public bool CanReadFolders { get; }
-        public bool CanAddFolders { get; }
-        public bool CanDeleteFolders { get; }
-        public bool CanReadCalendars { get; }
-        public bool CanAddCalendars { get; }
-        public bool CanDeleteCalendars { get; }
-        public bool CanEditContent { get; }
-        public bool CanEditMenus { get; }
-        public bool CanEditFolders { get; }
-        public bool CanEditCalendar { get; }
-        public bool CanReadPages { get; }
-        public bool CanEditPages { get; }
-        public bool CanAddPages { get; }
-        public bool CanDeletePages { get; }
+        public bool CanReadContent { get; private set; }
+        public bool CanAddContent { get; private set; }
+        public bool CanDeleteContent { get; private set; }
+        public bool CanReadMenus { get; private set; }
+        public bool CanAddMenus { get; private set; }
+        public bool CanDeleteMenus { get; private set; }
+        public bool CanReadFolders { get; private set; }
+        public bool CanAddFolders { get; private set; }
+        public bool CanDeleteFolders { get; private set; }
+        public bool CanReadCalendars { get; private set; }
+        public bool CanAddCalendars { get; private set; }
+        public bool CanDeleteCalendars { get; private set; }
+        public bool CanEditContent { get; private set; }
+        public bool CanEditMenus { get; private set; }
+        public bool CanEditFolders { get; private set; }
+        public bool CanEditCalendar { get; private set; }
+        public bool CanReadPages { get; private set; }
+        public bool CanEditPages { get; private set; }
+        public bool CanAddPages { get; private set; }
+        public bool CanDeletePages { get; private set; }
 
         internal Permissions(User.User CurrentUser, Content.Folder CurrentFolder) {
             _user = CurrentUser;

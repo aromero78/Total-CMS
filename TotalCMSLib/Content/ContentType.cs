@@ -7,11 +7,11 @@ using System.Xml;
 using System.Xml.Xsl;
 using System.Xml.Schema;
 
-namespace TotalTech.CMS.Content.Xml {
+namespace TotalTech.CMS.Content {
     /// <summary>
     /// Used as the definition for data within a content item.
     /// </summary>
-    public class ObjectType : BaseWorkFlowObject<ObjectType> {
+    public class ContentType : TotalTech.CMS.WorkFlow.BaseWorkFlowObject<ContentType> {
         const string WARNING = "WARNING: ", ERROR = "ERROR: ";
 
         int _objectTypeId;
@@ -84,12 +84,6 @@ namespace TotalTech.CMS.Content.Xml {
             }
         }
 
-        ContentStatuses _status;
-        public ContentStatuses Status {
-            get { return _status; }
-            set { _status = value; }
-        }
-
         bool _isActive;
         public bool IsActive {
             get { return _isActive; }
@@ -121,15 +115,19 @@ namespace TotalTech.CMS.Content.Xml {
         }
 
         internal override void Save() {
-            _objectTypeId = SiteSettings.DataAccess.ObjectTypeSave(_rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, _status, _workFlowInstanceId);
+            _objectTypeId = SiteSettings.DataAccess.ObjectTypeSave(_rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, ContentStatus, _workFlowInstanceId);
         }
 
         internal override void Update() {
-            SiteSettings.DataAccess.ObjectTypeUpdate(_objectTypeId, _rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, _status, _workFlowInstanceId, _isActive);
+            SiteSettings.DataAccess.ObjectTypeUpdate(_objectTypeId, _rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, ContentStatus, _workFlowInstanceId, _isActive);
         }
 
         internal override void Delete() {
             throw new NotImplementedException();
-        }    
+        }
+
+        protected override void AssignRollBackData(WorkFlow.ObjectHistory RollBackTo) {
+            throw new NotImplementedException();
+        }
     }
 }

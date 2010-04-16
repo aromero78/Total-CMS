@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalTech.CMS.Content.WorkFlow {
-    public class WorkFlow : BaseDataObject<WorkFlow> {
-        int _workFlowId;
-        public int WorkFlowid {
-            get {
-                return _workFlowId;
-            }
+namespace TotalTech.CMS.WorkFlow {
+    public class WorkFlowStep : BaseDataObject<WorkFlowStep>{
+        int _workFlowStepid;
+        public int WorkFlowStepId {
+            get { return _workFlowStepid; }
         }
 
-        public WorkFlow(int WorkFlowId) {
-            _workFlowId = WorkFlowId;
+        public WorkFlowStep(int WorkFlowStepId) {
+            _workFlowStepid = WorkFlowStepId;
             Load();
+        }
+
+        public bool UserIsStepEditor() {
+            return UserIsStepEditor(SiteSettings.ContextData.CurrentUser);
+        }
+
+        public bool UserIsStepEditor(User.User User){
+            throw new NotImplementedException();
+        }
+
+        public bool UserIsApprover() {
+            return UserIsApprover(SiteSettings.ContextData.CurrentUser);
+        }
+
+        public bool UserIsApprover(User.User User){
+            throw new NotImplementedException();
         }
 
         internal override void Reset() {

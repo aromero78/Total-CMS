@@ -45,15 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseWorkFlowObject.cs" />
-    <Compile Include="Content\ContentHistory.cs" />
+    <Compile Include="WorkFlow\BaseWorkFlowObject.cs" />
+    <Compile Include="WorkFlow\ObjectHistory.cs" />
     <Compile Include="Content\ContentItem.cs" />
     <Compile Include="Content\Folder.cs" />
-    <Compile Include="Content\WorkFlow\Permissions.cs" />
-    <Compile Include="Content\WorkFlow\UserRolesToWorkFlowStep.cs" />
-    <Compile Include="Content\WorkFlow\WorkFlow.cs" />
-    <Compile Include="Content\WorkFlow\WorkFlowInstance.cs" />
-    <Compile Include="Content\WorkFlow\WorkFlowStep.cs" />
+    <Compile Include="WorkFlow\Permissions.cs" />
+    <Compile Include="WorkFlow\UserRolesToWorkFlowStep.cs" />
+    <Compile Include="WorkFlow\WorkFlow.cs" />
+    <Compile Include="WorkFlow\WorkFlowInstance.cs" />
+    <Compile Include="WorkFlow\WorkFlowStep.cs" />
     <Compile Include="Data\ContextDataProviders\BaseDebugLogger.cs" />
     <Compile Include="Data\ContextDataProviders\WindowsContextData.cs" />
     <Compile Include="Data\Database\iDataManager.cs" />
@@ -78,8 +78,8 @@
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserRoles.cs" />
     <Compile Include="Web\Uri.cs" />
-    <Compile Include="Content\Xml\ObjectType.cs" />
-    <Compile Include="Content\Xml\ObjectXslt.cs" />
+    <Compile Include="Content\ContentType.cs" />
+    <Compile Include="Content\ContentXslt.cs" />
     <Compile Include="Xml\XslHelper.cs" />
   </ItemGroup>
   <ItemGroup>

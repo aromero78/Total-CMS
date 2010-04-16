@@ -1,6 +1,6 @@
 
 -- --------------------------------------------------
--- Date Created: 04/15/2010 00:32:46
+-- Date Created: 04/15/2010 23:26:57
 -- Generated from EDMX file: C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\TotalCMS.edmx
 -- --------------------------------------------------
 
@@ -17,12 +17,6 @@ GO
 -- Dropping existing FK constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_UsersContentItems]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentItems] DROP CONSTRAINT [FK_UsersContentItems]
-GO
-IF OBJECT_ID(N'[dbo].[FK_UsersContentItems1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentItems] DROP CONSTRAINT [FK_UsersContentItems1]
-GO
 IF OBJECT_ID(N'[dbo].[FK_UsersToUserRolesUsers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UsersToUserRoles] DROP CONSTRAINT [FK_UsersToUserRolesUsers]
 GO
@@ -83,11 +77,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MetaDataTypesToContentItemsContentItems]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MetaDataTypesToContentItems] DROP CONSTRAINT [FK_MetaDataTypesToContentItemsContentItems]
 GO
-IF OBJECT_ID(N'[dbo].[FK_ContentHistoryContentItems]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentHistories] DROP CONSTRAINT [FK_ContentHistoryContentItems]
-GO
 IF OBJECT_ID(N'[dbo].[FK_ContentHistoryUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentHistories] DROP CONSTRAINT [FK_ContentHistoryUsers]
+    ALTER TABLE [dbo].[ObjectHistories] DROP CONSTRAINT [FK_ContentHistoryUsers]
 GO
 IF OBJECT_ID(N'[dbo].[FK_AliasesContentItems]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Aliases] DROP CONSTRAINT [FK_AliasesContentItems]
@@ -96,7 +87,7 @@ IF OBJECT_ID(N'[dbo].[FK_ObjectXsltSetContentItems]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ContentItems] DROP CONSTRAINT [FK_ObjectXsltSetContentItems]
 GO
 IF OBJECT_ID(N'[dbo].[FK_ObjectSchemaObjectXsltSets]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ObjectXslts] DROP CONSTRAINT [FK_ObjectSchemaObjectXsltSets]
+    ALTER TABLE [dbo].[ContentXslts] DROP CONSTRAINT [FK_ObjectSchemaObjectXsltSets]
 GO
 IF OBJECT_ID(N'[dbo].[FK_MenusMenus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Menus] DROP CONSTRAINT [FK_MenusMenus]
@@ -132,7 +123,7 @@ IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstancesContentItems]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ContentItems] DROP CONSTRAINT [FK_WorkFlowInstancesContentItems]
 GO
 IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstancesObjectTypes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ObjectTypes] DROP CONSTRAINT [FK_WorkFlowInstancesObjectTypes]
+    ALTER TABLE [dbo].[ContentTypes] DROP CONSTRAINT [FK_WorkFlowInstancesObjectTypes]
 GO
 IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstancesCalendars]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Calendars] DROP CONSTRAINT [FK_WorkFlowInstancesCalendars]
@@ -143,23 +134,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstancesMenus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Menus] DROP CONSTRAINT [FK_WorkFlowInstancesMenus]
 GO
-IF OBJECT_ID(N'[dbo].[FK_ObjectTypeHistoriesObjectTypes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ObjectTypeHistories] DROP CONSTRAINT [FK_ObjectTypeHistoriesObjectTypes]
-GO
-IF OBJECT_ID(N'[dbo].[FK_ObjectTypeHistoriesUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ObjectTypeHistories] DROP CONSTRAINT [FK_ObjectTypeHistoriesUsers]
-GO
-IF OBJECT_ID(N'[dbo].[FK_MenuHistoriesMenus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MenuHistories] DROP CONSTRAINT [FK_MenuHistoriesMenus]
-GO
-IF OBJECT_ID(N'[dbo].[FK_MenuHistoriesUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MenuHistories] DROP CONSTRAINT [FK_MenuHistoriesUsers]
-GO
 IF OBJECT_ID(N'[dbo].[FK_UserRolesToWorkFlowStepsUserRoles]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] DROP CONSTRAINT [FK_UserRolesToWorkFlowStepsUserRoles]
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserRolesToWorkFlowStepsWorkFlowSteps]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] DROP CONSTRAINT [FK_UserRolesToWorkFlowStepsWorkFlowSteps]
+GO
+IF OBJECT_ID(N'[dbo].[FK_ObjectHistoriesObjectTypes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ObjectHistories] DROP CONSTRAINT [FK_ObjectHistoriesObjectTypes]
 GO
 
 -- --------------------------------------------------
@@ -223,20 +205,17 @@ GO
 IF OBJECT_ID(N'[dbo].[MetaDataValueTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MetaDataValueTypes];
 GO
-IF OBJECT_ID(N'[dbo].[ContentHistories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ContentHistories];
+IF OBJECT_ID(N'[dbo].[ObjectHistories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ObjectHistories];
 GO
-IF OBJECT_ID(N'[dbo].[ObjectTypes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ObjectTypes];
+IF OBJECT_ID(N'[dbo].[ContentTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentTypes];
 GO
-IF OBJECT_ID(N'[dbo].[ObjectXslts]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ObjectXslts];
+IF OBJECT_ID(N'[dbo].[ContentXslts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentXslts];
 GO
 IF OBJECT_ID(N'[dbo].[Settings]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Settings];
-GO
-IF OBJECT_ID(N'[dbo].[ObjectTypeHistories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ObjectTypeHistories];
 GO
 IF OBJECT_ID(N'[dbo].[Workflows]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Workflows];
@@ -247,11 +226,11 @@ GO
 IF OBJECT_ID(N'[dbo].[WorkFlowInstances]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkFlowInstances];
 GO
-IF OBJECT_ID(N'[dbo].[MenuHistories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[MenuHistories];
-GO
 IF OBJECT_ID(N'[dbo].[UserRolesToWorkFlowSteps]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserRolesToWorkFlowSteps];
+GO
+IF OBJECT_ID(N'[dbo].[ObjectTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ObjectTypes];
 GO
 
 -- --------------------------------------------------
@@ -263,10 +242,6 @@ CREATE TABLE [dbo].[ContentItems] (
     [ContentItemId] int  NOT NULL,
     [ContentHtml] nvarchar(max)  NOT NULL,
     [ContentSummary] nvarchar(250)  NOT NULL,
-    [DateCreated] datetime  NOT NULL,
-    [DateModified] datetime  NULL,
-    [CreatedByUserId] int  NOT NULL,
-    [ModifiedByUserId] int  NULL,
     [FolderId] int  NOT NULL,
     [ContentStatus] nvarchar(2)  NOT NULL,
     [ObjectXsltId] int  NOT NULL,
@@ -464,19 +439,20 @@ CREATE TABLE [dbo].[MetaDataValueTypes] (
     [Name] nvarchar(max)  NOT NULL
 );
 GO
--- Creating table 'ContentHistories'
-CREATE TABLE [dbo].[ContentHistories] (
+-- Creating table 'ObjectHistories'
+CREATE TABLE [dbo].[ObjectHistories] (
     [ContentHistoryId] int  NOT NULL,
-    [ContentItemId] int  NOT NULL,
+    [ObjectItemId] int  NULL,
     [VersionNumber] float  NOT NULL,
     [DateCreated] datetime  NOT NULL,
     [CreatedByUserId] int  NOT NULL,
-    [SerializedData] varbinary(max)  NOT NULL
+    [CompressedData] varbinary(max)  NOT NULL,
+    [ObjectTypeId] int  NOT NULL
 );
 GO
--- Creating table 'ObjectTypes'
-CREATE TABLE [dbo].[ObjectTypes] (
-    [ObjectTypeId] int  NOT NULL,
+-- Creating table 'ContentTypes'
+CREATE TABLE [dbo].[ContentTypes] (
+    [ContentTypeId] int  NOT NULL,
     [DataEntryXslt] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [DefaultDisplayXslt] nvarchar(max)  NOT NULL,
@@ -486,11 +462,11 @@ CREATE TABLE [dbo].[ObjectTypes] (
     [IsActive] bit  NOT NULL
 );
 GO
--- Creating table 'ObjectXslts'
-CREATE TABLE [dbo].[ObjectXslts] (
-    [ObjectXsltId] int  NOT NULL,
-    [ObjectXsltUri] nvarchar(max)  NOT NULL,
-    [ObjectSchemaId] int  NOT NULL,
+-- Creating table 'ContentXslts'
+CREATE TABLE [dbo].[ContentXslts] (
+    [ContentXsltId] int  NOT NULL,
+    [ContentXsltUri] nvarchar(max)  NOT NULL,
+    [ContentTypeId] int  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [isValidated] bit  NOT NULL
 );
@@ -499,17 +475,6 @@ GO
 CREATE TABLE [dbo].[Settings] (
     [SettingId] int  NOT NULL,
     [LicenceKey] nvarchar(max)  NOT NULL
-);
-GO
--- Creating table 'ObjectTypeHistories'
-CREATE TABLE [dbo].[ObjectTypeHistories] (
-    [ObjectTypeHistoryId] int  NOT NULL,
-    [ObjectTypeId] int  NOT NULL,
-    [SerializedData] varbinary(max)  NOT NULL,
-    [CreatedDate] datetime  NOT NULL,
-    [UserId] int  NOT NULL,
-    [VersionNumber] float  NOT NULL,
-    [User_UserId] int  NOT NULL
 );
 GO
 -- Creating table 'Workflows'
@@ -532,22 +497,18 @@ CREATE TABLE [dbo].[WorkFlowInstances] (
     [IsComplete] bit  NOT NULL
 );
 GO
--- Creating table 'MenuHistories'
-CREATE TABLE [dbo].[MenuHistories] (
-    [MenuHistoryId] int  NOT NULL,
-    [MenusMenuId] int  NOT NULL,
-    [CreatedByUserId] int  NOT NULL,
-    [CreatedDate] datetime  NOT NULL,
-    [SerializedData] varbinary(max)  NOT NULL,
-    [VersionNumber] nvarchar(max)  NOT NULL
-);
-GO
 -- Creating table 'UserRolesToWorkFlowSteps'
 CREATE TABLE [dbo].[UserRolesToWorkFlowSteps] (
     [UserRolesToWorkFlowStepId] int  NOT NULL,
     [UserRolesUserRoleId] int  NOT NULL,
     [WorkFlowStepsWorkFlowStepId] int  NOT NULL,
     [IsApprover] bit  NOT NULL
+);
+GO
+-- Creating table 'ObjectTypes'
+CREATE TABLE [dbo].[ObjectTypes] (
+    [ObjectTypeId] int  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -669,34 +630,28 @@ ADD CONSTRAINT [PK_MetaDataValueTypes]
     PRIMARY KEY CLUSTERED ([MetaDataValueTypeId] ASC)
     ON [PRIMARY]
 GO
--- Creating primary key on [ContentHistoryId] in table 'ContentHistories'
-ALTER TABLE [dbo].[ContentHistories] WITH NOCHECK 
-ADD CONSTRAINT [PK_ContentHistories]
+-- Creating primary key on [ContentHistoryId] in table 'ObjectHistories'
+ALTER TABLE [dbo].[ObjectHistories] WITH NOCHECK 
+ADD CONSTRAINT [PK_ObjectHistories]
     PRIMARY KEY CLUSTERED ([ContentHistoryId] ASC)
     ON [PRIMARY]
 GO
--- Creating primary key on [ObjectTypeId] in table 'ObjectTypes'
-ALTER TABLE [dbo].[ObjectTypes] WITH NOCHECK 
-ADD CONSTRAINT [PK_ObjectTypes]
-    PRIMARY KEY CLUSTERED ([ObjectTypeId] ASC)
+-- Creating primary key on [ContentTypeId] in table 'ContentTypes'
+ALTER TABLE [dbo].[ContentTypes] WITH NOCHECK 
+ADD CONSTRAINT [PK_ContentTypes]
+    PRIMARY KEY CLUSTERED ([ContentTypeId] ASC)
     ON [PRIMARY]
 GO
--- Creating primary key on [ObjectXsltId] in table 'ObjectXslts'
-ALTER TABLE [dbo].[ObjectXslts] WITH NOCHECK 
-ADD CONSTRAINT [PK_ObjectXslts]
-    PRIMARY KEY CLUSTERED ([ObjectXsltId] ASC)
+-- Creating primary key on [ContentXsltId] in table 'ContentXslts'
+ALTER TABLE [dbo].[ContentXslts] WITH NOCHECK 
+ADD CONSTRAINT [PK_ContentXslts]
+    PRIMARY KEY CLUSTERED ([ContentXsltId] ASC)
     ON [PRIMARY]
 GO
 -- Creating primary key on [SettingId] in table 'Settings'
 ALTER TABLE [dbo].[Settings] WITH NOCHECK 
 ADD CONSTRAINT [PK_Settings]
     PRIMARY KEY CLUSTERED ([SettingId] ASC)
-    ON [PRIMARY]
-GO
--- Creating primary key on [ObjectTypeHistoryId] in table 'ObjectTypeHistories'
-ALTER TABLE [dbo].[ObjectTypeHistories] WITH NOCHECK 
-ADD CONSTRAINT [PK_ObjectTypeHistories]
-    PRIMARY KEY CLUSTERED ([ObjectTypeHistoryId] ASC)
     ON [PRIMARY]
 GO
 -- Creating primary key on [WorkflowId] in table 'Workflows'
@@ -717,16 +672,16 @@ ADD CONSTRAINT [PK_WorkFlowInstances]
     PRIMARY KEY CLUSTERED ([WorkFlowInstanceId] ASC)
     ON [PRIMARY]
 GO
--- Creating primary key on [MenuHistoryId] in table 'MenuHistories'
-ALTER TABLE [dbo].[MenuHistories] WITH NOCHECK 
-ADD CONSTRAINT [PK_MenuHistories]
-    PRIMARY KEY CLUSTERED ([MenuHistoryId] ASC)
-    ON [PRIMARY]
-GO
 -- Creating primary key on [UserRolesToWorkFlowStepId] in table 'UserRolesToWorkFlowSteps'
 ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] WITH NOCHECK 
 ADD CONSTRAINT [PK_UserRolesToWorkFlowSteps]
     PRIMARY KEY CLUSTERED ([UserRolesToWorkFlowStepId] ASC)
+    ON [PRIMARY]
+GO
+-- Creating primary key on [ObjectTypeId] in table 'ObjectTypes'
+ALTER TABLE [dbo].[ObjectTypes] WITH NOCHECK 
+ADD CONSTRAINT [PK_ObjectTypes]
+    PRIMARY KEY CLUSTERED ([ObjectTypeId] ASC)
     ON [PRIMARY]
 GO
 
@@ -734,22 +689,6 @@ GO
 -- Creating all Foreign Key Constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [CreatedByUserId] in table 'ContentItems'
-ALTER TABLE [dbo].[ContentItems] WITH NOCHECK 
-ADD CONSTRAINT [FK_UsersContentItems]
-    FOREIGN KEY ([CreatedByUserId])
-    REFERENCES [dbo].[UsersSet]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
--- Creating foreign key on [ModifiedByUserId] in table 'ContentItems'
-ALTER TABLE [dbo].[ContentItems] WITH NOCHECK 
-ADD CONSTRAINT [FK_UsersContentItems1]
-    FOREIGN KEY ([ModifiedByUserId])
-    REFERENCES [dbo].[UsersSet]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
 -- Creating foreign key on [UserId] in table 'UsersToUserRoles'
 ALTER TABLE [dbo].[UsersToUserRoles] WITH NOCHECK 
 ADD CONSTRAINT [FK_UsersToUserRolesUsers]
@@ -910,16 +849,8 @@ ADD CONSTRAINT [FK_MetaDataTypesToContentItemsContentItems]
         ([ContentItemId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
--- Creating foreign key on [ContentItemId] in table 'ContentHistories'
-ALTER TABLE [dbo].[ContentHistories] WITH NOCHECK 
-ADD CONSTRAINT [FK_ContentHistoryContentItems]
-    FOREIGN KEY ([ContentItemId])
-    REFERENCES [dbo].[ContentItems]
-        ([ContentItemId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
--- Creating foreign key on [CreatedByUserId] in table 'ContentHistories'
-ALTER TABLE [dbo].[ContentHistories] WITH NOCHECK 
+-- Creating foreign key on [CreatedByUserId] in table 'ObjectHistories'
+ALTER TABLE [dbo].[ObjectHistories] WITH NOCHECK 
 ADD CONSTRAINT [FK_ContentHistoryUsers]
     FOREIGN KEY ([CreatedByUserId])
     REFERENCES [dbo].[UsersSet]
@@ -938,16 +869,16 @@ GO
 ALTER TABLE [dbo].[ContentItems] WITH NOCHECK 
 ADD CONSTRAINT [FK_ObjectXsltSetContentItems]
     FOREIGN KEY ([ObjectXsltId])
-    REFERENCES [dbo].[ObjectXslts]
-        ([ObjectXsltId])
+    REFERENCES [dbo].[ContentXslts]
+        ([ContentXsltId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
--- Creating foreign key on [ObjectSchemaId] in table 'ObjectXslts'
-ALTER TABLE [dbo].[ObjectXslts] WITH NOCHECK 
+-- Creating foreign key on [ContentTypeId] in table 'ContentXslts'
+ALTER TABLE [dbo].[ContentXslts] WITH NOCHECK 
 ADD CONSTRAINT [FK_ObjectSchemaObjectXsltSets]
-    FOREIGN KEY ([ObjectSchemaId])
-    REFERENCES [dbo].[ObjectTypes]
-        ([ObjectTypeId])
+    FOREIGN KEY ([ContentTypeId])
+    REFERENCES [dbo].[ContentTypes]
+        ([ContentTypeId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 -- Creating foreign key on [ParentMenuId] in table 'Menus'
@@ -970,8 +901,8 @@ GO
 ALTER TABLE [dbo].[ContentItems] WITH NOCHECK 
 ADD CONSTRAINT [FK_ContentItemsObjectTypes]
     FOREIGN KEY ([ObjectSchemaId])
-    REFERENCES [dbo].[ObjectTypes]
-        ([ObjectTypeId])
+    REFERENCES [dbo].[ContentTypes]
+        ([ContentTypeId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 -- Creating foreign key on [ContentItemId] in table 'TemplateElements'
@@ -1002,8 +933,8 @@ GO
 ALTER TABLE [dbo].[TemplateElements] WITH NOCHECK 
 ADD CONSTRAINT [FK_ObjectTypesTemplateElements]
     FOREIGN KEY ([ObjectTypeId])
-    REFERENCES [dbo].[ObjectTypes]
-        ([ObjectTypeId])
+    REFERENCES [dbo].[ContentTypes]
+        ([ContentTypeId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 -- Creating foreign key on [WorkflowId] in table 'Folders'
@@ -1038,8 +969,8 @@ ADD CONSTRAINT [FK_WorkFlowInstancesContentItems]
         ([WorkFlowInstanceId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
--- Creating foreign key on [WorkFlowInstanceId] in table 'ObjectTypes'
-ALTER TABLE [dbo].[ObjectTypes] WITH NOCHECK 
+-- Creating foreign key on [WorkFlowInstanceId] in table 'ContentTypes'
+ALTER TABLE [dbo].[ContentTypes] WITH NOCHECK 
 ADD CONSTRAINT [FK_WorkFlowInstancesObjectTypes]
     FOREIGN KEY ([WorkFlowInstanceId])
     REFERENCES [dbo].[WorkFlowInstances]
@@ -1070,38 +1001,6 @@ ADD CONSTRAINT [FK_WorkFlowInstancesMenus]
         ([WorkFlowInstanceId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
--- Creating foreign key on [ObjectTypeId] in table 'ObjectTypeHistories'
-ALTER TABLE [dbo].[ObjectTypeHistories] WITH NOCHECK 
-ADD CONSTRAINT [FK_ObjectTypeHistoriesObjectTypes]
-    FOREIGN KEY ([ObjectTypeId])
-    REFERENCES [dbo].[ObjectTypes]
-        ([ObjectTypeId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
--- Creating foreign key on [User_UserId] in table 'ObjectTypeHistories'
-ALTER TABLE [dbo].[ObjectTypeHistories] WITH NOCHECK 
-ADD CONSTRAINT [FK_ObjectTypeHistoriesUsers]
-    FOREIGN KEY ([User_UserId])
-    REFERENCES [dbo].[UsersSet]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
--- Creating foreign key on [MenusMenuId] in table 'MenuHistories'
-ALTER TABLE [dbo].[MenuHistories] WITH NOCHECK 
-ADD CONSTRAINT [FK_MenuHistoriesMenus]
-    FOREIGN KEY ([MenusMenuId])
-    REFERENCES [dbo].[Menus]
-        ([MenuId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
--- Creating foreign key on [CreatedByUserId] in table 'MenuHistories'
-ALTER TABLE [dbo].[MenuHistories] WITH NOCHECK 
-ADD CONSTRAINT [FK_MenuHistoriesUsers]
-    FOREIGN KEY ([CreatedByUserId])
-    REFERENCES [dbo].[UsersSet]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
 -- Creating foreign key on [UserRolesUserRoleId] in table 'UserRolesToWorkFlowSteps'
 ALTER TABLE [dbo].[UserRolesToWorkFlowSteps] WITH NOCHECK 
 ADD CONSTRAINT [FK_UserRolesToWorkFlowStepsUserRoles]
@@ -1116,6 +1015,14 @@ ADD CONSTRAINT [FK_UserRolesToWorkFlowStepsWorkFlowSteps]
     FOREIGN KEY ([WorkFlowStepsWorkFlowStepId])
     REFERENCES [dbo].[WorkFlowSteps]
         ([WorkFlowStepId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [ObjectTypeId] in table 'ObjectHistories'
+ALTER TABLE [dbo].[ObjectHistories] WITH NOCHECK 
+ADD CONSTRAINT [FK_ObjectHistoriesObjectTypes]
+    FOREIGN KEY ([ObjectTypeId])
+    REFERENCES [dbo].[ObjectTypes]
+        ([ObjectTypeId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 

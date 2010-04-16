@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalTech.CMS.Content.WorkFlow {
+namespace TotalTech.CMS.WorkFlow {
     public class WorkFlowInstance : BaseDataObject<WorkFlowInstance> {
         int _workFlowInstanceId;
         public int WorkFlowInstanceId { 
