@@ -74,7 +74,15 @@ namespace TotalTech.CMS.Content {
             get { return _contentStatus; }
         }
 
-
+        bool _useCache = false;
+        public bool CacheData {
+            get {
+                return _useCache;
+            }
+            set {
+                _useCache = value;
+            }
+        }
 
         public void SetModifiedByUser(int UserId) {
             _modifiedByUserId = UserId;
@@ -84,27 +92,16 @@ namespace TotalTech.CMS.Content {
             _folderId = FolderId;
         }
 
-        internal override void Reset() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Save() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Update() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Delete() {
-            throw new NotImplementedException();
-        }
-
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
 
-        internal override void LoadData() {
+        protected override void AssignRollBackData(WorkFlow.ObjectHistory RollBackTo) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData(out string SystemMessage) {
+            SystemMessage = string.Empty;
             if (_contentItemId != 0) {
                 System.Data.Common.DbDataReader dataReader = SiteSettings.DataAccess.ContentItemGet(_contentItemId);
                 _contentItemId = dataReader.GetInt32(0);
@@ -130,8 +127,24 @@ namespace TotalTech.CMS.Content {
             }
         }
 
-        protected override void AssignRollBackData(WorkFlow.ObjectHistory RollBackTo) {
+        protected internal override bool SaveData(out string SystemMessage) {
             throw new NotImplementedException();
+        }
+
+        protected internal override bool UpdateData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool DeleteData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override int GetObjectId() {
+            return _contentItemId;
+        }
+
+        protected internal override bool UseCache() {
+            return CacheData;
         }
     }
 }

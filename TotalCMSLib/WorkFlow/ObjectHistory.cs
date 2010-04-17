@@ -10,27 +10,8 @@ namespace TotalTech.CMS.WorkFlow {
             get;
             set;
         }
-        internal override void Reset() {
-            throw new NotImplementedException();
-        }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
-            throw new NotImplementedException();
-        }
-
-        internal override void LoadData() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Save() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Update() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Delete() {
             throw new NotImplementedException();
         }
 
@@ -38,6 +19,30 @@ namespace TotalTech.CMS.WorkFlow {
             System.Data.Common.DbDataReader reader = SiteSettings.DataAccess.WorkFlowObjectHistoryGet(ObjectId, ObjectType);
             reader.Close();
             throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool SaveData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool UpdateData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool DeleteData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override int GetObjectId() {
+            return _objectHistoryId;
+        }
+
+        protected internal override bool UseCache() {
+            return false;
         }
     }
 }

@@ -268,6 +268,51 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
         public override int WorkFlowObjectHistoryAdd(int ObjectId, WorkFlow.WorkFlowObjectTypes ObjectType, WorkFlow.ContentStatuses OperationStatusType) {
             throw new NotImplementedException();
         }
-        #endregion
+
+        public override DbDataReader WorkFlowGetSteps(WorkFlow.WorkFlow CurrentWorkFlow) {
+            throw new NotImplementedException();
+        }
+
+        public override bool WorkFlowUserIsStepApprover(WorkFlow.WorkFlowStep Step, User.User CurrentUser) {
+            throw new NotImplementedException();
+        }
+
+        public override bool WorkFlowUserIsStepEditor(WorkFlow.WorkFlowStep Step, User.User CurrentUser) {
+            throw new NotImplementedException();
+        }
+
+        public override DbDataReader WorkFlowStepGet(int WorkFlowStepId) {
+            throw new NotImplementedException();
+        }
+
+        public override int WorkFlowStepDelete(WorkFlow.WorkFlowStep CurrentWorkFlowStep) {
+            throw new NotImplementedException();
+        }
+
+        public override void WorkFlowStepUpdate(WorkFlow.WorkFlowStep UpdateWorkFlowStep) {
+            throw new NotImplementedException();
+        }
+
+        #endregion                           
+    
+        public override int WorkFlowStepSave(int CurrentWorkFlow, int StepOrder, List<User.UserRoles> Approvers, List<User.UserRoles> Editors) {
+            throw new NotImplementedException();
+        }
+
+        public override DbDataReader WorkFlowStepUserRolesGet(int WorkFlowStepUserRolesId) {
+            throw new NotImplementedException();
+        }
+
+        public override int WorkFlowStepUserRolesSave(int CurrentWorkFlow, int StepOrder, List<User.UserRoles> Approvers, List<User.UserRoles> Editors) {
+            throw new NotImplementedException();
+        }
+
+        public override int WorkFlowStepUserRolesDelete(WorkFlow.WorkFlowStep CurrentWorkFlowStep) {
+            throw new NotImplementedException();
+        }
+
+        public override void WorkFlowStepUserRolesUpdate(WorkFlow.WorkFlowStep UpdateWorkFlowStep) {
+            throw new NotImplementedException();
+        }
     }
 }

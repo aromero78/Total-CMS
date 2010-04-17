@@ -34,36 +34,36 @@ namespace TotalTech.CMS {
             internal set { _langId = value; }
         }
 
-        public Language() {
-            Reset();
-        }
-
-        public Language(int LangId) : this() {
+        public Language(int LangId) {
             _langId = LangId;
-        }
-
-        internal override void Reset() {
-            
-        }
-
-        internal override void Save() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Update() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Delete() {
-            throw new NotImplementedException();
         }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
 
-        internal override void LoadData() {
+        protected internal override void LoadData(out string SystemMessage) {
             throw new NotImplementedException();
+        }
+
+        protected internal override bool SaveData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool UpdateData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool DeleteData(out string SystemMessage) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override int GetObjectId() {
+            return LanguageId;
+        }
+
+        protected internal override bool UseCache() {
+            return true;
         }
     }
 }

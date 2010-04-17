@@ -131,7 +131,7 @@ namespace TotalTech.CMS.Data {
             }
             
             if (CacheData == null || e.Value != TotalTech.CMS.Data.CacheLevels.UseCache || (CacheDepend != null && CompareCacheDependency(CacheDepend, _CompareValue, CompareType))) {
-                OnFetchDataEvent(new Controls.GenericEventArgs<T, object>(default(T), e.Identifier));//Raise the fetch new data event.
+                OnFetchDataEvent(new Controls.GenericEventArgs<T, object>(null, e.Identifier));//Raise the fetch new data event.
                 if (CacheData != null) {//remove old cache values
                     SiteSettings.ContextData.Cache.Remove(DataName);
                     SiteSettings.ContextData.Cache.Remove(TimeName);

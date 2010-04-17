@@ -1,6 +1,6 @@
 
 -- --------------------------------------------------
--- Date Created: 04/15/2010 23:26:57
+-- Date Created: 04/17/2010 01:01:44
 -- Generated from EDMX file: C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\TotalCMS.edmx
 -- --------------------------------------------------
 
@@ -508,7 +508,26 @@ GO
 -- Creating table 'ObjectTypes'
 CREATE TABLE [dbo].[ObjectTypes] (
     [ObjectTypeId] int  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [DisplayUrl] nvarchar(max)  NOT NULL
+);
+GO
+-- Creating table 'Tasks1'
+CREATE TABLE [dbo].[Tasks1] (
+    [TaskId] int  NOT NULL,
+    [Description] nvarchar(max)  NOT NULL,
+    [CreatorUserId] int  NOT NULL,
+    [AssignedToUserRoleId] int  NOT NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectTypeId] int  NOT NULL,
+    [WorkFlowInstanceStepId] int  NULL
+);
+GO
+-- Creating table 'WorkFlowInstanceSteps'
+CREATE TABLE [dbo].[WorkFlowInstanceSteps] (
+    [WorkFlowInstanceStepId] int  NOT NULL,
+    [WorkFlowStepId] int  NOT NULL,
+    [WorkFlowInstanceId] int  NOT NULL
 );
 GO
 
@@ -682,6 +701,18 @@ GO
 ALTER TABLE [dbo].[ObjectTypes] WITH NOCHECK 
 ADD CONSTRAINT [PK_ObjectTypes]
     PRIMARY KEY CLUSTERED ([ObjectTypeId] ASC)
+    ON [PRIMARY]
+GO
+-- Creating primary key on [TaskId] in table 'Tasks1'
+ALTER TABLE [dbo].[Tasks1] WITH NOCHECK 
+ADD CONSTRAINT [PK_Tasks1]
+    PRIMARY KEY CLUSTERED ([TaskId] ASC)
+    ON [PRIMARY]
+GO
+-- Creating primary key on [WorkFlowInstanceStepId] in table 'WorkFlowInstanceSteps'
+ALTER TABLE [dbo].[WorkFlowInstanceSteps] WITH NOCHECK 
+ADD CONSTRAINT [PK_WorkFlowInstanceSteps]
+    PRIMARY KEY CLUSTERED ([WorkFlowInstanceStepId] ASC)
     ON [PRIMARY]
 GO
 
@@ -1023,6 +1054,54 @@ ADD CONSTRAINT [FK_ObjectHistoriesObjectTypes]
     FOREIGN KEY ([ObjectTypeId])
     REFERENCES [dbo].[ObjectTypes]
         ([ObjectTypeId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [CreatorUserId] in table 'Tasks1'
+ALTER TABLE [dbo].[Tasks1] WITH NOCHECK 
+ADD CONSTRAINT [FK_TasksUsers]
+    FOREIGN KEY ([CreatorUserId])
+    REFERENCES [dbo].[UsersSet]
+        ([UserId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [AssignedToUserRoleId] in table 'Tasks1'
+ALTER TABLE [dbo].[Tasks1] WITH NOCHECK 
+ADD CONSTRAINT [FK_TasksUserRoles]
+    FOREIGN KEY ([AssignedToUserRoleId])
+    REFERENCES [dbo].[UserRoles]
+        ([UserRoleId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [ObjectTypeId] in table 'Tasks1'
+ALTER TABLE [dbo].[Tasks1] WITH NOCHECK 
+ADD CONSTRAINT [FK_TasksObjectTypes]
+    FOREIGN KEY ([ObjectTypeId])
+    REFERENCES [dbo].[ObjectTypes]
+        ([ObjectTypeId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [WorkFlowStepId] in table 'WorkFlowInstanceSteps'
+ALTER TABLE [dbo].[WorkFlowInstanceSteps] WITH NOCHECK 
+ADD CONSTRAINT [FK_WorkFlowInstanceStepsWorkFlowSteps]
+    FOREIGN KEY ([WorkFlowStepId])
+    REFERENCES [dbo].[WorkFlowSteps]
+        ([WorkFlowStepId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [WorkFlowInstanceId] in table 'WorkFlowInstanceSteps'
+ALTER TABLE [dbo].[WorkFlowInstanceSteps] WITH NOCHECK 
+ADD CONSTRAINT [FK_WorkFlowInstanceStepsWorkFlowInstances]
+    FOREIGN KEY ([WorkFlowInstanceId])
+    REFERENCES [dbo].[WorkFlowInstances]
+        ([WorkFlowInstanceId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+-- Creating foreign key on [WorkFlowInstanceStepId] in table 'Tasks1'
+ALTER TABLE [dbo].[Tasks1] WITH NOCHECK 
+ADD CONSTRAINT [FK_WorkFlowInstanceStepsTasks]
+    FOREIGN KEY ([WorkFlowInstanceStepId])
+    REFERENCES [dbo].[WorkFlowInstanceSteps]
+        ([WorkFlowInstanceStepId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 

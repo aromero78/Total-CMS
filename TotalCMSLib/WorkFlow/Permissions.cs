@@ -68,42 +68,49 @@ namespace TotalTech.CMS.WorkFlow {
         internal Permissions(User.User CurrentUser, Content.Folder CurrentFolder) {
             _user = CurrentUser;
             _folder = CurrentFolder;
-            Load();
+            string SystemMessage = string.Empty;
+            Load(out SystemMessage);
         }
 
         internal Permissions(User.UserRoles CurrentRole, Content.Folder CurrentFolder) {
             _userRole = CurrentRole;
             _folder = CurrentFolder;
-            Load();
+            string SystemMessage = string.Empty;
+            Load(out SystemMessage);
         }
 
         internal Permissions(int PermissionId) {
             _permissionId = PermissionId;
-            Load();
-        }
-
-        internal override void Reset() {
-            throw new NotImplementedException();
+            string SystemMessage = string.Empty;
+            Load(out SystemMessage);
         }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
 
-        internal override void LoadData() {
+        protected internal override void LoadData(out string SystemMessage) {
             throw new NotImplementedException();
         }
 
-        internal override void Save() {
+        protected internal override bool SaveData(out string SystemMessage) {
             throw new NotImplementedException();
         }
 
-        internal override void Update() {
+        protected internal override bool UpdateData(out string SystemMessage) {
             throw new NotImplementedException();
         }
 
-        internal override void Delete() {
+        protected internal override bool DeleteData(out string SystemMessage) {
             throw new NotImplementedException();
+        }
+
+        protected internal override int GetObjectId() {
+            return PermissionId;
+        }
+
+        protected internal override bool UseCache() {
+            return false;
         }
     }
 }

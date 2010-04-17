@@ -18,7 +18,7 @@ namespace TotalTech.CMS.Content {
         /// <summary>
         /// The primary key for the object schema
         /// </summary>
-        public int ObjectTypeId {
+        public int ContentTypeId {
             get { return _objectTypeId; }
         }
 
@@ -88,15 +88,19 @@ namespace TotalTech.CMS.Content {
         public bool IsActive {
             get { return _isActive; }
             set { _isActive = value; }
+        }    
+
+        protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
+            e.Value = SiteSettings.DataAccess.ObjectTypeCheckModifiedDate(_objectTypeId);
         }
 
-        internal override void Reset() {
-            _schemaXml = null;
-            _dataEntryXslt = null;
-            _defaultDisplayXslt = null;
+
+        protected override void AssignRollBackData(WorkFlow.ObjectHistory RollBackTo) {
+            throw new NotImplementedException();
         }
 
-        internal override void LoadData() {
+        protected internal override void LoadData(out string SystemMessage) {
+            SystemMessage = string.Empty;
             System.Data.Common.DbDataReader reader = SiteSettings.DataAccess.ObjectTypeGet(_objectTypeId);
             _objectTypeId = reader.GetInt32(0);
             _rawDataEntryXslt = reader.GetString(1);
@@ -108,26 +112,31 @@ namespace TotalTech.CMS.Content {
             _schemaXml = null;
             _isActive = reader.GetBoolean(5);
             reader.Close();
-        }        
-
-        protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
-            e.Value = SiteSettings.DataAccess.ObjectTypeCheckModifiedDate(_objectTypeId);
         }
 
-        internal override void Save() {
+        protected internal override bool SaveData(out string SystemMessage) {
+            SystemMessage = string.Empty;
             _objectTypeId = SiteSettings.DataAccess.ObjectTypeSave(_rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, ContentStatus, _workFlowInstanceId);
+            return true;
         }
 
-        internal override void Update() {
-            SiteSettings.DataAccess.ObjectTypeUpdate(_objectTypeId, _rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, ContentStatus, _workFlowInstanceId, _isActive);
+        protected internal override bool UpdateData(out string SystemMessage) {
+            SystemMessage = string.Empty;
+            int RowsAffected = SiteSettings.DataAccess.ObjectTypeUpdate(_objectTypeId, _rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, ContentStatus, _workFlowInstanceId, _isActive);
+            return (RowsAffected > 0 ? true : false);
+
         }
 
-        internal override void Delete() {
+        protected internal override bool DeleteData(out string SystemMessage) {
             throw new NotImplementedException();
         }
 
-        protected override void AssignRollBackData(WorkFlow.ObjectHistory RollBackTo) {
-            throw new NotImplementedException();
+        protected internal override int GetObjectId() {
+            return ContentTypeId;   
+        }
+
+        protected internal override bool UseCache() {
+            return true;
         }
     }
 }

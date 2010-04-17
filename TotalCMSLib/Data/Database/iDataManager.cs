@@ -207,7 +207,33 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
 
         public abstract DbDataReader WorkFlowObjectHistoryGet(int ObjectId, WorkFlow.WorkFlowObjectTypes ObjecType);
 
-        public abstract int WorkFlowObjectRollBack(WorkFlow.ObjectHistory RollBackTo);
+        public abstract int WorkFlowObjectRollBack(WorkFlow.ObjectHistory RollBackTo);        
+        #endregion
+
+        #region WorkFlowSteps
+        public abstract DbDataReader WorkFlowGetSteps(WorkFlow.WorkFlow CurrentWorkFlow);
+
+        public abstract bool WorkFlowUserIsStepEditor(WorkFlow.WorkFlowStep Step, User.User CurrentUser);
+
+        public abstract bool WorkFlowUserIsStepApprover(WorkFlow.WorkFlowStep Step, User.User CurrentUser);
+
+        public abstract DbDataReader WorkFlowStepGet(int WorkFlowStepId);
+
+        public abstract int WorkFlowStepSave(int CurrentWorkFlow, int StepOrder, List<User.UserRoles> Approvers, List<User.UserRoles> Editors);
+
+        public abstract int WorkFlowStepDelete(WorkFlow.WorkFlowStep CurrentWorkFlowStep);
+
+        public abstract void WorkFlowStepUpdate(WorkFlow.WorkFlowStep UpdateWorkFlowStep);
+        #endregion
+
+        #region WorkFlowStepUserRoles
+        public abstract DbDataReader WorkFlowStepUserRolesGet(int WorkFlowStepUserRolesId);
+
+        public abstract int WorkFlowStepUserRolesSave(int CurrentWorkFlow, int StepOrder, List<User.UserRoles> Approvers, List<User.UserRoles> Editors);
+
+        public abstract int WorkFlowStepUserRolesDelete(WorkFlow.WorkFlowStep CurrentWorkFlowStep);
+
+        public abstract void WorkFlowStepUserRolesUpdate(WorkFlow.WorkFlowStep UpdateWorkFlowStep);
         #endregion
     }
 }

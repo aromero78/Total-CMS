@@ -3,26 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalTech.CMS.Content {
-    public class Folder : BaseDataObject<Folder> {
+namespace TotalTech.CMS.WorkFlow {
+    public class WorkFlowStepUserRoles : BaseDataObject<WorkFlowStepUserRoles> {
+        public int WorkFlowStepUserRoleId { get; private set; }
 
-        int _folderId;
-        public int FolderId {
-            get { return _folderId; }
-            internal set { _folderId = value; }
-        }
-
-        internal Folder(int FolderId) {
-            _folderId = FolderId;
-        }
-
-        WorkFlow.Permissions _currentUserPermissions;
-        internal WorkFlow.Permissions CurrentUserRolePermissions {
+        int _userRoleId;
+        User.UserRoles _userRole;
+        public User.UserRoles UserRole { 
             get {
-                if (_currentUserPermissions == null)
-                    _currentUserPermissions = new WorkFlow.Permissions(SiteSettings.ContextData.CurrentUser, this);
-                return _currentUserPermissions;
+                if (_userRole == null || _userRole.UserRoleId != _userRoleId) 
+                    _userRole = new User.UserRoles(_userRoleId);
+                return _userRole;
             }
+            set {
+                _userRole = value;
+            }
+        }
+        public bool IsApprover { get; set; }
+
+        internal WorkFlowStepUserRoles(User.UserRoles UserRole, bool IsApprover) {
+            _userRole = UserRole;
+            this.IsApprover = IsApprover;
+        }
+
+        internal WorkFlowStepUserRoles(int StepUserRoleId, User.UserRoles UserRole, bool IsApprover) {
+            WorkFlowStepUserRoleId = StepUserRoleId;
+            _userRole = UserRole;
+            this.IsApprover = IsApprover;
         }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
@@ -46,7 +53,7 @@ namespace TotalTech.CMS.Content {
         }
 
         protected internal override int GetObjectId() {
-            return FolderId;
+            return WorkFlowStepUserRoleId;
         }
 
         protected internal override bool UseCache() {

@@ -80,6 +80,7 @@
     <Compile Include="Web\Uri.cs" />
     <Compile Include="Content\ContentType.cs" />
     <Compile Include="Content\ContentXslt.cs" />
+    <Compile Include="WorkFlow\WorkFlowStepUserRoles.cs" />
     <Compile Include="Xml\XslHelper.cs" />
   </ItemGroup>
   <ItemGroup>

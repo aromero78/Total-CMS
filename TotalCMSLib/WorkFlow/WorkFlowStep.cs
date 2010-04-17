@@ -10,9 +10,34 @@ namespace TotalTech.CMS.WorkFlow {
             get { return _workFlowStepid; }
         }
 
-        public WorkFlowStep(int WorkFlowStepId) {
+        int _workFlowId;
+        public int WorkFlowId {
+            get { return _workFlowId; }
+        }
+
+        int _stepOrder;
+        public int StepOrder {
+            get {
+                return _stepOrder;
+            }
+        }
+
+        internal WorkFlowStep(int WorkFlowStepId) {
             _workFlowStepid = WorkFlowStepId;
-            Load();
+            string SystemMessage = string.Empty;
+            Load(out SystemMessage);
+            SiteSettings.ContextData.DebugLog.HandleSystemMessage(SystemMessage, false);
+        }
+
+        internal WorkFlowStep(int WorkFlowStepId, WorkFlow ParentWorkFlow, int StepOrder) {
+            _workFlowId = ParentWorkFlow.WorkFlowid;
+            _workFlowStepid = WorkFlowStepId;
+            _stepOrder = StepOrder;
+        }
+
+        internal WorkFlowStep(WorkFlow ParentWorkFlow, int StepOrder) {
+            _workFlowStepid = WorkFlowStepId;
+            _stepOrder = StepOrder;
         }
 
         public bool UserIsStepEditor() {
@@ -20,7 +45,7 @@ namespace TotalTech.CMS.WorkFlow {
         }
 
         public bool UserIsStepEditor(User.User User){
-            throw new NotImplementedException();
+            return SiteSettings.DataAccess.WorkFlowUserIsStepEditor(this, User);
         }
 
         public bool UserIsApprover() {
@@ -28,30 +53,40 @@ namespace TotalTech.CMS.WorkFlow {
         }
 
         public bool UserIsApprover(User.User User){
-            throw new NotImplementedException();
-        }
-
-        internal override void Reset() {
-            throw new NotImplementedException();
+            return SiteSettings.DataAccess.WorkFlowUserIsStepApprover(this, User);
         }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
 
-        internal override void LoadData() {
+        protected internal override bool SaveData(out string SystemMessage) {
+            SystemMessage = string.Empty;
+            //_workFlowStepid = SiteSettings.DataAccess.WorkFlowStepSave(_workFlowId, _stepOrder, 
+            return false;
+        }
+
+        protected internal override bool UseCache() {
+            return false;
+        }
+
+        protected internal override int GetObjectId() {
+            return _workFlowStepid;
+        }
+
+        protected internal override void LoadData(out string SystemMessage) {
+            SystemMessage = string.Empty;
+            System.Data.Common.DbDataReader Reader = SiteSettings.DataAccess.WorkFlowStepGet(WorkFlowStepId);
+            _workFlowId = Reader.GetInt32(0);
+            _stepOrder = Reader.GetInt32(1);
+            Reader.Close();
+        }
+
+        protected internal override bool UpdateData(out string SystemMessage) {
             throw new NotImplementedException();
         }
 
-        internal override void Save() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Update() {
-            throw new NotImplementedException();
-        }
-
-        internal override void Delete() {
+        protected internal override bool DeleteData(out string SystemMessage) {
             throw new NotImplementedException();
         }
     }

@@ -18,7 +18,6 @@ namespace TotalTech.CMS.WorkFlow {
             get {
                 if (_workFlow == null || _workFlow.WorkFlowid != _workFlowId) {
                     _workFlow = new WorkFlow(_workFlowId);
-                    _workFlow.Load();
                 }
                 return _workFlow;
             }
@@ -43,7 +42,6 @@ namespace TotalTech.CMS.WorkFlow {
 
         public WorkFlowInstance(int WorkFlowInstanceId) {
             _workFlowInstanceId = WorkFlowInstanceId;
-            Load();
         }
 
         public bool CompleteCurrentStep(User.User User) {
@@ -53,28 +51,32 @@ namespace TotalTech.CMS.WorkFlow {
             else return false;
         }
 
-        internal override void Reset() {
-            throw new NotImplementedException();
-        }
-
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
 
-        internal override void LoadData() {
+        protected internal override void LoadData(out string SystemMessage) {
             throw new NotImplementedException();
         }
 
-        internal override void Save() {
+        protected internal override bool SaveData(out string SystemMessage) {
             throw new NotImplementedException();
         }
 
-        internal override void Update() {
+        protected internal override bool UpdateData(out string SystemMessage) {
             throw new NotImplementedException();
         }
 
-        internal override void Delete() {
+        protected internal override bool DeleteData(out string SystemMessage) {
             throw new NotImplementedException();
+        }
+
+        protected internal override int GetObjectId() {
+            return WorkFlowInstanceId;
+        }
+
+        protected internal override bool UseCache() {
+            return false;
         }
     }
 }

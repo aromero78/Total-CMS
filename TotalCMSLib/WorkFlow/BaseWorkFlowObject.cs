@@ -13,7 +13,7 @@ namespace TotalTech.CMS.WorkFlow {
         /// If the user if finished editing the content allow other users to edit
         /// </summary>
         CheckedIn = 2,
-        Published = 3
+        Approved = 3
     }
 
     public enum WorkFlowObjectTypes { 
@@ -55,28 +55,19 @@ namespace TotalTech.CMS.WorkFlow {
         public System.Collections.ObjectModel.ReadOnlyCollection<ObjectHistory> VersionHistroy {
             get {
                 if (_versionHistory == null) {
-                    _versionHistory = ObjectHistory.LoadHistory(ObjectId, ObjectType);
+                    _versionHistory = ObjectHistory.LoadHistory(GetObjectId(), ObjectType);
                 }
                 return _versionHistory.AsReadOnly();
             }
         }
 
-        protected int _objectId;
-        protected int ObjectId { 
-            get {
-                if (_objectId == default(int))
-                    throw new MemberAccessException("ObjectId not set for class : " + GetType().ToString());
-                return _objectId;
-            } 
-        }
-
         protected int _workFlowInstanceId;
-        protected WorkFlowInstance _workFlowInstance;
-        public WorkFlowInstance WorkFlowInstance {
+        protected WorkFlowInstance _currnetWorkFlow;
+        public WorkFlowInstance CurrentWorkFlow {
             get {
-                if (_workFlowInstance == null || _workFlowInstance.WorkFlowInstanceId != _workFlowInstanceId)
-                    _workFlowInstance = new WorkFlowInstance(_workFlowInstanceId);
-                return _workFlowInstance;
+                if (_currnetWorkFlow == null || _currnetWorkFlow.WorkFlowInstanceId != _workFlowInstanceId)
+                    _currnetWorkFlow = new WorkFlowInstance(_workFlowInstanceId);
+                return _currnetWorkFlow;
             }
         }
         
@@ -87,7 +78,7 @@ namespace TotalTech.CMS.WorkFlow {
         public bool CheckOut(out string ErrorMessage) {
             ErrorMessage = string.Empty;
             if (HasEditRights()) {
-                int ResponseCode = SiteSettings.DataAccess.WorkFlowObjectHistoryAdd(ObjectId, ObjectType, ContentStatuses.CheckedOut);
+                int ResponseCode = SiteSettings.DataAccess.WorkFlowObjectHistoryAdd(GetObjectId(), ObjectType, ContentStatuses.CheckedOut);
                 switch (ResponseCode) { 
                     case 0:
                         ErrorMessage = "Object checked out by another user.";
@@ -123,6 +114,25 @@ namespace TotalTech.CMS.WorkFlow {
             return _hasRights;
         }
 
+        public bool HasAddRights() {
+            bool _hasRights = false;
+            switch (_objectType) {
+                case WorkFlowObjectTypes.Calendar:
+                    _hasRights = _folder.CurrentUserRolePermissions.CanAddCalendars;
+                    break;
+                case WorkFlowObjectTypes.Content:
+                    _hasRights = _folder.CurrentUserRolePermissions.CanAddContent;
+                    break;
+                case WorkFlowObjectTypes.Menu:
+                    _hasRights = _folder.CurrentUserRolePermissions.CanAddMenus;
+                    break;
+                case WorkFlowObjectTypes.ContentType:
+                    _hasRights = _folder.CurrentUserRolePermissions.CanAddPages;
+                    break;
+            }
+            return _hasRights;
+        }
+
         public bool HasDeleteRights(){
             bool _hasRights = false;
             switch (_objectType) { 
@@ -145,33 +155,50 @@ namespace TotalTech.CMS.WorkFlow {
         /// <summary>
         /// Return the content to an editable state and update the content history/last modified fields
         /// </summary>
-        public void CheckIn() {
-            SiteSettings.DataAccess.WorkFlowObjectHistoryAdd(ObjectId, ObjectType, ContentStatuses.CheckedIn);
+        public bool CheckIn() {
+            bool HasRights = HasEditRights();
+            if (HasRights) {
+                SiteSettings.DataAccess.WorkFlowObjectHistoryAdd(GetObjectId(), ObjectType, ContentStatuses.CheckedIn);
+                _versionHistory = null;
+            }
+            return HasRights;
         }
 
-        public void Publish() {
-            SiteSettings.DataAccess.WorkFlowObjectHistoryAdd(ObjectId, ObjectType, ContentStatuses.Published);
+        public bool Approve(out string SystemMessage) {
+            SystemMessage = string.Empty;
+            bool HasRights = HasEditRights();
+            if (HasRights) {
+                SiteSettings.DataAccess.WorkFlowObjectHistoryAdd(GetObjectId(), ObjectType, ContentStatuses.Approved);
+                _versionHistory = null;
+
+                SystemMessage = ObjectType.ToString() + " successfully published";
+            }
+            else
+                SystemMessage = "Current user does not have publish rights on this object.";
+
+            return HasRights;
         }
 
-        public bool RollBack(ObjectHistory RollBackTo, out string ErrorMessage) {
-            ErrorMessage = string.Empty;
+        public bool RollBack(ObjectHistory RollBackTo, out string SystemMessage) {
+            SystemMessage = string.Empty;
             if(HasDeleteRights()){
                 int RowsAffected = SiteSettings.DataAccess.WorkFlowObjectRollBack(RollBackTo);
                 if (RowsAffected > 0) {
+                    _versionHistory = null;
                     AssignRollBackData(RollBackTo);
                     return true;
                 }
                 else {
-                    ErrorMessage = "Unable to roll back object in the database.";
+                    SystemMessage = "Unable to roll back object in the database.";
                     return false;
                 }
             }   
             else{
-                ErrorMessage = "The current user does not have rights to delete/manage history for the requested object";
+                SystemMessage = "The current user does not have rights to delete/manage history for the requested object";
                 return false;
             }
         }
 
-        protected abstract void AssignRollBackData(ObjectHistory RollBackTo);
+        protected abstract void AssignRollBackData(ObjectHistory RollBackTo);        
     }
 }

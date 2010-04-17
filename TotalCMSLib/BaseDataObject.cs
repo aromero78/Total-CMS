@@ -15,30 +15,20 @@ namespace TotalTech.CMS
         public event DataBindHandler DataBind;
         public event DataBoundHandler DataBound;
 
-        /// <summary>
-        /// If set to true the data retreived from the database will be cached
-        /// </summary>
-        public bool UseCache { get; set; }
-
-        /// <summary>
-        /// Sets this object to its inital state, used when application knows the system has updated the data. Objects that 
-        /// have been reset will be retrieved from the database.
-        /// </summary>
-        internal abstract void Reset();
-
-        public void Load() {
+        public void Load(out string SystemMessage) {
+            SystemMessage = string.Empty;
             if(DataBind != null){
                 Controls.GenericEventArgs<object, object> evnt = new Controls.GenericEventArgs<object,object>(null, null);
                 DataBind(this, evnt);
             }
             CacheManager.FetchDataEvent += new Data.CacheManager<CacheType>.FetchData(CacheManager_FetchDataEvent);
             CacheManager.FetchExpICompareEvent += new Data.CacheManager<CacheType>.FetchExpICompare(CacheManager_FetchExpICompareEvent);
-            Controls.GenericEventArgs<Data.CacheLevels, CacheType> e = new Controls.GenericEventArgs<Data.CacheLevels, CacheType>(Data.CacheLevels.UseCache, default(CacheType));
-            if (UseCache) {                
+            Controls.GenericEventArgs<Data.CacheLevels, CacheType> e = new Controls.GenericEventArgs<Data.CacheLevels, CacheType>(Data.CacheLevels.UseCache, null);
+            if (UseCache()) {                
                 CacheManager.ManageCache(GetHashCode().ToString(), e, SiteSettings.CacheLength, Data.ComparisonType.LessThen);               
             }
             else {
-                LoadData();
+                LoadData(out SystemMessage);
                 CacheManager.ManageCache(GetHashCode().ToString(), SiteSettings.CacheLength, Data.ComparisonType.LessThen, default(CacheType), DateTime.Now, Data.CacheLevels.NoCache);
             }
             if (DataBound != null) {
@@ -47,26 +37,59 @@ namespace TotalTech.CMS
             }
         }
 
-        protected internal void CacheManager_FetchDataEvent(object sender, Controls.GenericEventArgs<CacheType, object> e) {
-            LoadData();
+        internal protected void CacheManager_FetchDataEvent(object sender, Controls.GenericEventArgs<CacheType, object> e) {
+            string SystemMessage = e.Identifier.ToString();
+            LoadData(out SystemMessage);
         }
 
         internal protected abstract void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e);
 
+        public bool Save(out string SystemMessage) {
+            SystemMessage = string.Empty;
+            if (GetObjectId() != default(int)){
+                SystemMessage = "The Object being saved is already in the database.";
+                return false;
+            }
+            else return SaveData(out SystemMessage); 
+        }
+
+        public bool Update(out string SystemMessage) {
+            SystemMessage = string.Empty;
+            if (GetObjectId() == default(int)) {
+                SystemMessage = "The Object being updated is not in the database.";
+                return false;
+            }
+            else return UpdateData(out SystemMessage);
+        }
+
+        public bool Delete(out string SystemMessage) {
+            SystemMessage = string.Empty;
+            if (GetObjectId() == default(int)) {
+                SystemMessage = "The Object being deleted is not in the database.";
+                return false;
+            }
+            else return SaveData(out SystemMessage);
+        }
+
         /// <summary>
         /// Retreives data from the database, assumes that the primary key for the object has been set.
         /// </summary>
-        internal abstract void LoadData();
-        internal abstract void Save();
-        internal abstract void Update();
-        internal abstract void Delete();
-        protected Data.CacheManager<CacheType> _cacheManager;
-        internal protected Data.CacheManager<CacheType> CacheManager {
+        internal protected abstract void LoadData(out string SystemMessage);
+        internal protected abstract bool SaveData(out string SystemMessage);
+        internal protected abstract bool UpdateData(out string SystemMessage);
+        internal protected abstract bool DeleteData(out string SystemMessage);
+
+
+        internal protected Data.CacheManager<CacheType> _cacheManager;
+        protected Data.CacheManager<CacheType> CacheManager {
             get {
                 if (_cacheManager == null)
                     _cacheManager = new Data.CacheManager<CacheType>();
                 return _cacheManager;
             }
-        }        
+        }
+
+        internal protected abstract int GetObjectId();
+        internal protected abstract bool UseCache();
     }
 }
