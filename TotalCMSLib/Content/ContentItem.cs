@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.Content {
-    public class ContentItem : TotalTech.CMS.WorkFlow.BaseWorkFlowObject<ContentItem> {
+    public class ContentItem : TotalTech.CMS.WorkFlow.BaseWorkFlowObject {
 
         int _contentItemId;
         public int ContactItemId {
@@ -58,22 +58,6 @@ namespace TotalTech.CMS.Content {
             }
         }
 
-        int _folderId;
-        Folder _folder;
-        public Folder Folder {
-            get {
-                if (_folder == null || _folder.FolderId != _folderId) {
-                    _folder = new Folder(_folderId);
-                }
-                return _folder;             
-            }
-        }
-
-        TotalTech.CMS.WorkFlow.ContentStatuses _contentStatus;
-        public TotalTech.CMS.WorkFlow.ContentStatuses ContentStatus {
-            get { return _contentStatus; }
-        }
-
         bool _useCache = false;
         public bool CacheData {
             get {
@@ -114,10 +98,10 @@ namespace TotalTech.CMS.Content {
                 _folderId = dataReader.GetInt32(7);
                 switch (dataReader.GetString(8)) {
                     case "IN":
-                        _contentStatus = TotalTech.CMS.WorkFlow.ContentStatuses.CheckedIn;
+                        ContentStatus = TotalTech.CMS.WorkFlow.ContentStatuses.CheckedIn;
                         break;
                     case "OT":
-                        _contentStatus = TotalTech.CMS.WorkFlow.ContentStatuses.CheckedOut;
+                        ContentStatus = TotalTech.CMS.WorkFlow.ContentStatuses.CheckedOut;
                         break;
                 }
                 dataReader.Close();

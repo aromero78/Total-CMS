@@ -11,7 +11,7 @@ namespace TotalTech.CMS.Content {
     /// <summary>
     /// Used as the definition for data within a content item.
     /// </summary>
-    public class ContentType : TotalTech.CMS.WorkFlow.BaseWorkFlowObject<ContentType> {
+    public class ContentType : TotalTech.CMS.WorkFlow.BaseWorkFlowObject {
         const string WARNING = "WARNING: ", ERROR = "ERROR: ";
 
         int _objectTypeId;

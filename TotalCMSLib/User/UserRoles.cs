@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.User {
-    public class UserRoles : BaseDataObject<UserRoles> {
+    public class UserRoles : BaseDataObject {
         public int UserRoleId { get; internal set; }
 
         public UserRoles(int RoleId) {

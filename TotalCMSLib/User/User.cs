@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.User {
-    public class User : TotalTech.CMS.WorkFlow.BaseWorkFlowObject<User> {
+    public class User : TotalTech.CMS.WorkFlow.BaseWorkFlowObject {
 
         int _userId;
         public int UserId {

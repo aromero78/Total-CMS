@@ -243,6 +243,7 @@
     <Property Name="ContentDisplayId" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="WorkFlowInstanceId" Type="int" Nullable="true" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="UserRoles">
     <Key>
@@ -360,7 +361,7 @@
     <Property Name="MetaDataTypeId" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DefaultValue" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="MetaDataValueTypesId" Type="int" Nullable="false" />
+    <Property Name="MetaDataValueTypeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Languages">
     <Key>
@@ -764,7 +765,7 @@
         <PropertyRef Name="MetaDataValueTypeId" />
       </Principal>
       <Dependent Role="MetaDataTypes">
-        <PropertyRef Name="MetaDataValueTypesId" />
+        <PropertyRef Name="MetaDataValueTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1328,6 +1329,7 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <NavigationProperty Name="WorkFlowInstance" Relationship="DataAccess.WorkFlowInstancesContentItems" FromRole="ContentItems" ToRole="WorkFlowInstances" />
           <Property Type="Int32" Name="WorkFlowInstanceId" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="false" />
           </EntityType>
         <EntityType Name="UserRoles" Abstract="false">
           <Key>
@@ -1490,7 +1492,7 @@
           <NavigationProperty Name="MetaDataTypeToFolders" Relationship="DataAccess.MetaDataTypeToFolderMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataTypeToFolder" cg:SetterAccess="Protected" />
           <Property Type="String" Name="DefaultValue" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="MetaDataValueType" Relationship="DataAccess.MetaDataValueTypesMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataValueTypes" cg:SetterAccess="Protected" />
-          <Property Type="Int32" Name="MetaDataValueTypesId" Nullable="false" cg:SetterAccess="Protected" />
+          <Property Type="Int32" Name="MetaDataValueTypeId" Nullable="false" cg:SetterAccess="Protected" />
           <NavigationProperty Name="MetaDataTypesToContentItems" Relationship="DataAccess.MetaDataTypesToContentItemsMetaDataTypes" FromRole="MetaDataTypes" ToRole="MetaDataTypesToContentItems" cg:SetterAccess="Protected" /></EntityType>
         <Association Name="FoldersContentItems">
           <End Type="DataAccess.Folders" Role="Folders" Multiplicity="1" />
@@ -1705,7 +1707,7 @@
             <Principal Role="MetaDataValueTypes">
               <PropertyRef Name="MetaDataValueTypeId" /></Principal>
             <Dependent Role="MetaDataTypes">
-              <PropertyRef Name="MetaDataValueTypesId" /></Dependent></ReferentialConstraint></Association>
+              <PropertyRef Name="MetaDataValueTypeId" /></Dependent></ReferentialConstraint></Association>
         <Association Name="MetaDataTypesToContentItemsMetaDataTypes">
           <End Type="DataAccess.MetaDataTypesToContentItems" Role="MetaDataTypesToContentItems" Multiplicity="*" />
           <End Type="DataAccess.MetaDataTypes" Role="MetaDataTypes" Multiplicity="1" />
@@ -2082,6 +2084,7 @@
           <ScalarProperty Name="ContentDisplayId" ColumnName="ContentDisplayId" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="WorkFlowInstanceId" ColumnName="WorkFlowInstanceId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2209,7 +2212,7 @@
           <ScalarProperty Name="MetaDataTypeId" ColumnName="MetaDataTypeId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
-          <ScalarProperty Name="MetaDataValueTypesId" ColumnName="MetaDataValueTypesId" />
+          <ScalarProperty Name="MetaDataValueTypeId" ColumnName="MetaDataValueTypeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2449,8 +2452,8 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="129" >
-        <EntityTypeShape EntityType="DataAccess.ContentItems" Width="1.5" PointX="4" PointY="4.375" Height="3.7288216145833317" />
+      <Diagram Name="Model1" ZoomLevel="64" >
+        <EntityTypeShape EntityType="DataAccess.ContentItems" Width="1.5" PointX="4" PointY="4.375" Height="3.8931689453124996" />
         <EntityTypeShape EntityType="DataAccess.UserRoles" Width="1.5" PointX="10.25" PointY="11.125" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="DataAccess.Users" Width="1.5" PointX="7.625" PointY="9.125" Height="2.9070849609374996" />
         <EntityTypeShape EntityType="DataAccess.UsersToUserRoles" PointX="10" PointY="8.25" Width="1.875" Height="1.7566536458333326" />
@@ -2471,8 +2474,8 @@
         <EntityTypeShape EntityType="DataAccess.MetaDataTypes" Width="2.125" PointX="0.5" PointY="10" Height="2.0853483072916665" />
         <AssociationConnector Association="DataAccess.FoldersContentItems" ManuallyRouted="false">
           <ConnectorPoint PointX="9.5625" PointY="14.625" />
-          <ConnectorPoint PointX="9.5625" PointY="7.5299616826704057" />
-          <ConnectorPoint PointX="5.5" PointY="7.5299616826704057" />
+          <ConnectorPoint PointX="9.5625" PointY="7.6265519284888068" />
+          <ConnectorPoint PointX="5.5" PointY="7.6265519284888068" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.Languages" Width="1.5" PointX="6.25" PointY="12.875" Height="2.0853483072916674" />
         <AssociationConnector Association="DataAccess.LanguagesUsers">
@@ -2531,11 +2534,9 @@
           <ConnectorPoint PointX="9.568973858974358" PointY="20.599786143021319" />
           <ConnectorPoint PointX="8.4691967179487175" PointY="20.599786143021319" />
           <ConnectorPoint PointX="8.30253005128205" PointY="20.599786143021319" />
-          <ConnectorPoint PointX="7.458333333333333" PointY="20.599786143021319" />
-          <ConnectorPoint PointX="7.291666666666667" PointY="20.599786143021319" />
           <ConnectorPoint PointX="5.36703125" PointY="20.599786143021319" />
           <ConnectorPoint PointX="5.36703125" PointY="19.145819964771562" />
-          <ConnectorPoint PointX="2" PointY="18.922041838888426" />
+          <ConnectorPoint PointX="1.2299350200931174" PointY="19.039042968750003" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ChildFolders">
           <ConnectorPoint PointX="8.70923076923077" PointY="19.668600260416667" />
@@ -2575,34 +2576,36 @@
           <ConnectorPoint PointX="1.5625" PointY="9.5460009765625" />
           <ConnectorPoint PointX="1.5625" PointY="10" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.MetaDataTypesToContentItemsContentItems">
-          <ConnectorPoint PointX="3" PointY="7.8644108072916659" />
-          <ConnectorPoint PointX="4" PointY="7.8644108072916659" />
+          <ConnectorPoint PointX="3" PointY="7.94658447265625" />
+          <ConnectorPoint PointX="3.2604169166666668" PointY="7.9465844726562489" />
+          <ConnectorPoint PointX="3.4270835833333337" PointY="7.94658447265625" />
+          <ConnectorPoint PointX="4" PointY="7.94658447265625" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.ObjectHistories" Width="1.625" PointX="2.625" PointY="0.5" Height="2.41404296875" />
         <AssociationConnector Association="DataAccess.ContentHistoryUsers">
           <ConnectorPoint PointX="3.3437502500000003" PointY="2.91404296875" />
-          <ConnectorPoint PointX="3.3437502500000003" PointY="10.235915459610837" />
-          <ConnectorPoint PointX="5.010416666666667" PointY="10.235915459610837" />
-          <ConnectorPoint PointX="5.177083333333333" PointY="10.235915459610837" />
-          <ConnectorPoint PointX="7.625" PointY="10.235915459610837" />
+          <ConnectorPoint PointX="3.3437502500000003" PointY="10.283135609363004" />
+          <ConnectorPoint PointX="5.010416666666667" PointY="10.283135609363004" />
+          <ConnectorPoint PointX="5.177083333333333" PointY="10.283135609363004" />
+          <ConnectorPoint PointX="7.625" PointY="10.283135609363004" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.AliasesContentItems">
-          <ConnectorPoint PointX="2" PointY="17.664077455223307" />
-          <ConnectorPoint PointX="5.09375" PointY="17.664077455223307" />
-          <ConnectorPoint PointX="5.09375" PointY="8.1038216145833317" />
+          <ConnectorPoint PointX="2" PointY="17.832021484375" />
+          <ConnectorPoint PointX="5.09375" PointY="17.832021484375" />
+          <ConnectorPoint PointX="5.09375" PointY="8.2681689453125" />
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.ContentTypes" Width="1.5" PointX="18" PointY="0.5" Height="3.0714322916666661" />
         <EntityTypeShape EntityType="DataAccess.ContentXslts" Width="1.5" PointX="16" PointY="0.5" Height="2.0853483072916665" />
         <AssociationConnector Association="DataAccess.ObjectXsltSetContentItems">
-          <ConnectorPoint PointX="16.75" PointY="2.5853483072916665" />
-          <ConnectorPoint PointX="16.75" PointY="6.89359675075748" />
-          <ConnectorPoint PointX="13.083333333333334" PointY="6.8935967507574789" />
-          <ConnectorPoint PointX="12.916666666666666" PointY="6.89359675075748" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="6.8935967507574789" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="6.89359675075748" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="6.8935967507574789" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="6.89359675075748" />
-          <ConnectorPoint PointX="5.5" PointY="6.89359675075748" />
+          <ConnectorPoint PointX="16.78125" PointY="2.5853483072916665" />
+          <ConnectorPoint PointX="16.78125" PointY="6.84062449967641" />
+          <ConnectorPoint PointX="13.083333333333334" PointY="6.8406244996764087" />
+          <ConnectorPoint PointX="12.916666666666666" PointY="6.84062449967641" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="6.8406244996764087" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="6.84062449967641" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="6.8406244996764087" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="6.84062449967641" />
+          <ConnectorPoint PointX="5.5" PointY="6.84062449967641" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ObjectSchemaObjectXsltSets">
           <ConnectorPoint PointX="18" PointY="1.5426741536458333" />
@@ -2621,26 +2624,24 @@
           <ConnectorPoint PointX="7.375" PointY="21.25" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ContentItemsObjectTypes">
-          <ConnectorPoint PointX="5.5" PointY="5.3408073909705438" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="5.3408073909705429" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="5.3408073909705438" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="5.3408073909705429" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="5.3408073909705438" />
-          <ConnectorPoint PointX="12.916666666666666" PointY="5.3408073909705429" />
-          <ConnectorPoint PointX="13.083333333333334" PointY="5.3408073909705438" />
-          <ConnectorPoint PointX="16.666666666666668" PointY="5.3408073909705429" />
-          <ConnectorPoint PointX="16.833333333333332" PointY="5.3408073909705438" />
-          <ConnectorPoint PointX="18.338233064066571" PointY="5.3408073909705429" />
-          <ConnectorPoint PointX="18.504899730733236" PointY="5.3408073909705438" />
-          <ConnectorPoint PointX="18.968132794799807" PointY="5.3408073909705438" />
-          <ConnectorPoint PointX="18.968132794799807" PointY="3.4070849609375" />
+          <ConnectorPoint PointX="5.5" PointY="5.2121553683004489" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="5.212155368300448" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="5.2121553683004489" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="5.212155368300448" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="5.2121553683004489" />
+          <ConnectorPoint PointX="12.916666666666666" PointY="5.212155368300448" />
+          <ConnectorPoint PointX="13.083333333333334" PointY="5.2121553683004489" />
+          <ConnectorPoint PointX="16.697916666666668" PointY="5.212155368300448" />
+          <ConnectorPoint PointX="16.864583333333332" PointY="5.2121553683004489" />
+          <ConnectorPoint PointX="18.338233064066571" PointY="5.212155368300448" />
+          <ConnectorPoint PointX="18.504899730733236" PointY="5.2121553683004489" />
+          <ConnectorPoint PointX="18.992035698699951" PointY="5.2121553683004489" />
+          <ConnectorPoint PointX="18.992035698699951" PointY="3.4070849609375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.TemplateElementContentItems">
-          <ConnectorPoint PointX="8.625" PointY="3.3596402994791665" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="3.3596402994791661" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="3.3596402994791665" />
-          <ConnectorPoint PointX="4.90625" PointY="3.3596402994791665" />
-          <ConnectorPoint PointX="4.90625" PointY="4.375" />
+          <ConnectorPoint PointX="8.625" PointY="3.4533902994791665" />
+          <ConnectorPoint PointX="5" PointY="3.4533902994791665" />
+          <ConnectorPoint PointX="5" PointY="4.375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.AliasesMenuItems">
           <ConnectorPoint PointX="1.25" PointY="19.039042968750003" />
@@ -2655,8 +2656,8 @@
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.ObjectTypesTemplateElements">
           <ConnectorPoint PointX="18" PointY="3.3596402994791665" />
-          <ConnectorPoint PointX="16.833333333333332" PointY="3.3596402994791661" />
-          <ConnectorPoint PointX="16.666666666666668" PointY="3.3596402994791665" />
+          <ConnectorPoint PointX="16.864583333333332" PointY="3.3596402994791661" />
+          <ConnectorPoint PointX="16.697916666666668" PointY="3.3596402994791665" />
           <ConnectorPoint PointX="13.083333333333334" PointY="3.3596402994791661" />
           <ConnectorPoint PointX="12.916666666666666" PointY="3.3596402994791665" />
           <ConnectorPoint PointX="12.591148333333335" PointY="3.3596402994791661" />
@@ -2690,21 +2691,21 @@
           <ConnectorPoint PointX="18.1875" PointY="15.117737630208332" />
           <ConnectorPoint PointX="18.1875" PointY="15.75" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesContentItems">
-          <ConnectorPoint PointX="17.874380294799806" PointY="12.375" />
-          <ConnectorPoint PointX="17.874380294799806" PointY="6.3691197819410874" />
-          <ConnectorPoint PointX="16.833333333333332" PointY="6.3691197819410865" />
-          <ConnectorPoint PointX="16.666666666666668" PointY="6.3691197819410874" />
-          <ConnectorPoint PointX="13.083333333333334" PointY="6.3691197819410865" />
-          <ConnectorPoint PointX="12.916666666666666" PointY="6.3691197819410874" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="6.3691197819410865" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="6.3691197819410874" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="6.3691197819410865" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="6.3691197819410874" />
-          <ConnectorPoint PointX="5.5" PointY="6.3691197819410874" />
+          <ConnectorPoint PointX="17.867030698699949" PointY="12.375" />
+          <ConnectorPoint PointX="17.867030698699949" PointY="6.02638993398843" />
+          <ConnectorPoint PointX="16.864583333333332" PointY="6.0263899339884288" />
+          <ConnectorPoint PointX="16.697916666666668" PointY="6.02638993398843" />
+          <ConnectorPoint PointX="13.083333333333334" PointY="6.0263899339884288" />
+          <ConnectorPoint PointX="12.916666666666666" PointY="6.02638993398843" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="6.0263899339884288" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="6.02638993398843" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="6.0263899339884288" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="6.02638993398843" />
+          <ConnectorPoint PointX="5.5" PointY="6.02638993398843" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesObjectTypes">
-          <ConnectorPoint PointX="18.436265589599611" PointY="12.375" />
-          <ConnectorPoint PointX="18.436265589599611" PointY="3.4070849609375" />
+          <ConnectorPoint PointX="18.421566397399904" PointY="12.375" />
+          <ConnectorPoint PointX="18.421566397399904" PointY="3.4070849609375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesCalendars">
           <ConnectorPoint PointX="17.375" PointY="14.724911982917813" />
@@ -2712,14 +2713,14 @@
           <ConnectorPoint PointX="16.764824592105356" PointY="21.375" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesTemplates">
-          <ConnectorPoint PointX="17.375" PointY="13.27300048828125" />
-          <ConnectorPoint PointX="15.141930208333333" PointY="13.27300048828125" />
-          <ConnectorPoint PointX="14.975263541666665" PointY="13.27300048828125" />
-          <ConnectorPoint PointX="14.722006770833334" PointY="13.27300048828125" />
-          <ConnectorPoint PointX="14.555340104166666" PointY="13.27300048828125" />
-          <ConnectorPoint PointX="14.302083333333334" PointY="13.27300048828125" />
-          <ConnectorPoint PointX="14.135416666666666" PointY="13.27300048828125" />
-          <ConnectorPoint PointX="12.507815" PointY="13.27300048828125" />
+          <ConnectorPoint PointX="17.375" PointY="13.355174153645834" />
+          <ConnectorPoint PointX="15.183922552083333" PointY="13.355174153645834" />
+          <ConnectorPoint PointX="15.017255885416665" PointY="13.355174153645834" />
+          <ConnectorPoint PointX="14.743002942708333" PointY="13.355174153645834" />
+          <ConnectorPoint PointX="14.576336276041666" PointY="13.355174153645834" />
+          <ConnectorPoint PointX="14.302083333333334" PointY="13.355174153645834" />
+          <ConnectorPoint PointX="14.135416666666666" PointY="13.355174153645834" />
+          <ConnectorPoint PointX="12.507815" PointY="13.355174153645834" />
           <ConnectorPoint PointX="12.507815" PointY="3.2496956380208331" />
           </AssociationConnector>
         <AssociationConnector Association="DataAccess.WorkFlowInstancesMenus" ManuallyRouted="false">
@@ -2739,20 +2740,20 @@
           </AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.UserRolesToWorkFlowSteps" Width="2.125" PointX="20.5" PointY="11.5" Height="1.9210009765624996" />
         <AssociationConnector Association="DataAccess.UserRolesToWorkFlowStepsUserRoles">
-          <ConnectorPoint PointX="20.5" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="18.504899730733236" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="18.338233064066571" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="17.957713628133138" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="17.791046961466474" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="14.722006770833334" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="14.555340104166666" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="14.302083333333334" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="14.135416666666666" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="12.591148333333335" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="12.424481666666667" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="12.286458333333334" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="12.119791666666666" PointY="11.877875811035157" />
-          <ConnectorPoint PointX="11.75" PointY="11.877875811035157" /></AssociationConnector>
+          <ConnectorPoint PointX="20.5" PointY="11.90625" />
+          <ConnectorPoint PointX="18.504899730733236" PointY="11.90625" />
+          <ConnectorPoint PointX="18.338233064066571" PointY="11.90625" />
+          <ConnectorPoint PointX="17.950364032033281" PointY="11.90625" />
+          <ConnectorPoint PointX="17.783697365366617" PointY="11.90625" />
+          <ConnectorPoint PointX="14.743002942708333" PointY="11.90625" />
+          <ConnectorPoint PointX="14.576336276041666" PointY="11.90625" />
+          <ConnectorPoint PointX="14.302083333333334" PointY="11.90625" />
+          <ConnectorPoint PointX="14.135416666666666" PointY="11.90625" />
+          <ConnectorPoint PointX="12.591148333333335" PointY="11.90625" />
+          <ConnectorPoint PointX="12.424481666666667" PointY="11.90625" />
+          <ConnectorPoint PointX="12.286458333333334" PointY="11.90625" />
+          <ConnectorPoint PointX="12.119791666666666" PointY="11.90625" />
+          <ConnectorPoint PointX="11.75" PointY="11.90625" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.UserRolesToWorkFlowStepsWorkFlowSteps">
           <ConnectorPoint PointX="20.875" PointY="13.4210009765625" />
           <ConnectorPoint PointX="20.875" PointY="15.25" /></AssociationConnector>
@@ -2786,8 +2787,8 @@
           <ConnectorPoint PointX="12.119791666666666" PointY="12.575364559163411" />
           <ConnectorPoint PointX="11.75" PointY="12.575364559163411" /></AssociationConnector>
         <AssociationConnector Association="DataAccess.TasksObjectTypes">
-          <ConnectorPoint PointX="14.6386734375" PointY="15" />
-          <ConnectorPoint PointX="14.6386734375" PointY="9.6386116536458317" />
+          <ConnectorPoint PointX="14.659669609375" PointY="15" />
+          <ConnectorPoint PointX="14.659669609375" PointY="9.6386116536458317" />
           <ConnectorPoint PointX="13" PointY="9.6386116536458317" />
           <ConnectorPoint PointX="13" PointY="0.75000000000000022" />
           <ConnectorPoint PointX="4.5" PointY="0.75000000000000022" />
@@ -2795,8 +2796,8 @@
           <ConnectorPoint PointX="3.4270835833333337" PointY="3.1640429687499996" />
           <ConnectorPoint PointX="3.2604169166666668" PointY="3.16404296875" />
           <ConnectorPoint PointX="2.5" PointY="3.16404296875" />
-          <ConnectorPoint PointX="2.5" PointY="2.434699256998698" />
-          <ConnectorPoint PointX="2.125" PointY="2.434699256998698" /></AssociationConnector>
+          <ConnectorPoint PointX="2.5" PointY="2.4501531770698848" />
+          <ConnectorPoint PointX="2.125" PointY="2.4501531770698848" /></AssociationConnector>
         <EntityTypeShape EntityType="DataAccess.WorkFlowInstanceSteps" Width="2" PointX="19.125" PointY="18.125" Height="1.9210009765625031" />
         <AssociationConnector Association="DataAccess.WorkFlowInstanceStepsWorkFlowSteps">
           <ConnectorPoint PointX="20.4375" PointY="18.125" />

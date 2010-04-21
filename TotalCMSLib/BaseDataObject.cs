@@ -8,36 +8,44 @@ namespace TotalTech.CMS
     /// <summary>
     /// Base object for all objects that presist on the presentation layer and/or use workflow
     /// </summary>
-    public abstract class BaseDataObject<CacheType> where CacheType : class
-    {
-        public delegate void DataBindHandler(BaseDataObject<CacheType> sender, Controls.GenericEventArgs<object, object> e);
-        public delegate void DataBoundHandler(BaseDataObject<CacheType> sender, Controls.GenericEventArgs<object, object> e);
+    public abstract class BaseDataObject
+    {        
+        public delegate void DataBindHandler(BaseDataObject sender, Controls.GenericEventArgs<object, object> e);
+        public delegate void DataBoundHandler(BaseDataObject sender, Controls.GenericEventArgs<object, object> e);
         public event DataBindHandler DataBind;
         public event DataBoundHandler DataBound;
 
-        public void Load(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        protected virtual void OnDataBind(){
             if(DataBind != null){
                 Controls.GenericEventArgs<object, object> evnt = new Controls.GenericEventArgs<object,object>(null, null);
                 DataBind(this, evnt);
             }
-            CacheManager.FetchDataEvent += new Data.CacheManager<CacheType>.FetchData(CacheManager_FetchDataEvent);
-            CacheManager.FetchExpICompareEvent += new Data.CacheManager<CacheType>.FetchExpICompare(CacheManager_FetchExpICompareEvent);
-            Controls.GenericEventArgs<Data.CacheLevels, CacheType> e = new Controls.GenericEventArgs<Data.CacheLevels, CacheType>(Data.CacheLevels.UseCache, null);
-            if (UseCache()) {                
-                CacheManager.ManageCache(GetHashCode().ToString(), e, SiteSettings.CacheLength, Data.ComparisonType.LessThen);               
-            }
-            else {
-                LoadData(out SystemMessage);
-                CacheManager.ManageCache(GetHashCode().ToString(), SiteSettings.CacheLength, Data.ComparisonType.LessThen, default(CacheType), DateTime.Now, Data.CacheLevels.NoCache);
-            }
+        }
+
+        protected virtual void OnDataBound() {
             if (DataBound != null) {
                 Controls.GenericEventArgs<object, object> evnt = new Controls.GenericEventArgs<object, object>(null, null);
                 DataBound(this, evnt);
             }
         }
 
-        internal protected void CacheManager_FetchDataEvent(object sender, Controls.GenericEventArgs<CacheType, object> e) {
+        public void Load(out string SystemMessage) {
+            SystemMessage = string.Empty;
+            OnDataBind();
+            CacheManager.FetchDataEvent += new Data.CacheManager.FetchData(CacheManager_FetchDataEvent);
+            CacheManager.FetchExpICompareEvent += new Data.CacheManager.FetchExpICompare(CacheManager_FetchExpICompareEvent);
+            Controls.GenericEventArgs<Data.CacheLevels, object> e = new Controls.GenericEventArgs<Data.CacheLevels, object>(Data.CacheLevels.UseCache, null);
+            if (UseCache()) {                               
+                CacheManager.ManageCache(GetHashCode().ToString(), e, SiteSettings.CacheLength, Data.ComparisonType.LessThen);                   
+            }
+            else {
+                LoadData(out SystemMessage);
+                CacheManager.ManageCache(GetHashCode().ToString(), SiteSettings.CacheLength, Data.ComparisonType.LessThen, this, DateTime.Now, Data.CacheLevels.NoCache);
+            }
+            OnDataBound();
+        }
+
+        internal protected void CacheManager_FetchDataEvent(object sender, Controls.GenericEventArgs<object, object> e) {
             string SystemMessage = e.Identifier.ToString();
             LoadData(out SystemMessage);
         }
@@ -80,11 +88,11 @@ namespace TotalTech.CMS
         internal protected abstract bool DeleteData(out string SystemMessage);
 
 
-        internal protected Data.CacheManager<CacheType> _cacheManager;
-        protected Data.CacheManager<CacheType> CacheManager {
+        internal protected Data.CacheManager _cacheManager;
+        protected Data.CacheManager CacheManager {
             get {
                 if (_cacheManager == null)
-                    _cacheManager = new Data.CacheManager<CacheType>();
+                    _cacheManager = new Data.CacheManager();
                 return _cacheManager;
             }
         }

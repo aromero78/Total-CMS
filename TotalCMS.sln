@@ -3,25 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalCMS", "TotalCMSLib\TotalCMS.csproj", "{CFD032ED-8A9B-4BB9-A6A1-526B08870EDF}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TotalCMS", "TotalCMS\", "{1FE7F328-F45B-49DB-943A-416D9F402E6D}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/TotalCMS"
-		Debug.AspNetCompiler.PhysicalPath = "TotalCMS\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\TotalCMS\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/TotalCMS"
-		Release.AspNetCompiler.PhysicalPath = "TotalCMS\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\TotalCMS\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "21545"
-	EndProjectSection
+Project("{00000000-0000-0000-0000-000000000000}") = "Total-CMS", "Total-CMS\Total-CMS.csproj", "{5BC60A01-5C73-4CEB-A311-2AEECAD5E28F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Total-CMS.Tests", "Total-CMS.Tests\Total-CMS.Tests.csproj", "{4996D8C5-ED1B-4559-B08A-6C7087127FA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +17,14 @@ Global
 		{CFD032ED-8A9B-4BB9-A6A1-526B08870EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFD032ED-8A9B-4BB9-A6A1-526B08870EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFD032ED-8A9B-4BB9-A6A1-526B08870EDF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1FE7F328-F45B-49DB-943A-416D9F402E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FE7F328-F45B-49DB-943A-416D9F402E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FE7F328-F45B-49DB-943A-416D9F402E6D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FE7F328-F45B-49DB-943A-416D9F402E6D}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{5BC60A01-5C73-4CEB-A311-2AEECAD5E28F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BC60A01-5C73-4CEB-A311-2AEECAD5E28F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BC60A01-5C73-4CEB-A311-2AEECAD5E28F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BC60A01-5C73-4CEB-A311-2AEECAD5E28F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4996D8C5-ED1B-4559-B08A-6C7087127FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4996D8C5-ED1B-4559-B08A-6C7087127FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4996D8C5-ED1B-4559-B08A-6C7087127FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4996D8C5-ED1B-4559-B08A-6C7087127FA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

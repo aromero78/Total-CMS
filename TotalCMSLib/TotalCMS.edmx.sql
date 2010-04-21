@@ -1,6 +1,6 @@
 
 -- --------------------------------------------------
--- Date Created: 04/17/2010 01:01:44
+-- Date Created: 04/21/2010 01:18:39
 -- Generated from EDMX file: C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\TotalCMS.edmx
 -- --------------------------------------------------
 
@@ -143,6 +143,24 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ObjectHistoriesObjectTypes]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ObjectHistories] DROP CONSTRAINT [FK_ObjectHistoriesObjectTypes]
 GO
+IF OBJECT_ID(N'[dbo].[FK_TasksUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tasks1] DROP CONSTRAINT [FK_TasksUsers]
+GO
+IF OBJECT_ID(N'[dbo].[FK_TasksUserRoles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tasks1] DROP CONSTRAINT [FK_TasksUserRoles]
+GO
+IF OBJECT_ID(N'[dbo].[FK_TasksObjectTypes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tasks1] DROP CONSTRAINT [FK_TasksObjectTypes]
+GO
+IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstanceStepsWorkFlowSteps]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WorkFlowInstanceSteps] DROP CONSTRAINT [FK_WorkFlowInstanceStepsWorkFlowSteps]
+GO
+IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstanceStepsWorkFlowInstances]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WorkFlowInstanceSteps] DROP CONSTRAINT [FK_WorkFlowInstanceStepsWorkFlowInstances]
+GO
+IF OBJECT_ID(N'[dbo].[FK_WorkFlowInstanceStepsTasks]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tasks1] DROP CONSTRAINT [FK_WorkFlowInstanceStepsTasks]
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -232,6 +250,12 @@ GO
 IF OBJECT_ID(N'[dbo].[ObjectTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ObjectTypes];
 GO
+IF OBJECT_ID(N'[dbo].[Tasks1]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tasks1];
+GO
+IF OBJECT_ID(N'[dbo].[WorkFlowInstanceSteps]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[WorkFlowInstanceSteps];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -248,7 +272,8 @@ CREATE TABLE [dbo].[ContentItems] (
     [ObjectSchemaId] int  NOT NULL,
     [ContentDisplayId] int  NOT NULL,
     [IsActive] bit  NOT NULL,
-    [WorkFlowInstanceId] int  NULL
+    [WorkFlowInstanceId] int  NULL,
+    [Title] nvarchar(max)  NOT NULL
 );
 GO
 -- Creating table 'UserRoles'
@@ -355,7 +380,7 @@ CREATE TABLE [dbo].[MetaDataTypes] (
     [MetaDataTypeId] int  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [DefaultValue] nvarchar(max)  NOT NULL,
-    [MetaDataValueTypesId] int  NOT NULL
+    [MetaDataValueTypeId] int  NOT NULL
 );
 GO
 -- Creating table 'Languages'
@@ -856,10 +881,10 @@ ADD CONSTRAINT [FK_MetaDataTypeToFolderMetaDataTypes]
         ([MetaDataTypeId])
     ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
--- Creating foreign key on [MetaDataValueTypesId] in table 'MetaDataTypes'
+-- Creating foreign key on [MetaDataValueTypeId] in table 'MetaDataTypes'
 ALTER TABLE [dbo].[MetaDataTypes] WITH NOCHECK 
 ADD CONSTRAINT [FK_MetaDataValueTypesMetaDataTypes]
-    FOREIGN KEY ([MetaDataValueTypesId])
+    FOREIGN KEY ([MetaDataValueTypeId])
     REFERENCES [dbo].[MetaDataValueTypes]
         ([MetaDataValueTypeId])
     ON DELETE NO ACTION ON UPDATE NO ACTION

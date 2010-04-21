@@ -25,7 +25,13 @@ namespace TotalTech.CMS.WorkFlow {
         Pages = 6
     }
 
-    public abstract class BaseWorkFlowObject<CacheType> : BaseDataObject<CacheType> where CacheType : class {
+    public abstract class BaseWorkFlowObject : BaseDataObject {
+        protected string _title;
+        public string Title {
+            get { return _title; }
+            protected set { _title = value; }
+        }
+
         protected int _folderId;
         protected Content.Folder _folder;
         public Content.Folder Folder {
@@ -40,6 +46,9 @@ namespace TotalTech.CMS.WorkFlow {
         ContentStatuses _contentStatus;
         public ContentStatuses ContentStatus {
             get { return _contentStatus; }
+            protected internal set{
+                _contentStatus = value;
+            }
         }
 
         protected WorkFlowObjectTypes _objectType;
@@ -199,6 +208,11 @@ namespace TotalTech.CMS.WorkFlow {
             }
         }
 
-        protected abstract void AssignRollBackData(ObjectHistory RollBackTo);        
+        protected abstract void AssignRollBackData(ObjectHistory RollBackTo);
+
+        protected override void OnDataBound() {
+            base.OnDataBound();
+            //Check for needed properties then pass messages to error handler if needed.
+        }
     }
 }

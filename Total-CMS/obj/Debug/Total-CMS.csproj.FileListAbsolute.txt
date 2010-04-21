@@ -1,0 +1,5 @@
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS\bin\Total-CMS.dll
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS\bin\Total-CMS.pdb
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS\obj\Debug\Total-CMS.dll
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS\obj\Debug\Total-CMS.pdb

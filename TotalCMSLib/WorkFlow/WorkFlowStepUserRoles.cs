@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.WorkFlow {
-    public class WorkFlowStepUserRoles : BaseDataObject<WorkFlowStepUserRoles> {
+    public class WorkFlowStepUserRoles : BaseDataObject {
         public int WorkFlowStepUserRoleId { get; private set; }
 
         int _userRoleId;

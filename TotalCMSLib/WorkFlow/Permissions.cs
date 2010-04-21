@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.WorkFlow {
-    public class Permissions : BaseDataObject<Permissions> {
+    public class Permissions : BaseDataObject {
 
         int _permissionId;
         public int PermissionId { 

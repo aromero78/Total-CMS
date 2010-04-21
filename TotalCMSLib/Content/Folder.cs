@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.Content {
-    public class Folder : BaseDataObject<Folder> {
+    public class Folder : BaseDataObject {
 
         int _folderId;
         public int FolderId {
@@ -22,6 +22,13 @@ namespace TotalTech.CMS.Content {
                 if (_currentUserPermissions == null)
                     _currentUserPermissions = new WorkFlow.Permissions(SiteSettings.ContextData.CurrentUser, this);
                 return _currentUserPermissions;
+            }
+        }
+
+        List<WorkFlow.BaseWorkFlowObject> _workFlowObjects;
+        public List<WorkFlow.BaseWorkFlowObject> WorkFlowObjects {
+            get {
+                throw new NotImplementedException();
             }
         }
 

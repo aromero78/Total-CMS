@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.WorkFlow {
-    public class WorkFlowInstance : BaseDataObject<WorkFlowInstance> {
+    public class WorkFlowInstance : BaseDataObject {
         int _workFlowInstanceId;
         public int WorkFlowInstanceId { 
             get {

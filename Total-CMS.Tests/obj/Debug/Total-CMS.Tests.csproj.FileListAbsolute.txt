@@ -1,0 +1,8 @@
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS.Tests\bin\Debug\Total-CMS.Tests.dll.config
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS.Tests\bin\Debug\Total-CMS.Tests.dll
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS.Tests\bin\Debug\Total-CMS.Tests.pdb
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS.Tests\bin\Debug\Total-CMS.dll
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS.Tests\bin\Debug\Total-CMS.pdb
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS.Tests\obj\Debug\Total-CMS.Tests.dll
+C:\Documents and Settings\Anthony\Total-CMS\Total-CMS.Tests\obj\Debug\Total-CMS.Tests.pdb

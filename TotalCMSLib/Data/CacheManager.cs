@@ -55,14 +55,14 @@ namespace TotalTech.CMS.Data {
     /// <summary>
     /// This class is used to handle cache management.
     /// </summary>
-    public class CacheManager<T> where T : class {        
+    public class CacheManager {        
         const string DataAugment = "Data", DependAugment = "Depend", NameSpaceAugment = "TotalCMS_";
         /// <summary>
         /// Manages a single cache "type". Event handlers must be defined for the FetchDataEvent and FetchExpDateEvent to ensure proper functioning.
         /// </summary>
         public CacheManager() { }
         //The Object data being cached and passed back from the ManageCache function
-        T _DataObject = null;
+        object _DataObject = null;
         //The Timestamp used as a comparison for determining it the cache should be updated. This should eventually be changed to an IComparable to allow for more flexibility.
         IComparable _CompareValue = null;
         /// <summary>
@@ -70,7 +70,7 @@ namespace TotalTech.CMS.Data {
         /// </summary>
         /// <param name="sender">A reference to this control</param>
         /// <param name="e">The even arguments</param>
-        public delegate void FetchData(object sender, Controls.GenericEventArgs<T, object> e);
+        public delegate void FetchData(object sender, Controls.GenericEventArgs<object, object> e);
         /// <summary>
         /// Delegate used in the  FetchExpDate event
         /// </summary>
@@ -90,7 +90,7 @@ namespace TotalTech.CMS.Data {
         /// This function first checks to see if the OnFetchDataEvent event handler has been set then calls it.
         /// </summary>
         /// <param name="e">The event arguments</param>
-        protected virtual void OnFetchDataEvent(Controls.GenericEventArgs<T, object> e) {
+        protected virtual void OnFetchDataEvent(Controls.GenericEventArgs<object, object> e) {
             if (FetchDataEvent != null)
                 FetchDataEvent(this, e);
             _DataObject = e.Value;
@@ -115,7 +115,7 @@ namespace TotalTech.CMS.Data {
         /// <example>If the CompareType is Equal then if CachedIComparable.CompareTo(EventDrivenIComparable) = 0 that cache will be updated.</example>
         /// </param>
         /// <returns>Returns the most current version of the object.</returns>
-        public T ManageCache(string UniqueCacheName, Controls.GenericEventArgs<TotalTech.CMS.Data.CacheLevels, T> e, int CacheLength, ComparisonType CompareType) {
+        public object ManageCache(string UniqueCacheName, Controls.GenericEventArgs<TotalTech.CMS.Data.CacheLevels, object> e, int CacheLength, ComparisonType CompareType) {
             string TimeName = NameSpaceAugment + UniqueCacheName + DependAugment, DataName = NameSpaceAugment + UniqueCacheName + DataAugment;//Create two unique names.
             object CacheData = CacheData = SiteSettings.ContextData.Cache[DataName];//Retrieve the current object in the cache. 
             IComparable CacheDepend = null;//Default the cache time stamp.
@@ -131,7 +131,7 @@ namespace TotalTech.CMS.Data {
             }
             
             if (CacheData == null || e.Value != TotalTech.CMS.Data.CacheLevels.UseCache || (CacheDepend != null && CompareCacheDependency(CacheDepend, _CompareValue, CompareType))) {
-                OnFetchDataEvent(new Controls.GenericEventArgs<T, object>(null, e.Identifier));//Raise the fetch new data event.
+                OnFetchDataEvent(new Controls.GenericEventArgs<object, object>(null, e.Identifier));//Raise the fetch new data event.
                 if (CacheData != null) {//remove old cache values
                     SiteSettings.ContextData.Cache.Remove(DataName);
                     SiteSettings.ContextData.Cache.Remove(TimeName);
@@ -142,7 +142,7 @@ namespace TotalTech.CMS.Data {
                 }
             }
             else if (CacheData != null) //we can use the old cache value
-                _DataObject = (T)SiteSettings.ContextData.Cache[DataName];
+                _DataObject = SiteSettings.ContextData.Cache[DataName];
             return _DataObject;
         }
 
@@ -160,7 +160,7 @@ namespace TotalTech.CMS.Data {
         /// <param name="CacheDependency">A value that will be used to determine in the cache should be updated.</param>
         /// <param name="CacheUsage">How the cache should be used.</param>
         /// <returns></returns>
-        public T ManageCache(string UniqueCacheName, int CacheLength, ComparisonType CompareType, T ValueToCache, IComparable CacheDependency, CacheLevels CacheUsage) {
+        public object ManageCache(string UniqueCacheName, int CacheLength, ComparisonType CompareType, object ValueToCache, IComparable CacheDependency, CacheLevels CacheUsage) {
             string DataName = NameSpaceAugment + UniqueCacheName + DataAugment, TimeName = NameSpaceAugment + UniqueCacheName + DependAugment;
             object CacheData = SiteSettings.ContextData.Cache[DataName];
             _CompareValue = CacheDependency;
@@ -178,7 +178,7 @@ namespace TotalTech.CMS.Data {
                 }
             }
             else if (CacheData != null) //we can use the old cache value
-                _DataObject = (T)SiteSettings.ContextData.Cache[DataName];
+                _DataObject = SiteSettings.ContextData.Cache[DataName];
             return _DataObject;
         }
 
