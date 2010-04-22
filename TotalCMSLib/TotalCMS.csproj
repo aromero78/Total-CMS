@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WorkFlow\BaseWorkFlowObject.cs" />
+    <Compile Include="WorkFlow\BasePermissionsObject.cs" />
+    <Compile Include="WorkFlow\WorkFlowObject.cs" />
     <Compile Include="WorkFlow\ObjectHistory.cs" />
     <Compile Include="Content\ContentItem.cs" />
     <Compile Include="Content\Folder.cs" />

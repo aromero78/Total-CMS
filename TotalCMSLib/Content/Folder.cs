@@ -25,10 +25,24 @@ namespace TotalTech.CMS.Content {
             }
         }
 
-        List<WorkFlow.BaseWorkFlowObject> _workFlowObjects;
-        public List<WorkFlow.BaseWorkFlowObject> WorkFlowObjects {
+        List<WorkFlow.WorkFlowObject> _workFlowObjects;
+        public List<WorkFlow.WorkFlowObject> WorkFlowObjects {
             get {
-                throw new NotImplementedException();
+                if(_workFlowObjects == null){
+                    System.Data.Common.DbDataReader Reader = SiteSettings.DataAccess.FolderGetWorkFlowObjects(this, SiteSettings.ContextData.CurrentUser);
+                    while(Reader.Read())
+                        _workFlowObjects.Add(
+                            new WorkFlow.WorkFlowObject(
+                                Reader.GetString(0), 
+                                this, 
+                                (WorkFlow.ContentStatuses)Enum.Parse(typeof(WorkFlow.ContentStatuses), 
+                                Reader.GetString(1)), 
+                                (WorkFlow.WorkFlowObjectTypes)Enum.Parse(typeof(WorkFlow.WorkFlowObjectTypes), 
+                                Reader.GetString(2)), 
+                                Reader.GetInt32(3)));
+                    Reader.Close();
+                }
+                return _workFlowObjects;
             }
         }
 
@@ -36,19 +50,19 @@ namespace TotalTech.CMS.Content {
             throw new NotImplementedException();
         }
 
-        protected internal override void LoadData(out string SystemMessage) {
+        protected internal override void LoadData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool SaveData(out string SystemMessage) {
+        protected internal override bool SaveData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool UpdateData(out string SystemMessage) {
+        protected internal override bool UpdateData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool DeleteData(out string SystemMessage) {
+        protected internal override bool DeleteData() {
             throw new NotImplementedException();
         }
 
@@ -58,6 +72,10 @@ namespace TotalTech.CMS.Content {
 
         protected internal override bool UseCache() {
             return false;
+        }
+
+        protected internal override void LoadData(params object[] Params) {
+            throw new NotImplementedException();
         }
     }
 }

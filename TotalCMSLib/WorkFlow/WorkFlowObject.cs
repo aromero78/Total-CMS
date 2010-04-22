@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.InteropServices;
 
 namespace TotalTech.CMS.WorkFlow {
     public enum ContentStatuses {
@@ -25,7 +26,7 @@ namespace TotalTech.CMS.WorkFlow {
         Pages = 6
     }
 
-    public abstract class BaseWorkFlowObject : BaseDataObject {
+    public class WorkFlowObject : BaseDataObject {
         protected string _title;
         public string Title {
             get { return _title; }
@@ -58,28 +59,30 @@ namespace TotalTech.CMS.WorkFlow {
                     throw new MemberAccessException("WorkFlowObjectType not set for class : " + GetType().ToString());
                 return _objectType;
             }
-        }
-
-        List<ObjectHistory> _versionHistory;
-        public System.Collections.ObjectModel.ReadOnlyCollection<ObjectHistory> VersionHistroy {
-            get {
-                if (_versionHistory == null) {
-                    _versionHistory = ObjectHistory.LoadHistory(GetObjectId(), ObjectType);
-                }
-                return _versionHistory.AsReadOnly();
-            }
-        }
+        }        
 
         protected int _workFlowInstanceId;
-        protected WorkFlowInstance _currnetWorkFlow;
+        protected WorkFlowInstance _currentWorkFlow;
         public WorkFlowInstance CurrentWorkFlow {
             get {
-                if (_currnetWorkFlow == null || _currnetWorkFlow.WorkFlowInstanceId != _workFlowInstanceId)
-                    _currnetWorkFlow = new WorkFlowInstance(_workFlowInstanceId);
-                return _currnetWorkFlow;
+                if (_currentWorkFlow == null || _currentWorkFlow.WorkFlowInstanceId != _workFlowInstanceId)
+                    _currentWorkFlow = new WorkFlowInstance(_workFlowInstanceId);
+                return _currentWorkFlow;
             }
         }
+
+        internal WorkFlowObject() { 
         
+        }
+
+        internal WorkFlowObject(string Title, Content.Folder ParentFolder, ContentStatuses ContentStatus, WorkFlowObjectTypes ObjectType, [Optional, DefaultParameterValue(0)]int CurrentWorkFlowId) {
+            _title = Title;
+            _folder = ParentFolder;
+            _contentStatus = ContentStatus;
+            _objectType = ObjectType;
+            _workFlowInstanceId = CurrentWorkFlowId;
+        }
+
         /// <summary>
         /// If the content is in a editable state give edit rights to the current user, at this point the content will no
         /// longer be in an editable state
@@ -164,55 +167,62 @@ namespace TotalTech.CMS.WorkFlow {
         /// <summary>
         /// Return the content to an editable state and update the content history/last modified fields
         /// </summary>
-        public bool CheckIn() {
+        public virtual bool CheckIn() {
             bool HasRights = HasEditRights();
             if (HasRights) {
                 SiteSettings.DataAccess.WorkFlowObjectHistoryAdd(GetObjectId(), ObjectType, ContentStatuses.CheckedIn);
-                _versionHistory = null;
             }
             return HasRights;
         }
 
-        public bool Approve(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        public virtual bool Approve() {
+            string SystemMessage = string.Empty;
             bool HasRights = HasEditRights();
             if (HasRights) {
                 SiteSettings.DataAccess.WorkFlowObjectHistoryAdd(GetObjectId(), ObjectType, ContentStatuses.Approved);
-                _versionHistory = null;
-
                 SystemMessage = ObjectType.ToString() + " successfully published";
             }
             else
                 SystemMessage = "Current user does not have publish rights on this object.";
 
             return HasRights;
-        }
-
-        public bool RollBack(ObjectHistory RollBackTo, out string SystemMessage) {
-            SystemMessage = string.Empty;
-            if(HasDeleteRights()){
-                int RowsAffected = SiteSettings.DataAccess.WorkFlowObjectRollBack(RollBackTo);
-                if (RowsAffected > 0) {
-                    _versionHistory = null;
-                    AssignRollBackData(RollBackTo);
-                    return true;
-                }
-                else {
-                    SystemMessage = "Unable to roll back object in the database.";
-                    return false;
-                }
-            }   
-            else{
-                SystemMessage = "The current user does not have rights to delete/manage history for the requested object";
-                return false;
-            }
-        }
-
-        protected abstract void AssignRollBackData(ObjectHistory RollBackTo);
+        }        
 
         protected override void OnDataBound() {
             base.OnDataBound();
             //Check for needed properties then pass messages to error handler if needed.
+        }
+
+        protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData(params object[] Params) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool SaveData() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool UpdateData() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool DeleteData() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override int GetObjectId() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override bool UseCache() {
+            throw new NotImplementedException();
         }
     }
 }

@@ -69,39 +69,39 @@ namespace TotalTech.CMS.WorkFlow {
             _user = CurrentUser;
             _folder = CurrentFolder;
             string SystemMessage = string.Empty;
-            Load(out SystemMessage);
+            Load();
         }
 
         internal Permissions(User.UserRoles CurrentRole, Content.Folder CurrentFolder) {
             _userRole = CurrentRole;
             _folder = CurrentFolder;
             string SystemMessage = string.Empty;
-            Load(out SystemMessage);
+            Load();
         }
 
         internal Permissions(int PermissionId) {
             _permissionId = PermissionId;
             string SystemMessage = string.Empty;
-            Load(out SystemMessage);
+            Load();
         }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
 
-        protected internal override void LoadData(out string SystemMessage) {
+        protected internal override void LoadData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool SaveData(out string SystemMessage) {
+        protected internal override bool SaveData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool UpdateData(out string SystemMessage) {
+        protected internal override bool UpdateData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool DeleteData(out string SystemMessage) {
+        protected internal override bool DeleteData() {
             throw new NotImplementedException();
         }
 
@@ -111,6 +111,10 @@ namespace TotalTech.CMS.WorkFlow {
 
         protected internal override bool UseCache() {
             return false;
+        }
+
+        protected internal override void LoadData(params object[] Params) {
+            throw new NotImplementedException();
         }
     }
 }

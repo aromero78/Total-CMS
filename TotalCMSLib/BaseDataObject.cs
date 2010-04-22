@@ -29,8 +29,8 @@ namespace TotalTech.CMS
             }
         }
 
-        public void Load(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        public void Load() {
+            //SystemMessage = string.Empty;
             OnDataBind();
             CacheManager.FetchDataEvent += new Data.CacheManager.FetchData(CacheManager_FetchDataEvent);
             CacheManager.FetchExpICompareEvent += new Data.CacheManager.FetchExpICompare(CacheManager_FetchExpICompareEvent);
@@ -39,7 +39,7 @@ namespace TotalTech.CMS
                 CacheManager.ManageCache(GetHashCode().ToString(), e, SiteSettings.CacheLength, Data.ComparisonType.LessThen);                   
             }
             else {
-                LoadData(out SystemMessage);
+                LoadData();
                 CacheManager.ManageCache(GetHashCode().ToString(), SiteSettings.CacheLength, Data.ComparisonType.LessThen, this, DateTime.Now, Data.CacheLevels.NoCache);
             }
             OnDataBound();
@@ -47,45 +47,46 @@ namespace TotalTech.CMS
 
         internal protected void CacheManager_FetchDataEvent(object sender, Controls.GenericEventArgs<object, object> e) {
             string SystemMessage = e.Identifier.ToString();
-            LoadData(out SystemMessage);
+            LoadData();
         }
 
         internal protected abstract void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e);
 
-        public bool Save(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        public bool Save() {
+            //SystemMessage = string.Empty;
             if (GetObjectId() != default(int)){
-                SystemMessage = "The Object being saved is already in the database.";
+                //SystemMessage = "The Object being saved is already in the database.";
                 return false;
             }
-            else return SaveData(out SystemMessage); 
+            else return SaveData(); 
         }
 
-        public bool Update(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        public bool Update() {
+            //SystemMessage = string.Empty;
             if (GetObjectId() == default(int)) {
-                SystemMessage = "The Object being updated is not in the database.";
+                //SystemMessage = "The Object being updated is not in the database.";
                 return false;
             }
-            else return UpdateData(out SystemMessage);
+            else return UpdateData();
         }
 
-        public bool Delete(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        public bool Delete() {
+            //SystemMessage = string.Empty;
             if (GetObjectId() == default(int)) {
-                SystemMessage = "The Object being deleted is not in the database.";
+                //SystemMessage = "The Object being deleted is not in the database.";
                 return false;
             }
-            else return SaveData(out SystemMessage);
+            else return SaveData();
         }
 
         /// <summary>
         /// Retreives data from the database, assumes that the primary key for the object has been set.
         /// </summary>
-        internal protected abstract void LoadData(out string SystemMessage);
-        internal protected abstract bool SaveData(out string SystemMessage);
-        internal protected abstract bool UpdateData(out string SystemMessage);
-        internal protected abstract bool DeleteData(out string SystemMessage);
+        internal protected abstract void LoadData();
+        internal protected abstract void LoadData(params object[] Params);
+        internal protected abstract bool SaveData();
+        internal protected abstract bool UpdateData();
+        internal protected abstract bool DeleteData();
 
 
         internal protected Data.CacheManager _cacheManager;

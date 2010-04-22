@@ -25,7 +25,7 @@ namespace TotalTech.CMS.WorkFlow {
         internal WorkFlowStep(int WorkFlowStepId) {
             _workFlowStepid = WorkFlowStepId;
             string SystemMessage = string.Empty;
-            Load(out SystemMessage);
+            Load();
             SiteSettings.ContextData.DebugLog.HandleSystemMessage(SystemMessage, false);
         }
 
@@ -60,8 +60,8 @@ namespace TotalTech.CMS.WorkFlow {
             throw new NotImplementedException();
         }
 
-        protected internal override bool SaveData(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        protected internal override bool SaveData() {
+            //SystemMessage = string.Empty;
             //_workFlowStepid = SiteSettings.DataAccess.WorkFlowStepSave(_workFlowId, _stepOrder, 
             return false;
         }
@@ -74,19 +74,23 @@ namespace TotalTech.CMS.WorkFlow {
             return _workFlowStepid;
         }
 
-        protected internal override void LoadData(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        protected internal override void LoadData() {
+            //SystemMessage = string.Empty;
             System.Data.Common.DbDataReader Reader = SiteSettings.DataAccess.WorkFlowStepGet(WorkFlowStepId);
             _workFlowId = Reader.GetInt32(0);
             _stepOrder = Reader.GetInt32(1);
             Reader.Close();
         }
 
-        protected internal override bool UpdateData(out string SystemMessage) {
+        protected internal override bool UpdateData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool DeleteData(out string SystemMessage) {
+        protected internal override bool DeleteData() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData(params object[] Params) {
             throw new NotImplementedException();
         }
     }

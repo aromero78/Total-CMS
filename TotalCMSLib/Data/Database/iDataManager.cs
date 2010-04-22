@@ -235,5 +235,9 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
 
         public abstract void WorkFlowStepUserRolesUpdate(WorkFlow.WorkFlowStep UpdateWorkFlowStep);
         #endregion
+
+        #region Folder
+        public abstract DbDataReader FolderGetWorkFlowObjects(Content.Folder CurrentFolder, User.User CurrentUser);
+        #endregion
     }
 }

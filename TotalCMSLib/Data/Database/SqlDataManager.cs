@@ -224,6 +224,7 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
 
         #region ObjectType Functions
         public override DbDataReader ObjectTypeGet(int ObjectTypeId) {
+            DbDataReader db;
             return GetDataReader("ObjectTypeGet",
                 new SqlParameter("ObjectTypeId", ObjectTypeId));
         }
@@ -293,8 +294,6 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
             throw new NotImplementedException();
         }
 
-        #endregion                           
-    
         public override int WorkFlowStepSave(int CurrentWorkFlow, int StepOrder, List<User.UserRoles> Approvers, List<User.UserRoles> Editors) {
             throw new NotImplementedException();
         }
@@ -314,5 +313,15 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
         public override void WorkFlowStepUserRolesUpdate(WorkFlow.WorkFlowStep UpdateWorkFlowStep) {
             throw new NotImplementedException();
         }
+
+        #endregion                                    
+    
+        #region Folder
+
+        public override DbDataReader FolderGetWorkFlowObjects(Content.Folder CurrentFolder, User.User CurrentUser) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

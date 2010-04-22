@@ -11,7 +11,7 @@ namespace TotalTech.CMS.Content {
     /// <summary>
     /// Used as the definition for data within a content item.
     /// </summary>
-    public class ContentType : TotalTech.CMS.WorkFlow.BaseWorkFlowObject {
+    public class ContentType : TotalTech.CMS.WorkFlow.BasePermissionsObject {
         const string WARNING = "WARNING: ", ERROR = "ERROR: ";
 
         int _objectTypeId;
@@ -94,13 +94,7 @@ namespace TotalTech.CMS.Content {
             e.Value = SiteSettings.DataAccess.ObjectTypeCheckModifiedDate(_objectTypeId);
         }
 
-
-        protected override void AssignRollBackData(WorkFlow.ObjectHistory RollBackTo) {
-            throw new NotImplementedException();
-        }
-
-        protected internal override void LoadData(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        protected internal override void LoadData() {
             System.Data.Common.DbDataReader reader = SiteSettings.DataAccess.ObjectTypeGet(_objectTypeId);
             _objectTypeId = reader.GetInt32(0);
             _rawDataEntryXslt = reader.GetString(1);
@@ -114,20 +108,18 @@ namespace TotalTech.CMS.Content {
             reader.Close();
         }
 
-        protected internal override bool SaveData(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        protected internal override bool SaveData() {
             _objectTypeId = SiteSettings.DataAccess.ObjectTypeSave(_rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, ContentStatus, _workFlowInstanceId);
             return true;
         }
 
-        protected internal override bool UpdateData(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        protected internal override bool UpdateData() {
             int RowsAffected = SiteSettings.DataAccess.ObjectTypeUpdate(_objectTypeId, _rawDataEntryXslt, _name, _rawDefaultDisplayXslt, _rawSchemaXml, ContentStatus, _workFlowInstanceId, _isActive);
             return (RowsAffected > 0 ? true : false);
 
         }
 
-        protected internal override bool DeleteData(out string SystemMessage) {
+        protected internal override bool DeleteData() {
             throw new NotImplementedException();
         }
 
@@ -137,6 +129,14 @@ namespace TotalTech.CMS.Content {
 
         protected internal override bool UseCache() {
             return true;
+        }
+
+        protected override void AssignRollBackData(WorkFlow.ObjectHistory RollBackTo) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void LoadData(params object[] Params) {
+            throw new NotImplementedException();
         }
     }
 }

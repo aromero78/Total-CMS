@@ -34,19 +34,19 @@ namespace TotalTech.CMS.WorkFlow {
             throw new NotImplementedException();
         }
 
-        protected internal override void LoadData(out string SystemMessage) {
+        protected internal override void LoadData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool SaveData(out string SystemMessage) {
+        protected internal override bool SaveData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool UpdateData(out string SystemMessage) {
+        protected internal override bool UpdateData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool DeleteData(out string SystemMessage) {
+        protected internal override bool DeleteData() {
             throw new NotImplementedException();
         }
 
@@ -56,6 +56,10 @@ namespace TotalTech.CMS.WorkFlow {
 
         protected internal override bool UseCache() {
             return false;
+        }
+
+        protected internal override void LoadData(params object[] Params) {
+            throw new NotImplementedException();
         }
     }
 }

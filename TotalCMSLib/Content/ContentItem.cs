@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.Content {
-    public class ContentItem : TotalTech.CMS.WorkFlow.BaseWorkFlowObject {
+    public class ContentItem : TotalTech.CMS.WorkFlow.BasePermissionsObject {
 
         int _contentItemId;
         public int ContactItemId {
@@ -84,8 +84,15 @@ namespace TotalTech.CMS.Content {
             throw new NotImplementedException();
         }
 
-        protected internal override void LoadData(out string SystemMessage) {
-            SystemMessage = string.Empty;
+        protected internal override int GetObjectId() {
+            return _contentItemId;
+        }
+
+        protected internal override bool UseCache() {
+            return CacheData;
+        }
+
+        protected internal override void LoadData() {
             if (_contentItemId != 0) {
                 System.Data.Common.DbDataReader dataReader = SiteSettings.DataAccess.ContentItemGet(_contentItemId);
                 _contentItemId = dataReader.GetInt32(0);
@@ -111,24 +118,20 @@ namespace TotalTech.CMS.Content {
             }
         }
 
-        protected internal override bool SaveData(out string SystemMessage) {
+        protected internal override void LoadData(params object[] Params) {
             throw new NotImplementedException();
         }
 
-        protected internal override bool UpdateData(out string SystemMessage) {
+        protected internal override bool SaveData() {
             throw new NotImplementedException();
         }
 
-        protected internal override bool DeleteData(out string SystemMessage) {
+        protected internal override bool UpdateData() {
             throw new NotImplementedException();
         }
 
-        protected internal override int GetObjectId() {
-            return _contentItemId;
-        }
-
-        protected internal override bool UseCache() {
-            return CacheData;
+        protected internal override bool DeleteData() {
+            throw new NotImplementedException();
         }
     }
 }
