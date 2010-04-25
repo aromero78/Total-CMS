@@ -5,9 +5,17 @@ using System.Text;
 
 namespace TotalTech.CMS.User {
     public class UserRoles : BaseDataObject {
-        public int UserRoleId { get; internal set; }
+        int _userRoleId;
+        public int UserRoleId { 
+            get {
+                return _userRoleId;
+            }
+            internal set {
+                _userRoleId = value;
+            }
+        }
 
-        public UserRoles(int RoleId) {
+        internal UserRoles(int RoleId) {
             UserRoleId = RoleId;
         }
 

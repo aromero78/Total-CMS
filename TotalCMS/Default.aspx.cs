@@ -5,12 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace TotalCMS
-{
-    public partial class _Default : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+namespace TotalTech.Web {
+    public partial class Default : System.Web.UI.Page {
+        protected void Page_Load(object sender, EventArgs e) {
 
         }
     }

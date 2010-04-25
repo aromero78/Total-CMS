@@ -5,12 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace TotalCMS.Account
-{
-    public partial class ChangePassword : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+namespace TotalTech.Web.Admin {
+    public partial class ChangePassword : System.Web.UI.Page {
+        protected void Page_Load(object sender, EventArgs e) {
 
         }
     }

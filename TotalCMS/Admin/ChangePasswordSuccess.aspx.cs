@@ -5,13 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace TotalCMS.Account
+public partial class Admin_ChangePasswordSuccess : System.Web.UI.Page
 {
-    public partial class ChangePasswordSuccess : System.Web.UI.Page
+    protected void Page_Load(object sender, EventArgs e)
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
 
-        }
     }
 }

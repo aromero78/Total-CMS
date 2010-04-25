@@ -22,9 +22,18 @@ namespace TotalTech.CMS.User {
             }
         }
 
-        public User(int UserId) {
-            _userId = UserId;
-            
+        internal User(int UserId) {
+            _userId = UserId;            
+        }
+
+        bool _IsLoggedIn = false;
+        public bool IsLoggedIn {
+            get {
+                return _IsLoggedIn;
+            }
+            internal set {
+                _IsLoggedIn = value;
+            }
         }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {

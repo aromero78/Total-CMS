@@ -1,6 +1,10 @@
-C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\Xml\ApplicationSettings.xml
 C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalTechCMS.dll.config
 C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalTechCMS.dll
 C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\TotalTechCMS.pdb
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\Newtonsoft.Json.dll
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\Newtonsoft.Json.pdb
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\bin\Debug\Newtonsoft.Json.xml
+C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\TotalTechCMS.dll
 C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\obj\Debug\TotalTechCMS.pdb

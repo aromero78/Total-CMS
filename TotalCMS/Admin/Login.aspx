@@ -1,5 +1,6 @@
-﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Login.aspx.cs" Inherits="TotalCMS.Account.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site.master" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="TotalTech.Web.Admin.Login" %>
+
+
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
@@ -9,6 +10,7 @@
     </h2>
     <p>
         Please enter your username and password.
+        <asp:HyperLink ID="RegisterHyperLink2" runat="server" >Register</asp:HyperLink>
         <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">Register</asp:HyperLink> if you don't have an account.
     </p>
     <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false">
@@ -48,3 +50,5 @@
         </LayoutTemplate>
     </asp:Login>
 </asp:Content>
+
+

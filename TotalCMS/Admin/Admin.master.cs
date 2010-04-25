@@ -5,11 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace TotalTech.Web {
-    public partial class sitemaster : System.Web.UI.MasterPage
-    {
+namespace TotalTech.Web.Admin {
+    public partial class AdminMaster : System.Web.UI.MasterPage {
         protected void Page_Load(object sender, EventArgs e) {
-
+            
         }
     }
 }

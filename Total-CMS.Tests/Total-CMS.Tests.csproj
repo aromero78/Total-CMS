@@ -62,12 +62,6 @@
     <Content Include="AuthoringTests.txt" />
     <Content Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Total-CMS\Total-CMS.csproj">
-      <Project>{5BC60A01-5C73-4CEB-A311-2AEECAD5E28F}</Project>
-      <Name>Total-CMS</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

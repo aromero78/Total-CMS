@@ -1,5 +1,5 @@
-﻿<%@ Page Title="About Us" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="About.aspx.cs" Inherits="TotalCMS.About" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site.master" AutoEventWireup="true" CodeFile="About.aspx.cs" Inherits="TotalTech.Web.About" %>
+
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
@@ -11,3 +11,4 @@
         Put content here.
     </p>
 </asp:Content>
+
