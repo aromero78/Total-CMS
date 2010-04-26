@@ -36,7 +36,7 @@
         <div id="left1">
             <div id="MainNavTree"></div>            
         </div>
-        <div id="center2">&nbsp;</div>
+        <div id="center1"><div id="logger"></div></div>
         <script>
             TotalTech = {}
             TotalTech.LayoutManager = {}
@@ -52,7 +52,7 @@
                         units: [
                             { position: 'top', body: 'top1', width: 1000, height: 100, gutter: '2px 5px' },
                             { position: 'left', header: 'Left', width: 200, resize: true, body: 'left1', gutter: '2px 5px', collapse: true, collapseSize: 25, scroll: true, maxWidth: 300 },
-                            { position: 'center', body: 'center', width: 800, height: 600, gutter: '2px 5px 2px 0px' }
+                            { position: 'center', body: 'center1', width: 800, height: 500, gutter: '2px 5px 2px 0px' }
                         ]
                     });
 
@@ -60,14 +60,14 @@
                         YAHOO.log("Layout Render", "info", "TotalCMS-Layout");
                         var currentIconMode = 0;
                         //create a new tree:
-                        var r = TotalTech.LayoutManager.Layout.getUnitByPosition('center'),
-                        w = r.getSizes().body.w - 10,
-                        h = r.getSizes().body.h - 100;
+                        var r = TotalTech.LayoutManager.Layout.getUnitByPosition('logger'),
+                        w = 400//r.getSizes().body.w - 150,
+                        h = 400//r.getSizes().body.h - 200;
 
                         var logger = new YAHOO.widget.LogReader(r.body, {
                             logReaderEnabled: true,
-                            draggable: false,
-                            newestOnTop: true,
+                            draggable: true,
+                            newestOnTop: false,
                             height: h + 'px',
                             width: w + 'px'
                         });
@@ -86,8 +86,6 @@
                         loadNodeData(RootNode, function () {
                             TotalTech.LayoutManager.NodeTree.draw();
                         });
-                        alert()
-                        //get root node for tree:                        
                     });
                     TotalTech.LayoutManager.Layout.render();
                     YAHOO.log("Layout Rendered", "info", "TotalCMS-Layout");
@@ -107,13 +105,12 @@
                     //Get the node's label and urlencode it; this is the word/s
                     //on which we'll search for related words:
                     var nodeLabel = (node == "RootNode" ? node : encodeURI(node.label));
-                    var nodeType = (node.Type ? node.Type : null);
+                    var nodeType = (node.type ? node.type : "");
                     if (fnLoadComplete == null)
                         fnLoadComplete = function () { };
-
-                    if (nodeType.index("TotalCMS.Page") == -1) {
+                    if (nodeType != "") {
                         //prepare URL for XHR request:
-                        var sUrl = "YUIHandler.ashx?object=" + TotalTech.LayoutManager.NodeTree.Object + "&loadnode=" + nodeLabel;
+                        var sUrl = "YUIHandler.ashx?object=" + TotalTech.LayoutManager.NodeTree.Object + "&nodeType=" + encodeURIComponent(nodeType);
 
                         //prepare our callback object
                         var callback = {
@@ -128,16 +125,24 @@
                                 if ((ResultSet) && (ResultSet.length)) {
                                     YAHOO.log("Result Set Found", "info", "TotalCMS-Layout");
                                     //Result is an array if more than one result, string otherwise
-                                    if (YAHOO.lang.isArray(ResultSet)) {
-                                        YAHOO.log("Result Set is Array", "info", "TotalCMS-Layout");
-                                        for (var i = 0, j = ResultSet.length; i < j; i++) {
-                                            var tempNode = new YAHOO.widget.TextNode(ResultSet[i].label, node, false);
-                                            YAHOO.log("Node Loaded", "info", "TotalCMS-Layout");
-                                        }
-                                    } else {
-                                        //there is only one result; comes as string:
-                                        YAHOO.log("Result Set is not Array", "info", "TotalCMS-Layout");
-                                        var tempNode = new YAHOO.widget.TextNode(ResultSet, node, false)
+                                    switch (nodeType) {
+                                        case "RootNode":
+                                            if (YAHOO.lang.isArray(ResultSet)) {
+                                                YAHOO.log("Result Set is Array", "info", "TotalCMS-Layout");
+                                                for (var i = 0, j = ResultSet.length; i < j; i++) {
+                                                    var tempNode = new YAHOO.widget.TextNode(ResultSet[i].label, node, false);
+                                                    tempNode.type = ResultSet[i].type
+                                                    YAHOO.log("Node Loaded", "info", "TotalCMS-Layout");
+                                                }
+                                            } else {
+                                                //there is only one result; comes as string:
+                                                YAHOO.log("Result Set is not Array", "info", "TotalCMS-Layout");
+                                                var tempNode = new YAHOO.widget.TextNode(ResultSet, node, false)
+                                            }
+                                            break;
+                                        case "TotalCMS.Page.Reports.Approvals, TotalCMS":
+                                            
+                                            break;
                                     }
                                 }
 
@@ -173,6 +178,10 @@
                         //make our XHR call using Connection Manager's
                         //asyncRequest method:
                         YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+                    }
+                    else {
+                        if (fnLoadComplete != null)
+                            fnLoadComplete();
                     }
                 }
             } ();

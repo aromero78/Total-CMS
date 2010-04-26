@@ -1,6 +1,6 @@
 
 -- --------------------------------------------------
--- Date Created: 04/21/2010 01:18:39
+-- Date Created: 04/25/2010 10:56:48
 -- Generated from EDMX file: C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\TotalCMS.edmx
 -- --------------------------------------------------
 
@@ -472,7 +472,8 @@ CREATE TABLE [dbo].[ObjectHistories] (
     [DateCreated] datetime  NOT NULL,
     [CreatedByUserId] int  NOT NULL,
     [CompressedData] varbinary(max)  NOT NULL,
-    [ObjectTypeId] int  NOT NULL
+    [ObjectTypeId] int  NOT NULL,
+    [ObjectStatus] nvarchar(max)  NOT NULL
 );
 GO
 -- Creating table 'ContentTypes'

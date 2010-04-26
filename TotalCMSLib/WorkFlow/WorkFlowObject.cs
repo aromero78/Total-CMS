@@ -23,7 +23,8 @@ namespace TotalTech.CMS.WorkFlow {
         ContentType = 3,
         Calendar = 4, 
         NotSet = 5,
-        Pages = 6
+        Pages = 6, 
+        AllTypes = 7
     }
 
     public class WorkFlowObject : BaseDataObject {

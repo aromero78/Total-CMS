@@ -22,12 +22,21 @@ namespace TotalTech.CMS.Web {
             if (!string.IsNullOrEmpty(Obj)) {
                 switch (Obj.ToLower()) { 
                     case "dashboard":
-                        Newtonsoft.Json.Linq.JObject ResultSet = new Newtonsoft.Json.Linq.JObject();
-                        System.Xml.XmlDocument xDoc = new System.Xml.XmlDocument();
-                        xDoc.Load(context.Server.MapPath("~/Admin/Config/ApplicationSettings.xml"));
-                        Newtonsoft.Json.Converters.XmlNodeConverter converter = new Newtonsoft.Json.Converters.XmlNodeConverter();
-                        string OutputJSON = Newtonsoft.Json.JsonConvert.SerializeXmlNode(xDoc).Replace("@", string.Empty);
-                        context.Response.Write(OutputJSON);
+                        string nodeType = context.Request["nodeType"];
+                        switch (nodeType) { 
+                            case "RootNode":
+                                Newtonsoft.Json.Linq.JObject ResultSet = new Newtonsoft.Json.Linq.JObject();
+                                System.Xml.XmlDocument xDoc = new System.Xml.XmlDocument();
+                                xDoc.Load(context.Server.MapPath("~/Admin/Config/ApplicationSettings.xml"));
+                                Newtonsoft.Json.Converters.XmlNodeConverter converter = new Newtonsoft.Json.Converters.XmlNodeConverter();
+                                string OutputJSON = Newtonsoft.Json.JsonConvert.SerializeXmlNode(xDoc).Replace("@", string.Empty);
+                                context.Response.Write(OutputJSON);
+                                break;
+                            default:
+                                string[] TypeParts = nodeType.Split(',');
+                                
+                                break;
+                        }                        
                         break;
                 }
             }

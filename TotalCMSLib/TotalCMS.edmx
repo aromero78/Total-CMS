@@ -462,6 +462,7 @@
     <Property Name="CreatedByUserId" Type="int" Nullable="false" />
     <Property Name="CompressedData" Type="varbinary(max)" Nullable="false" />
     <Property Name="ObjectTypeId" Type="int" Nullable="false" />
+    <Property Name="ObjectStatus" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ContentTypes">
     <Key>
@@ -2322,6 +2323,7 @@
           <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
           <ScalarProperty Name="CompressedData" ColumnName="CompressedData" />
           <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" />
+          <ScalarProperty Name="ObjectStatus" ColumnName="ObjectStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

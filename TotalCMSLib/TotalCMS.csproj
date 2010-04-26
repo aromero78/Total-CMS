@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Manager.cs" />
+    <Compile Include="Page\Reports\Approvals.cs" />
+    <Compile Include="Page\Reports\iUsageReport.cs" />
     <Compile Include="Web\YUIHandler.cs" />
     <Compile Include="WorkFlow\BasePermissionsObject.cs" />
     <Compile Include="WorkFlow\WorkFlowObject.cs" />
@@ -103,7 +105,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Web\UI\" />
+    <Folder Include="UIControllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

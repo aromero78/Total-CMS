@@ -11,7 +11,7 @@ namespace TotalTech.CMS.WorkFlow {
             set;
         }
 
-        public static List<ObjectHistory> LoadHistory(int ObjectId, WorkFlowObjectTypes ObjectType) {
+        public static List<ObjectHistory> LoadHistory(int? ObjectId, User.User ModifiedBy, WorkFlowObjectTypes ObjectType, ContentStatuses? Status, DateTime? StartDate, DateTime? EndDate) {
             throw new NotImplementedException();
         }
     }

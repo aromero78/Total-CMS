@@ -36,6 +36,13 @@ namespace TotalTech.CMS.User {
             }
         }
 
+        DateTime? _lastLoginDate;
+        public DateTime? LastLoginDate {
+            get {
+                return _lastLoginDate;
+            }
+        }
+
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
