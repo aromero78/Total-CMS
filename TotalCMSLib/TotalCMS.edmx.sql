@@ -1,6 +1,6 @@
 
 -- --------------------------------------------------
--- Date Created: 04/25/2010 10:56:48
+-- Date Created: 04/27/2010 00:26:04
 -- Generated from EDMX file: C:\Documents and Settings\Anthony\Total-CMS\TotalCMSLib\TotalCMS.edmx
 -- --------------------------------------------------
 
@@ -466,7 +466,7 @@ CREATE TABLE [dbo].[MetaDataValueTypes] (
 GO
 -- Creating table 'ObjectHistories'
 CREATE TABLE [dbo].[ObjectHistories] (
-    [ContentHistoryId] int  NOT NULL,
+    [ObjectHistoryId] int  NOT NULL,
     [ObjectItemId] int  NULL,
     [VersionNumber] float  NOT NULL,
     [DateCreated] datetime  NOT NULL,
@@ -675,10 +675,10 @@ ADD CONSTRAINT [PK_MetaDataValueTypes]
     PRIMARY KEY CLUSTERED ([MetaDataValueTypeId] ASC)
     ON [PRIMARY]
 GO
--- Creating primary key on [ContentHistoryId] in table 'ObjectHistories'
+-- Creating primary key on [ObjectHistoryId] in table 'ObjectHistories'
 ALTER TABLE [dbo].[ObjectHistories] WITH NOCHECK 
 ADD CONSTRAINT [PK_ObjectHistories]
-    PRIMARY KEY CLUSTERED ([ContentHistoryId] ASC)
+    PRIMARY KEY CLUSTERED ([ObjectHistoryId] ASC)
     ON [PRIMARY]
 GO
 -- Creating primary key on [ContentTypeId] in table 'ContentTypes'

@@ -239,5 +239,9 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
         #region Folder
         public abstract DbDataReader FolderGetWorkFlowObjects(Content.Folder CurrentFolder, User.User CurrentUser);
         #endregion
+
+        #region Object History
+        public abstract DbDataReader ObjectHistoryLoadHistory(int? ObjectId, User.User ModifiedBy, WorkFlow.WorkFlowObjectTypes ObjectType, WorkFlow.ContentStatuses? Status, DateTime? StartDate, DateTime? EndDate);
+        #endregion
     }
 }

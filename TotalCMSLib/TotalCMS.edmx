@@ -453,9 +453,9 @@
   </EntityType>
   <EntityType Name="ObjectHistories">
     <Key>
-      <PropertyRef Name="ContentHistoryId" />
+      <PropertyRef Name="ObjectHistoryId" />
     </Key>
-    <Property Name="ContentHistoryId" Type="int" Nullable="false" />
+    <Property Name="ObjectHistoryId" Type="int" Nullable="false" />
     <Property Name="ObjectItemId" Type="int" Nullable="true" />
     <Property Name="VersionNumber" Type="float" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
@@ -1727,8 +1727,8 @@
               <PropertyRef Name="ContentItemId" /></Dependent></ReferentialConstraint></Association>
         <EntityType Name="ObjectHistories" Abstract="false">
           <Key>
-            <PropertyRef Name="ContentHistoryId" /></Key>
-          <Property Type="Int32" Name="ContentHistoryId" Nullable="false" cg:SetterAccess="Protected" />
+            <PropertyRef Name="ObjectHistoryId" /></Key>
+          <Property Type="Int32" Name="ObjectHistoryId" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="Int32" Name="ObjectItemId" Nullable="true" cg:SetterAccess="Protected" />
           <Property Type="Double" Name="VersionNumber" Nullable="false" cg:SetterAccess="Protected" />
           <Property Type="DateTime" Name="DateCreated" Nullable="false" cg:SetterAccess="Protected" />
@@ -2316,7 +2316,7 @@
     <EntitySetMapping Name="ObjectHistories">
       <EntityTypeMapping TypeName="IsTypeOf(DataAccess.ObjectHistories)">
         <MappingFragment StoreEntitySet="ObjectHistories">
-          <ScalarProperty Name="ContentHistoryId" ColumnName="ContentHistoryId" />
+          <ScalarProperty Name="ObjectHistoryId" ColumnName="ObjectHistoryId" />
           <ScalarProperty Name="ObjectItemId" ColumnName="ObjectItemId" />
           <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />

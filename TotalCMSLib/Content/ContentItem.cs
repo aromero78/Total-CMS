@@ -68,6 +68,11 @@ namespace TotalTech.CMS.Content {
             }
         }
 
+        public ContentItem(int ContentId) {
+            _contentItemId = ContentId;
+            LoadData();
+        }
+
         public void SetModifiedByUser(int UserId) {
             _modifiedByUserId = UserId;
         }

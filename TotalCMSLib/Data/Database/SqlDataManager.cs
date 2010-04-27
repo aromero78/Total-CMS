@@ -323,5 +323,15 @@ namespace TotalTech.CMS.Data.ContextDataProviders.Database {
         }
 
         #endregion
+
+        public override DbDataReader ObjectHistoryLoadHistory(int? ObjectId, User.User ModifiedBy, WorkFlow.WorkFlowObjectTypes ObjectType, WorkFlow.ContentStatuses? Status, DateTime? StartDate, DateTime? EndDate) {
+            return GetDataReader("ObjectHistoryLoadHistory",
+                new SqlParameter("ObjectId", (ObjectId.HasValue ? ObjectId.Value.ToString() : string.Empty)),
+                new SqlParameter("UserId", (ModifiedBy != null ? ModifiedBy.UserId.ToString() : string.Empty)),
+                new SqlParameter("ObjectTypeId", (int)ObjectType),
+                new SqlParameter("ContentStatusId", (Status.HasValue ? ((int)Status).ToString() : string.Empty)),
+                new SqlParameter("StartDate", (StartDate.HasValue ? StartDate.Value.ToString() : string.Empty)),
+                new SqlParameter("EndDate", (EndDate.HasValue ? EndDate.Value.ToString() : string.Empty)));
+        }
     }
 }
