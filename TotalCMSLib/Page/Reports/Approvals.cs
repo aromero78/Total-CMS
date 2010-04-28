@@ -14,7 +14,7 @@ namespace TotalTech.CMS.Page.Reports {
             int UserId = (Params.Contains("UserId") ? int.Parse(Params["UserId"].ToString()) : SiteSettings.ContextData.CurrentUser.UserId);
             User.User User = new CMS.User.User(UserId);
             DateTime StartDate = (User.LastLoginDate.HasValue?User.LastLoginDate.Value:DateTime.Now);
-            DateTime EndDate = DateTime.Now
+            DateTime EndDate = DateTime.Now;
             List<WorkFlow.ObjectHistory> Histories = WorkFlow.ObjectHistory.LoadHistory(null, null, WorkFlow.WorkFlowObjectTypes.AllTypes, WorkFlow.ContentStatuses.Approved, StartDate, EndDate);
             DataSet HistoryDataSet = new DataSet();            
             DataTable HistoryTable = new DataTable("ObjectHistory", "TT-CMS");

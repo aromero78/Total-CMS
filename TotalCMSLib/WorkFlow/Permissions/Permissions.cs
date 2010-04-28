@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TotalTech.CMS.WorkFlow {
+namespace TotalTech.CMS.WorkFlow.Permissions {
     public class Permissions : BaseDataObject {
 
         int _permissionId;
@@ -114,6 +114,10 @@ namespace TotalTech.CMS.WorkFlow {
         }
 
         protected internal override void LoadData(params object[] Params) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void SetObjectId(int Id) {
             throw new NotImplementedException();
         }
     }

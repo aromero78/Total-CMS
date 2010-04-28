@@ -74,5 +74,9 @@ namespace TotalTech.CMS.User {
         protected internal override void LoadData(params object[] Params) {
             throw new NotImplementedException();
         }
+
+        protected internal override void SetObjectId(int Id) {
+            throw new NotImplementedException();
+        }
     }
 }

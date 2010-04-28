@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\My Documents\Visual Studio 2008\Projects\yui.Net\bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\My Documents\jsonnet\Bin\DotNet\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -50,15 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Manager.cs" />
+    <Compile Include="Misc\BSONConverter.cs" />
+    <Compile Include="Misc\gZip.cs" />
     <Compile Include="Page\Reports\Approvals.cs" />
     <Compile Include="Page\Reports\iUsageReport.cs" />
     <Compile Include="Web\YUIHandler.cs" />
-    <Compile Include="WorkFlow\BasePermissionsObject.cs" />
+    <Compile Include="WorkFlow\Permissions\BasePermissionsObject.cs" />
     <Compile Include="WorkFlow\WorkFlowObject.cs" />
     <Compile Include="WorkFlow\ObjectHistory.cs" />
     <Compile Include="Content\ContentItem.cs" />
     <Compile Include="Content\Folder.cs" />
-    <Compile Include="WorkFlow\Permissions.cs" />
+    <Compile Include="WorkFlow\Permissions\Permissions.cs" />
     <Compile Include="WorkFlow\UserRolesToWorkFlowStep.cs" />
     <Compile Include="WorkFlow\WorkFlow.cs" />
     <Compile Include="WorkFlow\WorkFlowInstance.cs" />

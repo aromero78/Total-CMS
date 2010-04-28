@@ -16,11 +16,11 @@ namespace TotalTech.CMS.Content {
             _folderId = FolderId;
         }
 
-        WorkFlow.Permissions _currentUserPermissions;
-        internal WorkFlow.Permissions CurrentUserRolePermissions {
+        WorkFlow.Permissions.Permissions _currentUserPermissions;
+        internal WorkFlow.Permissions.Permissions CurrentUserRolePermissions {
             get {
                 if (_currentUserPermissions == null)
-                    _currentUserPermissions = new WorkFlow.Permissions(SiteSettings.ContextData.CurrentUser, this);
+                    _currentUserPermissions = new WorkFlow.Permissions.Permissions(SiteSettings.ContextData.CurrentUser, this);
                 return _currentUserPermissions;
             }
         }
@@ -75,6 +75,10 @@ namespace TotalTech.CMS.Content {
         }
 
         protected internal override void LoadData(params object[] Params) {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void SetObjectId(int Id) {
             throw new NotImplementedException();
         }
     }

@@ -77,8 +77,31 @@ namespace TotalTech.CMS.WorkFlow {
             set { _objectType = value; }
         }
 
+        string _compressedData;
+        public string CompressedData{
+            get{
+                return _compressedData;
+            }
+        }
+
+        internal ObjectHistory(int ObjectHistoryId, int ObjectItemId, float VersionNumber, DateTime DateCreated, DateTime EndDate, string Data) { 
+            
+        }
+
         public static List<ObjectHistory> LoadHistory(int? ObjectId, User.User ModifiedBy, WorkFlowObjectTypes ObjectType, ContentStatuses? Status, DateTime? StartDate, DateTime? EndDate) {
-            throw new NotImplementedException();
+            System.Data.Common.DbDataReader reader = SiteSettings.DataAccess.ObjectHistoryLoadHistory(ObjectId, ModifiedBy, ObjectType, Status, StartDate, EndDate);
+            List<ObjectHistory> History = new List<ObjectHistory>();
+            while (reader.Read()) {
+                History.Add(
+                    new ObjectHistory(
+                        reader.GetInt32(0), 
+                        reader.GetInt32(1), 
+                        reader.GetFloat(2), 
+                        reader.GetDateTime(3),
+                        reader.GetDateTime(4),
+                        reader.GetString(5)));
+            }
+            return History;
         }
 
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
@@ -111,6 +134,10 @@ namespace TotalTech.CMS.WorkFlow {
 
         protected internal override bool UseCache() {
             return false;
+        }
+
+        protected internal override void SetObjectId(int Id) {
+            throw new NotImplementedException();
         }
     }
 }

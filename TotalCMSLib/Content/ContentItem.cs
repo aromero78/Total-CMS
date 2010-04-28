@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace TotalTech.CMS.Content {
-    public class ContentItem : TotalTech.CMS.WorkFlow.BasePermissionsObject {
+    public class ContentItem : TotalTech.CMS.WorkFlow.Permissions.BasePermissionsObject {
 
         int _contentItemId;
         public int ContactItemId {
@@ -109,7 +109,7 @@ namespace TotalTech.CMS.Content {
                 _modifiedByUserId = dataReader.GetInt32(6);
                 _folderId = dataReader.GetInt32(7);
                 switch (dataReader.GetString(8)) {
-                    case "IN":
+                    case "IN":                        
                         ContentStatus = TotalTech.CMS.WorkFlow.ContentStatuses.CheckedIn;
                         break;
                     case "OT":

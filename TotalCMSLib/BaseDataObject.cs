@@ -96,9 +96,10 @@ namespace TotalTech.CMS
                     _cacheManager = new Data.CacheManager();
                 return _cacheManager;
             }
-        }
+        }        
 
         internal protected abstract int GetObjectId();
+        internal protected abstract void SetObjectId(int Id);
         internal protected abstract bool UseCache();
     }
 }

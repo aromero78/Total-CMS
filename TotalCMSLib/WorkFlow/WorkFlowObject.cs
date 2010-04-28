@@ -194,6 +194,23 @@ namespace TotalTech.CMS.WorkFlow {
             //Check for needed properties then pass messages to error handler if needed.
         }
 
+        public string ToBson() {
+            StringBuilder sb = new StringBuilder();
+            System.IO.StringWriter sWriter = new System.IO.StringWriter(sb);
+            Newtonsoft.Json.JsonWriter writer = new Newtonsoft.Json.JsonTextWriter(sWriter);
+            Newtonsoft.Json.JsonSerializer jSerial = new Newtonsoft.Json.JsonSerializer();
+            writer.Formatting = Newtonsoft.Json.Formatting.None;
+            Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer {
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                ContractResolver = new Misc.BSONResolver(),
+            };
+            serializer.Serialize(writer, this);
+            writer.Close();
+            sWriter.Close();
+            return sb.ToString();
+        }
+
         protected internal override void CacheManager_FetchExpICompareEvent(object sender, Controls.GenericEventArgs<IComparable, object> e) {
             throw new NotImplementedException();
         }
@@ -223,6 +240,10 @@ namespace TotalTech.CMS.WorkFlow {
         }
 
         protected internal override bool UseCache() {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void SetObjectId(int Id) {
             throw new NotImplementedException();
         }
     }
